@@ -5,6 +5,7 @@
     :show-toggle-button="false"
     expand
   >
+
   </base-nav>
 </template>
 <script>

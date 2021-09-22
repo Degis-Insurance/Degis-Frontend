@@ -1,6 +1,6 @@
 <template>
   <div
-    class="card"
+    class=""
     :class="[
       { 'card-lift--hover': hover },
       { shadow: shadow },

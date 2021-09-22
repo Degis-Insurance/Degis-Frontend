@@ -3,7 +3,7 @@
     :is="tag"
     :type="tag === 'button' ? nativeType : ''"
     @click="handleClick"
-    class="btn"
+    class="degis-button"
     :class="classes"
   >
     <span
@@ -94,7 +94,7 @@ export default {
         { "btn-icon-only": this.iconOnly },
         { [`text-${this.textColor}`]: this.textColor },
         { "btn-icon": this.icon || this.$slots.icon },
-        this.type && !this.outline ? `btn-${this.type}` : "",
+        // this.type && !this.outline ? `btn-${this.type}` : "",
         this.outline ? `btn-outline-${this.type}` : "",
       ];
       if (this.size) {
@@ -110,4 +110,24 @@ export default {
   },
 };
 </script>
-<style></style>
+<style>
+.degis-button {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 9px 20px;
+  background: #6415ff;
+  border-radius: 30px;
+
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  color: #ffffff;
+  border-width: 0px;
+  /* identical to box height, or 125% */
+
+  align-items: center;
+  text-transform: uppercase;
+}
+</style>

@@ -7,8 +7,11 @@
       :target="link.target"
       :href="'#' + link.path"
     >
-      <i :class="link.icon"></i>
-      <span class="nav-link-text">{{ link.name }}</span>
+      <!--      <i :class="link.icon"></i>-->
+      <div class="ml-3">
+        <img :src="link.src" style="width: 24px; margin-right: 1rem; line-height: 45px" />
+        <span class="nav-link-text func-items" style="line-height: 40px;">{{ link.name }}</span>
+      </div>
     </router-link>
   </li>
 </template>
@@ -53,3 +56,14 @@ export default {
   },
 };
 </script>
+<style>
+.func-items {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 28px;
+  letter-spacing: -0.02em;
+  color: #86898c;
+}
+</style>

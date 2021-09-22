@@ -7,63 +7,30 @@
       { [`bg-${type}`]: type },
     ]"
   >
-    <div :class="containerClasses">
-      <slot name="brand">
-        <router-link
-          :to="$route.path"
-          class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"
-        >
-          {{ $route.name }}
-        </router-link>
-      </slot>
-      <navbar-toggle-button
-        v-if="showToggleButton"
-        :toggled="toggled"
-        :target="contentId"
-        @click.stop="toggled = !toggled"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </navbar-toggle-button>
-
-      <div
-        class="collapse navbar-collapse"
-        :class="{ show: toggled }"
-        :id="contentId"
-        v-click-outside="closeMenu"
-      >
-        <slot :close-menu="closeMenu"></slot>
+    <div class="container-fluid">
+      <div class="">
+        <h6 class="func-sub">Hi dude,</h6>
+        <h1 class="func-nor">Welcome to DEGIS!</h1>
+      </div>
+      <div>
+        <base-button>CONNECT WALLET</base-button>
       </div>
     </div>
   </nav>
 </template>
 <script>
-import NavbarToggleButton from "./NavbarToggleButton";
+import BaseButton from "./BaseButton";
 
 export default {
   name: "base-nav",
   components: {
-    NavbarToggleButton,
+    BaseButton
   },
   props: {
     type: {
       type: String,
       default: "",
       description: "Navbar type (e.g default, primary etc)",
-    },
-    title: {
-      type: String,
-      default: "",
-      description: "Title of navbar",
-    },
-    contentId: {
-      type: [String, Number],
-      default: Math.random().toString(),
-      description:
-        "Explicit id for the menu. By default it's a generated random number",
-    },
-    containerClasses: {
-      type: [String, Object, Array],
-      default: "container-fluid",
     },
     transparent: {
       type: Boolean,
@@ -75,21 +42,30 @@ export default {
       default: false,
       description: "Whether navbar should contain `navbar-expand-lg` class",
     },
-    showToggleButton: {
-      type: Boolean,
-      default: true,
-    },
   },
   data() {
-    return {
-      toggled: false,
-    };
-  },
-  methods: {
-    closeMenu() {
-      this.toggled = false;
-    },
+    return {};
   },
 };
 </script>
-<style></style>
+<style>
+.func-sub {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: -0.02em;
+  color: #86898c;
+}
+
+.func-nor {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 25px;
+  letter-spacing: -0.02em;
+  color: #86898c;
+}
+</style>

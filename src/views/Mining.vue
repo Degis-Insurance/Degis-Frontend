@@ -1,30 +1,31 @@
 <template>
-  <div>
-    <base-header type="gradient-primary" class="pb-6 pb-8 pt-5 pt-md-8">
-      <div class="row">
-
-        <div class="col-6">
-          <degis-deposit></degis-deposit>
-        </div>
-
-        <div class="col-6">
-          <degis-reward></degis-reward>
+  <base-header type="" class="pb-6 pb-8 pt-5 pt-md-8">
+    <h1 class="big-head mt-2 mb-4">Mining</h1>
+    <stats-card>
+      <div class="container-fluid">
+        <div class="row">
         </div>
       </div>
-    </base-header>
-
-  </div>
+    </stats-card>
+  </base-header>
 </template>
 
 <script>
-
-import DegisDeposit from "../components/Deposit";
 export default {
   name: "mining",
   components: {
-    DegisDeposit
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.big-head {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 34px;
+  line-height: 36px;
+  letter-spacing: -0.02em;
+  color: #2c2d2f;
+}
+</style>

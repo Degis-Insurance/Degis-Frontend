@@ -1,6 +1,6 @@
 <template>
   <base-header type="" class="pb-6 pb-8 pt-5 pt-md-8">
-    <h1 class="big-head mt-2 mb-4">LuckyBox</h1>
+    <h1 class="big-head mt-2 mb-4">Naught Price</h1>
     <stats-card>
       <div class="container-fluid">
         <div class="row">
@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: "mining",
+  name: "price",
   components: {
   },
 };

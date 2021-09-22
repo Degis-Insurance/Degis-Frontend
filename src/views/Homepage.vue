@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="background-color: #ffffff">
     <header class="header-global">
       <homepage-nav
         class="navbar-main"
@@ -11,9 +11,9 @@
         <template v-slot:brand>
           <router-link class="navbar-brand mr-lg-5" to="/">
             <img
-              src="img/degis/degis-logo.png"
+              src="img/degis/degislogo.png"
               alt="logo"
-              style="width: 106px; height: 41px"
+              style="width: 109px; height: 48px"
             />
           </router-link>
         </template>
@@ -23,9 +23,9 @@
             <div class="col-6 collapse-brand">
               <a href="/">
                 <img
-                  src="img/degis/degis-logo.png"
+                  src="img/degis/degislogo.png"
                   alt="logo"
-                  style="width: 106px; height: 41px"
+                  style="width: 109px; height: 48px"
                 />
               </a>
             </div>
@@ -38,14 +38,14 @@
         <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
           <homepage-dropdown class="nav-item" menu-classes="dropdown-menu-xl">
             <template v-slot:title>
-              <span class="nav-link" data-toggle="dropdown" role="button">
-                <i class="ni ni-ui-04 d-lg-none"></i>
-                <span class="nav-link-inner--text">Products</span>
-              </span>
+<!--              <span class="nav-link" data-toggle="dropdown" role="button">-->
+<!--                <i class="ni ni-ui-04 d-lg-none"></i>-->
+                <span class="nav-font">Products</span>
+<!--              </span>-->
             </template>
             <div class="dropdown-menu-inner">
               <router-link
-                to="/insurance"
+                to="/protection"
                 class="media d-flex align-items-center"
               >
                 <div
@@ -61,7 +61,7 @@
                 </div>
               </router-link>
               <router-link
-                to="/insurance"
+                to="/protection"
                 class="media d-flex align-items-center"
               >
                 <div
@@ -78,105 +78,57 @@
               </router-link>
             </div>
           </homepage-dropdown>
-<!--          <homepage-dropdown tag="li" class="nav-item">-->
-<!--            <template v-slot:title>-->
-<!--              <span class="nav-link" data-toggle="dropdown" role="button">-->
-<!--                <i class="ni ni-collection d-lg-none"></i>-->
-<!--                <span class="nav-link-inner&#45;&#45;text">Mining</span>-->
-<!--              </span>-->
-<!--            </template>-->
-<!--            <router-link to="/mining" class="dropdown-item"-->
-<!--              >Degis Mining</router-link-->
-<!--            >-->
-<!--            <router-link to="/mining" class="dropdown-item"-->
-<!--              >Another Mining</router-link-->
-<!--            >-->
-<!--          </homepage-dropdown>-->
+          <!--          <homepage-dropdown tag="li" class="nav-item">-->
+          <!--            <template v-slot:title>-->
+          <!--              <span class="nav-link" data-toggle="dropdown" role="button">-->
+          <!--                <i class="ni ni-collection d-lg-none"></i>-->
+          <!--                <span class="nav-link-inner&#45;&#45;text">Mining</span>-->
+          <!--              </span>-->
+          <!--            </template>-->
+          <!--            <router-link to="/mining" class="dropdown-item"-->
+          <!--              >Degis Mining</router-link-->
+          <!--            >-->
+          <!--            <router-link to="/mining" class="dropdown-item"-->
+          <!--              >Another Mining</router-link-->
+          <!--            >-->
+          <!--          </homepage-dropdown>-->
           <a href="/#/mining">
-            <span class="nav-link">Mining</span>
+              <span class="nav-font">
+                Mining
+              </span>
           </a>
           <a href="/#/luckybox">
-            <span class="nav-link">Luckybox</span>
+            <span class="nav-font">Luckybox</span>
           </a>
           <a href="/#/marketplace">
-            <span class="nav-link">Marketplace</span>
+            <span class="nav-font">Marketplace</span>
           </a>
         </ul>
         <ul class="navbar-nav align-items-lg-center ml-lg-auto">
-          <li class="nav-item">
-            <a
-              class="nav-link nav-link-icon"
-              href="https://www.facebook.com"
-              target="_blank"
-              rel="noopener"
-              data-toggle="tooltip"
-              title="Like us on Facebook"
-            >
-              <i class="fa fa-facebook-square"></i>
-              <span class="nav-link-inner--text d-lg-none">Facebook</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link nav-link-icon"
-              href="https://www.instagram.com"
-              target="_blank"
-              rel="noopener"
-              data-toggle="tooltip"
-              title="Follow us on Instagram"
-            >
-              <i class="fa fa-instagram"></i>
-              <span class="nav-link-inner--text d-lg-none">Instagram</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link nav-link-icon"
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener"
-              data-toggle="tooltip"
-              title="Follow us on Twitter"
-            >
-              <i class="fa fa-twitter-square"></i>
-              <span class="nav-link-inner--text d-lg-none">Twitter</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link nav-link-icon"
-              href="https://github.com"
-              target="_blank"
-              rel="noopener"
-              data-toggle="tooltip"
-              title="Star us on Github"
-            >
-              <i class="fa fa-github"></i>
-              <span class="nav-link-inner--text d-lg-none">Github</span>
-            </a>
-          </li>
-          <li class="nav-item d-none d-lg-block ml-lg-4">
-            <a
-              href="/#/"
-              target="_blank"
-              rel="noopener"
-              class="btn btn-neutral btn-icon"
-            >
-              <span class="nav-link-inner--text">Connect Wallet</span>
-            </a>
-          </li>
+          <base-button>CONNECT WALLET</base-button>
         </ul>
       </homepage-nav>
     </header>
+
     <main>
       <fade-transition origin="center" mode="out-in" :duration="250">
         <div>
           <hero></hero>
-          <protocol></protocol>
-          <token></token>
+          <!--          <protocol></protocol>-->
+          <GameFi></GameFi>
+          <ProtectionCover></ProtectionCover>
+          <LiquidityProviding></LiquidityProviding>
+          <DegisLucky></DegisLucky>
+          <MarketPlace></MarketPlace>
+          <Tokenomics></Tokenomics>
+<!--          <TokenOfferingPhase></TokenOfferingPhase>-->
+          <Articles></Articles>
+          <Investors></Investors>
+          <!--          <token></token>-->
         </div>
       </fade-transition>
     </main>
+
     <footer class="footer has-cards">
       <div class="container mt--100">
         <hr />
@@ -217,17 +169,45 @@
 </template>
 <script>
 import Hero from "./Homepage/Hero";
-import Protocol from "./Homepage/Protocol";
-import Token from "./Homepage/Token";
+import Articles from "./Homepage/Articles";
+import DegisLucky from "./Homepage/DegisLucky";
+import GameFi from "./Homepage/GameFi";
+import Investors from "./Homepage/Investors";
+import LiquidityProviding from "./Homepage/LiquidityProviding";
+import MarketPlace from "./Homepage/MarketPlace";
+import ProtectionCover from "./Homepage/ProtectionCover";
+import Tokenomics from "./Homepage/Tokenomics";
+// import TokenOfferingPhase from "./Homepage/TokenOfferingPhase";
+// import Token from "./Homepage/Token";
 import CloseButton from "@/components/CloseButton";
 
 export default {
   name: "homepage",
   components: {
+    Articles,
+    DegisLucky,
+    Investors,
+    LiquidityProviding,
+    MarketPlace,
+    ProtectionCover,
+    Tokenomics,
+    // TokenOfferingPhase,
     CloseButton,
-    Token,
-    Protocol,
+    // Token,
+    GameFi,
     Hero,
   },
 };
 </script>
+
+<style>
+.nav-font {
+  /*font-family: Montserrat;*/
+  /*font-style: normal;*/
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  color: #4d535c;
+  margin:0px 20px;
+}
+</style>

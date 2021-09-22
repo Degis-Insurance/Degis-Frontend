@@ -1,39 +1,50 @@
 <template>
   <div class="wrapper" :class="{ 'nav-open': $sidebar.showSidebar }">
-    <side-bar
-      :background-color="sidebarBackground"
-      short-title="Degis"
-      title="Degis"
-    >
+    <side-bar>
       <template v-slot:links>
         <sidebar-item
           :link="{
-            name: 'Insurance',
-            icon: 'ni ni-bullet-list-67 text-red',
-            path: '/insurance',
+            name: 'Protection',
+            src: 'img/function/icon/protection.png',
+            path: '/Protection',
+          }"
+        />
+        <sidebar-item
+          :link="{
+            name: 'Miserable Flight',
+            src: 'img/function/icon/flight.png',
+            path: '/flight',
+          }"
+        />
+        <sidebar-item
+          :link="{
+            name: 'Naught Price',
+            src: 'img/function/icon/price.png',
+            path: '/price',
           }"
         />
         <sidebar-item
           :link="{
             name: 'Mining',
-            icon: 'ni ni-key-25 text-info',
+            src: 'img/function/icon/mining.png',
             path: '/mining',
           }"
         />
         <sidebar-item
           :link="{
             name: 'Luckybox',
-            icon: 'ni ni-tv-2 text-primary',
+            src: 'img/function/icon/luckybox.png',
             path: '/luckybox',
           }"
         />
         <sidebar-item
           :link="{
-            name: 'Marketplace',
-            icon: 'ni ni-planet text-blue',
+            name: 'Bazaar',
+            src: 'img/function/icon/bazaar.png',
             path: '/marketplace',
           }"
         />
+        <img class="ml-4" style="width: 200px; padding-top: 50%" src="img/function/sidebar-bottom.png"/>
       </template>
     </side-bar>
     <div class="main-content" :data="sidebarBackground">
@@ -42,31 +53,22 @@
       <div @click="toggleSidebar">
         <!-- your content here -->
         <router-view></router-view>
-        <content-footer v-if="!$route.meta.hideFooter"></content-footer>
+<!--        <content-footer v-if="!$route.meta.hideFooter"></content-footer>-->
       </div>
     </div>
   </div>
 </template>
 <script>
 import DashboardNavbar from "./FunctionNavbar.vue";
-import ContentFooter from "./ContentFooter.vue";
+// import ContentFooter from "./ContentFooter.vue";
 
 export default {
   components: {
     DashboardNavbar,
-    ContentFooter,
+    // ContentFooter,
   },
   data() {
-    return {
-      sidebarBackground: "vue", //vue|blue|orange|green|red|primary
-    };
-  },
-  methods: {
-    toggleSidebar() {
-      if (this.$sidebar.showSidebar) {
-        this.$sidebar.displaySidebar(false);
-      }
-    },
+    return {};
   },
 };
 </script>
