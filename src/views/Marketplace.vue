@@ -1,5 +1,5 @@
 <template>
-  <base-header type="" class="pb-6 pb-8 pt-5 pt-md-8">
+  <base-header type="" class="pb-6 pb-8 pt-4">
     <h1 class="big-head mt-2 mb-4">Bazaar</h1>
     <stats-card>
       <div class="container-fluid">

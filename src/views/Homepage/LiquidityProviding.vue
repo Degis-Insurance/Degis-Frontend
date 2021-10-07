@@ -2,7 +2,7 @@
   <section class="section section-lg">
     <div class="container">
       <div class="row row-grid align-items-center">
-        <h1 class="lp-title">
+        <h1 class="title-2">
           Mining
         </h1>
       </div>
@@ -48,17 +48,6 @@ h6 {
   font-size: 15px;
   color: #7c8ba1;
   font-weight: 500;
-}
-
-.lp-title {
-          /*font-family: Montserrat;*/
-  /*font-style: normal;*/
-  font-weight: 900;
-  font-size: 48px;
-  line-height: 54px;
-  margin: auto;
-  /*text-align: center;*/
-  color: #6415ff;
 }
 
 .lp-subtitle {

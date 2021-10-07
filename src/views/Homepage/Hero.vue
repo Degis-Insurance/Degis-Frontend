@@ -25,17 +25,17 @@
         </div>
         <div class="col-md-7 order-md-1">
           <div class="pr-md-5">
-            <h1 class="hero-title">
+            <h1 class="title-1">
               Protect yourself against the miserable world
             </h1>
-            <p class="hero-text">
-              Degis is a real world cross blockchain protection platform.
-              Via Degis, protect yourself against the miserable world.
+            <p class="text-1">
+              Degis is a real world cross blockchain protection platform. Via
+              Degis, protect yourself against the miserable world.
             </p>
           </div>
           <div class="btn-wrapper d-flex pt-4">
-            <a href="/#/protection"><base-button href="/protection">Get started</base-button></a>
-            <base-button class="tut-button">tutorial</base-button>
+            <a href="/#/protection"><base-button>Get started</base-button></a>
+            <a href="https://docs.degis.io/" style="padding: 0 8%"><base-button class="tut-button">Tutorial</base-button></a>
           </div>
         </div>
       </div>
@@ -57,22 +57,10 @@ export default {
 };
 </script>
 <style>
-.hero-title {
-  font-size: 60px;
-  font-width: 900;
-  line-height: 64px;
-  color: #6415ff;
-}
-.hero-text {
-  font-size: 24px;
-  font-weight: 400;
-  line-height: 29.26px;
-  color: #4d535c;
-  opacity: 0.6;
-}
-.tut-button {
-  margin-left: 80px;
-  background: #F2F2F2;
-  color: #4D535C;
-}
+
+/*.tut-button {*/
+/*  margin-left: 80px;*/
+/*  background: #f2f2f2;*/
+/*  color: #4d535c;*/
+/*}*/
 </style>

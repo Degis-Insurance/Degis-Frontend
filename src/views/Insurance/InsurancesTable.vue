@@ -1,58 +1,40 @@
 <template>
-  <div class="card shadow" :class="type === 'dark' ? 'bg-default' : ''">
-    <div
-      class="card-header border-0"
-      :class="type === 'dark' ? 'bg-transparent' : ''"
-    >
-      <div class="row align-items-center">
-        <div class="col">
-          <h3 class="mb-0" :class="type === 'dark' ? 'text-white' : ''">
-            Flight Insurance Product
-          </h3>
-        </div>
-      </div>
-    </div>
-
+  <div class="flight-table" :class="type === 'dark' ? 'bg-default' : ''">
     <div class="table-responsive">
       <base-table
         class="table align-items-center table-flush"
-        :class="type === 'dark' ? 'table-dark' : ''"
-        :thead-classes="type === 'dark' ? 'thead-dark' : 'thead-light'"
+        :thead-classes="thead-light"
         tbody-classes="list"
         :data="tableData"
       >
         <template v-slot:columns>
           <th></th>
-          <th>Flight Number</th>
-          <th>Product</th>
-          <th>Departure Date</th>
-          <th>Expiry Date</th>
+          <th>Airline</th>
+          <th>Flight No.</th>
+          <th>Route</th>
+          <th>Depart time</th>
+          <th>Arrive time</th>
           <th>Premium</th>
-          <th>Maximum Payoff</th>
-          <th>Policy Id(bytes32)</th>
           <th></th>
         </template>
 
         <template v-slot:default>
           <td></td>
-          <td>example flight number</td>
-          <td>product name</td>
-          <td>example departure date</td>
-          <td>example expiry date</td>
-          <td>premium info</td>
-          <td class="text-left">example payoff</td>
-          <td>example id</td>
+          <td>SouthWest</td>
+          <td>SW186</td>
+          <td>STL-AWL</td>
+          <td>10:00</td>
+          <td>13:00</td>
+<!--          <td class="text-center">4</td>-->
+          <td>4</td>
           <td></td>
         </template>
       </base-table>
     </div>
 
-    <div
-      class="card-footer d-flex justify-content-end"
-      :class="type === 'dark' ? 'bg-transparent' : ''"
-    >
-      <base-pagination total="30"></base-pagination>
-    </div>
+<!--    <div class="d-flex justify-content-end flight-table">-->
+<!--      <base-pagination total="4"></base-pagination>-->
+<!--    </div>-->
   </div>
 </template>
 <script>
@@ -66,9 +48,16 @@ export default {
   },
   data() {
     return {
-      tableData: [{}, {}, {}, {}],
+      tableData: [{}, {}, {}, {}, {}, {}, {}],
     };
   },
 };
 </script>
-<style></style>
+<style>
+.flight-table {
+  box-shadow: 0px 20px 40px rgba(21, 58, 255, 0.1);
+  border-radius: 24px;
+  background-color: white;
+}
+
+</style>

@@ -112,9 +112,9 @@ export default {
 </script>
 <style>
 .degis-button {
-  display: flex;
+  /*display: flex;*/
   flex-direction: row;
-  align-items: flex-start;
+  /*align-items: flex-start;*/
   padding: 9px 20px;
   background: #6415ff;
   border-radius: 30px;
@@ -127,7 +127,8 @@ export default {
   border-width: 0px;
   /* identical to box height, or 125% */
 
-  align-items: center;
+  /*align-items: center;*/
   text-transform: uppercase;
+  text-align: center;
 }
 </style>

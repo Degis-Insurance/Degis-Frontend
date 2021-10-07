@@ -1,16 +1,16 @@
 <template>
   <table class="table tablesorter" :class="tableClass">
-    <thead :class="theadClasses">
+    <thead class="table-thead" :class="theadClasses">
       <tr>
         <slot name="columns" :columns="columns">
           <th v-for="column in columns" :key="column">{{ column }}</th>
         </slot>
       </tr>
     </thead>
-    <tbody :class="tbodyClasses">
+    <tbody class="table-tbody">
       <tr v-for="(item, index) in data" :key="index">
         <slot :item="item">
-          <td v-for="column in columns" :key="column">
+          <td colspan="column in columns" :key="column">
             <template v-if="hasValue(item, column)">
               {{ itemValue(item, column) }}
             </template>
@@ -70,4 +70,26 @@ export default {
   },
 };
 </script>
-<style></style>
+<style>
+.table-thead {
+  height: 57px;
+
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 120%;
+  text-align: center;
+  color: #86898C;
+}
+
+.table-tbody {
+  font-family: Montserrat;
+  /*font-style: normal;*/
+  /*font-weight: normal;*/
+  font-size: 14px;
+  line-height: 280%;
+  text-align: center;
+  color: #2C2D2F;
+}
+</style>

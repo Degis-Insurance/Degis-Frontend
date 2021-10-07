@@ -12,7 +12,7 @@
         </div>
         <div class="col-md-7 order-md-2">
           <div class="pl-md-7">
-            <h3 class="gamefi-title mb-5"><grey>GameFi</grey> X NFT</h3>
+            <h3 class="title-2 mb-5"><grey>GameFi</grey> X NFT</h3>
 <!--            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
             <h5 class="gamefi-textline">GameFi <grey>is the entrance.</grey></h5>
             <h5 class="gamefi-textline">NFT <grey>is the identity.</grey></h5>
@@ -31,12 +31,7 @@ export default {
 </script>
 
 <style scoped>
-.gamefi-title {
-  font-size: 48px;
-  font-weight: 900;
-  line-height: 54px;
-  color: #6415ff;
-}
+
 p {
   font-weight: 400;
   font-size: 21px;

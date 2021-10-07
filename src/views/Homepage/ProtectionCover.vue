@@ -1,25 +1,26 @@
 <template>
-  <section class="section section-lg">
-    <div class="container">
-      <div class="row row-grid align-items-center">
-        <h1 class="pc-title" style="margin: auto; font-size: 50px">
-          Protection Cover
-        </h1>
-      </div>
-      <div class="row row-grid align-items-center">
-        <h5 class="pc-subtitle">
-          There are many dangers lying in this miserable world. Degis.Protection
-          is the shield to protect yourself.
-        </h5>
-        <base-button style="margin: auto; margin-top: 30px">Read More</base-button>
-      </div>
-      <div class="row row-grid align-items-center">
-        <div class="col-md-12">
-          <img src="img/homepage/3.png" class="img-fluid floating"/>
+  <section class="section section"></section>
+
+  <div class="container shape-container d-flex align-items-center">
+    <div class="col px-0">
+      <div class="row justify-content-center align-items-center">
+        <!--          <div class="row row-grid align-items-center">-->
+        <div class="col-md-6 order-md-2">
+          <img src="img/homepage/protection-cover.png" class="img-fluid floating"/>
+        </div>
+        <div class="col-md-6 order-md-1">
+          <h3 class="title-2 pb-4">Protection Cover</h3>
+          <p class="text-1">
+            There are many dangers lying in this miserable world.
+            Degis.Protection is the shield to protect yourself.
+          </p>
+          <div class="btn-wrapper d-flex pt-4">
+            <base-button>Read More</base-button>
+          </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -31,28 +32,6 @@ export default {
 </script>
 
 <style scoped>
-h3 {
-  font-size: 28px;
-  font-weight: 900;
-}
-
-h6 {
-  font-size: 15px;
-  color: #7c8ba1;
-  font-weight: 500;
-}
-
-.pc-title {
-  /*font-family: Montserrat;*/
-  /*font-style: normal;*/
-  font-weight: 900;
-  font-size: 48px;
-  line-height: 54px;
-  margin: auto;
-  /*text-align: center;*/
-  color: #6415ff;
-}
-
 .pc-subtitle {
   font-family: Montserrat;
   font-style: normal;
@@ -60,7 +39,7 @@ h6 {
   font-size: 24px;
   line-height: 29px;
   text-align: center;
-  color: #4D535C;
+  color: #4d535c;
   margin: auto;
   margin-top: -30px;
   padding-left: 100px;

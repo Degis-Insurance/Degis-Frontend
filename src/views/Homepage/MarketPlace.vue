@@ -2,7 +2,7 @@
   <section class="section section-lg">
     <div class="container">
       <div class="row row-grid align-items-center">
-        <h1 class="mp-title">
+        <h1 class="title-2">
           Bazaar
         </h1>
       </div>
@@ -13,7 +13,7 @@
       </div>
       <div class="row row-grid align-items-center">
         <div class="col-md-12">
-          <img src="img/homepage/market-place.png" class="img-fluid floating" />
+          <img src="img/homepage/market-place.png" class="img-fluid floating" style="margin-top: -15%" />
         </div>
       </div>
     </div>
@@ -36,17 +36,6 @@ h6 {
   font-size: 15px;
   color: #7c8ba1;
   font-weight: 500;
-}
-
-.mp-title {
-      /*font-family: Montserrat;*/
-  /*font-style: normal;*/
-  font-weight: 900;
-  font-size: 48px;
-  line-height: 54px;
-  margin: auto;
-  /*text-align: center;*/
-  color: #6415ff;
 }
 
 .mp-subtitle {

@@ -1,19 +1,35 @@
 <template>
   <section class="section section-lg">
-    <div class="container">
-      <div class="row row-grid align-items-center">
-        <h1 class="dl-title">
-          Lucky Box
-        </h1>
-      </div>
-      <div class="row row-grid align-items-center">
-        <h5 class="dl-subtitle">
-          At Degis.LuckBox, use Degis token(DEG) to buy tickets and win the biggest prize you can ever imagine.
-        </h5>
-      </div>
-      <div class="row row-grid align-items-center">
-        <div class="col-md-12">
-          <img src="img/homepage/3.png" class="img-fluid floating" />
+    <div
+      style="
+        /*min-height: 910px;*/
+        /*min-width: 1920px;*/
+        width: 100%;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-image: url('img/homepage/degis-lucky-box.png');
+      "
+    >
+      <div class="container" style="height: 800px">
+        <div class="row row-grid align-items-center">
+          <h1 class="title-2 pt-7">Degis Lucky Box</h1>
+        </div>
+        <div class="row row-grid align-items-center">
+          <p class="text-1" style="text-align: center; padding: 0 10%">
+            At Degis.LuckBox, use Degis token(DEG) to buy tickets and win the
+            biggest prize you can ever imagine.
+          </p>
+        </div>
+        <div class="row align-items-center">
+          <h1 class="title-1 pt-4" style="margin: auto; text-align: center">
+            $272,786
+          </h1>
+        </div>
+        <div class="row align-items-center">
+          <h5 class="text-ip pt-2">IN PRIZES!</h5>
+        </div>
+        <div class="row row-grid align-items-center">
+          <base-button style="margin: 3% auto">Buy Tickets</base-button>
         </div>
       </div>
     </div>
@@ -21,45 +37,23 @@
 </template>
 
 <script>
+import BaseButton from "../../components/BaseButton";
 export default {
   name: "degislucky",
+  components: { BaseButton },
 };
 </script>
 
 <style scoped>
-h3 {
-  font-size: 28px;
-  font-weight: 900;
-}
-
-h6 {
-  font-size: 15px;
-  color: #7c8ba1;
-  font-weight: 500;
-}
-
-.dl-title {
-    /*font-family: Montserrat;*/
-  /*font-style: normal;*/
-  font-weight: 900;
-  font-size: 48px;
-  line-height: 54px;
-  margin: auto;
-  /*text-align: center;*/
-  color: #6415ff;
-}
-
-.dl-subtitle {
+.text-ip {
   font-family: Montserrat;
   font-style: normal;
   font-weight: 900;
   font-size: 24px;
-  line-height: 29px;
-  text-align: center;
-  color: #4D535C;
+
   margin: auto;
-  margin-top: -30px;
-    padding-left: 100px;
-  padding-right: 100px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #4d535c;
 }
 </style>
