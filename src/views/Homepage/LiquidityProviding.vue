@@ -3,29 +3,31 @@
     <div class="container">
       <div class="row row-grid align-items-center">
         <h1 class="title-2">
-          Mining
+          Liquidity Mining
         </h1>
       </div>
       <div class="row row-grid align-items-center">
-        <h5 class="lp-subtitle">
-          Degis.Mining is the place of high yield with token rewards.
+        <h5 class="lp-subtitle pt-5">
+          The place to earn at high yield and token rewards.
         </h5>
       </div>
       <div class="row row-grid align-items-center justify-content-between">
-        <div class="col-md-5 order-md-1">
+        <div class="col-md-5 order-md-1" style="text-align: center">
           <img
-            src="img/homepage/liquidity-providing.png"
+            src="img/homepage/lm-left.png"
             class="img-fluid floating"
           />
+          <h3>Premium Sharing</h3>
         </div>
         <div class="col-md-1 order-md-2">
           <img src="img/homepage/plus.png" class="img-fluid floating"/>
         </div>
-        <div class="col-md-5 order-md-3">
+        <div class="col-md-5 order-md-3" style="text-align: center;">
           <img
-            src="img/homepage/liquidity-providing.png"
+            src="img/homepage/lm-right.png"
             class="img-fluid floating"
           />
+          <h3>Token Reward</h3>
         </div>
       </div>
     </div>

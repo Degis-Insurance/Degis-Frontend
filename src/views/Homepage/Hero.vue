@@ -26,14 +26,14 @@
         <div class="col-md-7 order-md-1">
           <div class="pr-md-5">
             <h1 class="title-1">
-              Protect yourself against the miserable world
+              The 1st  Decentralized Protection Market On Avalanche
             </h1>
-            <p class="text-1">
-              Degis is a real world cross blockchain protection platform. Via
-              Degis, protect yourself against the miserable world.
-            </p>
+<!--            <p class="text-1">-->
+<!--              Degis is a real world cross blockchain protection platform. Via-->
+<!--              Degis, protect yourself against the miserable world.-->
+<!--            </p>-->
           </div>
-          <div class="btn-wrapper d-flex pt-4">
+          <div class="btn-wrapper d-flex pt-7">
             <a href="/#/protection"><base-button>Get started</base-button></a>
             <a href="https://docs.degis.io/" style="padding: 0 8%"><base-button class="tut-button">Tutorial</base-button></a>
           </div>

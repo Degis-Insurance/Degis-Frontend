@@ -6,30 +6,16 @@
       </div>
       <div class="row row-grid align-items-center">
         <div class="col-md-3">
-          <img src="img/homepage/investors.png" class="img-fluid" />
+          <img src="img/homepage/investors.svg" class="img-fluid" />
         </div>
         <div class="col-md-3">
-          <img src="img/homepage/investors.png" class="img-fluid" />
+          <img src="img/homepage/investors.svg" class="img-fluid" />
         </div>
         <div class="col-md-3">
-          <img src="img/homepage/investors.png" class="img-fluid" />
+          <img src="img/homepage/investors.svg" class="img-fluid" />
         </div>
         <div class="col-md-3">
-          <img src="img/homepage/investors.png" class="img-fluid" />
-        </div>
-      </div>
-      <div class="row row-grid align-items-center">
-        <div class="col-md-3">
-          <img src="img/homepage/investors.png" class="img-fluid" />
-        </div>
-        <div class="col-md-3">
-          <img src="img/homepage/investors.png" class="img-fluid" />
-        </div>
-        <div class="col-md-3">
-          <img src="img/homepage/investors.png" class="img-fluid" />
-        </div>
-        <div class="col-md-3">
-          <img src="img/homepage/investors.png" class="img-fluid" />
+          <img src="img/homepage/investors.svg" class="img-fluid" />
         </div>
       </div>
     </div>

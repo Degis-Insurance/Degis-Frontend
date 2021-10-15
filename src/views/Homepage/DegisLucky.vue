@@ -16,8 +16,7 @@
         </div>
         <div class="row row-grid align-items-center">
           <p class="text-1" style="text-align: center; padding: 0 10%">
-            At Degis.LuckBox, use Degis token(DEG) to buy tickets and win the
-            biggest prize you can ever imagine.
+            Specially Designed for DEGIS Token Holders Play to earn the biggest prizes!
           </p>
         </div>
         <div class="row align-items-center">

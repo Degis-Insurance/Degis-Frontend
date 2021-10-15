@@ -3,12 +3,12 @@
     <div class="container">
       <div class="row row-grid align-items-center">
         <h1 class="title-2">
-          Bazaar
+          The Way to InsuranceDAO
         </h1>
       </div>
             <div class="row row-grid align-items-center">
         <h1 class="mp-subtitle">
-          Degis.Bazaar, a bizarre place where any kind of insurance would appear. Trade what you want.
+          The Bazaar Protection Market is fully governed by DEGIS token holders, with the freedom to buy, sell, and design their own products.
         </h1>
       </div>
       <div class="row row-grid align-items-center">

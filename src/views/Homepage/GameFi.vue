@@ -1,5 +1,6 @@
 <template>
   <section class="section section-lg">
+  <section class="section section-lg"/>
     <div class="container">
       <!--      <div class="row row-grid align-items-center">-->
       <!--        <h1 class="font-weight-900" style="margin: auto; font-size: 50px">-->
@@ -12,11 +13,11 @@
         </div>
         <div class="col-md-7 order-md-2">
           <div class="pl-md-7">
-            <h3 class="title-2 mb-5"><grey>GameFi</grey> X NFT</h3>
+            <h3 class="title-2 mb-5">Shape DeFi Protection Ecosystem</h3>
 <!--            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
-            <h5 class="gamefi-textline">GameFi <grey>is the entrance.</grey></h5>
-            <h5 class="gamefi-textline">NFT <grey>is the identity.</grey></h5>
-            <h5 class="gamefi-textline">Protection <grey>is the key.</grey></h5>
+            <h5 class="gamefi-textline">To Protect <grey>with safety.</grey></h5>
+            <h5 class="gamefi-textline">To Earn <grey>with yield.</grey></h5>
+            <h5 class="gamefi-textline">To Play <grey>with fun.</grey></h5>
           </div>
         </div>
       </div>
