@@ -18,7 +18,7 @@
         />
         <sidebar-item
           :link="{
-            name: 'Naught Price',
+            name: 'Naughty Price',
             src: 'img/function/icon/price.png',
             path: '/price',
           }"

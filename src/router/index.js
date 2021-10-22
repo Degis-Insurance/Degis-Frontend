@@ -7,7 +7,7 @@ import Protection from "../views/Protection.vue";
 import Flight from "../views/Flight.vue";
 import Price from "../views/Price.vue";
 import Mining from "../views/Mining.vue";
-import Luckybox from "../views/Luckybox.vue";
+import Luckybox from "../views/LuckyBox/Luckybox.vue";
 import Marketplace from "../views/Marketplace.vue";
 
 const routes = [

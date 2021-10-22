@@ -51,7 +51,7 @@
       <div class="container-fluid">
         <div class="row align-items-center">
           <div class="col-xl-6 order-md-1">
-            <h2 class="sub-head">The Naught Price Pool</h2>
+            <h2 class="sub-head">The Naughty Price Pool</h2>
             <div class="row justify-content-between" style="padding: 2% 0">
               <div class="col-6">
                 <img

@@ -2,18 +2,19 @@
   <section class="section section-lg">
     <div class="container">
       <div class="row row-grid align-items-center">
-        <h1 class="title-2">The Way to InsuranceDAO</h1>
+        <h1 class="title-2">
+          Roadmap
+        </h1>
       </div>
       <div class="row row-grid align-items-center">
-        <h1 class="mp-subtitle">
-          The Bazaar Protection Market is fully governed by DEGIS token holders,
-          with the freedom to buy, sell, and design their own products.
+        <h1 class="tn-subtitle">
+          Timeline and Version Update
         </h1>
       </div>
     </div>
-    <div class="row">
+    <div class="row row-grid align-items-center">
       <div class="col-md-12">
-        <img src="img/homepage/market-place.png" class="img-fluid floating" style="margin-top: -10%"/>
+        <img src="img/homepage/roadmap.png" class="img-fluid floating"/>
       </div>
     </div>
   </section>
@@ -21,7 +22,7 @@
 
 <script>
 export default {
-  name: "marketplace",
+  name: "Roadmap",
 };
 </script>
 
@@ -37,17 +38,15 @@ h6 {
   font-weight: 500;
 }
 
-.mp-subtitle {
+.tn-subtitle {
   font-family: Montserrat;
   font-style: normal;
   font-weight: 900;
   font-size: 24px;
   line-height: 29px;
   text-align: center;
-  color: #4d535c;
+  color: #4D535C;
   margin: auto;
   margin-top: -30px;
-  padding-left: 100px;
-  padding-right: 100px;
 }
 </style>

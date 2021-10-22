@@ -8,13 +8,13 @@
       </div>
       <div class="row row-grid align-items-center">
         <h1 class="tn-subtitle">
-          Now, trading protection contracts becomes possible.
+          DEGIS will distribute 100 million DEG to reward loyal users
         </h1>
       </div>
-      <div class="row row-grid align-items-center">
-        <div class="col-md-12">
-          <img src="img/homepage/temp.png" class="img-fluid floating" />
-        </div>
+    </div>
+    <div class="row row-grid align-items-center">
+      <div class="col-md-12">
+        <img src="img/homepage/tokenomics.png" class="img-fluid floating"/>
       </div>
     </div>
   </section>
@@ -27,17 +27,6 @@ export default {
 </script>
 
 <style scoped>
-h3 {
-  font-size: 28px;
-  font-weight: 900;
-}
-
-h6 {
-  font-size: 15px;
-  color: #7c8ba1;
-  font-weight: 500;
-}
-
 .tn-subtitle {
   font-family: Montserrat;
   font-style: normal;

@@ -33,9 +33,9 @@
             <img src="img/function/product-price.png" class="img-fluid" />
           </div>
           <div class="col-lg-6 order-md-2">
-            <h1 class="big-head">The Naught Price</h1>
+            <h1 class="big-head">The Naughty Price</h1>
             <h5 class="product-desc pt-4">
-              The world of Blockchain is beyond imagination. Token prices are very naught, as they can drop to zero immediately. At Degis Naught Price, protect your money by foreseeing the price change and purchase the right policy.
+              The world of Blockchain is beyond imagination. Token prices are very naught, as they can drop to zero immediately. At Degis Naughty Price, protect your money by foreseeing the price change and purchase the right policy.
             </h5>
             <div class="d-flex justify-content-between" style="padding-top: 12%">
               <div class="display-4" style="line-height: 25px">

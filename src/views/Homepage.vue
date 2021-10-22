@@ -38,10 +38,10 @@
         <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
           <homepage-dropdown class="nav-item" menu-classes="dropdown-menu-xl">
             <template v-slot:title>
-<!--              <span class="nav-link" data-toggle="dropdown" role="button">-->
-<!--                <i class="ni ni-ui-04 d-lg-none"></i>-->
-                <span class="nav-font">Products</span>
-<!--              </span>-->
+              <!--              <span class="nav-link" data-toggle="dropdown" role="button">-->
+              <!--                <i class="ni ni-ui-04 d-lg-none"></i>-->
+              <span class="nav-font">Products</span>
+              <!--              </span>-->
             </template>
             <div class="dropdown-menu-inner">
               <router-link
@@ -93,15 +93,13 @@
           <!--            >-->
           <!--          </homepage-dropdown>-->
           <a href="/#/mining">
-              <span class="nav-font">
-                Mining
-              </span>
+            <span class="nav-font"> Mining </span>
           </a>
           <a href="/#/luckybox">
-            <span class="nav-font">Luckybox</span>
+            <span class="nav-font">Lucky Box</span>
           </a>
           <a href="/#/marketplace">
-            <span class="nav-font">Marketplace</span>
+            <span class="nav-font">Market Place</span>
           </a>
         </ul>
         <ul class="navbar-nav align-items-lg-center ml-lg-auto">
@@ -121,50 +119,15 @@
           <DegisLucky></DegisLucky>
           <MarketPlace></MarketPlace>
           <Tokenomics></Tokenomics>
-<!--          <TokenOfferingPhase></TokenOfferingPhase>-->
+          <Roadmap></Roadmap>
+          <!--          <TokenOfferingPhase></TokenOfferingPhase>-->
           <Articles></Articles>
           <Investors></Investors>
           <!--          <token></token>-->
+          <ContentFooter></ContentFooter>
         </div>
       </fade-transition>
     </main>
-
-    <footer class="footer has-cards">
-      <div class="container mt--100">
-        <hr />
-        <div class="row align-items-center justify-content-md-between">
-          <div class="col-md-6">
-            <div class="copyright">
-              &copy; {{ year }}
-              <a
-                href="http://cryptofintechlabhk.net"
-                target="_blank"
-                rel="noopener"
-                >CRYPTOFINTECH LABORATORY</a
-              >
-            </div>
-          </div>
-          <div class="col-md-6">
-            <ul class="nav nav-footer justify-content-end">
-              <li class="nav-item">
-                <a href="#" class="nav-link" target="_blank" rel="noopener"
-                  >Contact Us</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  href="https://www.github.com"
-                  class="nav-link"
-                  target="_blank"
-                  rel="noopener"
-                  >Github</a
-                >
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </footer>
   </div>
 </template>
 <script>
@@ -177,13 +140,16 @@ import LiquidityProviding from "./Homepage/LiquidityProviding";
 import MarketPlace from "./Homepage/MarketPlace";
 import ProtectionCover from "./Homepage/ProtectionCover";
 import Tokenomics from "./Homepage/Tokenomics";
+import Roadmap from "./Homepage/Roadmap";
 // import TokenOfferingPhase from "./Homepage/TokenOfferingPhase";
 // import Token from "./Homepage/Token";
 import CloseButton from "@/components/CloseButton";
+import ContentFooter from "../layout/ContentFooter";
 
 export default {
   name: "homepage",
   components: {
+    ContentFooter,
     Articles,
     DegisLucky,
     Investors,
@@ -191,6 +157,7 @@ export default {
     MarketPlace,
     ProtectionCover,
     Tokenomics,
+    Roadmap,
     // TokenOfferingPhase,
     CloseButton,
     // Token,
@@ -208,6 +175,6 @@ export default {
   font-size: 16px;
   line-height: 24px;
   color: #4d535c;
-  margin:0px 20px;
+  margin: 0px 20px;
 }
 </style>
