@@ -29,7 +29,8 @@
           <base-button
             style="margin: 3% auto; padding: 1% 5%"
             @click="modals.BuyTickets = true"
-            >Buy Tickets</base-button
+          >Buy Tickets
+          </base-button
           >
         </div>
       </div>
@@ -38,30 +39,31 @@
     <div class="row">
       <div class="col-3">
         <stats-card>
-          <div class="container-fluid" style="height: 500px">
+          <div class="container-fluid" style="height: 450px">
             <div class="row row-grid align-items-center">
               <h2 class="fw-7 d-g1 fs-28 pt-3">Next Draw</h2>
             </div>
             <div class="row">
-              <h3 class="fw-7 d-g1 fs-16 pt-4">Round #124</h3>
+              <h3 class="fw-7 d-g1 fs-16 pt-3">Round #124</h3>
             </div>
             <div class="row">
-              <h4 class="fw-5 d-g4 fs-14 pt-3">prize Pot</h4>
+              <h4 class="fw-5 d-g4 fs-14 pt-2">prize Pot</h4>
             </div>
             <div class="row">
-              <h4 class="fw-7 d-p fs-24 pt-3">$272,786</h4>
+              <h4 class="fw-7 d-p fs-24 pt-2">$272,786</h4>
             </div>
             <div class="row">
-              <h4 class="fw-5 d-g4 fs-14 pt-3">End in</h4>
+              <h4 class="fw-5 d-g4 fs-14 pt-2">End in</h4>
             </div>
             <div class="row">
-              <h3 class="fw-7 d-g1 fs-16 pt-3">20:00, 15/10/2021</h3>
+              <h3 class="fw-7 d-g1 fs-16 pt-2">20:00, 15/10/2021</h3>
             </div>
-            <div class="row pt-5">
+            <div class="row pt-4">
               <base-button
                 style="margin: 3% auto; padding: 3% 8%; width: 100%"
                 @click="modals.BuyTickets = true"
-                >Buy Tickets</base-button
+              >Buy Tickets
+              </base-button
               >
             </div>
             <div class="row">
@@ -73,7 +75,7 @@
 
       <div class="col-9">
         <stats-card>
-          <div class="container-fluid" style="height: 500px">
+          <div class="container-fluid" style="height: 450px">
             <div
               class="row row-grid align-items-center justify-content-between"
             >
@@ -81,7 +83,8 @@
               <div class="d-flex">
                 <base-button>All History</base-button>
                 <base-button style="background: #f2f2f2; color: #6415ff"
-                  >Your History</base-button
+                >Your History
+                </base-button
                 >
               </div>
             </div>
@@ -93,21 +96,30 @@
               <h4 class="fw-7 d-g1 fs-16 pt-3">Winning Number</h4>
               <h4 class="fw-4 d-g4 fs-14 pt-4">Drawn <span class="fw-7 d-g3"> 20:00, 15/10/2021</span></h4>
             </div>
-            <img
-              class="pt-4"
-              src="img/function/luckybox-number.png"
-              style="width: 100%"
-            />
+
+            <div class="pt-3">
+              <div style="background-color: #F2F2F2; border-radius: 12px; height: 88px">
+                <div class="row">
+                  <div class="col-xl-3"></div>
+                  <div class="col-xl-6 d-flex justify-content-between">
+                    <img src="img/luckybox/num-3.png" style="max-width: 65px; max-height: 66px; margin-top: 11px">
+                    <img src="img/luckybox/num-5.png" style="max-width: 65px; max-height: 66px; margin-top: 11px">
+                    <img src="img/luckybox/num-6.png" style="max-width: 65px; max-height: 66px; margin-top: 11px">
+                    <img src="img/luckybox/num-7.png" style="max-width: 65px; max-height: 66px; margin-top: 11px">
+                  </div>
+                  <div class="col-xl-3"></div>
+                </div>
+              </div>
+            </div>
+
             <div class="row justify-content-between pt-3">
               <div>
                 <h4 class="fw-7 d-g1 fs-16 pt-3">Prize Pot: <span class="fw-7 d-p fs-24">$272,786</span></h4>
-                <h4 class="fw-4 d-p fs-14 pt-3">Details ></h4>
+                <h4 class="fw-4 d-p fs-14 pt-3" @click="modals.Details = true">Details ></h4>
               </div>
               <div>
                 <h4 class="fw-4 d-g1 fs-14 pt-3" align="right">Are you a winner?</h4>
-                <base-button @click="modals.PendingPrize = true"
-                  >CHECK YOUR PENDING PRIZE</base-button
-                >
+                <base-button @click="modals.PendingPrize = true">CHECK YOUR PENDING PRIZE</base-button>
               </div>
             </div>
           </div>
@@ -118,34 +130,37 @@
 
   <buy-tickets v-model:show="modals.BuyTickets">
     <template v-slot:footer>
-      <base-button @click="modals.BuyTickets = false">Buy Tickets</base-button>
+      <base-button style="width: 100%; height: 100%" @click="modals.BuyTickets = false">Buy Tickets</base-button>
     </template>
   </buy-tickets>
 
   <pending-prize v-model:show="modals.PendingPrize">
     <template v-slot:footer>
-      <base-button @click="modals.PendingPrize = false"
-        >Buy Tickets</base-button
-      >
+      <base-button @click="modals.PendingPrize = false">Buy Tickets</base-button>
     </template>
   </pending-prize>
+
+  <lb-details v-model:show="modals.Details"></lb-details>
 </template>
 
 <script>
 import BuyTickets from "./BuyTickets";
 import PendingPrize from "./PendingPrize";
+import LbDetails from "./LbDetails";
 
 export default {
   name: "luckybox",
   components: {
     BuyTickets,
     PendingPrize,
+    LbDetails,
   },
   data() {
     return {
       modals: {
         BuyTickets: false,
         PendingPrize: false,
+        LbDetails: false,
       },
     };
   },
@@ -153,35 +168,9 @@ export default {
 </script>
 
 <style scoped>
-
-.nd-1 {
-  font-weight: bold;
-  font-size: 28px;
-  display: flex;
-  align-items: center;
-  color: #2c2d2f;
-  display: inline-block;
-}
 .nd-2 {
   font-weight: bold;
   font-size: 16px;
   color: #2c2d2f;
-}
-.nd-3 {
-  font-weight: 500;
-  font-size: 14px;
-  color: #bdbdbd;
-}
-.nd-4 {
-  font-weight: bold;
-  font-size: 24px;
-  color: #6415ff;
-}
-.nd-5 {
-  font-weight: normal;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  color: #6415ff;
 }
 </style>

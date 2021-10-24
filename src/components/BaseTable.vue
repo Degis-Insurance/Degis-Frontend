@@ -73,9 +73,6 @@ export default {
 <style>
 .table-thead {
   height: 57px;
-
-  font-family: Montserrat;
-  font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 120%;
@@ -84,9 +81,7 @@ export default {
 }
 
 .table-tbody {
-  font-family: Montserrat;
-  /*font-style: normal;*/
-  /*font-weight: normal;*/
+  font-weight: normal;
   font-size: 14px;
   line-height: 280%;
   text-align: center;
