@@ -23,9 +23,6 @@ import HomepageDropdown from "../components/HomepageDropdown";
 
 import { ElTooltip, ElPopover } from "element-plus";
 import GlobalDirectives from "./globalDirectives";
-import "../assets/vendor/nucleo/css/nucleo.css";
-import "../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css";
-import "@/assets/vendor/font-awesome/css/font-awesome.css";
 import "../assets/scss/degis.scss";
 import SidebarPlugin from "../components/SidebarPlugin";
 

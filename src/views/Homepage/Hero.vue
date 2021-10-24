@@ -23,8 +23,8 @@
         <img src="img/homepage/img-1.png" class="img-fluid floating" />
       </div>
       <div class="col-md-7 order-md-1">
-        <h3 class="hp-subtitle">DEGIS</h3>
-        <h1 class="hp-title">The 1st Decentralized Protection Market</h1>
+        <p class="fw-9 d-p fs-32">DEGIS</p>
+        <p class="hp-title">The 1st Decentralized Protection Market</p>
         <h1 class="hp-title" style="color: #6415FF;">On Avalanche</h1>
         <div class="btn-wrapper d-flex pt-5">
           <a href="/#/protection"><base-button>Get started</base-button></a>
@@ -54,18 +54,5 @@ export default {
 };
 </script>
 <style>
-.hp-subtitle {
-  font-weight: 900;
-  font-size: 30px;
-  line-height: 38px;
-  text-transform: uppercase;
-  color: #6415FF;
-}
 
-.hp-title {
-  font-size: 60px;
-  font-weight: 900;
-  line-height: 64px;
-  color: #2C2D2F;
-}
 </style>

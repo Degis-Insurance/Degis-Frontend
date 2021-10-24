@@ -12,20 +12,20 @@
     >
       <div class="container" style="height: 800px">
         <div class="row row-grid align-items-center">
-          <h1 class="title-2 pt-7">Degis Lucky Box</h1>
+          <h1 class="hp-title2 pt-7">Degis Lucky Box</h1>
         </div>
         <div class="row row-grid align-items-center">
-          <p class="text-1" style="text-align: center; padding: 0 10%">
+          <p class="hp-desc" style="text-align: center; padding: 0 10%">
             Specially Designed for DEGIS Token Holders Play to earn the biggest prizes!
           </p>
         </div>
         <div class="row align-items-center">
-          <h1 class="title-1 pt-4" style="margin: auto; text-align: center">
+          <p class="fw-9 d-p pt-5" style="font-size: 72px; line-height: 64px; margin: auto">
             $272,786
-          </h1>
+          </p>
         </div>
         <div class="row align-items-center">
-          <h5 class="text-ip pt-2">IN PRIZES!</h5>
+          <p class="fw-9 d-g2 ma pt-4 fs-24">IN PRIZES!</p>
         </div>
         <div class="row row-grid align-items-center">
           <base-button style="margin: 3% auto">Buy Tickets</base-button>
@@ -44,15 +44,5 @@ export default {
 </script>
 
 <style scoped>
-.text-ip {
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: 900;
-  font-size: 24px;
 
-  margin: auto;
-  text-align: center;
-  text-transform: uppercase;
-  color: #4d535c;
-}
 </style>

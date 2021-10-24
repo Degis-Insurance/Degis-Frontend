@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view />
+    <router-view/>
     <modal v-model:show="modals.modal1">
       <template v-slot:header></template>
       <div class="py-3 text-center">
@@ -25,9 +25,16 @@ export default {
   data() {
     return {
       modals: {
-        modal1: true,
+        modal1: false,
       },
     };
   },
 };
 </script>
+
+<style>
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+}
+</style>

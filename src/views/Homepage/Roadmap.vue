@@ -2,14 +2,14 @@
   <section class="section section-lg">
     <div class="container">
       <div class="row row-grid align-items-center">
-        <h1 class="title-2">
+        <p class="hp-title2">
           Roadmap
-        </h1>
+        </p>
       </div>
       <div class="row row-grid align-items-center">
-        <h1 class="tn-subtitle">
+        <p class="hp-desc">
           Timeline and Version Update
-        </h1>
+        </p>
       </div>
     </div>
     <div class="row row-grid align-items-center">
@@ -27,26 +27,5 @@ export default {
 </script>
 
 <style scoped>
-h3 {
-  font-size: 28px;
-  font-weight: 900;
-}
 
-h6 {
-  font-size: 15px;
-  color: #7c8ba1;
-  font-weight: 500;
-}
-
-.tn-subtitle {
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: 900;
-  font-size: 24px;
-  line-height: 29px;
-  text-align: center;
-  color: #4D535C;
-  margin: auto;
-  margin-top: -30px;
-}
 </style>

@@ -1,37 +1,54 @@
 <template>
-  <modal v-model:show="modals.modal1">
-    <template v-slot:header></template>
-    <div class="py-3 text-center">
-      <i class="ni ni-bell-55 ni-3x"></i>
-      <h4 class="heading mt-4" style="padding-left: 10%; padding-right: 10%">
-        We only provide services to users who are
-        <span style="color: red">not</span> in mainland China.
-      </h4>
+  <div class="modal fade" @click.self="closeModal" :class="[{ 'show d-block': show }, { 'd-none': !show }]" v-show="show" tabindex="-1" role="dialog" :aria-hidden="!show">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h1 class="m-h">Buy Tickets</h1>
+          <button class="close" @click="closeModal">
+            <span :aria-hidden="!show">×</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="py-3 text-center">
+            <h1>Some content here</h1>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <slot name="footer"></slot>
+        </div>
+      </div>
     </div>
-    <template v-slot:footer>
-      <base-button type="white" @click="modals.modal1 = false"
-        >Confirm!</base-button
-      >
-      <base-button
-        type="link"
-        text-color="white"
-        class="ml-auto"
-        @click="modals.modal1 = false"
-        >Close</base-button
-      >
-    </template>
-  </modal>
+  </div>
 </template>
-
 <script>
-import Modal from "../../components/Modal";
-
 export default {
-  name: "BuyTickets",
-  components: {
-    Modal,
+  name: "buy-tickets",
+  props: {
+    show: Boolean,
+  },
+  methods: {
+    closeModal() {
+      this.$emit("update:show", false);
+      this.$emit("close");
+    },
+  },
+  watch: {
+    show(val) {
+      let documentClasses = document.body.classList;
+      if (val) {
+        documentClasses.add("modal-open");
+      } else {
+        documentClasses.remove("modal-open");
+      }
+    },
   },
 };
 </script>
-
-<style scoped></style>
+<style>
+.modal.show {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+</style>

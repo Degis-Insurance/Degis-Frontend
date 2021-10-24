@@ -2,12 +2,12 @@
   <section class="section section-lg">
     <div class="container">
       <div class="row row-grid align-items-center">
-        <h1 class="title-2">
+        <h1 class="hp-title2">
           Liquidity Mining
         </h1>
       </div>
       <div class="row row-grid align-items-center">
-        <h5 class="lp-subtitle pt-5">
+        <h5 class="hp-desc">
           The place to earn at high yield and token rewards.
         </h5>
       </div>
@@ -41,26 +41,5 @@ export default {
 </script>
 
 <style scoped>
-h3 {
-  font-size: 28px;
-  font-weight: 900;
-}
 
-h6 {
-  font-size: 15px;
-  color: #7c8ba1;
-  font-weight: 500;
-}
-
-.lp-subtitle {
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: 900;
-  font-size: 24px;
-  line-height: 29px;
-  text-align: center;
-  color: #4D535C;
-  margin: auto;
-  margin-top: -30px;
-}
 </style>

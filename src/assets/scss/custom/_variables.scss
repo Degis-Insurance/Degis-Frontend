@@ -19,8 +19,8 @@ $border-radius:               .25rem !default;
 
 // Fonts
 
-$font-family-base: 'Open Sans', sans-serif !default;
-$font-family-alt: 'Open Sans', sans-serif !default;
+$font-family-base: 'Montserrat', sans-serif !default;
+$font-family-alt: 'Montserrat', sans-serif !default;
 
 
 // Navbar
@@ -401,8 +401,8 @@ $transition-collapse:         height .35s ease !default;
 
 // Fonts
 
-$font-family-sans-serif: Open Sans, sans-serif !default;
-$font-family-base: $font-family-sans-serif !default;
+//$font-family-sans-serif: Open Sans, sans-serif !default;
+//$font-family-base: $font-family-sans-serif !default;
 
 $font-size-base:              1rem !default; // Assumes the browser default, typically `16px`
 $font-size-xl:                ($font-size-base * 1.5);

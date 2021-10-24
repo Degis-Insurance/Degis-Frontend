@@ -119,8 +119,6 @@ export default {
   background: #6415ff;
   border-radius: 30px;
 
-  font-family: Montserrat;
-  font-style: normal;
   font-weight: bold;
   font-size: 16px;
   color: #ffffff;

@@ -2,9 +2,9 @@
   <section class="section section-lg">
     <div class="container">
       <div class="row row-grid align-items-center">
-        <h1 class="title-2">
+        <p class="hp-title2">
           Articles
-        </h1>
+        </p>
       </div>
       <div class="row row-grid align-items-center">
         <div class="col-md-12 order-md-1">
@@ -22,15 +22,5 @@ export default {
 </script>
 
 <style scoped>
-h3 {
-  font-size: 28px;
-  font-weight: 900;
-}
-
-h6 {
-  font-size: 15px;
-  color: #7c8ba1;
-  font-weight: 500;
-}
 
 </style>

@@ -9,8 +9,8 @@
   >
     <div class="container-fluid">
       <div class="">
-        <h6 class="func-sub">Hi dude,</h6>
-        <h1 class="func-nor">Welcome to DEGIS!</h1>
+        <h6 class="fw-7 d-g3 fs-14">Hi dude,</h6>
+        <h6 class="fw-7 d-g3 fs-24">Welcome to DEGIS!</h6>
       </div>
       <div>
         <base-button>CONNECT WALLET</base-button>
@@ -49,23 +49,4 @@ export default {
 };
 </script>
 <style>
-.func-sub {
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 14px;
-  line-height: 24px;
-  letter-spacing: -0.02em;
-  color: #86898c;
-}
-
-.func-nor {
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 25px;
-  letter-spacing: -0.02em;
-  color: #86898c;
-}
 </style>

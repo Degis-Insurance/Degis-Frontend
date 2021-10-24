@@ -2,18 +2,18 @@
   <section class="section section-lg">
     <div class="container">
       <div class="row row-grid align-items-center">
-        <h1 class="title-2">
+        <p class="hp-title2">
           Tokenomics
-        </h1>
+        </p>
       </div>
       <div class="row row-grid align-items-center">
-        <h1 class="tn-subtitle">
+        <p class="hp-desc">
           DEGIS will distribute 100 million DEG to reward loyal users
-        </h1>
+        </p>
       </div>
     </div>
     <div class="row row-grid align-items-center">
-      <div class="col-md-12">
+      <div class="col-md-12 pt-5">
         <img src="img/homepage/tokenomics.png" class="img-fluid floating"/>
       </div>
     </div>
@@ -27,15 +27,5 @@ export default {
 </script>
 
 <style scoped>
-.tn-subtitle {
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: 900;
-  font-size: 24px;
-  line-height: 29px;
-  text-align: center;
-  color: #4D535C;
-  margin: auto;
-  margin-top: -30px;
-}
+
 </style>

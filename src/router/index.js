@@ -2,13 +2,13 @@ import { createRouter, createWebHashHistory } from "vue-router";
 
 import FunctionLayout from "@/layout/FunctionLayout";
 
-import Homepage from "../views/Homepage.vue";
-import Protection from "../views/Protection.vue";
-import Flight from "../views/Flight.vue";
-import Price from "../views/Price.vue";
-import Mining from "../views/Mining.vue";
-import Luckybox from "../views/LuckyBox/Luckybox.vue";
-import Marketplace from "../views/Marketplace.vue";
+import Homepage from "../views/Homepage/Homepage";
+import Protection from "../views/Products/Products";
+import Flight from "../views/Flight/Flight";
+import Price from "../views/Price/Price";
+import Mining from "../views/Mining/Mining";
+import Luckybox from "../views/LuckyBox/Luckybox";
+import Marketplace from "../views/MarketPlace/Marketplace";
 
 const routes = [
   {

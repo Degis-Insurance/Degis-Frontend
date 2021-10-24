@@ -2,10 +2,10 @@
   <section class="section section-lg">
     <div class="container">
       <div class="row row-grid align-items-center">
-        <h1 class="title-2">The Way to InsuranceDAO</h1>
+        <h1 class="hp-title2">The Way to InsuranceDAO</h1>
       </div>
       <div class="row row-grid align-items-center">
-        <h1 class="mp-subtitle">
+        <h1 class="hp-desc ta-c" style="padding: 0 10%">
           The Bazaar Protection Market is fully governed by DEGIS token holders,
           with the freedom to buy, sell, and design their own products.
         </h1>
@@ -26,28 +26,5 @@ export default {
 </script>
 
 <style scoped>
-h3 {
-  font-size: 28px;
-  font-weight: 900;
-}
 
-h6 {
-  font-size: 15px;
-  color: #7c8ba1;
-  font-weight: 500;
-}
-
-.mp-subtitle {
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: 900;
-  font-size: 24px;
-  line-height: 29px;
-  text-align: center;
-  color: #4d535c;
-  margin: auto;
-  margin-top: -30px;
-  padding-left: 100px;
-  padding-right: 100px;
-}
 </style>
