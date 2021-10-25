@@ -5,7 +5,7 @@
       <div class="container">
         <div class="row row-grid align-items-center">
           <div class="col-lg-6 order-md-1">
-            <img src="img/function/product-flight.png" class="img-fluid" />
+            <img src="img/function/product-flight.png" class="img-fluid"/>
           </div>
           <div class="col-lg-6 order-md-2">
             <p class="fw-7 d-g1 fs-34">The Miserable Flight</p>
@@ -16,11 +16,12 @@
               predicting whether flights are delayed and get paid accordingly.
             </p>
             <div class="d-flex justify-content-between" style="padding-top: 12%">
-              <div class="display-4" style="line-height: 25px">
-                <span>Finished</span>
-                <img src="img/function/product-prog.png" style="width: 70%" />
+              <div class="display-4" style="line-height: 25px; width: 60%">
+                <base-progress type="primary" :height="8" :value="100" label="Task completed"></base-progress>
               </div>
-              <base-button style="padding: 0px 15%">BUY</base-button>
+              <a href="/#/flight" style="line-height: 50px; width: 50%; padding-top: 24px" align="right">
+                <base-button style="padding: 0px 30%">BUY</base-button>
+              </a>
             </div>
           </div>
         </div>
@@ -30,19 +31,21 @@
       <div class="container">
         <div class="row row-grid align-items-center">
           <div class="col-lg-6 order-md-1">
-            <img src="img/function/product-price.png" class="img-fluid" />
+            <img src="img/function/product-price.png" class="img-fluid"/>
           </div>
           <div class="col-lg-6 order-md-2">
             <p class="fw-7 d-g1 fs-34">The Naughty Price</p>
             <p class="fw-4 d-g3 fs-16 pt-4">
-              The world of Blockchain is beyond imagination. Token prices are very naught, as they can drop to zero immediately. At Degis Naughty Price, protect your money by foreseeing the price change and purchase the right policy.
+              The world of Blockchain is beyond imagination. Token prices are very naught, as they can drop to zero immediately. At Degis Naughty Price, protect your money by foreseeing the price
+              change and purchase the right policy.
             </p>
             <div class="d-flex justify-content-between" style="padding-top: 12%">
-              <div class="display-4" style="line-height: 25px">
-                <span>Designed</span>
-                <img src="img/function/product-prog.png" style="width: 70%" />
+              <div class="display-4" style="line-height: 25px; width: 60%">
+                <base-progress type="primary" :height="8" :value="60" label="Task completed"></base-progress>
               </div>
-              <base-button style="padding: 0px 15%">BUY</base-button>
+              <a href="/#/price" style="line-height: 50px; width: 50%; padding-top: 24px" align="right">
+                <base-button style="padding: 0px 30%">BUY</base-button>
+              </a>
             </div>
           </div>
         </div>

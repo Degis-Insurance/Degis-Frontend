@@ -102,10 +102,10 @@
                 <div class="row">
                   <div class="col-xl-3"></div>
                   <div class="col-xl-6 d-flex justify-content-between">
-                    <img src="img/luckybox/num-3.png" style="max-width: 65px; max-height: 66px; margin-top: 11px">
-                    <img src="img/luckybox/num-5.png" style="max-width: 65px; max-height: 66px; margin-top: 11px">
-                    <img src="img/luckybox/num-6.png" style="max-width: 65px; max-height: 66px; margin-top: 11px">
-                    <img src="img/luckybox/num-7.png" style="max-width: 65px; max-height: 66px; margin-top: 11px">
+                    <img :src="'img/luckybox/num-'+num[0]+'.png'" style="max-width: 65px; max-height: 66px; margin-top: 11px">
+                    <img :src="'img/luckybox/num-'+num[1]+'.png'" style="max-width: 65px; max-height: 66px; margin-top: 11px">
+                    <img :src="'img/luckybox/num-'+num[2]+'.png'" style="max-width: 65px; max-height: 66px; margin-top: 11px">
+                    <img :src="'img/luckybox/num-'+num[3]+'.png'" style="max-width: 65px; max-height: 66px; margin-top: 11px">
                   </div>
                   <div class="col-xl-3"></div>
                 </div>
@@ -157,6 +157,7 @@ export default {
   },
   data() {
     return {
+      num: [3, 5, 6, 7],
       modals: {
         BuyTickets: false,
         PendingPrize: false,
