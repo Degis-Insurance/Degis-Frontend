@@ -1,0 +1,11 @@
+export const AVA_MAINNET = {
+  DEGIS: "0x121323132",
+  POLICYFLOW: "",
+  INSURANCEPOOL: "",
+};
+
+export const RINKEBY = {
+  DEGIS: "0xeffedf1d042122493ba9c96e0a1208295554cb41",
+  POLICYFLOW: "",
+  INSURANCEPOOL: "",
+};

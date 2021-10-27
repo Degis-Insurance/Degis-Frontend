@@ -13,6 +13,10 @@
         <h6 class="fw-7 d-g3 fs-24">Welcome to DEGIS!</h6>
       </div>
       <div>
+        <span>{{ degisBalance }}</span>
+        <base-button @click="getDegisBalance">check degis balance </base-button>
+      </div>
+      <div>
         <span id="userInfo">{{ selectedAccount }}</span>
         <base-button v-if="!isConnected" @click="connectWallet">{{
           walletstatus
@@ -28,6 +32,7 @@
 import BaseButton from "./BaseButton";
 import { getWeb3 } from "../utils/getWeb3";
 import Web3 from "web3";
+import { getDegis } from "../utils/contractInstance";
 
 export default {
   name: "base-nav",
@@ -55,6 +60,7 @@ export default {
     return {
       walletstatus: "CONNECT WALLET",
       isConnected: false,
+      degisBalance: 0,
     };
   },
   computed: {
@@ -85,6 +91,13 @@ export default {
       this.walletstatus = "CONNECT WALLET";
 
       this.setConnected(false);
+    },
+
+    async getDegisBalance() {
+      const degis = await getDegis();
+      const account = this.$store.state.selectedAccount;
+      const balance = await degis.methods.balanceOf(account).call();
+      this.degisBalance = balance / 1e18;
     },
 
     setConnected(status) {
