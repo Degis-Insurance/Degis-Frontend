@@ -91,7 +91,7 @@
               class="d-flex justify-content-between"
               style="padding-bottom: 11%"
             >
-              <base-button style="width: 45%"> DEPOSIT </base-button>
+              <base-button style="width: 45%">DEPOSIT</base-button>
               <base-button style="width: 45%"> WITHDRAW </base-button>
             </div>
             <h5 class="text-r">Your Premium Income: <bold> XXXX</bold></h5>
@@ -125,7 +125,7 @@ export default {
       const MockUSD = await getMockUSD();
       const InsurancePool = await getInsurancePool();
       const account = this.$store.state.selectedAccount;
-      
+
       const deposit_amount = 10;
       let f_amount = window.WEB3.utils.toWei(String(deposit_amount), "ether");
 
@@ -135,12 +135,12 @@ export default {
           window.WEB3.utils.toBN(f_amount)
         )
         .send({ from: account });
-      console.log("Tx Hash:", tx1.tx);
+      console.log("Tx Hash:", tx1.transactionHash);
 
       const tx2 = await InsurancePool.methods
         .stake(account, window.WEB3.utils.toBN(f_amount))
         .send({ from: account });
-      console.log("Tx Hash:", tx2.tx);
+      console.log("Tx Hash:", tx2.transactionHash);
     },
   },
 };
