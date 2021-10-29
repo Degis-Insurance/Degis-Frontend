@@ -34,20 +34,26 @@
               class="degis-input"
               style="width: 100%; margin: 4% 0"
               placeholder="0"
+              id="degis-input"
             />
             <div
               class="d-flex justify-content-between"
               style="padding-bottom: 11%"
             >
-              <base-button style="width: 45%" @click="depositUSD">
+              <base-button style="width: 45%" @click="depositUSDEvent">
                 DEPOSIT
               </base-button>
-              <base-button style="width: 45%"> WITHDRAW </base-button>
+              <base-button style="width: 45%" @click="withdrawUSDEvent">
+                WITHDRAW
+              </base-button>
             </div>
             <h5 class="text-r">Your Premium Income: <bold> XXXX</bold></h5>
             <h5 class="text-r">Your DEGIS Token Income: <bold> XXXX</bold></h5>
-            <base-button style="width: 100%; margin-bottom: 2%"
-              >HARVEST REWARD</base-button
+            <base-button
+              style="width: 100%; margin-bottom: 2%"
+              @click="harvestDegisEvent"
+            >
+              HARVEST REWARD</base-button
             >
           </div>
         </div>
@@ -91,8 +97,12 @@
               class="d-flex justify-content-between"
               style="padding-bottom: 11%"
             >
-              <base-button style="width: 45%">DEPOSIT</base-button>
-              <base-button style="width: 45%"> WITHDRAW </base-button>
+              <base-button style="width: 45%" @click="getPoolInfoEvent">
+                DEPOSIT</base-button
+              >
+              <base-button style="width: 45%" @click="getLPInfoEvent">
+                WITHDRAW</base-button
+              >
             </div>
             <h5 class="text-r">Your Premium Income: <bold> XXXX</bold></h5>
             <h5 class="text-r">Your DEGIS Token Income: <bold> XXXX</bold></h5>
@@ -109,38 +119,247 @@
 <script>
 import BaseButton from "@/components/BaseButton";
 import Web3 from "web3";
-import { getMockUSD, getInsurancePool } from "../../utils/contractInstance";
+import {
+  getMockUSD,
+  getInsurancePool,
+  getLPToken,
+  getPolicyFlow,
+} from "../../utils/contractInstance";
 export default {
   name: "mining",
   components: {
     BaseButton,
   },
   methods: {
-    async depositUSD() {
-      // const degis = await getDegis();
-      // const account = this.$store.state.selectedAccount;
-      // const balance = await degis.methods.balanceOf(account).call();
-      // this.degisBalance = balance / 1e18;
-
+    async depositUSD(depositAmount) {
       const MockUSD = await getMockUSD();
       const InsurancePool = await getInsurancePool();
       const account = this.$store.state.selectedAccount;
 
-      const deposit_amount = 10;
-      let f_amount = window.WEB3.utils.toWei(String(deposit_amount), "ether");
+      let fAmount = window.WEB3.utils.toWei(String(depositAmount), "ether");
 
       const tx1 = await MockUSD.methods
-        .approve(
-          InsurancePool.options.address,
-          window.WEB3.utils.toBN(f_amount)
-        )
+        .approve(InsurancePool.options.address, window.WEB3.utils.toBN(fAmount))
         .send({ from: account });
       console.log("Tx Hash:", tx1.transactionHash);
 
       const tx2 = await InsurancePool.methods
-        .stake(account, window.WEB3.utils.toBN(f_amount))
+        .stake(account, window.WEB3.utils.toBN(fAmount))
         .send({ from: account });
       console.log("Tx Hash:", tx2.transactionHash);
+    },
+
+    async withdrawUSD(depositAmount) {
+      const InsurancePool = await getInsurancePool();
+      const account = this.$store.state.selectedAccount;
+
+      let fAmount = window.WEB3.utils.toWei(String(depositAmount), "ether");
+
+      const tx = await InsurancePool.methods
+        .unstake(account, window.WEB3.utils.toBN(fAmount))
+        .send({
+          from: account,
+        });
+      console.log("Tx Hash:", tx.transactionHash);
+    },
+
+    async harvestPremium() {
+      const InsurancePool = await getInsurancePool();
+      const account = this.$store.state.selectedAccount;
+
+      const tx = await InsurancePool.methods.harvestPremium(account).send({
+        from: account,
+      });
+      console.log("Tx Hash:", tx.transactionHash);
+    },
+
+    async harvestDegis() {
+      const InsurancePool = await getInsurancePool();
+      const account = this.$store.state.selectedAccount;
+
+      const tx = await InsurancePool.methods.harvestDegisReward(account).send({
+        from: account,
+      });
+      console.log("Tx Hash:", tx.transactionHash);
+    },
+
+    async getLPInfo() {
+      const InsurancePool = await getInsurancePool();
+      const LPToken = await getLPToken();
+      const account = this.$store.state.selectedAccount;
+
+      await InsurancePool.methods
+        .getStakeAmount(account)
+        .call()
+        .then((value) => {
+          console.log("Your stake amount:", parseInt(value) / 10 ** 18);
+        });
+
+      await InsurancePool.methods
+        .getUnlockedfor(account)
+        .call()
+        .then((value) => {
+          console.log("Your unlocked amount:", parseInt(value) / 10 ** 18);
+        });
+
+      await InsurancePool.methods
+        .getLockedfor(account)
+        .call()
+        .then((value) => {
+          console.log("Your locked amount:", parseInt(value) / 10 ** 18);
+        });
+
+      await InsurancePool.methods
+        .getRealBalance(account)
+        .call()
+        .then((value) => {
+          console.log("Your real balance:", parseInt(value) / 10 ** 18);
+        });
+
+      const lpvalue = await InsurancePool.methods.LPValue.call();
+      const lpnum = await LPToken.methods.balanceOf(account);
+
+      const pendingDegis = await InsurancePool.methods
+        .pendingDegis(account)
+        .call();
+      console.log("Pending degis:", parseInt(pendingDegis) / 10 ** 18);
+
+      const pendingPremium = await InsurancePool.methods
+        .pendingPremium(account)
+        .call();
+      console.log("Pending premium:", parseInt(pendingPremium) / 10 ** 18);
+
+      return { pendingDegis: pendingDegis, pendingPremium: pendingPremium };
+    },
+
+    async getPoolInfo() {
+      const MockUSD = await getMockUSD();
+      const InsurancePool = await getInsurancePool();
+      const account = this.$store.state.selectedAccount;
+
+      await InsurancePool.methods
+        .getPoolName()
+        .call()
+        .then((value) => console.log("Pool name:", value));
+
+      let current_policies = await InsurancePool.methods
+        .getCurrentStakingBalance()
+        .call();
+
+      console.log(
+        "Current Staking Balance in the pool:",
+        parseInt(current_policies) / 10 ** 18
+      );
+
+      let available_capacity = await InsurancePool.methods
+        .getAvailableCapacity()
+        .call();
+
+      console.log(
+        "Available capacity in the pool:",
+        parseInt(available_capacity) / 10 ** 18
+      );
+
+      let total_value_locked = await InsurancePool.methods
+        .getTotalLocked()
+        .call();
+
+      console.log(
+        "Total locked amount in the pool:",
+        parseInt(total_value_locked) / 10 ** 18
+      );
+
+      let locked_ratio = await InsurancePool.methods.getLockedRatio().call();
+
+      console.log("PRB locked Ratio:", parseInt(locked_ratio) / 10 ** 18);
+
+      await MockUSD.methods
+        .balanceOf(InsurancePool.options.address)
+        .call()
+        .then((value) =>
+          console.log(
+            "Total USDC balance in the pool:",
+            parseInt(value) / 10 ** 18
+          )
+        );
+
+      await MockUSD.methods
+        .allowance(account, InsurancePool.options.address)
+        .call()
+        .then((value) =>
+          console.log("USDC allowance of the pool:", parseInt(value) / 10 ** 18)
+        );
+
+      const reward_collected = await InsurancePool.methods
+        .getRewardCollected()
+        .call();
+      console.log("reward collected:", parseInt(reward_collected) / 10 ** 18);
+
+      const pf_add = await InsurancePool.methods.policyFlow().call();
+      console.log("policy flow in the pool:", pf_add);
+
+      //await this.getAllPolicyInfo();
+      return {
+        total_value_locked: total_value_locked,
+        available_capacity: available_capacity,
+        current_policies: current_policies,
+        locked_ratio: locked_ratio,
+        pool_address: InsurancePool.options.address,
+      };
+    },
+
+    async getAllPolicyInfo() {
+      const PolicyFlow = await getPolicyFlow();
+
+      const total_policy = await PolicyFlow.methods.Total_Policies().call();
+      console.log("Total policy amount in the pool:", parseInt(total_policy));
+      for (let i = 0; i < parseInt(total_policy); i++) {
+        await PolicyFlow.methods
+          .getPolicyIdByCount(i)
+          .call()
+          .then((value) => {
+            console.log("policyId", i, ":", value);
+          });
+        await PolicyFlow.methods
+          .getPolicyInfoByCount(i)
+          .call()
+          .then((value) => {
+            console.log(value);
+          });
+      }
+    },
+
+    async depositUSDEvent() {
+      const depositAmount = document.getElementById("degis-input").value;
+      await this.depositUSD(depositAmount);
+    },
+
+    async withdrawUSDEvent() {
+      const depositAmount = document.getElementById("degis-input").value;
+      await this.withdrawUSD(depositAmount);
+    },
+
+    async withdrawUSDEvent() {
+      const depositAmount = document.getElementById("degis-input").value;
+      await this.withdrawUSD(depositAmount);
+    },
+
+    async harvestPremiumEvent() {
+      await this.harvestPremium();
+    },
+
+    async harvestDegisEvent() {
+      await this.harvestDegis();
+    },
+
+    async getLPInfoEvent() {
+      const res = await this.getLPInfo();
+      console.log(res);
+    },
+
+    async getPoolInfoEvent() {
+      const res = await this.getPoolInfo();
+      console.log(res);
     },
   },
 };
