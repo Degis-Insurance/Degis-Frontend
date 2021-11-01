@@ -3,7 +3,6 @@
     <div class="table-responsive">
       <base-table
         class="table align-items-center table-flush"
-        :thead-classes="thead-light"
         tbody-classes="list"
         :data="tableData"
       >

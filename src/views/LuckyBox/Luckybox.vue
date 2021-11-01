@@ -1,16 +1,7 @@
 <template>
   <base-header type="" class="pb-6 pb-8 pt-4">
-    <h1 class="fw-7 d-g1 fs-34 mb-4">
-      The Degis Lucky Box
-    </h1>
-    <stats-card
-      style="
-        width: 100%;
-        background-size: 100% 100%;
-        background-repeat: no-repeat;
-        background-image: url('img/homepage/degis-lucky-box.png');
-      "
-    >
+    <h1 class="fw-7 d-g1 fs-34 mb-4">The Degis Lucky Box</h1>
+    <stats-card style=" width: 100%; background-size: 100% 100%; background-repeat: no-repeat; background-image: url('img/homepage/degis-lucky-box.png');">
       <div class="container" style="height: 500px">
         <div class="row row-grid align-items-center">
           <h1 class="fw-7 d-g1 fs-34 pt-7" style="margin: auto">
@@ -67,7 +58,7 @@
               >
             </div>
             <div class="row">
-              <h4 class="fw-4 d-p fs-14 pt-3" style="margin: auto">Winning rules ></h4>
+              <h4 class="fw-4 d-p fs-14 pt-3" style="margin: auto" @click="modals.WinningRules = true">Winning rules ></h4>
             </div>
           </div>
         </stats-card>
@@ -76,52 +67,105 @@
       <div class="col-9">
         <stats-card>
           <div class="container-fluid" style="height: 450px">
-            <div
-              class="row row-grid align-items-center justify-content-between"
-            >
-              <h2 class="fw-7 d-g1 fs-28 pt-3">Finished Rounds ></h2>
+            <div class="row row-grid align-items-center justify-content-between pt-3 pb-2">
+              <h2 class="fw-7 d-g1 fs-28 ">Finished Rounds ></h2>
               <div class="d-flex">
-                <base-button>All History</base-button>
-                <base-button style="background: #f2f2f2; color: #6415ff"
-                >Your History
-                </base-button
-                >
-              </div>
-            </div>
-            <div class="row justify-content-between">
-              <h3 class="nd-2 pt-4">Round #124 > >></h3>
-              <h3 class="fw-4 d-p fs-14 pt-4">View More ></h3>
-            </div>
-            <div class="row justify-content-between pt-3">
-              <h4 class="fw-7 d-g1 fs-16 pt-3">Winning Number</h4>
-              <h4 class="fw-4 d-g4 fs-14 pt-4">Drawn <span class="fw-7 d-g3"> 20:00, 15/10/2021</span></h4>
-            </div>
-
-            <div class="pt-3">
-              <div style="background-color: #F2F2F2; border-radius: 12px; height: 88px">
-                <div class="row">
-                  <div class="col-xl-3"></div>
-                  <div class="col-xl-6 d-flex justify-content-between">
-                    <img :src="'img/luckybox/num-'+num[0]+'.png'" style="max-width: 65px; max-height: 66px; margin-top: 11px">
-                    <img :src="'img/luckybox/num-'+num[1]+'.png'" style="max-width: 65px; max-height: 66px; margin-top: 11px">
-                    <img :src="'img/luckybox/num-'+num[2]+'.png'" style="max-width: 65px; max-height: 66px; margin-top: 11px">
-                    <img :src="'img/luckybox/num-'+num[3]+'.png'" style="max-width: 65px; max-height: 66px; margin-top: 11px">
-                  </div>
-                  <div class="col-xl-3"></div>
-                </div>
+                <base-button @click="modals.PendingPrize = true">PENDING PRIZE</base-button>
               </div>
             </div>
 
-            <div class="row justify-content-between pt-3">
-              <div>
-                <h4 class="fw-7 d-g1 fs-16 pt-3">Prize Pot: <span class="fw-7 d-p fs-24">$272,786</span></h4>
-                <h4 class="fw-4 d-p fs-14 pt-3" @click="modals.Details = true">Details ></h4>
-              </div>
-              <div>
-                <h4 class="fw-4 d-g1 fs-14 pt-3" align="right">Are you a winner?</h4>
-                <base-button @click="modals.PendingPrize = true">CHECK YOUR PENDING PRIZE</base-button>
+            <div class="row">
+              <div class="col-12">
+
+                <el-tabs v-model="activeName">
+                  <el-tab-pane label="All History" name="AllHistory">
+                    <div style="padding: 0 3%">
+                      <div class="row justify-content-between pt-4">
+                        <h4 class="fw-7 d-g1 fs-16">Winning Number</h4>
+                        <h4 class="fw-4 d-g4 fs-14">Drawn <span class="fw-7 d-g3"> 20:00, 15/10/2021</span></h4>
+                      </div>
+                      <div class="pt-2">
+                        <div style="background-color: #F2F2F2; border-radius: 12px; height: 88px">
+                          <div class="row">
+                            <div class="col-xl-3"></div>
+                            <div class="col-xl-6 d-flex justify-content-between">
+                              <img :src="'img/luckybox/num-'+num[0]+'.png'" style="max-width: 65px; max-height: 66px; margin-top: 11px">
+                              <img :src="'img/luckybox/num-'+num[1]+'.png'" style="max-width: 65px; max-height: 66px; margin-top: 11px">
+                              <img :src="'img/luckybox/num-'+num[2]+'.png'" style="max-width: 65px; max-height: 66px; margin-top: 11px">
+                              <img :src="'img/luckybox/num-'+num[3]+'.png'" style="max-width: 65px; max-height: 66px; margin-top: 11px">
+                            </div>
+                            <div class="col-xl-3"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row justify-content-between pt-4">
+                        <div>
+                          <h4 class="fw-7 d-g1 fs-16 pt-2">Prize Pot: <span class="fw-7 d-p fs-24">$272,786</span></h4>
+                          <h4 class="fw-4 d-p fs-14 pt-3" @click="modals.Details = true">Details ></h4>
+                        </div>
+
+                        <div class="demo-pagination-block pt-5">
+                          <el-pagination
+                            :currentPage="124"
+                            :page-size="1"
+                            layout="prev, pager, next, jumper"
+                            :total="124"
+                            @size-change="handleSizeChange"
+                            @current-change="handleCurrentChange"
+                          >
+                          </el-pagination>
+                        </div>
+
+                      </div>
+                    </div>
+                  </el-tab-pane>
+
+                  <el-tab-pane label="Your History" name="YourHistory">
+                    <div style="padding: 0 3%">
+                      <div class="row justify-content-between pt-4">
+                        <h4 class="fw-7 d-g1 fs-16">Your Number</h4>
+                        <h4 class="fw-4 d-g4 fs-14">Drawn <span class="fw-7 d-g3"> 20:00, 15/10/2021</span></h4>
+                      </div>
+                      <div class="pt-2">
+                        <div style="background-color: #F2F2F2; border-radius: 12px; height: 88px">
+                          <div class="row">
+                            <div class="col-xl-3"></div>
+                            <div class="col-xl-6 d-flex justify-content-between">
+                              <img :src="'img/luckybox/num-'+num[3]+'.png'" style="max-width: 65px; max-height: 66px; margin-top: 11px">
+                              <img :src="'img/luckybox/num-'+num[0]+'.png'" style="max-width: 65px; max-height: 66px; margin-top: 11px">
+                              <img :src="'img/luckybox/num-'+num[2]+'.png'" style="max-width: 65px; max-height: 66px; margin-top: 11px">
+                              <img :src="'img/luckybox/num-'+num[1]+'.png'" style="max-width: 65px; max-height: 66px; margin-top: 11px">
+                            </div>
+                            <div class="col-xl-3"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row justify-content-between pt-4">
+                        <div>
+                          <h4 class="fw-7 d-g1 fs-16 pt-2">Prize Pot: <span class="fw-7 d-p fs-24">$272,786</span></h4>
+                          <h4 class="fw-4 d-p fs-14 pt-3" @click="modals.Details = true">Details ></h4>
+                        </div>
+
+                        <div class="demo-pagination-block pt-5">
+                          <el-pagination
+                            :currentPage="124"
+                            :page-size="1"
+                            layout="prev, pager, next, jumper"
+                            :total="124"
+                            @size-change="handleSizeChange"
+                            @current-change="handleCurrentChange"
+                          >
+                          </el-pagination>
+                        </div>
+
+                      </div>
+                    </div>
+
+                  </el-tab-pane>
+                </el-tabs>
               </div>
             </div>
+
           </div>
         </stats-card>
       </div>
@@ -134,19 +178,16 @@
     </template>
   </buy-tickets>
 
-  <pending-prize v-model:show="modals.PendingPrize">
-    <template v-slot:footer>
-      <base-button @click="modals.PendingPrize = false">Buy Tickets</base-button>
-    </template>
-  </pending-prize>
-
+  <pending-prize v-model:show="modals.PendingPrize"></pending-prize>
   <lb-details v-model:show="modals.Details"></lb-details>
+  <winning-rules v-model:show="modals.WinningRules"></winning-rules>
 </template>
 
 <script>
 import BuyTickets from "./BuyTickets";
 import PendingPrize from "./PendingPrize";
 import LbDetails from "./LbDetails";
+import WinningRules from "./WinningRules";
 
 export default {
   name: "luckybox",
@@ -154,14 +195,17 @@ export default {
     BuyTickets,
     PendingPrize,
     LbDetails,
+    WinningRules,
   },
   data() {
     return {
       num: [3, 5, 6, 7],
+      activeName: 'AllHistory',
       modals: {
         BuyTickets: false,
         PendingPrize: false,
         LbDetails: false,
+        WinningRules: false,
       },
     };
   },
