@@ -335,13 +335,8 @@ export default {
     },
 
     async withdrawUSDEvent() {
-      const depositAmount = document.getElementById("degis-input").value;
-      await this.withdrawUSD(depositAmount);
-    },
-
-    async withdrawUSDEvent() {
-      const depositAmount = document.getElementById("degis-input").value;
-      await this.withdrawUSD(depositAmount);
+      const withdrawAmount = document.getElementById("degis-input").value;
+      await this.withdrawUSD(withdrawAmount);
     },
 
     async harvestPremiumEvent() {

@@ -9,6 +9,7 @@ import MockUSD_abi from "../abi/MockUSD.json";
 import InsurancePool_abi from "../abi/InsurancePool.json";
 import LPToken_abi from "../abi/LPToken.json";
 import PolicyFlow_abi from "../abi/PolicyFlow.json";
+import DegisLottery_abi from "../abi/DegisLottery.json";
 
 export const getCurrentAccount = async () => {
   return getWeb3().then((res) => res.currentProvider.selectedAddress);
@@ -56,5 +57,14 @@ export const getPolicyFlow = async () => {
   return await new web3.eth.Contract(
     PolicyFlow_abi.abi,
     getAddress("POLICYFLOW", chainId)
+  );
+}
+
+export const getDegisLottery = async () => {
+  const web3 = await getWeb3();
+  const chainId = getChainId();
+  return await new web3.eth.Contract(
+    DegisLottery_abi.abi,
+    getAddress("DEGISLOTTERY", chainId)
   );
 }

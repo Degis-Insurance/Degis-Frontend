@@ -6,7 +6,11 @@
         <div class="col-xl-3">
           <p class="fw-7 d-p fs-18">Search by Flight</p>
           <div class="d-flex">
-            <el-select v-model="flightno" filterable placeholder="Select Flight">
+            <el-select
+              v-model="flightno"
+              filterable
+              placeholder="Select Flight"
+            >
               <el-option
                 v-for="item in flightoptions"
                 :key="item.value"
@@ -20,7 +24,11 @@
         <div class="col-xl-5">
           <p class="fw-7 d-p fs-18">Search by Route</p>
           <div class="d-flex align-items-center">
-            <el-select v-model="origincity" filterable placeholder="Origin City">
+            <el-select
+              v-model="origincity"
+              filterable
+              placeholder="Origin City"
+            >
               <el-option
                 v-for="item in ocoptions"
                 :key="item.value"
@@ -33,7 +41,11 @@
               src="img/function/flight-rarrow.png"
               style="width: 15px; margin: 0 15px"
             />
-            <el-select v-model="destinationcity" filterable placeholder="Destination City">
+            <el-select
+              v-model="destinationcity"
+              filterable
+              placeholder="Destination City"
+            >
               <el-option
                 v-for="item in dcoptions"
                 :key="item.value"
@@ -47,13 +59,19 @@
 
         <div class="col-xl-2">
           <p class="fw-7 d-p fs-18">Date</p>
-          <el-date-picker v-model="datevalue" type="date" placeholder="Pick a day"></el-date-picker>
+          <el-date-picker
+            v-model="datevalue"
+            type="date"
+            placeholder="Pick a day"
+          ></el-date-picker>
         </div>
 
         <div class="col-xl-2">
           <p class="fw-7 d-p fs-18" style="color: white">Search</p>
           <div align="right">
-            <base-button style="padding: 13px 46px;">SEARCH</base-button>
+            <base-button style="padding: 13px 46px" @click="NewPolicyEvent"
+              >SEARCH</base-button
+            >
           </div>
         </div>
       </div>
@@ -66,9 +84,14 @@
 
 <script>
 import FlightTable from "./FlightTable";
-import {ref} from 'vue';
+import { ref } from "vue";
 // import BaseButton from "../components/BaseButton";
 // import BaseInput from "../components/BaseInput";
+import {
+  getMockUSD,
+  getPolicyFlow,
+  getInsurancePool,
+} from "../../utils/contractInstance";
 
 export default {
   name: "flight",
@@ -79,18 +102,90 @@ export default {
   },
   data() {
     return {
-      datevalue: '',
-      flightoptions: ref([{value: 'FlightNo1', label: 'FlightNo1',}, {value: 'FlightNo2', label: 'FlightNo2',}, {value: 'FlightNo3', label: 'FlightNo3',},]),
-      flightno: ref(''),
-      ocoptions: ref([{value: 'City1', label: 'City1',}, {value: 'City2', label: 'City2',}, {value: 'City3', label: 'City3',}]),
-      origincity: ref(''),
-      dcoptions: ref([{value: 'City1', label: 'City1',}, {value: 'City2', label: 'City2',}, {value: 'City3', label: 'City3',}]),
-      destinationcity: ref(''),
-    }
-  }
+      datevalue: "",
+      flightoptions: ref([
+        { value: "FlightNo1", label: "FlightNo1" },
+        { value: "FlightNo2", label: "FlightNo2" },
+        { value: "FlightNo3", label: "FlightNo3" },
+      ]),
+      flightno: ref(""),
+      ocoptions: ref([
+        { value: "City1", label: "City1" },
+        { value: "City2", label: "City2" },
+        { value: "City3", label: "City3" },
+      ]),
+      origincity: ref(""),
+      dcoptions: ref([
+        { value: "City1", label: "City1" },
+        { value: "City2", label: "City2" },
+        { value: "City3", label: "City3" },
+      ]),
+      destinationcity: ref(""),
+    };
+  },
+
+  methods: {
+    async ShowUserPolicy() {
+      const PolicyFlow = await getPolicyFlow();
+      const account = this.$store.state.selectedAccount;
+
+      const policycount = await PolicyFlow.methods
+        .getUserPolicyCount(account)
+        .call();
+
+      const userpolicy = await PolicyFlow.methods.viewPolicy(account).call();
+
+      return { policycount: policycount, userpolicy: userpolicy };
+    },
+
+    async NewPolicy(premium, payoff, flight_number, timestamp1) {
+      const PolicyFlow = await getPolicyFlow();
+      const MockUSD = await getMockUSD();
+      const InsurancePool = await getInsurancePool();
+      const account = this.$store.state.selectedAccount;
+
+      var timestamp2 = timestamp1 + 300; // 飞行时间5min
+
+      console.log(flight_number, timestamp1);
+
+      const tx1 = await MockUSD.methods
+        .approve(InsurancePool.options.address, window.WEB3.utils.toBN(premium))
+        .send({ from: account });
+
+      console.log("Tx Hash:", tx1.transactionHash);
+
+      const tx2 = await PolicyFlow.methods
+        .newApplication(
+          account,
+          0,
+          flight_number,
+          window.WEB3.utils.toBN(premium),
+          window.WEB3.utils.toBN(payoff),
+          timestamp1,
+          timestamp2
+        )
+        .send({ from: account });
+      console.log("Tx Hash:", tx2.transactionHash);
+      console.log(tx2);
+      console.log("policy Id:", tx2.logs[0].args[0]);
+    },
+
+    async ShowUserPolicyEvent() {
+      const policyinfo = await this.ShowUserPolicy();
+      console.log(policyinfo);
+    },
+
+    async NewPolicyEvent() {
+      const premium = 1111;
+      const payoff = 111;
+      const flight_number = "WN186";
+      const timestamp1 = 1636189973;
+
+      await this.NewPolicy(premium, payoff, flight_number, timestamp1);
+    },
+  },
 };
 </script>
 
 <style scoped>
-
 </style>
