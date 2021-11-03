@@ -2,23 +2,23 @@
   <base-header type="" class="pb-6 pb-8 pt-4">
     <h1 class="fw-7 d-g1 fs-34 mb-4">The Degis Lucky Box</h1>
     <stats-card style=" width: 100%; background-size: 100% 100%; background-repeat: no-repeat; background-image: url('img/homepage/degis-lucky-box.png');">
-      <div class="container" style="height: 500px">
+      <div class="container" style="height: 620px">
         <div class="row row-grid align-items-center">
-          <h1 class="fw-7 d-g1 fs-34 pt-7" style="margin: auto">
+          <h1 class="fw-7 d-g1 fs-34 pt-8" style="margin: auto">
             The Degis Lucky Box
           </h1>
         </div>
         <div class="row align-items-center">
-          <h1 class="fw-9 d-p pt-3" style="font-size: 60px; margin: auto; text-align: center">
+          <h1 class="fw-9 d-p pt-4" style="font-size: 60px; margin: auto; text-align: center">
             $272,786
           </h1>
         </div>
         <div class="row align-items-center">
-          <h5 class="fw-9 d-g2 fs-24 ma pt-3">IN PRIZES!</h5>
+          <h5 class="fw-9 d-g2 fs-24 ma pt-4">IN PRIZES!</h5>
         </div>
         <div class="row row-grid align-items-center">
           <base-button
-            style="margin: 3% auto; padding: 1% 5%"
+            style="margin: 5% auto; padding: 1% 5%"
             @click="modals.BuyTickets = true"
           >Buy Tickets
           </base-button

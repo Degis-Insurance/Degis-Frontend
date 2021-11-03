@@ -1,21 +1,6 @@
 <template>
-  <!--  <section class="section-hero section-shaped my-0">-->
-  <!--    <div class="shape shape-style-1 shape-primary">-->
-  <!--      <span class="span-150"></span>-->
-  <!--      <span class="span-50"></span>-->
-  <!--      <span class="span-50"></span>-->
-  <!--      <span class="span-75"></span>-->
-  <!--      <span class="span-100"></span>-->
-  <!--      <span class="span-75"></span>-->
-  <!--      <span class="span-50"></span>-->
-  <!--      <span class="span-100"></span>-->
-  <!--      <span class="span-50"></span>-->
-  <!--      <span class="span-100"></span>-->
-  <!--    </div>-->
-
-  <section class="section section"></section>
-  <section class="section section"></section>
-
+  <section class="section-sm"></section>
+  <section class="section"></section>
   <div class="container d-flex align-items-center">
     <div class="row justify-content-center align-items-center">
       <!--          <div class="row row-grid align-items-center">-->
@@ -27,7 +12,7 @@
         <p class="hp-title">The 1st Decentralized Protection Market</p>
         <h1 class="hp-title" style="color: #6415FF;">On Avalanche</h1>
         <div class="btn-wrapper d-flex pt-5">
-          <a href="/#/protection"><base-button>Get started</base-button></a>
+          <a href="/#/products"><base-button>Get started</base-button></a>
           <a href="https://docs.degis.io/" style="padding: 0 8%"><base-button class="tut-button" style="background-color: #f2f2f2; color: #4d535c">Tutorial</base-button></a>
         </div>
       </div>

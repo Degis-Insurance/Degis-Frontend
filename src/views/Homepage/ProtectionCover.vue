@@ -1,10 +1,9 @@
 <template>
-  <section class="section section"></section>
+  <section class="section-sm"></section>
 
   <div class="container shape-container d-flex align-items-center">
     <div class="col px-0">
       <div class="row justify-content-center align-items-center">
-        <!--          <div class="row row-grid align-items-center">-->
         <div class="col-md-6 order-md-2">
           <img src="img/homepage/protection-cover.png" class="img-fluid floating"/>
         </div>
@@ -14,7 +13,9 @@
             Blockchain is miserable, where risk and reward are widely extended. DEGIS is the shield to protect you.
           </p>
           <div class="btn-wrapper d-flex pt-4">
-            <base-button>Read More</base-button>
+            <a href="https://docs.degis.io/">
+              <base-button>Read More</base-button>
+            </a>
           </div>
         </div>
       </div>

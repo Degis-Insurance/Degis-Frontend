@@ -4,9 +4,9 @@
       <template v-slot:links>
         <sidebar-item
           :link="{
-            name: 'Protection',
+            name: 'Products',
             src: 'img/function/icon/protection.png',
-            path: '/Protection',
+            path: '/products',
           }"
         />
         <sidebar-item

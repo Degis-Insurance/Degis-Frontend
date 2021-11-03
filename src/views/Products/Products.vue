@@ -41,7 +41,7 @@
             </p>
             <div class="d-flex justify-content-between" style="padding-top: 12%">
               <div class="display-4" style="line-height: 25px; width: 60%">
-                <base-progress type="primary" :height="8" :value="60" label="Task completed"></base-progress>
+                <base-progress type="success" :height="8" :value="60" label="Task completed"></base-progress>
               </div>
               <a href="/#/price" style="line-height: 50px; width: 50%; padding-top: 24px" align="right">
                 <base-button style="padding: 0px 30%">BUY</base-button>
@@ -60,7 +60,7 @@ import BaseButton from "@/components/BaseButton";
 // import BaseInput from "../components/BaseInput";
 
 export default {
-  name: "protection",
+  name: "products",
   components: {
     BaseButton,
     // BaseInput,

@@ -3,7 +3,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import FunctionLayout from "@/layout/FunctionLayout";
 
 import Homepage from "../views/Homepage/Homepage";
-import Protection from "../views/Products/Products";
+import Products from "../views/Products/Products";
 import Flight from "../views/Flight/Flight";
 import Price from "../views/Price/Price";
 import Mining from "../views/Mining/Mining";
@@ -21,9 +21,9 @@ const routes = [
     component: FunctionLayout,
     children: [
       {
-        path: "/protection",
-        name: "protection",
-        components: { default: Protection },
+        path: "/products",
+        name: "products",
+        components: { default: Products },
       },
       {
         path: "/flight",

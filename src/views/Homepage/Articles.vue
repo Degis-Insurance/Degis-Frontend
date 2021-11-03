@@ -1,14 +1,16 @@
 <template>
-  <section class="section section-lg">
+  <section class="section-sm">
     <div class="container">
       <div class="row row-grid align-items-center">
-        <p class="hp-title2">
-          Articles
-        </p>
+        <p class="hp-title2">Articles</p>
       </div>
-      <div class="row row-grid align-items-center">
-        <div class="col-md-12 order-md-1">
-          <img src="img/homepage/article.png" class="img-fluid floating" />
+      <div class="row row-grid">
+        <div class="col-12">
+          <el-carousel :interval="3000" type="card" height="360px">
+            <el-carousel-item v-for="item in 5" :key="item">
+              <img src="img/homepage/article.png" class="img-fluid"/>
+            </el-carousel-item>
+          </el-carousel>
         </div>
       </div>
     </div>

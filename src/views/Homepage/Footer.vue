@@ -4,7 +4,7 @@
       <div class="col-1"></div>
       <div class="col-2"><a href="/#/" class="f-text-1">Home</a></div>
       <div class="col-2">
-        <a href="/#/protection" class="f-text-1">Products</a>
+        <a href="/#/products" class="f-text-1">Products</a>
       </div>
       <div class="col-2"><a href="/#/mining" class="f-text-1">Mining</a></div>
       <div class="col-2">
