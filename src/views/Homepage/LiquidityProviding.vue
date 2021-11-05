@@ -1,5 +1,5 @@
 <template>
-  <section class="section">
+  <section class="section-xl">
     <div class="container">
       <div class="row row-grid align-items-center">
         <h1 class="hp-title2">

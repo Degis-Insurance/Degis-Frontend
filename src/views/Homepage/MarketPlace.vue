@@ -1,5 +1,5 @@
 <template>
-  <section class="section-lg">
+  <section class="section-xl">
     <div class="container">
       <div class="row row-grid align-items-center">
         <h1 class="hp-title2">The Way to InsuranceDAO</h1>

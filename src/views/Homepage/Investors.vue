@@ -1,5 +1,5 @@
 <template>
-  <section class="section-sm">
+  <section class="section">
     <div class="container">
       <div class="row row-grid align-items-center pb-5">
         <h1 class="hp-title2">Investors</h1>

@@ -4,6 +4,13 @@
       <template v-slot:links>
         <sidebar-item
           :link="{
+            name: 'Account',
+            src: 'img/function/icon/account.png',
+            path: '/account',
+          }"
+        />
+        <sidebar-item
+          :link="{
             name: 'Products',
             src: 'img/function/icon/protection.png',
             path: '/products',
@@ -44,7 +51,7 @@
             path: '/marketplace',
           }"
         />
-        <img class="ml-4" style="width: 200px; padding-top: 50%" src="img/function/sidebar-bottom.png"/>
+        <img class="ml-4" style="width: 200px; padding-top: 30%" src="img/function/sidebar-bottom.png"/>
       </template>
     </side-bar>
     <div class="main-content" :data="sidebarBackground">

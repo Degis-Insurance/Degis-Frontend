@@ -1,5 +1,5 @@
 <template>
-  <section class="section-sm"></section>
+  <section class="section-lg"></section>
 
   <div class="container shape-container d-flex align-items-center">
     <div class="col px-0">
