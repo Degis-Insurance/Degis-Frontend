@@ -18,16 +18,16 @@
     <div class="row pt-5">
       <div class="col-4"></div>
       <div class="col-4 d-flex justify-content-between">
-        <a href="https://github.com/">
-          <img src="img/homepage/github.png" style="width: 50%" />
-        </a>
-        <a href="https://twitter.com/">
+<!--        <a href="https://github.com/">-->
+<!--          <img src="img/homepage/github.png" style="width: 50%" />-->
+<!--        </a>-->
+        <a href="http://twitter.com/ProjectDegis">
           <img src="img/homepage/twitter.png" style="width: 50%" />
         </a>
-        <a href="https://medium.com/">
+        <a href="http://degis.medium.com">
           <img src="img/homepage/medium.png" style="width: 50%" />
         </a>
-        <a href="https://telegram.org/">
+        <a href="http://t.me/ProjectDegis">
           <img src="img/homepage/telegram.png" style="width: 50%" />
         </a>
       </div>

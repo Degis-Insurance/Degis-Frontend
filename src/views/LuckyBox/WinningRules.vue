@@ -14,9 +14,9 @@
           <el-tab-pane label="Winning Criteria" name="WinningCriteria">
             <p class="fw-5 d-g2 fs-16 pt-4 pb-1">The digits on your ticket must match in the correct order to win.</p>
             <p class="fw-4 d-g2 fs-14" style="line-height: 22px">Here’s an example lottery draw, with two tickets, A and B.<br/>
-              Ticket A: The first 3 digits and the last 2 digits match, but the 4th digit is wrong, so this ticket only wins a “Match first 3” prize.<br/>
-              Ticket B: Even though the last 5 digits match, the first digit is wrong, so this ticket doesn’t win a prize.<br/>
-              Prize brackets don’t ‘stack’: if you match the first 3 digits in order, you’ll only win prizes from the ‘Match 3’ bracket, and not from ‘Match 1’ and ‘Match 2’.</p>
+              Ticket A: The first 2 digits match but the last 2 digits are wrong, so this ticket only wins a “Match first 2” prize.<br/>
+              Ticket B: Even though the last 2 digits match, the first digit is wrong, so this ticket doesn’t win any prize.<br/>
+              You only win the biggest prize: if you match the first 3 digits in order, you’ll only win prizes from the ‘Match 3’ bracket, and not from ‘Match 1’ or ‘Match 2’.</p>
 
             <div class="row pt-3">
               <div class="col-xl-3"></div>
@@ -57,14 +57,12 @@
           </el-tab-pane>
           <el-tab-pane label="Prize Funds" name="PrizeFunds">
             <p class="fw-4 d-g2 fs-14">The prizes for each lottery round come from three sources:</p>
-            <p class="fw-5 d-g2 fs-16">Ticket Purchases</p>
-            <p class="fw-4 d-g2 fs-14">100% of the CAKE paid by people buying tickets that round goes back into the prize pools.</p>
+            <p class="fw-5 d-g2 fs-16">Premium Income Shares</p>
+            <p class="fw-4 d-g2 fs-14">10% of the premium paid by people buying insurances will go into the prize pools.</p>
             <p class="fw-5 d-g2 fs-16">Rollover Prizes</p>
-            <p class="fw-4 d-g2 fs-14">After every round, if nobody wins in one of the prize brackets, the unclaimed CAKE for that bracket rolls over into the next round and are redistributed among
-              the prize pools.</p>
-            <p class="fw-5 d-g2 fs-16">CAKE Injections</p>
-            <p class="fw-4 d-g2 fs-14">An average total of 35,000 CAKE from the treasury is added to lottery rounds over the course of a week. This CAKE is of course also included in rollovers! Read
-              more in our guide to CAKE Tokenomics</p>
+            <p class="fw-4 d-g2 fs-14">After every round, if nobody wins in one of the prize brackets, the unclaimed prize for that bracket rolls over into the next round and are redistributed among the prize pools.</p>
+            <p class="fw-5 d-g2 fs-16">Fund Injections</p>
+            <p class="fw-4 d-g2 fs-14">There will be a reserved fund for Degis platform coming from 10% of all the premium incomes and after community decisions it may inject funds into this lottery pool.</p>
             <div class="row pt-4 pb-5">
               <div class="col-xl-5">
                 <img src="img/luckybox/circle.png" style="width: 70%" align="right"/>
@@ -82,9 +80,9 @@
                   <div style="text-align: right">
                     <p class="fw-5 d-g4 fs-14">Prize Pool Allocation</p>
                     <p class="fw-7 d-g3 fs-14">5%</p>
-                    <p class="fw-7 d-g3 fs-14">10%</p>
+                    <p class="fw-7 d-g3 fs-14">15%</p>
                     <p class="fw-7 d-g3 fs-14">20%</p>
-                    <p class="fw-7 d-g3 fs-14">40%</p>
+                    <p class="fw-7 d-g3 fs-14">60%</p>
                   </div>
                 </div>
 

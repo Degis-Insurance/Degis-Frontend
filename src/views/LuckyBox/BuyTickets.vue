@@ -20,10 +20,10 @@
               <div class="row">
                 <div class="col-xl-3"></div>
                 <div class="col-xl-6 d-flex justify-content-between">
-                  <ball-select :ball-num="nums[0]"></ball-select>
-                  <ball-select :ball-num="nums[1]"></ball-select>
-                  <ball-select :ball-num="nums[2]"></ball-select>
-                  <ball-select :ball-num="nums[3]"></ball-select>
+                  <ball-select :ball-number="nums[0]"></ball-select>
+                  <ball-select :ball-number="nums[1]"></ball-select>
+                  <ball-select :ball-number="nums[2]"></ball-select>
+                  <ball-select :ball-number="nums[3]"></ball-select>
                   <!--                  <img :src="'img/luckybox/num-'+num[0]+'.png'" style="max-width: 65px; max-height: 66px; margin-top: 11px">-->
                   <!--                  <img :src="'img/luckybox/num-'+num[1]+'.png'" style="max-width: 65px; max-height: 66px; margin-top: 11px">-->
                   <!--                  <img :src="'img/luckybox/num-'+num[2]+'.png'" style="max-width: 65px; max-height: 66px; margin-top: 11px">-->
@@ -73,7 +73,8 @@ export default {
   },
   data() {
     return {
-      nums: [3, 4, 6, 7]
+      nums: [3, 4, 6, 7],
+      test: 5,
     }
   },
   props: {
