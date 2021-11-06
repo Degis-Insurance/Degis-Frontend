@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: "marketplace",
+  name: "bazaar",
   components: {},
 };
 </script>

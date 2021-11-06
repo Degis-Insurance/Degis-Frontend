@@ -5,7 +5,7 @@
       <div class="container">
         <div class="row row-grid align-items-center">
           <div class="col-lg-6 order-md-1">
-            <img src="img/products/flight.png" class="img-fluid" style="padding-right: 20%"/>
+            <img src="img/protection/flight.png" class="img-fluid" style="padding-right: 20%"/>
           </div>
           <div class="col-lg-6 order-md-2">
             <p class="fw-7 d-g1 fs-34">The Miserable Flight</p>
@@ -31,7 +31,7 @@
       <div class="container">
         <div class="row row-grid align-items-center">
           <div class="col-lg-6 order-md-1">
-            <img src="img/products/price.png" class="img-fluid" style="padding-right: 20%"/>
+            <img src="img/protection/price.png" class="img-fluid" style="padding-right: 20%"/>
           </div>
           <div class="col-lg-6 order-md-2">
             <p class="fw-7 d-g1 fs-34">The Naughty Price</p>
@@ -63,7 +63,7 @@ import BaseButton from "@/components/BaseButton";
 // import BaseInput from "../components/BaseInput";
 
 export default {
-  name: "products",
+  name: "protection",
   components: {
     BaseButton,
     // BaseInput,

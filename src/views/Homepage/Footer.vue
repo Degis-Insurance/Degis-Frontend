@@ -1,19 +1,19 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-1"></div>
-      <div class="col-2"><a href="/#/" class="f-text-1">Home</a></div>
+      <div class="col-2"></div>
+<!--      <div class="col-2"><a href="/#/" class="f-text-1">Home</a></div>-->
       <div class="col-2">
-        <a href="/#/products" class="f-text-1">Products</a>
+        <a href="/#/protection" class="f-text-1">Protection</a>
       </div>
       <div class="col-2"><a href="/#/mining" class="f-text-1">Mining</a></div>
       <div class="col-2">
         <a href="/#/luckybox" class="f-text-1">Lucky Box</a>
       </div>
       <div class="col-2">
-        <a href="/#/marketplace" class="f-text-1">Market Place</a>
+        <a href="/#/bazaar" class="f-text-1">Bazaar</a>
       </div>
-      <div class="col-1"></div>
+      <div class="col-2"></div>
     </div>
     <div class="row pt-5">
       <div class="col-4"></div>

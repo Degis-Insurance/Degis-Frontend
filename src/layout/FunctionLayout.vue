@@ -11,9 +11,9 @@
         />
         <sidebar-item
           :link="{
-            name: 'Products',
+            name: 'Protection',
             src: 'img/function/icon/protection.png',
-            path: '/products',
+            path: '/protection',
           }"
         />
         <sidebar-item
@@ -39,7 +39,7 @@
         />
         <sidebar-item
           :link="{
-            name: 'Luckybox',
+            name: 'Lucky Box',
             src: 'img/function/icon/luckybox.png',
             path: '/luckybox',
           }"
@@ -48,7 +48,7 @@
           :link="{
             name: 'Bazaar',
             src: 'img/function/icon/bazaar.png',
-            path: '/marketplace',
+            path: '/bazaar',
           }"
         />
         <img class="ml-4" style="width: 200px; padding-top: 30%" src="img/function/sidebar-bottom.png"/>

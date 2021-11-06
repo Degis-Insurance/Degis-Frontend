@@ -4,12 +4,12 @@ import FunctionLayout from "@/layout/FunctionLayout";
 
 import Homepage from "../views/Homepage/Homepage";
 import Account from "../views/Account/Account";
-import Products from "../views/Products/Products";
+import Protection from "../views/Protection/Protection";
 import Flight from "../views/Flight/Flight";
 import Price from "../views/Price/Price";
 import Mining from "../views/Mining/Mining";
 import Luckybox from "../views/LuckyBox/Luckybox";
-import Marketplace from "../views/MarketPlace/Marketplace";
+import Bazaar from "../views/Bazaar/Bazaar";
 
 const routes = [
   {
@@ -27,9 +27,9 @@ const routes = [
         components: { default: Account },
       },
       {
-        path: "/products",
-        name: "products",
-        components: { default: Products },
+        path: "/protection",
+        name: "protection",
+        components: { default: Protection },
       },
       {
         path: "/flight",
@@ -52,9 +52,9 @@ const routes = [
         components: { default: Luckybox },
       },
       {
-        path: "/marketplace",
-        name: "marketplace",
-        components: { default: Marketplace },
+        path: "/bazaar",
+        name: "bazaar",
+        components: { default: Bazaar },
       },
     ],
   },

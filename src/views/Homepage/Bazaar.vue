@@ -2,7 +2,7 @@
   <section class="section-xl">
     <div class="container">
       <div class="row row-grid align-items-center">
-        <h1 class="hp-title2">The Way to InsuranceDAO</h1>
+        <h1 class="hp-title2" style="text-align: center">The Way to InsuranceDAO</h1>
       </div>
       <div class="row row-grid align-items-center">
         <h1 class="hp-desc ta-c" style="padding: 0 10%">
@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  name: "marketplace",
+  name: "bazaar",
 };
 </script>
 

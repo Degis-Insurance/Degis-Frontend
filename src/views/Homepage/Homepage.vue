@@ -36,8 +36,8 @@
         </template>
 
         <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
-          <a href="/#/products">
-            <span class="nav-font"> Products </span>
+          <a href="/#/protection">
+            <span class="nav-font"> Protection </span>
           </a>
           <a href="/#/mining">
             <span class="nav-font"> Mining </span>
@@ -45,8 +45,8 @@
           <a href="/#/luckybox">
             <span class="nav-font">Lucky Box</span>
           </a>
-          <a href="/#/marketplace">
-            <span class="nav-font">Market Place</span>
+          <a href="/#/bazaar">
+            <span class="nav-font">Bazaar</span>
           </a>
         </ul>
         <ul class="navbar-nav align-items-lg-center ml-lg-auto">
@@ -59,11 +59,11 @@
       <fade-transition origin="center" mode="out-in" :duration="250">
         <div>
           <hero></hero>
-          <GameFi></GameFi>
+          <DeFi></DeFi>
           <ProtectionCover></ProtectionCover>
           <LiquidityProviding></LiquidityProviding>
           <DegisLucky></DegisLucky>
-          <MarketPlace></MarketPlace>
+          <Bazaar></Bazaar>
           <Tokenomics></Tokenomics>
           <Roadmap></Roadmap>
           <Articles></Articles>
@@ -78,10 +78,10 @@
 import Hero from "./Hero";
 import Articles from "./Articles";
 import DegisLucky from "./DegisLucky";
-import GameFi from "./GameFi";
+import DeFi from "./DeFi";
 import Investors from "./Investors";
 import LiquidityProviding from "./LiquidityProviding";
-import MarketPlace from "./MarketPlace";
+import Bazaar from "./Bazaar";
 import ProtectionCover from "./ProtectionCover";
 import Tokenomics from "./Tokenomics";
 import Roadmap from "./Roadmap";
@@ -91,19 +91,19 @@ import Footer from "./Footer";
 export default {
   name: "homepage",
   components: {
+    Bazaar,
     Footer,
     Articles,
     DegisLucky,
     Investors,
     LiquidityProviding,
-    MarketPlace,
     ProtectionCover,
     Tokenomics,
     Roadmap,
     // TokenOfferingPhase,
     CloseButton,
     // Token,
-    GameFi,
+    DeFi,
     Hero,
   },
 };

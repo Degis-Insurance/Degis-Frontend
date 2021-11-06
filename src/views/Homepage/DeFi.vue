@@ -3,7 +3,7 @@
   <div class="container">
     <div class="row row-grid align-items-center">
       <div class="col-md-5 order-md-1">
-        <img src="img/homepage/2-1.png" class="img-fluid floating"/>
+        <img src="img/homepage/2-1.png" class="img-fluid floating hidden-xs-only"/>
       </div>
       <div class="col-md-7 order-md-2" style="padding-left: 9%">
         <div class="pl-md-7">
@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  name: "gamefi",
+  name: "defi",
 };
 </script>
 

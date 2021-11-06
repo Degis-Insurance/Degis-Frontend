@@ -1,11 +1,11 @@
 <template>
-  <section class="section-lg"></section>
+  <section class="section"></section>
 
   <div class="container shape-container d-flex align-items-center">
     <div class="col px-0">
       <div class="row justify-content-center align-items-center">
         <div class="col-md-6 order-md-2">
-          <img src="img/homepage/protection-cover.png" class="img-fluid floating"/>
+          <img src="img/homepage/protection-cover.png" class="img-fluid floating hidden-xs-only"/>
         </div>
         <div class="col-md-6 order-md-1">
           <h3 class="hp-title2 pb-4">Protection Products</h3>
