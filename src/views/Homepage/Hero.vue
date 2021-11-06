@@ -4,7 +4,7 @@
   <div class="container d-flex align-items-center">
     <div class="row justify-content-center align-items-center">
       <!--          <div class="row row-grid align-items-center">-->
-      <div class="col-md-5 order-md-2 d-flex">
+      <div class="col-md-5 order-md-2 d-flex hidden-xs-only">
         <div class="row">
           <div class="col-11" style="padding: 0">
             <img src="img/homepage/img-1.png" class="img-fluid floating"/>
@@ -27,7 +27,7 @@
         <p class="hp-title">The 1st Decentralized Protection Market</p>
         <h1 class="hp-title" style="color: #6415FF;">On Avalanche</h1>
         <div class="btn-wrapper d-flex pt-5">
-          <a href="/#/products">
+          <a href="/#/protection">
             <base-button>Get started</base-button>
           </a>
           <a href="https://docs.degis.io/" style="padding: 0 8%">
