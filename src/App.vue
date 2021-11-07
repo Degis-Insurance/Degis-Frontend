@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       modals: {
-        modal1: true,
+        modal1: false,
       },
     };
   },

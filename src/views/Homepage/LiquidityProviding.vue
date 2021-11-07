@@ -11,8 +11,8 @@
           The place to earn at high yield and token rewards.
         </h5>
       </div>
-      <div class="row row-grid align-items-center justify-content-between hidden-xs-only">
-        <div class="col-md-5 order-md-1" style="text-align: center">
+      <div class="row row-grid align-items-center justify-content-between">
+        <div class="col-md-5 order-md-1 hidden-xs-only" style="text-align: center">
           <img
             src="img/homepage/lm-left.png"
             class="img-fluid floating"

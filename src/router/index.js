@@ -10,6 +10,7 @@ import Price from "../views/Price/Price";
 import Mining from "../views/Mining/Mining";
 import Luckybox from "../views/LuckyBox/Luckybox";
 import Bazaar from "../views/Bazaar/Bazaar";
+import Test from "../views/Test";
 
 const routes = [
   {
@@ -55,6 +56,11 @@ const routes = [
         path: "/bazaar",
         name: "bazaar",
         components: { default: Bazaar },
+      },
+      {
+        path: "/test",
+        name: "test",
+        components: { default: Test },
       },
     ],
   },
