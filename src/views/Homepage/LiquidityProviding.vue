@@ -16,14 +16,11 @@
           <img src="img/homepage/lm-left.png" class="img-fluid floating"/>
           <h3>Premium Sharing</h3>
         </div>
-        <div class="col-md-1 order-md-2">
+        <div class="col-md-1 order-md-2 hidden-xs-only">
           <img src="img/homepage/plus.png" class="img-fluid floating"/>
         </div>
-        <div class="col-md-5 order-md-3" style="text-align: center;">
-          <img
-            src="img/homepage/lm-right.png"
-            class="img-fluid floating"
-          />
+        <div class="col-md-5 order-md-3 hidden-xs-only" style="text-align: center;">
+          <img src="img/homepage/lm-right.png" class="img-fluid floating"/>
           <h3>Token Reward</h3>
         </div>
       </div>
