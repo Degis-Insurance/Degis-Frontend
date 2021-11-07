@@ -4,8 +4,8 @@
   <div class="container d-flex align-items-center">
     <div class="row justify-content-center align-items-center">
       <!--          <div class="row row-grid align-items-center">-->
-      <div class="col-md-5 order-md-2 d-flex hidden-xs-only">
-        <div class="row">
+      <div class="col-md-5 order-md-2 d-flex">
+        <div class="row hidden-xs-only">
           <div class="col-11" style="padding: 0">
             <img src="img/homepage/img-1.png" class="img-fluid floating"/>
           </div>

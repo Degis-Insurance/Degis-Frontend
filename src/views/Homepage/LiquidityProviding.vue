@@ -13,10 +13,7 @@
       </div>
       <div class="row row-grid align-items-center justify-content-between">
         <div class="col-md-5 order-md-1 hidden-xs-only" style="text-align: center">
-          <img
-            src="img/homepage/lm-left.png"
-            class="img-fluid floating"
-          />
+          <img src="img/homepage/lm-left.png" class="img-fluid floating"/>
           <h3>Premium Sharing</h3>
         </div>
         <div class="col-md-1 order-md-2">
