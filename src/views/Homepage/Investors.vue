@@ -1,6 +1,6 @@
 <template>
   <section class="section">
-    <div class="container">
+    <div class="dg-container">
       <div class="row row-grid align-items-center pb-1">
         <h1 class="hp-title2">Investors</h1>
       </div>

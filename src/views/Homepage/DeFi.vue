@@ -1,12 +1,13 @@
 <template>
   <section class="section"/>
-  <div class="container">
-    <div class="row row-grid align-items-center">
-      <div class="col-md-5 order-md-1">
-        <img src="img/homepage/2-1.png" class="img-fluid floating hidden-xs-only"/>
+  <div class="dg-container">
+    <div class="row row-grid align-items-center d-flex justify-content-between">
+      <div class="col-lg-5 order-md-1 hidden-sm-and-down">
+        <img src="img/homepage/2-1.png" class="img-fluid floating"/>
       </div>
-      <div class="col-md-7 order-md-2" style="padding-left: 9%">
-        <div class="pl-md-7">
+      <div class="col-lg-2 order-md-2"></div>
+      <div class="col-lg-5 order-md-3">
+        <div>
           <p class="hp-title2 mb-5">Shape DeFi Protection Ecosystem</p>
           <p class="fw-9 d-p fs-32">To Protect <span class="d-g2">with safety.</span></p>
           <p class="fw-9 d-p fs-32">To Earn <span class="d-g2">with yield.</span></p>

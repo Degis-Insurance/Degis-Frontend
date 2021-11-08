@@ -1,6 +1,6 @@
 <template>
   <section class="section">
-    <div class="container">
+    <div class="dg-container">
       <div class="row row-grid align-items-center">
         <p class="hp-title2">
           Roadmap

@@ -1,20 +1,10 @@
 <template>
   <div style="background-color: #ffffff">
-    <header class="header-global">
-      <homepage-nav
-        class="navbar-main"
-        transparent
-        type=""
-        effect="light"
-        expand
-      >
+    <header class="dg-container">
+      <homepage-nav class="navbar-main" transparent type="" effect="light" expand style="margin-left: -30px; margin-right: -0px">
         <template v-slot:brand>
-          <router-link class="navbar-brand mr-lg-5" to="/">
-            <img
-              src="img/degis/degislogo.png"
-              alt="logo"
-              style="width: 109px; height: 48px"
-            />
+          <router-link class="navbar-brand mr-lg-4" to="/">
+            <img src="img/degis/degislogo.png" alt="logo" style="width: 109px; height: 48px"/>
           </router-link>
         </template>
 
@@ -22,11 +12,7 @@
           <div class="row">
             <div class="col-6 collapse-brand">
               <a href="/">
-                <img
-                  src="img/degis/degislogo.png"
-                  alt="logo"
-                  style="width: 109px; height: 48px"
-                />
+                <img src="img/degis/degislogo.png" alt="logo" style="width: 109px; height: 48px"/>
               </a>
             </div>
             <div class="col-6 collapse-close">
@@ -43,7 +29,7 @@
             <span class="nav-font"> Mining </span>
           </a>
           <a href="/#/luckybox">
-            <span class="nav-font">Lucky Box</span>
+            <span class="nav-font">LuckyBox</span>
           </a>
           <a href="/#/bazaar">
             <span class="nav-font">Bazaar</span>
@@ -56,21 +42,17 @@
     </header>
 
     <main>
-      <fade-transition origin="center" mode="out-in" :duration="250">
-        <div>
-          <hero></hero>
-          <DeFi></DeFi>
-          <ProtectionCover></ProtectionCover>
-          <LiquidityProviding></LiquidityProviding>
-          <DegisLucky></DegisLucky>
-          <Bazaar></Bazaar>
-          <Tokenomics></Tokenomics>
-          <Roadmap></Roadmap>
-          <Articles></Articles>
-          <Investors></Investors>
-          <Footer></Footer>
-        </div>
-      </fade-transition>
+      <hero></hero>
+      <DeFi></DeFi>
+      <ProtectionCover></ProtectionCover>
+      <LiquidityMining></LiquidityMining>
+      <DegisLucky></DegisLucky>
+      <Bazaar></Bazaar>
+      <Tokenomics></Tokenomics>
+      <Roadmap></Roadmap>
+      <Articles></Articles>
+      <Investors></Investors>
+      <Footer></Footer>
     </main>
   </div>
 </template>
@@ -80,7 +62,7 @@ import Articles from "./Articles";
 import DegisLucky from "./DegisLucky";
 import DeFi from "./DeFi";
 import Investors from "./Investors";
-import LiquidityProviding from "./LiquidityProviding";
+import LiquidityMining from "./LiquidityMining";
 import Bazaar from "./Bazaar";
 import ProtectionCover from "./ProtectionCover";
 import Tokenomics from "./Tokenomics";
@@ -96,7 +78,7 @@ export default {
     Articles,
     DegisLucky,
     Investors,
-    LiquidityProviding,
+    LiquidityMining,
     ProtectionCover,
     Tokenomics,
     Roadmap,
@@ -115,7 +97,7 @@ export default {
   font-size: 16px;
   line-height: 24px;
   color: #4d535c;
-  margin: 0px 20px;
+  margin: 0px 18px;
 }
 
 </style>

@@ -1,7 +1,7 @@
 <template>
   <section class="section-sm"/>
   <div style=" width: 100%; background-size: 100% 100%; background-repeat: no-repeat; background-image: url('img/homepage/degis-lucky-box.png');">
-    <div class="container" style="height: 800px">
+    <div class="dg-container" style="height: 800px">
       <div class="row row-grid align-items-center">
         <h1 class="hp-title2 pt-7">Degis Lucky Box</h1>
       </div>
