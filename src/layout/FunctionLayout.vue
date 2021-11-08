@@ -54,7 +54,7 @@
         <img class="ml-4" style="width: 200px; padding-top: 30%" src="img/function/sidebar-bottom.png"/>
       </template>
     </side-bar>
-    <div class="main-content" :data="sidebarBackground">
+    <div class="main-content">
       <dashboard-navbar></dashboard-navbar>
 
       <div @click="toggleSidebar">

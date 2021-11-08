@@ -54,11 +54,7 @@
             <h2 class="fw-7 d-g1 fs-28" style="padding: 3% 0">The Naughty Price Pool</h2>
             <div class="row justify-content-between" style="padding: 2% 0">
               <div class="col-6">
-                <img
-                  src="img/function/mining-circle-2.png"
-                  class="img-fluid"
-                  style="width: 80%"
-                />
+                <img src="img/function/mining-circle-2.png" class="img-fluid" style="width: 80%"/>
               </div>
               <div class="col-6">
                 <h5 class="text-l">Total Value Locker: <bold> XXXX</bold></h5>

@@ -2,21 +2,13 @@
   <base-header type="" class="pb-6 pb-8 pt-4">
     <h1 class="fw-7 d-g1 fs-34 mb-4">The Miserable Flight</h1>
 
-    <el-table :data="tableData" :default-sort="{ prop: 'date', order: 'descending' }" style="width: 100%; margin-bottom: 30px;">
-      <el-table-column prop="date" label="Date" sortable width="180"/>
-      <el-table-column prop="name" label="Name" sortable width="180"/>
-      <el-table-column prop="address" label="Address" sortable :formatter="formatter"/>
-    </el-table>
-
-
     <stats-card>
       <div class="row align-items-center pb-2">
         <div class="col-xl-3">
           <p class="fw-7 d-p fs-18">Search by Flight</p>
           <div class="d-flex">
             <el-select v-model="flightno" filterable placeholder="Select Flight">
-              <el-option v-for="item in flightoptions" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
+              <el-option v-for="item in tableData" :key="item.flightno" :label="item.flightno" :value="item.flightno"/>
             </el-select>
           </div>
         </div>
@@ -24,8 +16,7 @@
           <p class="fw-7 d-p fs-18">Search by Route</p>
           <div class="d-flex align-items-center">
             <el-select v-model="origincity" filterable placeholder="Origin City">
-              <el-option v-for="item in ocoptions" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
+              <el-option v-for="item in tableData" :key="item.route" :label="item.route" :value="item.route"/>
             </el-select>
             <img src="img/function/flight-rarrow.png" style="width: 15px; margin: 0 15px"/>
             <el-select v-model="destinationcity" filterable placeholder="Destination City">
@@ -37,54 +28,70 @@
 
         <div class="col-xl-2">
           <p class="fw-7 d-p fs-18">Date</p>
-          <el-date-picker v-model="datevalue" type="date" placeholder="Pick a day"></el-date-picker>
+          <el-date-picker v-model="datevalue" style="width: 100%" type="date" placeholder="Pick a day"></el-date-picker>
         </div>
 
         <div class="col-xl-2">
           <p class="fw-7 d-p fs-18" style="color: white">Search</p>
           <div align="right">
-            <base-button style="padding: 13px 46px;">SEARCH</base-button>
+            <base-button style="padding: 13px 0; width: 100%">SEARCH</base-button>
           </div>
         </div>
       </div>
     </stats-card>
 
-    <flight-table></flight-table>
+    <el-table :data="tableData" class="dg-table" header-cell-style="text-align: center; height: 70px" cell-style="text-align: center; height: 70px">
+      <el-table-column prop="airline" label="AIRLINE" sortable/>
+      <el-table-column prop="flightno" label="FLIGHT NO." sortable/>
+      <el-table-column prop="route" label="ROUTE" sortable/>
+      <el-table-column prop="departtime" label="DEPART TIME" sortable/>
+      <el-table-column prop="arrivetime" label="ARRIVE TIME" sortable/>
+      <el-table-column prop="premium" label="PREMIUM" sortable/>
+    </el-table>
 
   </base-header>
 </template>
 
 <script>
-import FlightTable from "./Flight/FlightTable";
 import {ref} from 'vue';
 
 export default {
   name: "test",
-  components: {
-    FlightTable,
-  },
+  components: {},
   data() {
     return {
       tableData: [
         {
-          date: '2016-05-03',
-          name: 'Tom',
-          address: 'No. 4, Grove St, Los Angeles',
+          airline: 'SouthWest',
+          flightno: '1111',
+          route: 'STL-AWL',
+          departtime: '2021-09-09 12:12',
+          arrivetime: '2021-09-10 01:00',
+          premium: '4',
         },
         {
-          date: '2016-05-02',
-          name: 'Alice',
-          address: 'No. 1, Grove St, Los Angeles',
+          airline: 'SouthEast',
+          flightno: '1119',
+          route: 'STL-AWL',
+          departtime: '2021-09-09 12:12',
+          arrivetime: '2021-09-10 01:00',
+          premium: '7',
         },
         {
-          date: '2016-05-04',
-          name: 'Bob',
-          address: 'No. 2, Grove St, Los Angeles',
+          airline: 'NorthWest',
+          flightno: '0003',
+          route: 'AWL-STL',
+          departtime: '2021-09-09 12:12',
+          arrivetime: '2021-09-10 01:00',
+          premium: '2',
         },
         {
-          date: '2016-05-01',
-          name: 'Cary',
-          address: 'No. 3, Grove St, Los Angeles',
+          airline: 'NorthEast',
+          flightno: '2222',
+          route: 'STL-AWL',
+          departtime: '2021-09-09 12:12',
+          arrivetime: '2021-09-10 01:00',
+          premium: '3',
         },
       ],
       datevalue: '',
@@ -100,6 +107,9 @@ export default {
     formatter(row, column, cellValue, index) {
       return cellValue
     },
+    rowclass(row, rowIndex) {
+      return rowIndex
+    }
   }
 };
 </script>

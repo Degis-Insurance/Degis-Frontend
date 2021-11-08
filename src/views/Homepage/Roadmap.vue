@@ -11,10 +11,10 @@
           Timeline and Version Update
         </p>
       </div>
-    </div>
-    <div class="row row-grid align-items-center">
-      <div class="col-md-12">
-        <img src="img/homepage/roadmap.png" class="img-fluid floating"/>
+      <div class="row row-grid align-items-center">
+        <div class="col-md-12">
+          <img src="img/homepage/roadmap.png" class="img-fluid floating"/>
+        </div>
       </div>
     </div>
   </section>

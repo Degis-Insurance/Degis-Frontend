@@ -11,12 +11,13 @@
           DEGIS will distribute 100 million DEG to reward loyal users
         </p>
       </div>
-    </div>
-    <div class="row row-grid align-items-center">
-      <div class="col-md-12 pt-5">
-        <img src="img/homepage/tokenomics.png" class="img-fluid floating"/>
+      <div class="row row-grid align-items-center">
+        <div class="col-md-12 pt-2">
+          <img src="img/homepage/tokenomics.png" class="img-fluid floating"/>
+        </div>
       </div>
     </div>
+
   </section>
 </template>
 
