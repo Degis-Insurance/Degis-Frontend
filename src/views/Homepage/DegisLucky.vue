@@ -1,9 +1,9 @@
 <template>
   <section class="section-sm"/>
-  <div style=" width: 100%; background-size: 100% 100%; background-repeat: no-repeat; background-image: url('img/homepage/degis-lucky-box.png');">
-    <div class="dg-container" style="height: 800px">
+  <div style="width: 70%; background-size: 100% 100%; background-repeat: no-repeat; background-image: url('img/homepage/degis-lucky-box.png'); margin: 0 auto">
+    <div class="dg-container" style="height: 560px">
       <div class="row row-grid align-items-center">
-        <h1 class="hp-title2 pt-7">Degis Lucky Box</h1>
+        <h1 class="hp-title2 pt-5" style="text-align: center">Degis Lucky Box</h1>
       </div>
       <div class="row row-grid align-items-center">
         <p class="hp-desc" style="text-align: center; padding: 0 10%">
