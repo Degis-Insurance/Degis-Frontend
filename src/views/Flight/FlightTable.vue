@@ -1,12 +1,7 @@
 <template>
   <div class="flight-table" :class="type === 'dark' ? 'bg-default' : ''">
     <div class="table-responsive">
-      <base-table
-        class="table align-items-center table-flush"
-        :thead-classes="thead-light"
-        tbody-classes="list"
-        :data="tableData"
-      >
+      <base-table class="table align-items-center table-flush" tbody-classes="list" :data="tableData">
         <template v-slot:columns>
           <th></th>
           <th>Airline</th>

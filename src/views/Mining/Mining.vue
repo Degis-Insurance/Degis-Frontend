@@ -68,11 +68,7 @@
             </h2>
             <div class="row justify-content-between" style="padding: 2% 0">
               <div class="col-6">
-                <img
-                  src="img/function/mining-circle-2.png"
-                  class="img-fluid"
-                  style="width: 80%"
-                />
+                <img src="img/function/mining-circle-2.png" class="img-fluid" style="width: 80%"/>
               </div>
               <div class="col-6">
                 <h5 class="text-l">Total Value Locker: <bold> XXXX</bold></h5>

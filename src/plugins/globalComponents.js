@@ -21,7 +21,6 @@ import Reward from "../components/Reward";
 import HomepageNav from "../components/HomepageNav";
 import HomepageDropdown from "../components/HomepageDropdown";
 
-import { ElTooltip, ElPopover } from "element-plus";
 import GlobalDirectives from "./globalDirectives";
 import "../assets/scss/degis.scss";
 import SidebarPlugin from "../components/SidebarPlugin";
@@ -52,8 +51,6 @@ export default {
 
     app.component("tab-pane", TabPane);
     app.component("tabs", Tabs);
-    app.use(ElTooltip);
-    app.use(ElPopover);
 
     app.use(SidebarPlugin);
     app.use(GlobalDirectives);

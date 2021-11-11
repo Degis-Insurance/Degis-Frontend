@@ -2,52 +2,19 @@
   <div class="wrapper" :class="{ 'nav-open': $sidebar.showSidebar }">
     <side-bar>
       <template v-slot:links>
-        <sidebar-item
-          :link="{
-            name: 'Protection',
-            src: 'img/function/icon/protection.png',
-            path: '/Protection',
-          }"
-        />
-        <sidebar-item
-          :link="{
-            name: 'Miserable Flight',
-            src: 'img/function/icon/flight.png',
-            path: '/flight',
-          }"
-        />
-        <sidebar-item
-          :link="{
-            name: 'Naughty Price',
-            src: 'img/function/icon/price.png',
-            path: '/price',
-          }"
-        />
-        <sidebar-item
-          :link="{
-            name: 'Mining',
-            src: 'img/function/icon/mining.png',
-            path: '/mining',
-          }"
-        />
-        <sidebar-item
-          :link="{
-            name: 'Luckybox',
-            src: 'img/function/icon/luckybox.png',
-            path: '/luckybox',
-          }"
-        />
-        <sidebar-item
-          :link="{
-            name: 'Bazaar',
-            src: 'img/function/icon/bazaar.png',
-            path: '/marketplace',
-          }"
-        />
-        <img class="ml-4" style="width: 200px; padding-top: 50%" src="img/function/sidebar-bottom.png"/>
+        <sidebar-item :link="{ name: 'Account', src: 'img/function/icon/account.png', path: '/account', }"/>
+        <sidebar-item :link="{ name: 'Protection', src: 'img/function/icon/protection.png', path: '/protection', }"/>
+        <sidebar-item :link="{ name: 'Miserable Flight', src: 'img/function/icon/flight.png', path: '/flight', }"/>
+        <sidebar-item :link="{ name: 'Buy', src: 'img/function/icon/flight.png', path: '/flight-buy', }"/>
+        <sidebar-item :link="{ name: 'Provide', src: 'img/function/icon/flight.png', path: '/flight-provide', }"/>
+        <sidebar-item :link="{ name: 'Naughty Price', src: 'img/function/icon/price.png', path: '/price', }"/>
+        <sidebar-item :link="{ name: 'Mining', src: 'img/function/icon/mining.png', path: '/mining', }"/>
+        <sidebar-item :link="{ name: 'Lucky Box', src: 'img/function/icon/luckybox.png', path: '/luckybox', }"/>
+        <sidebar-item :link="{ name: 'Bazaar', src: 'img/function/icon/bazaar.png', path: '/bazaar', }"/>
+        <img class="ml-4" style="width: 230px; padding-top: 30%;" src="img/function/sidebar-bottom.png"/>
       </template>
     </side-bar>
-    <div class="main-content" :data="sidebarBackground">
+    <div class="main-content">
       <dashboard-navbar></dashboard-navbar>
 
       <div @click="toggleSidebar">

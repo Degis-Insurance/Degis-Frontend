@@ -1,8 +1,8 @@
 <template>
-  <section class="section section-lg">
-    <div class="container">
+  <section class="section-xl">
+    <div class="dg-container">
       <div class="row row-grid align-items-center">
-        <h1 class="hp-title2">The Way to InsuranceDAO</h1>
+        <h1 class="hp-title2" style="text-align: center">The Way to InsuranceDAO</h1>
       </div>
       <div class="row row-grid align-items-center">
         <h1 class="hp-desc ta-c" style="padding: 0 10%">
@@ -10,10 +10,10 @@
           with the freedom to buy, sell, and design their own products.
         </h1>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <img src="img/homepage/market-place.png" class="img-fluid floating" style="margin-top: -10%"/>
+      <div class="row">
+        <div class="col-md-12">
+          <img src="img/homepage/img.png" class="img-fluid floating"/>
+        </div>
       </div>
     </div>
   </section>
@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  name: "marketplace",
+  name: "bazaar",
 };
 </script>
 

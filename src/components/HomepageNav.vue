@@ -1,36 +1,16 @@
 <template>
-  <nav
-    class="navbar"
-    :class="[
-      { 'navbar-expand-lg': expand },
-      { [`navbar-${effect}`]: effect },
-      { 'navbar-transparent': transparent },
-      { [`bg-${type}`]: type },
-      { rounded: round },
-    ]"
-  >
+  <nav class="navbar" :class="[ { 'navbar-expand-lg': expand }, { [`navbar-${effect}`]: effect }, { [`bg-${type}`]: type }, { rounded: round }, ]">
     <div class="container">
-      <slot name="container-pre"></slot>
       <slot name="brand">
         <a class="navbar-brand" href="#" @click.prevent="onTitleClick">
           {{ title }}
         </a>
       </slot>
-      <navbar-toggle-button
-        :toggled="toggled"
-        :target="contentId"
-        v-on:click.stop="toggled = !toggled"
-      >
-      </navbar-toggle-button>
+      <navbar-toggle-button :toggled="toggled" :target="contentId" v-on:click.stop="toggled = !toggled"></navbar-toggle-button>
 
       <slot name="container-after"></slot>
 
-      <div
-        class="collapse navbar-collapse"
-        :class="{ show: false }"
-        :id="contentId"
-        v-click-outside="closeMenu"
-      >
+      <div class="collapse navbar-collapse" :class="{ show: false }" :id="contentId" v-click-outside="closeMenu">
         <div class="navbar-collapse-header">
           <slot name="content-header" :close-menu="closeMenu"></slot>
         </div>

@@ -3,12 +3,16 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import FunctionLayout from "@/layout/FunctionLayout";
 
 import Homepage from "../views/Homepage/Homepage";
-import Protection from "../views/Products/Products";
+import Account from "../views/Account/Account";
+import Protection from "../views/Protection/Protection";
 import Flight from "../views/Flight/Flight";
+import FlightBuy from "../views/Flight/FlightBuy";
+import FlightProvide from "../views/Flight/FlightProvide";
 import Price from "../views/Price/Price";
 import Mining from "../views/Mining/Mining";
 import Luckybox from "../views/LuckyBox/Luckybox";
-import Marketplace from "../views/MarketPlace/Marketplace";
+import Bazaar from "../views/Bazaar/Bazaar";
+import Test from "../views/Test";
 
 const routes = [
   {
@@ -21,6 +25,11 @@ const routes = [
     component: FunctionLayout,
     children: [
       {
+        path: "/account",
+        name: "account",
+        components: { default: Account },
+      },
+      {
         path: "/protection",
         name: "protection",
         components: { default: Protection },
@@ -29,6 +38,16 @@ const routes = [
         path: "/flight",
         name: "flight",
         components: { default: Flight },
+      },
+      {
+        path: "/flight-buy",
+        name: "flight-buy",
+        components: { default: FlightBuy },
+      },
+      {
+        path: "/flight-provide",
+        name: "flight-provide",
+        components: { default: FlightProvide },
       },
       {
         path: "/price",
@@ -46,9 +65,14 @@ const routes = [
         components: { default: Luckybox },
       },
       {
-        path: "/marketplace",
-        name: "marketplace",
-        components: { default: Marketplace },
+        path: "/bazaar",
+        name: "bazaar",
+        components: { default: Bazaar },
+      },
+      {
+        path: "/test",
+        name: "test",
+        components: { default: Test },
       },
     ],
   },
