@@ -17,10 +17,18 @@
                 />
               </div>
               <div class="col-6">
-                <h5 class="text-l">Total Value Locked: <bold id="total-value-locked"> --</bold></h5>
-                <h5 class="text-l">Available Capacity: <bold id="available-capacity"> --</bold></h5>
-                <h5 class="text-l">Current Policies: <bold id="current-policies"> --</bold></h5>
-                <h5 class="text-l">Locked Ratio: <bold id="locked-ratio"> --</bold></h5>
+                <h5 class="text-l">
+                  Total Value Locked: <bold id="total-value-locked"> --</bold>
+                </h5>
+                <h5 class="text-l">
+                  Available Capacity: <bold id="available-capacity"> --</bold>
+                </h5>
+                <h5 class="text-l">
+                  Current Policies: <bold id="current-policies"> --</bold>
+                </h5>
+                <h5 class="text-l">
+                  Locked Ratio: <bold id="locked-ratio"> --</bold>
+                </h5>
                 <h5 class="text-l">APR: <bold id="apr"> --%</bold></h5>
               </div>
             </div>
@@ -29,7 +37,10 @@
             </h5>
           </div>
           <div class="col-xl-6 order-md-2">
-            <h5 class="text-r">Your Asset: <bold id="your-asset"> -- (+--%)</bold></h5>
+            <h5 class="text-r">
+              Your Asset:
+              <bold id="your-asset"> {{ userAsset }}-- (+--%)</bold>
+            </h5>
             <input
               class="degis-input"
               style="width: 100%; margin: 4% 0"
@@ -47,8 +58,14 @@
                 WITHDRAW
               </base-button>
             </div>
-            <h5 class="text-r">Your Premium Income: <bold id="your-premium-income"> -- </bold></h5>
-            <h5 class="text-r">Your DEGIS Token Income: <bold id="your-degis-token-income"> -- </bold></h5>
+            <h5 class="text-r">
+              Your Premium Income:
+              <bold id="your-premium-income"> {{ userPendingPremium }} </bold>
+            </h5>
+            <h5 class="text-r">
+              Your DEGIS Token Income:
+              <bold id="your-degis-token-income"> {{ userPendingDegis }} </bold>
+            </h5>
             <base-button
               style="width: 100%; margin-bottom: 2%"
               @click="harvestDegisEvent"
@@ -68,7 +85,11 @@
             </h2>
             <div class="row justify-content-between" style="padding: 2% 0">
               <div class="col-6">
-                <img src="img/function/mining-circle-2.png" class="img-fluid" style="width: 80%"/>
+                <img
+                  src="img/function/mining-circle-2.png"
+                  class="img-fluid"
+                  style="width: 80%"
+                />
               </div>
               <div class="col-6">
                 <h5 class="text-l">Total Value Locker: <bold> --</bold></h5>
@@ -78,9 +99,7 @@
                 <h5 class="text-l">APR: <bold> XX%</bold></h5>
               </div>
             </div>
-            <h5 class="text-l">
-              Pool Address: <bold> --</bold>
-            </h5>
+            <h5 class="text-l">Pool Address: <bold> --</bold></h5>
           </div>
           <div class="col-xl-6 order-md-2">
             <h5 class="text-r">Your Asset: <bold> -- (+--%)</bold></h5>
@@ -93,12 +112,8 @@
               class="d-flex justify-content-between"
               style="padding-bottom: 11%"
             >
-              <base-button style="width: 45%" >
-                DEPOSIT</base-button
-              >
-              <base-button style="width: 45%" >
-                WITHDRAW</base-button
-              >
+              <base-button style="width: 45%"> DEPOSIT</base-button>
+              <base-button style="width: 45%"> WITHDRAW</base-button>
             </div>
             <h5 class="text-r">Your Premium Income: <bold> --</bold></h5>
             <h5 class="text-r">Your DEGIS Token Income: <bold> --</bold></h5>
@@ -122,24 +137,36 @@ import {
   getPolicyFlow,
 } from "../../utils/contractInstance";
 
-
 export default {
   name: "mining",
   components: {
     BaseButton,
   },
+  data() {
+    return {
+      userPendingPremium: 0,
+      userAsset: 0,
+      userPendingDegis: 0,
+    };
+  },
   computed: {
     currentAccount() {
-      return this.$store.state.selectedAccount
-    }
+      return this.$store.state.selectedAccount;
+    },
   },
 
-  mounted (){
-    this.updateInfoEvent()
+  watch: {
+    "$store.state.selectedAccount": function (newVal) {
+      this.updateInfoEvent();
+    },
   },
-  
-  updated (){
-    this.updateInfoEvent()
+
+  mounted() {
+    this.updateInfoEvent();
+  },
+
+  updated() {
+    this.updateInfoEvent();
   },
 
   methods: {
@@ -225,8 +252,7 @@ export default {
         .getRealBalance(account)
         .call();
 
-      console.log("Your real balance:", parseInt(realBalance) / 10 ** 18)
-      
+      console.log("Your real balance:", parseInt(realBalance) / 10 ** 18);
 
       const lpvalue = await InsurancePool.methods.LPValue.call();
       const lpnum = await LPToken.methods.balanceOf(account);
@@ -241,7 +267,11 @@ export default {
         .call();
       console.log("Pending premium:", parseInt(pendingPremium) / 10 ** 18);
 
-      return { pendingDegis: pendingDegis, pendingPremium: pendingPremium, realBalance: realBalance};
+      return {
+        pendingDegis: pendingDegis,
+        pendingPremium: pendingPremium,
+        realBalance: realBalance,
+      };
     },
 
     async getPoolInfo() {
@@ -343,8 +373,8 @@ export default {
 
     async depositUSDEvent() {
       const depositAmount = document.getElementById("degis-input").value;
-      await this.depositUSD(depositAmount)
-      await this.updateInfoEvent()
+      await this.depositUSD(depositAmount);
+      await this.updateInfoEvent();
     },
 
     async withdrawUSDEvent() {
@@ -362,20 +392,28 @@ export default {
 
     async getLPInfoEvent() {
       const res = await this.getLPInfo();
-      document.getElementById("your-premium-income").innerHTML = res["pendingPremium"]
-      document.getElementById("your-degis-token-income").innerHTML = (res["pendingDegis"] / 1e18).toFixed(2)
-      document.getElementById("your-asset").innerHTML = (res["realBalance"] / 1e18).toFixed(2)
-      
+      // document.getElementById("your-premium-income").innerHTML =
+      //   res["pendingPremium"];
+      this.userPendingPremium = res["pendingPremium"];
+      this.userPendingDegis = (res["pendingDegis"] / 1e18).toFixed(2);
+      // document.getElementById("your-asset").innerHTML
+      this.userAsset = (res["realBalance"] / 1e18).toFixed(2);
+
       console.log(res);
     },
 
     async getPoolInfoEvent() {
       const res = await this.getPoolInfo();
-      document.getElementById("total-value-locked").innerHTML = (res["total_value_locked"] / 1e18)
-      document.getElementById("available-capacity").innerHTML = (res["available_capacity"] / 1e18)
-      document.getElementById("current-policies").innerHTML = (res["current_policies"] / 1e18)
-      document.getElementById("locked-ratio").innerHTML = (res["locked_ratio"] / 1e18).toFixed(6)
-      document.getElementById("pool-address").innerHTML = res["pool_address"]
+      document.getElementById("total-value-locked").innerHTML =
+        res["total_value_locked"] / 1e18;
+      document.getElementById("available-capacity").innerHTML =
+        res["available_capacity"] / 1e18;
+      document.getElementById("current-policies").innerHTML =
+        res["current_policies"] / 1e18;
+      document.getElementById("locked-ratio").innerHTML = (
+        res["locked_ratio"] / 1e18
+      ).toFixed(6);
+      document.getElementById("pool-address").innerHTML = res["pool_address"];
       console.log(res);
     },
 
