@@ -4,8 +4,11 @@ import router from "./router";
 import GlobalComponents from "./plugins/globalComponents";
 import ElementPlus from "element-plus";
 import "element-plus/lib/theme-chalk/index.css";
-import "element-plus/lib/theme-chalk/display.css";
+<<<<<<< HEAD
 import store from "./store";
+=======
+import "element-plus/lib/theme-chalk/display.css";
+>>>>>>> b9b2eb6d2df5a08607049aacbe1b5b3299fb619b
 
 const appInstance = createApp(App);
 appInstance.use(router);
