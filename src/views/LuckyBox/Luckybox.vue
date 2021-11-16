@@ -23,10 +23,11 @@
         <div class="row row-grid align-items-center justify-content-between pt-3 pb-2">
           <div>
             <h2 class="fw-7 d-g1 fs-28">Finished Rounds ></h2>
-            <h4 class="fw-4 d-p fs-14 pt-1 pb-3" style="margin: auto" @click="modals.WinningRules = true">Winning rules ></h4>
+            <!--            <h4 class="fw-4 d-p fs-14 pt-1 pb-3" style="margin: auto" @click="modals.WinningRules = true">Winning rules ></h4>-->
           </div>
           <div class="d-flex">
-            <base-button @click="modals.PendingPrize = true">PENDING PRIZE</base-button>
+            <h4 class="fw-4 d-p fs-14 pt-1 pb-3" style="margin: auto" @click="modals.WinningRules = true">Winning rules ></h4>
+            <!--            <base-button @click="modals.PendingPrize = true">PENDING PRIZE</base-button>-->
           </div>
         </div>
 
@@ -104,7 +105,7 @@
               </el-table-column>
               <el-table-column prop="action" label="ACTION">
                 <template #default="scope">
-                  <base-button @click="modals.LbDetails = true">CHECK</base-button>
+                  <base-button>Refund</base-button>
                 </template>
               </el-table-column>
             </el-table>
