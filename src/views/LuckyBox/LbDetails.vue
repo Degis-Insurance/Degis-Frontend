@@ -76,11 +76,27 @@
         <img src="img/luckybox/modal-split.png" style="height: 1px">
 
         <div class="modal-footer pt-4 pl-4" style="display: block">
-          <p class="fw-7 d-g1 fs-16">My Tickets</p>
-          <el-table :data="tableData" class="" header-cell-style="text-align: center; height: 70px" cell-style="text-align: center; height: 70px">
-            <el-table-column prop="lotteryid" label="LOTTERY ID" sortable/>
-            <el-table-column prop="lotterynumber" label="LOTTERY NUMBERS" sortable/>
-            <el-table-column prop="lotteryrewards" label="LOTTERY REWARDS" sortable/>
+          <div class="d-flex justify-content-between">
+            <p class="fw-7 d-g1 fs-16" style="margin: auto 0">My Tickets</p>
+            <base-button>GET PRIZE</base-button>
+          </div>
+
+          <el-table :data="prizeData" class="" header-cell-style="text-align: center; height: 70px" cell-style="text-align: center; height: 70px">
+            <el-table-column prop="lotteryid" label="LOTTERY ID" sortable>
+              <template #default="scope">
+                <p class="fw-7 d-g1 fs-16 ma">{{ scope.row.lorreryid }}</p>
+              </template>
+            </el-table-column>
+            <el-table-column prop="lotterynumber" label="LOTTERY NUMBERS" sortable>
+              <template #default="scope">
+                <img v-for="num in scope.row.number" :src="'img/luckybox/num-'+ num +'.png'" style="max-width: 44px; max-height: 44px;"/>
+              </template>
+            </el-table-column>
+            <el-table-column prop="lotteryrewards" label="LOTTERY REWARDS" sortable>
+              <template #default="scope">
+                <p class="fw-7 d-p fs-24 ma">${{ scope.row.lotteryrewards }}</p>
+              </template>
+            </el-table-column>
           </el-table>
         </div>
       </div>
@@ -92,6 +108,21 @@
 export default {
   name: "lb-details",
   components: {},
+  data() {
+    return {
+      prizeData: [
+        {
+          lorreryid: "0x9547342134",
+          number: [3, 6, 8, 9],
+          lotteryrewards: 120,
+        },
+        {
+          lorreryid: "0x3453452435",
+          number: [2, 6, 3, 2],
+          lotteryrewards: 40,
+        },]
+    };
+  },
   props: {
     show: Boolean,
   },

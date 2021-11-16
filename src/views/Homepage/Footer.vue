@@ -15,13 +15,16 @@
 <!--          <img src="img/homepage/github.png" style="width: 50%" />-->
 <!--        </a>-->
         <a href="http://twitter.com/ProjectDegis" target="_blank">
-          <img src="img/homepage/twitter.png" style="width: 50%" />
+          <img src="img/homepage/twitter.png" style="width: 40px" />
+        </a>
+        <a href="https://discord.com/invite/4C484BQVtp" target="_blank">
+          <img src="img/homepage/discord.png" style="width: 40px" />
         </a>
         <a href="http://degis.medium.com" target="_blank">
-          <img src="img/homepage/medium.png" style="width: 50%" />
+          <img src="img/homepage/medium.png" style="width: 40px" />
         </a>
         <a href="http://t.me/ProjectDegis" target="_blank">
-          <img src="img/homepage/telegram.png" style="width: 50%" />
+          <img src="img/homepage/telegram.png" style="width: 40px" />
         </a>
       </div>
       <div class="col-lg-4"></div>

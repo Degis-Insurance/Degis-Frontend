@@ -13,6 +13,9 @@
             <a href="http://twitter.com/ProjectDegis" target="_blank">
               <img src="img/homepage/twitter-p.png" style="width: 40px"/>
             </a>
+            <a href="https://discord.com/invite/4C484BQVtp" target="_blank">
+              <img src="img/homepage/discord-p.png" class="pt-3" style="width: 40px"/>
+            </a>
             <a href="http://degis.medium.com" target="_blank">
               <img src="img/homepage/medium-p.png" class="pt-3" style="width: 40px"/>
             </a>
