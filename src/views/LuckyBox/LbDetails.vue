@@ -78,7 +78,11 @@
         <div class="modal-footer pt-4 pl-4" style="display: block">
           <div class="d-flex justify-content-between">
             <p class="fw-7 d-g1 fs-16" style="margin: auto 0">My Tickets</p>
-            <base-button>GET PRIZE</base-button>
+            <div class="d-flex">
+              <p class="fw-7 d-p fs-24 ma pr-4">Totally $160</p>
+              <base-button>GET PRIZE</base-button>
+            </div>
+
           </div>
 
           <el-table :data="prizeData" class="" header-cell-style="text-align: center; height: 70px" cell-style="text-align: center; height: 70px">

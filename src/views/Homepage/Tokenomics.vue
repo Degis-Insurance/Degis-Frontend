@@ -6,7 +6,7 @@
           Tokenomics
         </p>
       </div>
-      <div class="row row-grid align-items-center">
+      <div class="row row-grid align-items-center mt-4">
         <p class="hp-desc">
           DEGIS will distribute 100 million DEG to reward loyal users
         </p>

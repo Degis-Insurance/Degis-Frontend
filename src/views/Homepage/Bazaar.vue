@@ -7,7 +7,12 @@
       <div class="row row-grid align-items-center">
         <h1 class="hp-desc ta-c" style="padding: 0 10%">
           The Bazaar Protection Market is fully governed by DEGIS token holders,
+        </h1>
+        <h1 class="hp-desc ta-c" style="padding: 0 10%">
           with the freedom to buy, sell, and design their own products.
+        </h1>
+        <h1 class="hp-desc ta-c" style="padding: 0 10%">
+          Available in Version 2.
         </h1>
       </div>
       <div class="row">
