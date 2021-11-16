@@ -9,9 +9,9 @@
       <div class="col-lg-5 order-md-3">
         <div>
           <p class="hp-title2 mb-5">Shape DeFi Protection Ecosystem</p>
-          <p class="fw-9 d-p fs-32">To Protect <span class="d-g2">with safety.</span></p>
-          <p class="fw-9 d-p fs-32">To Earn <span class="d-g2">with yield.</span></p>
-          <p class="fw-9 d-p fs-32">To Play <span class="d-g2">with fun.</span></p>
+          <p class="fw-9 d-p fs-28">To Protect <span class="d-g2">with safety.</span></p>
+          <p class="fw-9 d-p fs-28">To Earn <span class="d-g2">with yield.</span></p>
+          <p class="fw-9 d-p fs-28">To Play <span class="d-g2">with fun.</span></p>
         </div>
       </div>
     </div>

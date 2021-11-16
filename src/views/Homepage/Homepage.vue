@@ -51,7 +51,7 @@
       <Tokenomics></Tokenomics>
       <Roadmap></Roadmap>
       <Articles></Articles>
-      <Investors></Investors>
+<!--      <Investors></Investors>-->
       <Footer></Footer>
     </main>
   </div>

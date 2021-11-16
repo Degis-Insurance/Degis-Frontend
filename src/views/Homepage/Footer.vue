@@ -14,13 +14,13 @@
 <!--        <a href="https://github.com/">-->
 <!--          <img src="img/homepage/github.png" style="width: 50%" />-->
 <!--        </a>-->
-        <a href="http://twitter.com/ProjectDegis">
+        <a href="http://twitter.com/ProjectDegis" target="_blank">
           <img src="img/homepage/twitter.png" style="width: 50%" />
         </a>
-        <a href="http://degis.medium.com">
+        <a href="http://degis.medium.com" target="_blank">
           <img src="img/homepage/medium.png" style="width: 50%" />
         </a>
-        <a href="http://t.me/ProjectDegis">
+        <a href="http://t.me/ProjectDegis" target="_blank">
           <img src="img/homepage/telegram.png" style="width: 50%" />
         </a>
       </div>

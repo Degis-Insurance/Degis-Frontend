@@ -1,6 +1,6 @@
 <template>
   <section class="section-sm"></section>
-  <section class="section"></section>
+  <section class="section-sm"></section>
   <div class="dg-container d-flex align-items-center">
     <div class="row justify-content-center align-items-center">
       <!--          <div class="row row-grid align-items-center">-->
@@ -10,13 +10,13 @@
             <img src="img/homepage/img-1.png" class="img-fluid floating"/>
           </div>
           <div class="col-1" style="padding: 0; position: absolute; bottom: 0; right: 0">
-            <a href="http://twitter.com/ProjectDegis">
+            <a href="http://twitter.com/ProjectDegis" target="_blank">
               <img src="img/homepage/twitter-p.png" style="width: 40px"/>
             </a>
-            <a href="http://degis.medium.com">
+            <a href="http://degis.medium.com" target="_blank">
               <img src="img/homepage/medium-p.png" class="pt-3" style="width: 40px"/>
             </a>
-            <a href="http://t.me/ProjectDegis">
+            <a href="http://t.me/ProjectDegis" target="_blank">
               <img src="img/homepage/telegram-p.png" class="pt-3" style="width: 40px"/>
             </a>
           </div>
