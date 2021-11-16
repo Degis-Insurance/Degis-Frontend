@@ -115,7 +115,6 @@
 </template>
 
 <script>
-import FlightTable from "./FlightTable";
 import OrderConfirm from "./OrderConfirm";
 import {ref} from 'vue';
 
@@ -123,7 +122,6 @@ export default {
   name: "flight-provide",
   components: {
     OrderConfirm,
-    FlightTable,
   },
   data() {
     return {

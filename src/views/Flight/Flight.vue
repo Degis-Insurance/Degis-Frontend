@@ -20,8 +20,8 @@
               </el-option>
             </el-select>
             <img
-              src="img/function/flight-rarrow.png"
-              style="width: 15px; margin: 0 15px"
+                src="img/function/flight-rarrow.png"
+                style="width: 15px; margin: 0 15px"
             />
             <el-select v-model="destinationcity" filterable placeholder="Destination City">
               <el-option v-for="item in dcoptions" :key="item.value" :label="item.label" :value="item.value">
@@ -44,7 +44,33 @@
       </div>
     </stats-card>
 
-    <flight-table></flight-table>
+    <el-card class="dg-card">
+      <el-table :data="flightData" class="dg-cardtable" header-cell-style="text-align: center; height: 70px" cell-style="text-align: center; height: 70px">
+        <el-table-column prop="airline" label="AIRLINE" sortable/>
+        <el-table-column prop="flightno" label="FLIGHT NO." sortable/>
+        <el-table-column prop="route" label="ROUTE" sortable/>
+        <el-table-column prop="departtime" label="DEPART TIME" sortable/>
+        <el-table-column prop="arrivetime" label="ARRIVE TIME" sortable/>
+        <el-table-column prop="premium" label="PREMIUM" sortable/>
+        <el-table-column prop="action" label="ACTION">
+          <template #default="scope">
+            <base-button>Buy</base-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <div class="demo-pagination-block pt-4 pb-2" align="right">
+        <el-pagination
+            :currentPage="12"
+            :page-size="1"
+            layout="prev, pager, next, jumper"
+            :total="12"
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+        >
+        </el-pagination>
+      </div>
+    </el-card>
+
 
     <stats-card class="mt-5">
       <div class="row align-items-center pb-4">
@@ -107,15 +133,14 @@
     </stats-card>
     <order-confirm v-model:show="BuyProduction">
       <template v-slot:footer>
-      <base-button style="width: 100%; margin-top: 16%" @click="BuyProduction = false">CONFIRM</base-button>
-    </template>
+        <base-button style="width: 100%; margin-top: 16%" @click="BuyProduction = false">CONFIRM</base-button>
+      </template>
     </order-confirm>
 
   </base-header>
 </template>
 
 <script>
-import FlightTable from "./FlightTable";
 import OrderConfirm from "./OrderConfirm";
 import {ref} from 'vue';
 
@@ -123,10 +148,43 @@ export default {
   name: "flight",
   components: {
     OrderConfirm,
-    FlightTable,
   },
   data() {
     return {
+      flightData: [
+        {
+          airline: 'SouthWest',
+          flightno: '1111',
+          route: 'STL-AWL',
+          departtime: '2021-09-09 12:12',
+          arrivetime: '2021-09-10 01:00',
+          premium: '4',
+        },
+        {
+          airline: 'SouthEast',
+          flightno: '1119',
+          route: 'STL-AWL',
+          departtime: '2021-09-09 12:12',
+          arrivetime: '2021-09-10 01:00',
+          premium: '7',
+        },
+        {
+          airline: 'NorthWest',
+          flightno: '0003',
+          route: 'AWL-STL',
+          departtime: '2021-09-09 12:12',
+          arrivetime: '2021-09-10 01:00',
+          premium: '2',
+        },
+        {
+          airline: 'NorthEast',
+          flightno: '2222',
+          route: 'STL-AWL',
+          departtime: '2021-09-09 12:12',
+          arrivetime: '2021-09-10 01:00',
+          premium: '3',
+        },
+      ],
       BuyProduction: false,
       datevalue: '',
       flightoptions: ref([{value: 'FlightNo1', label: 'FlightNo1',}, {value: 'FlightNo2', label: 'FlightNo2',}, {value: 'FlightNo3', label: 'FlightNo3',},]),

@@ -21,20 +21,20 @@
           </div>
         </template>
 
-        <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
-          <a href="/#/protection">
-            <span class="nav-font"> Protection </span>
-          </a>
-          <a href="/#/mining">
-            <span class="nav-font"> Mining </span>
-          </a>
-          <a href="/#/luckybox">
-            <span class="nav-font">LuckyBox</span>
-          </a>
-          <a href="/#/bazaar">
-            <span class="nav-font">Bazaar</span>
-          </a>
-        </ul>
+<!--        <ul class="navbar-nav navbar-nav-hover align-items-lg-center">-->
+<!--          <a href="/#/protection">-->
+<!--            <span class="nav-font"> Protection </span>-->
+<!--          </a>-->
+<!--          <a href="/#/mining">-->
+<!--            <span class="nav-font"> Mining </span>-->
+<!--          </a>-->
+<!--          <a href="/#/luckybox">-->
+<!--            <span class="nav-font">LuckyBox</span>-->
+<!--          </a>-->
+<!--          <a href="/#/bazaar">-->
+<!--            <span class="nav-font">Bazaar</span>-->
+<!--          </a>-->
+<!--        </ul>-->
         <ul class="navbar-nav align-items-lg-center ml-lg-auto">
           <base-button>CONNECT WALLET</base-button>
         </ul>
