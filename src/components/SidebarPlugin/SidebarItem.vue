@@ -1,12 +1,6 @@
 <template>
   <li class="nav-item">
-    <router-link
-      :to="link.path"
-      @click="linkClick"
-      class="nav-link"
-      :target="link.target"
-      :href="'#' + link.path"
-    >
+    <router-link :to="link.path" @click="linkClick" class="nav-link" :target="link.target" :href="'#' + link.path">
       <!--      <i :class="link.icon"></i>-->
       <div class="ml-3">
         <img :src="link.src" style="width: 24px; margin-right: 1rem; line-height: 45px" />
