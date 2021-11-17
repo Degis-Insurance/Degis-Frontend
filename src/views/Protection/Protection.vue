@@ -1,7 +1,7 @@
 <template>
   <base-header type="" class="pb-6 pb-8 pt-4">
     <h1 class="fw-7 d-g1 fs-34 mb-4">Protection products built by DEGIS</h1>
-    <stats-card>
+    <el-card class="dg-card">
       <div class="container">
         <div class="row row-grid align-items-center">
           <div class="col-lg-6 order-md-1">
@@ -20,14 +20,14 @@
                 <base-button style="padding: 0px 30%">BUY</base-button>
               </a>
               <a href="/#/flight" style="line-height: 50px; width: 50%; padding-top: 24px" align="right">
-                <base-button style="padding: 0px 30%">SELL</base-button>
+                <base-button style="padding: 0px 30%">Provide</base-button>
               </a>
             </div>
           </div>
         </div>
       </div>
-    </stats-card>
-    <stats-card>
+    </el-card>
+    <el-card class="dg-card">
       <div class="container">
         <div class="row row-grid align-items-center">
           <div class="col-lg-6 order-md-1">
@@ -53,7 +53,7 @@
           </div>
         </div>
       </div>
-    </stats-card>
+    </el-card>
   </base-header>
 </template>
 

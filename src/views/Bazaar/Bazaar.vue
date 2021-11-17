@@ -1,7 +1,7 @@
 <template>
   <base-header type="" class="pb-6 pb-8 pt-4">
     <h1 class="fw-7 d-g1 fs-34 mb-4">Bazaar</h1>
-    <stats-card>
+    <el-card class="dg-card">
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
@@ -9,7 +9,7 @@
           </div>
         </div>
       </div>
-    </stats-card>
+    </el-card>
   </base-header>
 </template>
 

@@ -54,7 +54,7 @@
               <h4 class="fw-7 d-p fs-24">12.3467</h4>
             </div>
             <div class="col-sm-4 ma" align="center">
-              <slot name="footer"></slot>
+              <base-button style="width: 100%; height: 100%" @click="closeModal">Buy Tickets</base-button>
             </div>
           </div>
 

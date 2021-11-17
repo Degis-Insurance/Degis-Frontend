@@ -1,7 +1,7 @@
 <template>
   <base-header type="" class="pb-6 pb-8 pt-4">
     <h1 class="fw-7 d-g1 fs-34 mb-4">Mining by DEGIS</h1>
-    <stats-card>
+    <el-card class="dg-card">
       <div class="container-fluid">
         <div class="row align-items-center">
           <div class="col-xl-6 order-md-1">
@@ -10,11 +10,7 @@
             </h2>
             <div class="row justify-content-between" style="padding: 2% 0">
               <div class="col-6">
-                <img
-                  src="img/function/mining-circle.png"
-                  class="img-fluid"
-                  style="width: 80%"
-                />
+                <img src="img/function/mining-circle.png" class="img-fluid" style="width: 80%"/>
               </div>
               <div class="col-6">
                 <h5 class="text-l">
@@ -75,8 +71,8 @@
           </div>
         </div>
       </div>
-    </stats-card>
-    <stats-card>
+    </el-card>
+    <el-card class="dg-card">
       <div class="container-fluid">
         <div class="row align-items-center">
           <div class="col-xl-6 order-md-1">
@@ -123,7 +119,7 @@
           </div>
         </div>
       </div>
-    </stats-card>
+    </el-card>
   </base-header>
 </template>
 
