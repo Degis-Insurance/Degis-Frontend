@@ -128,7 +128,9 @@
 
   <buy-tickets v-model:show="modals.BuyTickets"></buy-tickets>
   <pending-prize v-model:show="modals.PendingPrize"></pending-prize>
-  <lb-details v-model:show="modals.LbDetails" :viewData="viewData"></lb-details>
+  <template v-if="modals.LbDetails">
+    <lb-details v-model:show="modals.LbDetails" :viewData="viewData"></lb-details>
+  </template>
   <winning-rules v-model:show="modals.WinningRules"></winning-rules>
 </template>
 
@@ -208,8 +210,8 @@ export default {
   },
   methods: {
     viewno(val) {
-      this.modals.LbDetails = true;
       this.viewData = val;
+      this.modals.LbDetails = true;
     }
   }
 };

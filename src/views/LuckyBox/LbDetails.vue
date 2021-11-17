@@ -37,25 +37,25 @@
               </div>
               <div class="col-lg-2">
                 <h4 class="fw-5 d-g4 fs-14">Match First 1</h4>
-                <h4 class="fw-7 d-p fs-20">${{prizeDetail.match1.totalMoney}}</h4>
+                <h4 class="fw-7 d-p fs-20">${{ prizeDetail.match1.totalMoney }}</h4>
                 <h4 class="fw-5 d-g1 fs-14">${{ prizeDetail.match1.eachMoney }} each</h4>
                 <h4 class="fw-5 d-g4 fs-14">{{ prizeDetail.match1.winnerNumber }} Winners</h4>
               </div>
               <div class="col-lg-2">
                 <h4 class="fw-5 d-g4 fs-14">Match First 2</h4>
-                <h4 class="fw-7 d-p fs-20">${{prizeDetail.match2.totalMoney}}</h4>
+                <h4 class="fw-7 d-p fs-20">${{ prizeDetail.match2.totalMoney }}</h4>
                 <h4 class="fw-5 d-g1 fs-14">${{ prizeDetail.match2.eachMoney }} each</h4>
                 <h4 class="fw-5 d-g4 fs-14">{{ prizeDetail.match2.winnerNumber }} Winners</h4>
               </div>
               <div class="col-lg-2">
                 <h4 class="fw-5 d-g4 fs-14">Match First 3</h4>
-                <h4 class="fw-7 d-p fs-20">${{prizeDetail.match3.totalMoney}}</h4>
+                <h4 class="fw-7 d-p fs-20">${{ prizeDetail.match3.totalMoney }}</h4>
                 <h4 class="fw-5 d-g1 fs-14">${{ prizeDetail.match3.eachMoney }} each</h4>
                 <h4 class="fw-5 d-g4 fs-14">{{ prizeDetail.match3.winnerNumber }} Winners</h4>
               </div>
               <div class="col-lg-2">
                 <h4 class="fw-5 d-g4 fs-14">Match First 4</h4>
-                <h4 class="fw-7 d-p fs-20">${{prizeDetail.match4.totalMoney}}</h4>
+                <h4 class="fw-7 d-p fs-20">${{ prizeDetail.match4.totalMoney }}</h4>
                 <h4 class="fw-5 d-g1 fs-14">${{ prizeDetail.match4.eachMoney }} each</h4>
                 <h4 class="fw-5 d-g4 fs-14">{{ prizeDetail.match4.winnerNumber }} Winners</h4>
               </div>
@@ -99,6 +99,8 @@
   </div>
 </template>
 <script>
+
+import {onMounted} from "vue";
 
 export default {
   name: "lb-details",
@@ -149,6 +151,10 @@ export default {
       this.$emit("update:show", false);
       this.$emit("close");
     },
+  },
+  created() {
+    console.log("点击view按键之后开始创建LbDetails组件");
+  //  这里就可以写查询的语句了
   },
   watch: {
     show(val) {
