@@ -1,7 +1,6 @@
 <template>
   <base-header type="" class="pb-6 pb-8 pt-4">
     <h1 class="fw-7 d-g1 fs-34 mb-4">The Miserable Flight</h1>
-
     <stats-card>
       <div class="row align-items-center pb-2">
         <div class="col-xl-3">
@@ -39,7 +38,6 @@
         </div>
       </div>
     </stats-card>
-
     <el-table :data="tableData" class="dg-table" header-cell-style="text-align: center; height: 70px" cell-style="text-align: center; height: 70px">
       <el-table-column prop="airline" label="AIRLINE" sortable/>
       <el-table-column prop="flightno" label="FLIGHT NO." sortable/>
@@ -48,7 +46,17 @@
       <el-table-column prop="arrivetime" label="ARRIVE TIME" sortable/>
       <el-table-column prop="premium" label="PREMIUM" sortable/>
     </el-table>
-
+    <div class="demo-pagination-block pt-4 pb-2" align="right">
+      <el-pagination
+          :currentPage="12"
+          :page-size="1"
+          layout="prev, pager, next, jumper"
+          :total="12"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+      >
+      </el-pagination>
+    </div>
   </base-header>
 </template>
 

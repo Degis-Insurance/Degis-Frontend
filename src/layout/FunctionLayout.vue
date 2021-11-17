@@ -11,7 +11,12 @@
         <sidebar-item :link="{ name: 'Mining', src: 'img/function/icon/mining.png', path: '/mining', }"/>
         <sidebar-item :link="{ name: 'Lucky Box', src: 'img/function/icon/luckybox.png', path: '/luckybox', }"/>
         <sidebar-item :link="{ name: 'Bazaar', src: 'img/function/icon/bazaar.png', path: '/bazaar', }"/>
-        <img class="ml-4" style="width: 230px; padding-top: 30%;" src="img/function/sidebar-bottom.png"/>
+                <img class="ml-4" style="width: 230px; padding-top: 30%;" src="img/function/sidebar-bottom.png"/>
+<!--        <div class="mt&#45;&#45;2" style="width: 260px; height: 280px; overflow: hidden; border: 0px">-->
+<!--          <div style="margin:-900px -1000px -200px -0px;">-->
+<!--            <iframe src="https://my.spline.design/degisrobotface-4f39d285ce75fbea5a7cdf6cfaaff5fd/" width="1360" height="1650" scrolling="no"></iframe>-->
+<!--          </div>-->
+<!--        </div>-->
       </template>
     </side-bar>
     <div class="main-content">
@@ -20,7 +25,7 @@
       <div @click="toggleSidebar">
         <!-- your content here -->
         <router-view></router-view>
-<!--        <content-footer v-if="!$route.meta.hideFooter"></content-footer>-->
+        <!--        <content-footer v-if="!$route.meta.hideFooter"></content-footer>-->
       </div>
     </div>
   </div>

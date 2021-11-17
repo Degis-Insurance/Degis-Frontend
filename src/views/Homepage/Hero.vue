@@ -1,6 +1,6 @@
 <template>
   <section class="section-sm"></section>
-  <section class="section"></section>
+  <section class="section-sm"></section>
   <div class="dg-container d-flex align-items-center">
     <div class="row justify-content-center align-items-center">
       <!--          <div class="row row-grid align-items-center">-->
@@ -10,13 +10,16 @@
             <img src="img/homepage/img-1.png" class="img-fluid floating"/>
           </div>
           <div class="col-1" style="padding: 0; position: absolute; bottom: 0; right: 0">
-            <a href="http://twitter.com/ProjectDegis">
+            <a href="http://twitter.com/ProjectDegis" target="_blank">
               <img src="img/homepage/twitter-p.png" style="width: 40px"/>
             </a>
-            <a href="http://degis.medium.com">
+            <a href="https://discord.com/invite/4C484BQVtp" target="_blank">
+              <img src="img/homepage/discord-p.png" class="pt-3" style="width: 40px"/>
+            </a>
+            <a href="http://degis.medium.com" target="_blank">
               <img src="img/homepage/medium-p.png" class="pt-3" style="width: 40px"/>
             </a>
-            <a href="http://t.me/ProjectDegis">
+            <a href="http://t.me/ProjectDegis" target="_blank">
               <img src="img/homepage/telegram-p.png" class="pt-3" style="width: 40px"/>
             </a>
           </div>
@@ -27,9 +30,9 @@
         <p class="hp-title">The 1st Decentralized Protection Market</p>
         <h1 class="hp-title" style="color: #6415FF;">On Avalanche</h1>
         <div class="btn-wrapper d-flex pt-5">
-          <a href="/#/protection">
+<!--          <a href="/#/protection">-->
             <base-button>Get started</base-button>
-          </a>
+<!--          </a>-->
           <a href="https://docs.degis.io/" style="padding: 0 8%">
             <base-button class="tut-button" style="background-color: #f2f2f2; color: #4d535c">Tutorial</base-button>
           </a>

@@ -29,9 +29,9 @@
                   <!--                  <img :src="'img/luckybox/num-'+num[2]+'.png'" style="max-width: 65px; max-height: 66px; margin-top: 11px">-->
                   <!--                  <img :src="'img/luckybox/num-'+num[3]+'.png'" style="max-width: 65px; max-height: 66px; margin-top: 11px">-->
                 </div>
-                <div class="col-xl-3">
-                  <p class="fw-7 d-p fs-18" style="line-height: 88px; text-align: center; cursor: pointer" @click="randomNumber">RANDOM</p>
-                </div>
+<!--                <div class="col-xl-3">-->
+<!--                  <p class="fw-7 d-p fs-18" style="line-height: 88px; text-align: center; cursor: pointer" @click="randomNumber">RANDOM</p>-->
+<!--                </div>-->
               </div>
             </div>
           </div>

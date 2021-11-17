@@ -13,9 +13,9 @@
           <p class="hp-desc">Blockchain is miserable, where risk and reward are widely extended. DEGIS is the shield to protect you. With innovative insurance products, DEGIS is attractive to both
             on-chain and off-chain buyers. Buyers can hedge their risk through insurance products while providers can earn attractive yield.</p>
           <div class="btn-wrapper d-flex pt-4 justify-content-between" style="padding-right: 15%">
-            <a href="/#/protection">
+<!--            <a href="/#/protection">-->
               <base-button>launch product</base-button>
-            </a>
+<!--            </a>-->
             <a href="https://docs.degis.io/">
               <base-button>Read More</base-button>
             </a>

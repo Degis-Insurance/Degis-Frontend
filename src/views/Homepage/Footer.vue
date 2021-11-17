@@ -1,27 +1,30 @@
 <template>
   <div class="dg-container">
-    <div class="row" style="text-align: center">
-      <div class="col-md-2"></div>
-      <div class="col-md-2"><a href="/#/protection" class="f-text-1">Protection</a></div>
-      <div class="col-md-2"><a href="/#/mining" class="f-text-1">Mining</a></div>
-      <div class="col-md-2"><a href="/#/luckybox" class="f-text-1">LuckyBox</a></div>
-      <div class="col-md-2"><a href="/#/bazaar" class="f-text-1">Bazaar</a></div>
-      <div class="col-md-2"></div>
-    </div>
+<!--    <div class="row" style="text-align: center">-->
+<!--      <div class="col-md-2"></div>-->
+<!--      <div class="col-md-2"><a href="/#/protection" class="f-text-1">Protection</a></div>-->
+<!--      <div class="col-md-2"><a href="/#/mining" class="f-text-1">Mining</a></div>-->
+<!--      <div class="col-md-2"><a href="/#/luckybox" class="f-text-1">LuckyBox</a></div>-->
+<!--      <div class="col-md-2"><a href="/#/bazaar" class="f-text-1">Bazaar</a></div>-->
+<!--      <div class="col-md-2"></div>-->
+<!--    </div>-->
     <div class="row pt-5">
       <div class="col-lg-4"></div>
       <div class="col-lg-4 d-flex justify-content-between" align="center">
-<!--        <a href="https://github.com/">-->
-<!--          <img src="img/homepage/github.png" style="width: 50%" />-->
-<!--        </a>-->
-        <a href="http://twitter.com/ProjectDegis">
-          <img src="img/homepage/twitter.png" style="width: 50%" />
+        <!--        <a href="https://github.com/">-->
+        <!--          <img src="img/homepage/github.png" style="width: 50%" />-->
+        <!--        </a>-->
+        <a href="http://twitter.com/ProjectDegis" target="_blank">
+          <img src="img/homepage/twitter.png" style="width: 40px"/>
         </a>
-        <a href="http://degis.medium.com">
-          <img src="img/homepage/medium.png" style="width: 50%" />
+        <a href="https://discord.com/invite/4C484BQVtp" target="_blank">
+          <img src="img/homepage/discord.png" style="width: 40px"/>
         </a>
-        <a href="http://t.me/ProjectDegis">
-          <img src="img/homepage/telegram.png" style="width: 50%" />
+        <a href="http://degis.medium.com" target="_blank">
+          <img src="img/homepage/medium.png" style="width: 40px"/>
+        </a>
+        <a href="http://t.me/ProjectDegis" target="_blank">
+          <img src="img/homepage/telegram.png" style="width: 40px"/>
         </a>
       </div>
       <div class="col-lg-4"></div>

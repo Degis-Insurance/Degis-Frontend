@@ -6,7 +6,7 @@
           Roadmap
         </p>
       </div>
-      <div class="row row-grid align-items-center">
+      <div class="row row-grid align-items-center mt-4">
         <p class="hp-desc">
           Timeline and Version Update
         </p>
