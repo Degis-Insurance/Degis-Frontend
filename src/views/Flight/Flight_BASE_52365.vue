@@ -1,0 +1,145 @@
+<template>
+  <base-header type="" class="pb-6 pb-8 pt-4">
+    <h1 class="fw-7 d-g1 fs-34 mb-4">The Miserable Flight</h1>
+    <stats-card>
+      <div class="row align-items-center pb-2">
+        <div class="col-xl-3">
+          <p class="fw-7 d-p fs-18">Search by Flight</p>
+          <div class="d-flex">
+            <el-select v-model="flightno" filterable placeholder="Select Flight">
+              <el-option v-for="item in flightoptions" :key="item.value" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
+          </div>
+        </div>
+        <div class="col-xl-5">
+          <p class="fw-7 d-p fs-18">Search by Route</p>
+          <div class="d-flex align-items-center">
+            <el-select v-model="origincity" filterable placeholder="Origin City">
+              <el-option v-for="item in ocoptions" :key="item.value" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
+            <img
+              src="img/function/flight-rarrow.png"
+              style="width: 15px; margin: 0 15px"
+            />
+            <el-select v-model="destinationcity" filterable placeholder="Destination City">
+              <el-option v-for="item in dcoptions" :key="item.value" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
+          </div>
+        </div>
+
+        <div class="col-xl-2">
+          <p class="fw-7 d-p fs-18">Date</p>
+          <el-date-picker v-model="datevalue" type="date" placeholder="Pick a day"></el-date-picker>
+        </div>
+
+        <div class="col-xl-2">
+          <p class="fw-7 d-p fs-18" style="color: white">Search</p>
+          <div align="right">
+            <base-button style="padding: 13px 46px;">SEARCH</base-button>
+          </div>
+        </div>
+      </div>
+    </stats-card>
+
+    <flight-table></flight-table>
+
+    <stats-card class="mt-5">
+      <div class="row align-items-center pb-4">
+        <div class="col-xl-5 pt-4" style="padding: 0 4%;">
+          <div class="d-flex pb-5">
+            <img src="img/function/flight-comp.png" style="width: 88px; height: 88px"/>
+            <div>
+              <p class="fw-4 d-g1 fs-20 pl-3 pt-2">Norwegian</p>
+              <p class="fw-4 d-g3 fs-14 pl-3">CCA1835</p>
+            </div>
+          </div>
+          <img src="img/function/flight-info.png" class="pb-4" style="width: 100%;"/>
+          <div class="d-flex justify-content-between">
+            <p class="fw-4 d-p fs-32">ABC</p>
+            <p class="fw-4 d-g3 fs-16 pt-3">5h 25m</p>
+            <p class="fw-4 d-p fs-32">CBA</p>
+          </div>
+
+          <div class="d-flex justify-content-between">
+            <p class="fw-4 d-g3 fs-14">Copenhagen, Denmark</p>
+            <p class="fw-4 d-g3 fs-14">Oclo, Norway</p>
+          </div>
+          <div class="d-flex justify-content-between">
+            <p class="fw-4 d-g3 fs-14">Thu 15 Oct</p>
+            <p class="fw-4 d-g3 fs-14">Fri 16 Oct</p>
+          </div>
+          <div class="d-flex justify-content-between">
+            <p class="fw-4 d-g3 fs-14">23:45</p>
+            <p class="fw-4 d-g3 fs-14">04:30</p>
+          </div>
+          <div class="d-flex justify-content-between">
+            <p class="fw-4 d-g3 fs-14">Terminal 1</p>
+            <p class="fw-4 d-g3 fs-14">Terminal 1</p>
+          </div>
+
+          <img src="img/function/flight-info2.png" class="pt-4" style="width: 100%;"/>
+
+        </div>
+
+        <div class="col-xl-7 pt-4" style="padding: 0 4%">
+          <img src="img/function/flight-map.png" style="width: 100%; margin: 3% 0"/>
+          <div class="row d-flex justify-content-between pt-4">
+            <div class="col-xl-6">
+              <div class="d-flex justify-content-between">
+                <p class="fw-4 d-g3 fs-16">Protection Premium:</p>
+                <p class="fw-7 d-p fs-16">12.3467</p>
+              </div>
+              <div class="d-flex justify-content-between" style="margin-top: -20px">
+                <p class="fw-4 d-g3 fs-16">Maximum Payoff:</p>
+                <p class="fw-7 d-p fs-16">19.2824</p>
+              </div>
+            </div>
+            <div class="col-xl-6 pt-1" align="right">
+              <base-button @click="BuyProduction = true">BUY PROTECTION</base-button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </stats-card>
+    <order-confirm v-model:show="BuyProduction">
+      <template v-slot:footer>
+      <base-button style="width: 100%; margin-top: 16%" @click="BuyProduction = false">CONFIRM</base-button>
+    </template>
+    </order-confirm>
+
+  </base-header>
+</template>
+
+<script>
+import FlightTable from "./FlightTable";
+import OrderConfirm from "./OrderConfirm";
+import {ref} from 'vue';
+
+export default {
+  name: "flight",
+  components: {
+    OrderConfirm,
+    FlightTable,
+  },
+  data() {
+    return {
+      BuyProduction: false,
+      datevalue: '',
+      flightoptions: ref([{value: 'FlightNo1', label: 'FlightNo1',}, {value: 'FlightNo2', label: 'FlightNo2',}, {value: 'FlightNo3', label: 'FlightNo3',},]),
+      flightno: ref(''),
+      ocoptions: ref([{value: 'City1', label: 'City1',}, {value: 'City2', label: 'City2',}, {value: 'City3', label: 'City3',}]),
+      origincity: ref(''),
+      dcoptions: ref([{value: 'City1', label: 'City1',}, {value: 'City2', label: 'City2',}, {value: 'City3', label: 'City3',}]),
+      destinationcity: ref(''),
+    }
+  }
+};
+</script>
+
+<style scoped>
+
+</style>

@@ -27,13 +27,13 @@
                   Current Policies: <bold> {{ currentPolicies }}</bold>
                 </h5>
                 <h5 class="text-l">
-                  Locked Ratio: <bold id="locked-ratio"> {{ lockedRatio }}</bold>
+                  Locked Ratio: <bold> {{ lockedRatio }}</bold>
                 </h5>
                 <h5 class="text-l">APR: <bold id="apr"> {{ APR }} </bold></h5>
               </div>
             </div>
             <h5 class="text-l">
-              Pool Address: <bold id="pool-address"> --</bold>
+              Pool Address: <bold> {{ poolAddress }}</bold>
             </h5>
           </div>
           <div class="col-xl-6 order-md-2">
@@ -411,8 +411,8 @@ export default {
     },
 
     async updateInfoEvent() {
-      await this.getLPInfoEvent();
-      await this.getPoolInfoEvent();
+      this.getLPInfoEvent();
+      this.getPoolInfoEvent();
     },
   },
 };

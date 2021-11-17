@@ -37,7 +37,7 @@
           </div>
           <div class="py-3">
             <p class="fw-5 d-g2 fs-16">AMOUNT</p>
-            <input class="fw-4 d-g4 fs-32 ta-c" value="0" style="background-color: #F2F2F2; border-radius: 12px; height: 88px; width: 100%; border-width: 0px; opacity: 0.6"/>
+            <input class="fw-4 d-g4 fs-32 ta-c" value="0" style="background-color: #F2F2F2; border-radius: 12px; height: 88px; width: 100%; border-width: 0px; opacity: 0.6" id = "ticket-amount">
           </div>
         </div>
 
@@ -134,6 +134,7 @@ export default {
       for (var i = 0; i < amount; i++) {
         tickets.push(luckNumber);
       }
+      console.log("xxxxxx");
 
       await this.BuyTicket(tickets);
     },

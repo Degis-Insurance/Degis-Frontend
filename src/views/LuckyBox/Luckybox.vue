@@ -13,7 +13,7 @@
           <h5 class="fw-9 d-g2 fs-24 ma pt-4">IN PRIZES!</h5>
         </div>
         <div class="row row-grid align-items-center">
-          <base-button style="margin: 5% auto; padding: 1% 5%" @click="modals.BuyTickets = true">Buy Tickets</base-button>
+          <base-button style="margin: 5% auto; padding: 1% 5%" @click="modals.BuyTickets = true">Buy Tickets1</base-button>
         </div>
       </div>
     </stats-card>
@@ -391,7 +391,7 @@
 
   <buy-tickets v-model:show="modals.BuyTickets">
     <template v-slot:footer>
-      <base-button style="width: 100%; height: 100%" @click="modals.BuyTickets = false">Buy Tickets</base-button>
+      <base-button style="width: 100%; height: 100%" @click="modals.BuyTickets = false">Buy Tickets2</base-button>
     </template>
   </buy-tickets>
 
@@ -476,6 +476,25 @@ export default {
       },
     };
   },
+
+  computed: {
+    currentAccount() {
+      return this.$store.state.selectedAccount;
+    },
+  },
+
+  watch: {
+    "$store.state.selectedAccount": function (newVal) {
+      this.showLotteryInfoEvent();
+      this.showUserInfoEvent();
+    },
+  },
+
+  mounted() {
+    this.showLotteryInfoEvent();
+    this.showUserInfoEvent();
+  },
+
   methods: {
     timestampToTime(timestamp) {
       let date = new Date(timestamp);
@@ -496,7 +515,7 @@ export default {
       return Y + M + D + h + m + s;
     },
 
-    async ShowLotteryInfo(lotteryId) {
+    async showLotteryInfo(lotteryId) {
       const DegisLottery = await getDegisLottery();
       const account = this.$store.state.selectedAccount;
 
@@ -508,7 +527,7 @@ export default {
       return lotteryDetails;
     },
 
-    async ShowUserInfo(lotteryId) {
+    async showUserInfo(lotteryId) {
       const DegisLottery = await getDegisLottery();
       const account = this.$store.state.selectedAccount;
 
@@ -519,14 +538,14 @@ export default {
       return userTicketInfo;
     },
 
-    async ClaimAllTickets(lotteryId) {
+    async claimAllTickets(lotteryId) {
       const DegisLottery = await getDegisLottery();
       const lotteryDetails = await DegisLottery.methods
         .viewLottery(lotteryId)
         .call();
       const account = this.$store.state.selectedAccount;
       if (lotteryDetails.status == 3) {
-        const tx = await DegisLottery.methods.claimAllTickets(lotteryId).send({
+        const tx = await DegisLottery.methods.ClaimAllTickets(lotteryId).send({
           from: account,
         });
         console.log("Tx Hash:", tx.transactionHash);
@@ -535,7 +554,7 @@ export default {
       }
     },
 
-    async RedeemTicket(ticketIds) {
+    async redeemTicket(ticketIds) {
       const DegisLottery = await getDegisLottery();
       const account = this.$store.state.selectedAccount;
       const tx = await DegisLottery.methods
@@ -544,29 +563,71 @@ export default {
       console.log("Tx Hash:", tx.transactionHash);
     },
 
-    async ShowLotteryInfoEvent() {
+    getExactTime(time) {
+      var date = new Date(time);
+      var year = date.getFullYear() + '-';
+      var month = (date.getMonth()+1 < 10 ? '0' + (date.getMonth()+1) : date.getMonth()+1) + '-';
+      var dates = date.getDate() + ' ';
+      var hour = date.getHours() + ':';
+      var min = date.getMinutes() + ':';
+      var second = date.getSeconds();
+      return year + month + dates + hour + min + second ;
+    },
+
+    int2array(num)
+    {
+      var number = new Array()
+      number[0]=parseInt(Number(num) / 1000) %10
+      number[1]=parseInt(Number(num) / 100) %10
+      number[2]=parseInt(Number(num) / 10) %10
+      number[3]=parseInt(Number(num) / 1) %10
+      return number
+    },
+
+    async showLotteryInfoEvent() {
       var lotteryId = 1;
-      const lotteryDetails = await this.ShowLotteryInfo(lotteryId);
+      const lotteryDetails = await this.showLotteryInfo(lotteryId);
       console.log(lotteryDetails);
-      
-      // TODO 返回所有期，id, 状态，每一期开奖奖池，每一个池子的奖金，中奖数...
+
+      var round = lotteryId;
+      var drawtime = this.getExactTime(Number(lotteryDetails["startTime"]))
+      var prizenumber = this.int2array(lotteryDetails["finalNumber"])
+      var prizepot = (lotteryDetails["amountCollected"] / 1e18).toFixed(2)
+
+      console.log("=====",lotteryDetails["amountCollected"])
+
+      this.roundData= [{
+          round: round,
+          prizenumber: prizenumber,
+          drawtime: drawtime,
+          prizepot: prizepot,
+      }]
     },
 
-    async ShowUserInfoEvent() {
+    async showUserInfoEvent() {
       var lotteryId = 1;
-      const userTicketInfo = await this.ShowUserInfo(lotteryId);
+      const userTicketInfo = await this.showUserInfo(lotteryId);
       console.log(userTicketInfo);
-      // TODO 返回所有期，id, 买入lotteryId， 是否卖出，卖出lotteryId，不同期的获奖情况...
+      this.lotteryData = []
+
+      for(var i=0; i<userTicketInfo[0].length; i++)
+      {
+        var lorreryid = userTicketInfo[0][i]
+        var number = this.int2array(userTicketInfo[1][i])
+        var buylotteryid = 1
+        var isredeemed = "NO"
+        this.lotteryData.push({lorreryid:lorreryid, number:number, buylotteryid:buylotteryid,isredeemed:isredeemed})
+      }
     },
 
-    async ClaimAllTicketsEvent() {
+    async claimAllTicketsEvent() {
       var lotteryId = 1;
-      await this.ClaimAllTickets(lotteryId);
+      await this.claimAllTickets(lotteryId);
     },
 
-    async RedeemTicketEvent() {
+    async redeemTicketEvent() {
       var ticketIds = [3];
-      await this.RedeemTicket(ticketIds);
+      await this.redeemTicket(ticketIds);
     },
   },
 };
