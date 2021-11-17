@@ -38,7 +38,7 @@
         <div class="col-xl-2">
           <p class="fw-7 d-p fs-18" style="color: white">Search</p>
           <div align="right">
-            <base-button style="padding: 13px 46px;">SEARCH</base-button>
+            <base-button style="padding: 13px 46px;" >SEARCH</base-button>
           </div>
         </div>
       </div>
@@ -136,7 +136,7 @@ export default {
       dcoptions: ref([{value: 'City1', label: 'City1',}, {value: 'City2', label: 'City2',}, {value: 'City3', label: 'City3',}]),
       destinationcity: ref(''),
     }
-  }
+  },
 };
 </script>
 

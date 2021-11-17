@@ -286,6 +286,7 @@ export default {
       var lotteryId = 1;
       const lotteryDetails = await this.ShowLotteryInfo(lotteryId);
       console.log(lotteryDetails);
+      
       // TODO 返回所有期，id, 状态，每一期开奖奖池，每一个池子的奖金，中奖数...
     },
 

@@ -22,6 +22,7 @@ yarn-error.log*
 
 *.md
 *.txt
+*.orig
 
 vue.config.js
 yarn.lock

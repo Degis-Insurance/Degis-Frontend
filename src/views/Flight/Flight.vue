@@ -38,7 +38,7 @@
         <div class="col-xl-2">
           <p class="fw-7 d-p fs-18" style="color: white">Search</p>
           <div align="right">
-            <base-button style="padding: 13px 46px;">SEARCH</base-button>
+            <base-button style="padding: 13px 46px;" @click="ShowUserPolicyEvent">SEARCH</base-button>
           </div>
         </div>
       </div>
@@ -150,6 +150,8 @@ export default {
       const policycount = await PolicyFlow.methods
         .getUserPolicyCount(account)
         .call();
+        
+      // findPolicyBuyerById
 
       const userpolicy = await PolicyFlow.methods.viewPolicy(account).call();
 
@@ -190,7 +192,9 @@ export default {
 
     async ShowUserPolicyEvent() {
       const policyinfo = await this.ShowUserPolicy();
-      console.log(policyinfo);
+      
+      console.log("======================");
+      console.log(policyinfo["policycount"]);
     },
 
     async NewPolicyEvent() {
