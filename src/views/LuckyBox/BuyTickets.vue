@@ -54,7 +54,7 @@
               <h4 class="fw-7 d-p fs-24">12.3467</h4>
             </div>
             <div class="col-sm-4 ma" align="center">
-              <base-button style="width: 100%; height: 100%" @click="closeModal">Buy Tickets</base-button>
+              <base-button style="width: 100%; height: 100%" @click="BuyTicketEvent">Buy Tickets</base-button>
             </div>
           </div>
 
@@ -93,10 +93,10 @@ export default {
       const DegisLottery = await getDegisLottery();
       const Degis = await getDegis();
       const account = this.$store.state.selectedAccount;
-      if (tickets.length > 10) {
-        alert("amount must smaller than 10");
-        return;
-      }
+      // if (tickets.length > 10) {
+      //   alert("amount must smaller than 10");
+      //   return;
+      // }
 
       console.log(tickets);
       let newTickets = new Array();
@@ -124,17 +124,18 @@ export default {
 
     async BuyTicketEvent() {
       const luckNumber =
-        this.num[0] * 1000 +
-        this.num[1] * 100 +
-        this.num[2] * 10 +
-        this.num[3] * 1;
+        this.nums[0] * 1000 +
+        this.nums[1] * 100 +
+        this.nums[2] * 10 +
+        this.nums[3] * 1;
 
+      console.log(luckNumber);
       const amount = document.getElementById("ticket-amount").value;
       let tickets = new Array();
       for (var i = 0; i < amount; i++) {
         tickets.push(luckNumber);
       }
-      console.log("xxxxxx");
+      // console.log(tickets);
 
       await this.BuyTicket(tickets);
     },

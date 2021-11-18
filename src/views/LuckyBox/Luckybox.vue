@@ -105,7 +105,7 @@
               </el-table-column>
               <el-table-column prop="action" label="ACTION">
                 <template #default="scope">
-                  <base-button>Refund</base-button>
+                  <base-button @click="redeemTicketEvent">Refund</base-button>
                 </template>
               </el-table-column>
             </el-table>
@@ -128,7 +128,9 @@
 
   <buy-tickets v-model:show="modals.BuyTickets"></buy-tickets>
   <pending-prize v-model:show="modals.PendingPrize"></pending-prize>
-  <lb-details v-model:show="modals.LbDetails" :viewData="viewData"></lb-details>
+  <template v-if="modals.LbDetails">
+    <lb-details v-model:show="modals.LbDetails" :viewData="viewData"></lb-details>
+  </template>
   <winning-rules v-model:show="modals.WinningRules"></winning-rules>
 </template>
 
@@ -159,49 +161,8 @@ export default {
     return {
       num: [3, 5, 6, 7],
       // activeName: 'AllHistory',
-      roundData: [
-        {
-          round: "124",
-          prizenumber: [3, 4, 6, 7],
-          drawtime: "20:00, 15/10/2021",
-          prizepot: "272,786",
-        },
-        {
-          round: "123",
-          prizenumber: [2, 9, 0, 3],
-          drawtime: "20:00, 08/10/2021",
-          prizepot: "112,786",
-        },
-        {
-          round: "122",
-          prizenumber: [4, 9, 1, 0],
-          drawtime: "20:00, 01/10/2021",
-          prizepot: "259,726",
-        },
-      ],
-      lotteryData: [
-        {
-          lorreryid: "0x9547342134",
-          number: [3, 6, 8, 9],
-          buylotteryid: 120,
-          isredeemed: "NO",
-          redeemlotteryid: "",
-        },
-        {
-          lorreryid: "0x3453452435",
-          number: [2, 6, 3, 2],
-          buylotteryid: 110,
-          isredeemed: "NO",
-          redeemlotteryid: "",
-        },
-        {
-          lorreryid: "0x2435453454",
-          number: [3, 7, 2, 5],
-          buylotteryid: 105,
-          isredeemed: "YES",
-          redeemlotteryid: 108,
-        },
-      ],
+      roundData: [ ],
+      lotteryData: [ ],
       modals: {
         BuyTickets: false,
         PendingPrize: false,
@@ -235,24 +196,6 @@ export default {
       this.modals.LbDetails = true;
       this.viewData = val;
     },
-    timestampToTime(timestamp) {
-      let date = new Date(timestamp);
-      var Y, M, D, h, m, s;
-      Y = date.getFullYear() + "-";
-      M =
-        (date.getMonth() + 1 < 10
-          ? "0" + (date.getMonth() + 1)
-          : date.getMonth() + 1) + "-";
-      (D = (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) + " "),
-        (h =
-          (date.getHours() < 10 ? "0" + date.getHours() : date.getHours()) +
-          ":");
-      m =
-        (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()) +
-        ":";
-      s = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
-      return Y + M + D + h + m + s;
-    },
 
     async showLotteryInfo() {
       const DegisLottery = await getDegisLottery();
@@ -275,22 +218,6 @@ export default {
         .call();
 
       return userTicketInfo;
-    },
-
-    async claimAllTickets(lotteryId) {
-      const DegisLottery = await getDegisLottery();
-      const lotteryDetails = await DegisLottery.methods
-        .viewLottery(lotteryId)
-        .call();
-      const account = this.$store.state.selectedAccount;
-      if (lotteryDetails.status == 3) {
-        const tx = await DegisLottery.methods.ClaimAllTickets(lotteryId).send({
-          from: account,
-        });
-        console.log("Tx Hash:", tx.transactionHash);
-      } else {
-        alert("current round not claimable now");
-      }
     },
 
     async redeemTicket(ticketIds) {
@@ -327,11 +254,11 @@ export default {
       this.roundData = []
       const lotteryDetails = await this.showLotteryInfo();
       console.log(lotteryDetails);
-      for(var i=0; i<lotteryDetails.length; i++)
+      for(var i=lotteryDetails.length-1; i>=0; i--)
       {
         var lotteryDetail = lotteryDetails[i];
         var round = lotteryDetail["lotteryId"]
-        var drawtime = this.getExactTime(Number(lotteryDetail["startTime"]))
+        var drawtime = this.getExactTime(Number(lotteryDetail["startTime"])*1000)
         var prizenumber = this.int2array(lotteryDetail["finalNumber"])
         var prizepot = (lotteryDetail["amountCollected"] / 1e18).toFixed(2)
         this.roundData.push({
@@ -361,14 +288,10 @@ export default {
       }
     },
 
-    async claimAllTicketsEvent() {
-      var lotteryId = 1;
-      await this.claimAllTickets(lotteryId);
-    },
-
     async redeemTicketEvent() {
-      var ticketIds = [3];
-      await this.redeemTicket(ticketIds);
+      console.log("===========");
+      // var ticketIds = [3];
+      // await this.redeemTicket(ticketIds);
     },
   },
 };

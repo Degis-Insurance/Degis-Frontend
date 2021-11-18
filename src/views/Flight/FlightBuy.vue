@@ -38,7 +38,7 @@
         <div class="col-xl-2">
           <p class="fw-7 d-p fs-18" style="color: white">Search</p>
           <div align="right">
-            <base-button style="padding: 13px 46px;">SEARCH</base-button>
+            <base-button style="padding: 13px 46px;" @click="NewPolicyEvent">SEARCH</base-button>
           </div>
         </div>
       </div>
@@ -82,9 +82,14 @@
 </template>
 
 <script>
+
 import OrderConfirm from "./OrderConfirm";
 import {ref} from 'vue';
-
+import {
+  getMockUSD,
+  getPolicyFlow,
+  getInsurancePool,
+} from "../../utils/contractInstance";
 export default {
   name: "flight-buy",
   components: {
@@ -141,9 +146,72 @@ export default {
       console.log(val);
       this.BuyProduction = true;
 
-    }
+    },
+    async ShowUserPolicy() {
+      const PolicyFlow = await getPolicyFlow();
+      const account = this.$store.state.selectedAccount;
+
+      const policycount = await PolicyFlow.methods
+        .getUserPolicyCount(account)
+        .call();
+        
+      // findPolicyBuyerById
+
+      const userpolicy = await PolicyFlow.methods.viewPolicy(account).call();
+
+      return { policycount: policycount, userpolicy: userpolicy };
+    },
+
+    async NewPolicy(premium, payoff, flight_number, timestamp1) {
+      const PolicyFlow = await getPolicyFlow();
+      const MockUSD = await getMockUSD();
+      const InsurancePool = await getInsurancePool();
+      const account = this.$store.state.selectedAccount;
+
+      var timestamp2 = timestamp1 + 300; // 飞行时间5min
+
+      console.log(flight_number, timestamp1);
+
+      const tx1 = await MockUSD.methods
+        .approve(InsurancePool.options.address, window.WEB3.utils.toBN(premium))
+        .send({ from: account });
+
+      console.log("Tx Hash:", tx1.transactionHash);
+
+      const tx2 = await PolicyFlow.methods
+        .newApplication(
+          account,
+          0,
+          flight_number,
+          window.WEB3.utils.toBN(premium),
+          window.WEB3.utils.toBN(payoff),
+          timestamp1,
+          timestamp2
+        )
+        .send({ from: account });
+      console.log("Tx Hash:", tx2.transactionHash);
+      console.log(tx2);
+      console.log("policy Id:", tx2.logs[0].args[0]);
+    },
+
+    async ShowUserPolicyEvent() {
+      const policyinfo = await this.ShowUserPolicy();
+      
+      console.log("======================");
+      console.log(policyinfo);
+    },
+
+    async NewPolicyEvent() {
+      const premium = 1111;
+      const payoff = 111;
+      const flight_number = "WN186";
+      const timestamp1 = 1636189973;
+
+      await this.NewPolicy(premium, payoff, flight_number, timestamp1);
+    },
   },
 };
+
 </script>
 
 <style scoped>

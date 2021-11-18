@@ -37,25 +37,25 @@
               </div>
               <div class="col-lg-2">
                 <h4 class="fw-5 d-g4 fs-14">Match First 1</h4>
-                <h4 class="fw-7 d-p fs-20">${{prizeDetail.match1.totalMoney}}</h4>
+                <h4 class="fw-7 d-p fs-20">${{ prizeDetail.match1.totalMoney }}</h4>
                 <h4 class="fw-5 d-g1 fs-14">${{ prizeDetail.match1.eachMoney }} each</h4>
                 <h4 class="fw-5 d-g4 fs-14">{{ prizeDetail.match1.winnerNumber }} Winners</h4>
               </div>
               <div class="col-lg-2">
                 <h4 class="fw-5 d-g4 fs-14">Match First 2</h4>
-                <h4 class="fw-7 d-p fs-20">${{prizeDetail.match2.totalMoney}}</h4>
+                <h4 class="fw-7 d-p fs-20">${{ prizeDetail.match2.totalMoney }}</h4>
                 <h4 class="fw-5 d-g1 fs-14">${{ prizeDetail.match2.eachMoney }} each</h4>
                 <h4 class="fw-5 d-g4 fs-14">{{ prizeDetail.match2.winnerNumber }} Winners</h4>
               </div>
               <div class="col-lg-2">
                 <h4 class="fw-5 d-g4 fs-14">Match First 3</h4>
-                <h4 class="fw-7 d-p fs-20">${{prizeDetail.match3.totalMoney}}</h4>
+                <h4 class="fw-7 d-p fs-20">${{ prizeDetail.match3.totalMoney }}</h4>
                 <h4 class="fw-5 d-g1 fs-14">${{ prizeDetail.match3.eachMoney }} each</h4>
                 <h4 class="fw-5 d-g4 fs-14">{{ prizeDetail.match3.winnerNumber }} Winners</h4>
               </div>
               <div class="col-lg-2">
                 <h4 class="fw-5 d-g4 fs-14">Match First 4</h4>
-                <h4 class="fw-7 d-p fs-20">${{prizeDetail.match4.totalMoney}}</h4>
+                <h4 class="fw-7 d-p fs-20">${{ prizeDetail.match4.totalMoney }}</h4>
                 <h4 class="fw-5 d-g1 fs-14">${{ prizeDetail.match4.eachMoney }} each</h4>
                 <h4 class="fw-5 d-g4 fs-14">{{ prizeDetail.match4.winnerNumber }} Winners</h4>
               </div>
@@ -71,7 +71,7 @@
             <p class="fw-7 d-g1 fs-16" style="margin: auto 0">My Tickets</p>
             <div class="d-flex">
               <p class="fw-7 d-p fs-24 ma pr-4">Totally ${{userPrize}}</p>
-              <base-button @click="showUserInfoEvent">GET PRIZE</base-button>
+              <base-button @click="claimAllTicketsEvent">GET PRIZE</base-button>
             </div>
 
           </div>
@@ -99,6 +99,8 @@
   </div>
 </template>
 <script>
+
+import {onMounted} from "vue";
 import {
   getMockUSD,
   getDegis,
@@ -106,41 +108,31 @@ import {
 } from "../../utils/contractInstance";
 export default {
   name: "lb-details",
-
+  components: {},
   data() {
     return {
-      userPrize: 0,
-      prizeData: [
-        {
-          lorreryid: "0x9547342134",
-          number: [3, 6, 8, 9],
-          lotteryrewards: 120,
-        },
-        {
-          lorreryid: "0x3453452435",
-          number: [2, 6, 3, 2],
-          lotteryrewards: 40,
-        }],
+      userPrize: "--",
+      prizeData: [ ],
       prizeDetail: {
         match1: {
-          totalMoney: 1517,
-          eachMoney: 32.85,
-          winnerNumber: 426,
+          totalMoney: "--",
+          eachMoney: "--",
+          winnerNumber: "--",
         },
         match2: {
-          totalMoney: 6575,
-          eachMoney: 185.34,
-          winnerNumber: 32,
+          totalMoney: "--",
+          eachMoney: "--",
+          winnerNumber: "--",
         },
         match3: {
-          totalMoney: 9575,
-          eachMoney: 443.85,
-          winnerNumber: 5,
+          totalMoney: "--",
+          eachMoney: "--",
+          winnerNumber: "--",
         },
         match4: {
-          totalMoney: 12575,
-          eachMoney: 3264.85,
-          winnerNumber: 0,
+          totalMoney: "--",
+          eachMoney: "--",
+          winnerNumber: "--",
         },
       },
     };
@@ -174,6 +166,22 @@ export default {
         .call({ from: account });
 
       return userTicketInfo;
+    },
+
+    async claimAllTickets(lotteryId) {
+      const DegisLottery = await getDegisLottery();
+      const lotteryDetails = await DegisLottery.methods
+        .viewLottery(lotteryId)
+        .call();
+      const account = this.$store.state.selectedAccount;
+      if (lotteryDetails.status == 3) {
+        const tx = await DegisLottery.methods.claimAllTickets(lotteryId).send({
+          from: account,
+        });
+        console.log("Tx Hash:", tx.transactionHash);
+      } else {
+        alert("current round not claimable now");
+      }
     },
 
     async showLotteryInfoEvent() {
@@ -217,6 +225,17 @@ export default {
         this.prizeData.push({lorreryid:lorreryid,number:number,lotteryrewards:lotteryrewards})
       }
     },
+
+    async claimAllTicketsEvent() {
+      var lotteryId = this.viewData.round
+      await this.claimAllTickets(lotteryId);
+      this.showUserInfoEvent();
+    }
+  },
+  created() {
+    this.showUserInfoEvent();
+    this.showLotteryInfoEvent();
+    console.log("点击view按键之后开始创建LbDetails组件");
   },
   watch: {
     show(val) {
