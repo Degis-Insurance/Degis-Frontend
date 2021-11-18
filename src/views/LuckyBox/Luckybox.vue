@@ -43,7 +43,7 @@
               </el-table-column>
               <el-table-column prop="prizenumber" label="PRIZE NUMBER">
                 <template #default="scope">
-                  <img v-for="num in scope.row.prizenumber" :src="'img/luckybox/num-'+ num +'.png'" style="max-width: 44px; max-height: 44px;"/>
+                  <img v-for="num in scope.row.prizenumber" :src="'img/luckybox/num-'+ num +'.png'" style="max-width: 44px; max-height: 44px;" :key="num"/>
                 </template>
               </el-table-column>
               <el-table-column prop="drawtime" label="DRAW TIME">
@@ -78,14 +78,14 @@
           <el-tab-pane>
             <template #label><p class="fw-7 d-g3 fs-16">MY LOTTERY</p></template>
             <el-table :data="lotteryData" class="dg-cardtable" header-cell-style="text-align: center; height: 70px" cell-style="text-align: center; height: 70px">
-              <el-table-column prop="lorreryid" label="LOTTERY ID">
+              <el-table-column prop="lotteryid" label="LOTTERY ID">
                 <template #default="scope">
-                  <p class="fw-7 d-g1 fs-16 ma">{{ scope.row.lorreryid }}</p>
+                  <p class="fw-7 d-g1 fs-16 ma">{{ scope.row.lotteryid }}</p>
                 </template>
               </el-table-column>
               <el-table-column prop="number" label="LOTTERY NUMBER">
                 <template #default="scope">
-                  <img v-for="num in scope.row.number" :src="'img/luckybox/num-'+ num +'.png'" style="max-width: 44px; max-height: 44px;"/>
+                  <img v-for="num in scope.row.number" :src="'img/luckybox/num-'+ num +'.png'" style="max-width: 44px; max-height: 44px;" :key="num"/>
                 </template>
               </el-table-column>
               <el-table-column prop="buylotteryid" label="BUY LOTTERY ID">
@@ -105,7 +105,7 @@
               </el-table-column>
               <el-table-column prop="action" label="ACTION">
                 <template #default="scope">
-                  <base-button>Refund</base-button>
+                  <base-button @click="refundno(scope.row)">Refund</base-button>
                 </template>
               </el-table-column>
             </el-table>
@@ -131,6 +131,9 @@
   <template v-if="modals.LbDetails">
     <lb-details v-model:show="modals.LbDetails" :viewData="viewData"></lb-details>
   </template>
+    <template v-if="modals.RefundConfirm">
+    <refund-confirm v-model:show="modals.RefundConfirm" :refundData="refundData"></refund-confirm>
+  </template>
   <winning-rules v-model:show="modals.WinningRules"></winning-rules>
 </template>
 
@@ -141,10 +144,12 @@ import LbDetails from "./LbDetails";
 import WinningRules from "./WinningRules";
 import BaseButton from "../../components/BaseButton";
 import StatsCard from "../../components/StatsCard";
+import RefundConfirm from "./RefundConfirm";
 
 export default {
   name: "luckybox",
   components: {
+    RefundConfirm,
     StatsCard,
     BaseButton,
     BuyTickets,
@@ -178,21 +183,21 @@ export default {
       ],
       lotteryData: [
         {
-          lorreryid: "0x9547342134",
+          lotteryid: "0x9547342134",
           number: [3, 6, 8, 9],
           buylotteryid: 120,
           isredeemed: "NO",
           redeemlotteryid: "",
         },
         {
-          lorreryid: "0x3453452435",
+          lotteryid: "0x3453452435",
           number: [2, 6, 3, 2],
           buylotteryid: 110,
           isredeemed: "NO",
           redeemlotteryid: "",
         },
         {
-          lorreryid: "0x2435453454",
+          lotteryid: "0x2435453454",
           number: [3, 7, 2, 5],
           buylotteryid: 105,
           isredeemed: "YES",
@@ -204,16 +209,22 @@ export default {
         PendingPrize: false,
         LbDetails: false,
         WinningRules: false,
+        RefundConfirm: false,
       },
       viewData: {},
+      refundData: {},
     };
   },
   methods: {
     viewno(val) {
       this.viewData = val;
       this.modals.LbDetails = true;
-    }
-  }
+    },
+    refundno(refundData) {
+      this.refundData = refundData;
+      this.modals.RefundConfirm = true;
+    },
+  },
 };
 </script>
 
