@@ -17,33 +17,33 @@
             <div class="d-flex pb-5">
               <img src="img/function/flight-comp.png" style="width: 88px; height: 88px"/>
               <div>
-                <p class="fw-4 d-g1 fs-20 pl-3 pt-2">Norwegian</p>
-                <p class="fw-4 d-g3 fs-14 pl-3">CCA1835</p>
+                <p class="fw-4 d-g1 fs-20 pl-3 pt-2">{{ buyData.airline }}</p>
+                <p class="fw-4 d-g3 fs-14 pl-3">{{ buyData.flightno }}</p>
               </div>
             </div>
             <img src="img/function/flight-info.png" class="pb-4" style="width: 100%;"/>
             <div class="d-flex justify-content-between">
-              <p class="fw-4 d-p fs-32">ABC</p>
+              <p class="fw-4 d-p fs-32">{{ buyData.route.split('-')[0] }}</p>
               <p class="fw-4 d-g3 fs-16 pt-3">5h 25m</p>
-              <p class="fw-4 d-p fs-32">CBA</p>
+              <p class="fw-4 d-p fs-32">{{ buyData.route.split('-')[1] }}</p>
             </div>
 
             <div class="d-flex justify-content-between">
-              <p class="fw-4 d-g3 fs-14">Copenhagen, Denmark</p>
-              <p class="fw-4 d-g3 fs-14">Oclo, Norway</p>
+              <p class="fw-4 d-g3 fs-14">Depart Time</p>
+              <p class="fw-4 d-g3 fs-14">{{ buyData.departtime }}</p>
             </div>
             <div class="d-flex justify-content-between">
-              <p class="fw-4 d-g3 fs-14">Thu 15 Oct</p>
-              <p class="fw-4 d-g3 fs-14">Fri 16 Oct</p>
+              <p class="fw-4 d-g3 fs-14">Arrive Time</p>
+              <p class="fw-4 d-g3 fs-14">{{ buyData.arrivetime }}</p>
             </div>
             <div class="d-flex justify-content-between">
-              <p class="fw-4 d-g3 fs-14">23:45</p>
-              <p class="fw-4 d-g3 fs-14">04:30</p>
+              <p class="fw-4 d-g3 fs-14">Premium</p>
+              <p class="fw-4 d-g3 fs-14">{{ buyData.premium }}</p>
             </div>
-            <div class="d-flex justify-content-between">
-              <p class="fw-4 d-g3 fs-14">Terminal 1</p>
-              <p class="fw-4 d-g3 fs-14">Terminal 1</p>
-            </div>
+<!--            <div class="d-flex justify-content-between">-->
+<!--              <p class="fw-4 d-g3 fs-14">Terminal 1</p>-->
+<!--              <p class="fw-4 d-g3 fs-14">Terminal 1</p>-->
+<!--            </div>-->
 
             <!--                <img src="img/function/flight-info2.png" class="pt-4" style="width: 100%;"/>-->
 
@@ -72,35 +72,7 @@
               </div>
             </div>
           </div>
-
         </div>
-
-        <!--        <img src="img/luckybox/modal-split.png" class="mb-3" style="height: 1px;">-->
-
-        <!--        <div class="modal-footer pt-4 pl-2 pb-5" style="display: block">-->
-        <!--          <div class="row">-->
-        <!--            <div class="col-xl-7" style="padding-right: 8%">-->
-        <!--              <p class="fw-5 d-g4 fs-14">Payout Mechanism</p>-->
-        <!--              <img src="img/function/flight-pm.png" style="width: 100%"/>-->
-        <!--            </div>-->
-        <!--            <div class="col-xl-5" style="padding: 0 3%">-->
-        <!--              <div class="row">-->
-        <!--                <div class="col-6">-->
-        <!--                  <p class="fw-5 d-g4 fs-14">Premium</p>-->
-        <!--                  <p class="fw-7 d-p fs-24">12.3467</p>-->
-        <!--                </div>-->
-        <!--                <div class="col-6">-->
-        <!--                  <p class="fw-5 d-g4 fs-14">Maximum</p>-->
-        <!--                  <p class="fw-7 d-p fs-24">19.2824</p>-->
-        <!--                </div>-->
-        <!--              </div>-->
-
-
-        <!--              <slot name="footer"></slot>-->
-        <!--            </div>-->
-        <!--          </div>-->
-        <!--        </div>-->
-
       </div>
     </div>
   </div>
@@ -112,6 +84,7 @@ export default {
   components: {},
   props: {
     show: Boolean,
+    buyData: Object,
   },
   methods: {
     closeModal() {

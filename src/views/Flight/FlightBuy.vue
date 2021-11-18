@@ -45,7 +45,7 @@
     </stats-card>
 
     <el-card class="dg-card">
-      <el-table :data="flightData" class="dg-cardtable" header-cell-style="text-align: center; height: 70px" cell-style="text-align: center; height: 70px">
+      <el-table :data="flightData" class="dg-cardtable" :header-cell-style="{'text-align': 'center', 'height': '70px'}" :cell-style="{'text-align': 'center', 'height': '70px'}">
         <el-table-column prop="airline" label="AIRLINE" sortable/>
         <el-table-column prop="flightno" label="FLIGHT NO." sortable/>
         <el-table-column prop="route" label="ROUTE" sortable/>
@@ -59,24 +59,12 @@
         </el-table-column>
       </el-table>
       <div class="demo-pagination-block pt-4 pb-2" align="right">
-        <el-pagination
-            :currentPage="12"
-            :page-size="1"
-            layout="prev, pager, next, jumper"
-            :total="12"
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
-        >
-        </el-pagination>
+<!--        <el-pagination :currentPage="12" :page-size="1" layout="prev, pager, next, jumper" :total="12" @size-change="handleSizeChange" @current-change="handleCurrentChange"/>-->
+        <el-pagination :currentPage="12" :page-size="1" layout="prev, pager, next, jumper" :total="12"/>
       </div>
     </el-card>
 
-
-    <order-confirm v-model:show="BuyProduction">
-      <template v-slot:footer>
-        <base-button style="width: 100%; margin-top: 16%" @click="BuyProduction = false">CONFIRM</base-button>
-      </template>
-    </order-confirm>
+    <order-confirm v-model:show="BuyProduction" :buyData="buyData"/>
 
   </base-header>
 </template>
@@ -134,13 +122,13 @@ export default {
       origincity: ref(''),
       dcoptions: ref([{value: 'City1', label: 'City1',}, {value: 'City2', label: 'City2',}, {value: 'City3', label: 'City3',}]),
       destinationcity: ref(''),
+      buyData: {},
     }
   },
   methods: {
     actionbuy(val) {
-      console.log(val);
+      this.buyData = val;
       this.BuyProduction = true;
-
     }
   },
 };

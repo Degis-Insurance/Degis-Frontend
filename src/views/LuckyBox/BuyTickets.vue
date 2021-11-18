@@ -16,24 +16,7 @@
         <div class="modal-body">
           <div class="py-3">
             <p class="fw-5 d-g2 fs-16">SELECT YOUR NUMBERS</p>
-            <div style="background-color: #F2F2F2; border-radius: 12px; height: 88px">
-              <div class="row">
-                <div class="col-xl-3"></div>
-                <div class="col-xl-6 d-flex justify-content-between">
-                  <ball-select :ball-number="nums[0]"></ball-select>
-                  <ball-select :ball-number="nums[1]"></ball-select>
-                  <ball-select :ball-number="nums[2]"></ball-select>
-                  <ball-select :ball-number="nums[3]"></ball-select>
-                  <!--                  <img :src="'img/luckybox/num-'+num[0]+'.png'" style="max-width: 65px; max-height: 66px; margin-top: 11px">-->
-                  <!--                  <img :src="'img/luckybox/num-'+num[1]+'.png'" style="max-width: 65px; max-height: 66px; margin-top: 11px">-->
-                  <!--                  <img :src="'img/luckybox/num-'+num[2]+'.png'" style="max-width: 65px; max-height: 66px; margin-top: 11px">-->
-                  <!--                  <img :src="'img/luckybox/num-'+num[3]+'.png'" style="max-width: 65px; max-height: 66px; margin-top: 11px">-->
-                </div>
-<!--                <div class="col-xl-3">-->
-<!--                  <p class="fw-7 d-p fs-18" style="line-height: 88px; text-align: center; cursor: pointer" @click="randomNumber">RANDOM</p>-->
-<!--                </div>-->
-              </div>
-            </div>
+            <ball-select :getBall="getBall"/>
           </div>
           <div class="py-3">
             <p class="fw-5 d-g2 fs-16">AMOUNT</p>
@@ -54,7 +37,7 @@
               <h4 class="fw-7 d-p fs-24">12.3467</h4>
             </div>
             <div class="col-sm-4 ma" align="center">
-              <base-button style="width: 100%; height: 100%" @click="closeModal">Buy Tickets</base-button>
+              <base-button style="width: 100%; height: 100%" @click="buyTickets">Buy Tickets</base-button>
             </div>
           </div>
 
@@ -73,8 +56,7 @@ export default {
   },
   data() {
     return {
-      nums: [3, 4, 6, 7],
-      test: 5,
+      buyNum: [],
     }
   },
   props: {
@@ -85,9 +67,13 @@ export default {
       this.$emit("update:show", false);
       this.$emit("close");
     },
-    randomNumber() {
-      this.num = [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)]
-    }
+    buyTickets() {
+      this.closeModal();
+      console.log("点击buy tickets买票，号码是", this.buyNum);
+    },
+    getBall(ballNum) {
+      this.buyNum = ballNum;
+    },
   },
   watch: {
     show(val) {
