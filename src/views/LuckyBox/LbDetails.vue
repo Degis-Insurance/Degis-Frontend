@@ -24,7 +24,7 @@
               <div class="row">
                 <div class="col-xl-3"></div>
                 <div class="col-xl-6 d-flex justify-content-between">
-                  <img v-for="num in this.viewData.prizenumber" :src="'img/luckybox/num-'+ num +'.png'" style="max-width: 65px; max-height: 66px; margin-top: 11px"/>
+                  <img v-for="num in this.viewData.prizenumber" :src="'img/luckybox/num-'+ num +'.png'" style="max-width: 65px; max-height: 66px; margin-top: 11px" :key="num"/>
                 </div>
                 <div class="col-xl-3"></div>
               </div>
@@ -76,15 +76,15 @@
 
           </div>
 
-          <el-table :data="prizeData" class="" header-cell-style="text-align: center; height: 70px" cell-style="text-align: center; height: 70px">
+          <el-table :data="prizeData" :header-cell-style="{'text-align': 'center', 'height': '70px'}" :cell-style="{'text-align': 'center', 'height': '70px'}">
             <el-table-column prop="lotteryid" label="LOTTERY ID" sortable>
               <template #default="scope">
-                <p class="fw-7 d-g1 fs-16 ma">{{ scope.row.lorreryid }}</p>
+                <p class="fw-7 d-g1 fs-16 ma">{{ scope.row.lotteryid }}</p>
               </template>
             </el-table-column>
             <el-table-column prop="lotterynumber" label="LOTTERY NUMBERS" sortable>
               <template #default="scope">
-                <img v-for="num in scope.row.number" :src="'img/luckybox/num-'+ num +'.png'" style="max-width: 44px; max-height: 44px;"/>
+                <img v-for="num in scope.row.number" :src="'img/luckybox/num-'+ num +'.png'" style="max-width: 44px; max-height: 44px;" :key="num"/>
               </template>
             </el-table-column>
             <el-table-column prop="lotteryrewards" label="LOTTERY REWARDS" sortable>
@@ -98,6 +98,7 @@
     </div>
   </div>
 </template>
+
 <script>
 
 import {onMounted} from "vue";
