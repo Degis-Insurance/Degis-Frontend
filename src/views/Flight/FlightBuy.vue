@@ -38,7 +38,7 @@
         <div class="col-xl-2">
           <p class="fw-7 d-p fs-18" style="color: white">Search</p>
           <div align="right">
-            <base-button style="padding: 13px 46px;" @click="NewPolicyEvent">SEARCH</base-button>
+            <base-button style="padding: 13px 46px;" @click="mainFlight">SEARCH</base-button>
           </div>
         </div>
       </div>
@@ -139,13 +139,14 @@ export default {
       origincity: ref(''),
       dcoptions: ref([{value: 'City1', label: 'City1',}, {value: 'City2', label: 'City2',}, {value: 'City3', label: 'City3',}]),
       destinationcity: ref(''),
+      val: {},
     }
   },
   methods: {
     actionbuy(val) {
       console.log(val);
+      this.val = val;
       this.BuyProduction = true;
-
     },
     async ShowUserPolicy() {
       const PolicyFlow = await getPolicyFlow();
@@ -194,6 +195,22 @@ export default {
       console.log("policy Id:", tx2.logs[0].args[0]);
     },
 
+    async mainFlight() {
+      var httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
+      var url = "http://39.101.132.228:8000/live/AQ1299/date=20211120"
+
+      // httpRequest.withCredentials=true; 
+      httpRequest.open('GET', url, true);
+      httpRequest.send();
+      httpRequest.onreadystatechange = function () {
+          if (httpRequest.readyState == 4 && httpRequest.status == 200) {
+              var json = httpRequest.responseText;//获取到json字符串，还需解析
+              console.log(json);
+          }
+      };
+
+    },
+
     async ShowUserPolicyEvent() {
       const policyinfo = await this.ShowUserPolicy();
       
@@ -205,9 +222,9 @@ export default {
       const premium = 1111;
       const payoff = 111;
       const flight_number = "WN186";
-      const timestamp1 = 1636189973;
+      const timestamp = 1636189973;
 
-      await this.NewPolicy(premium, payoff, flight_number, timestamp1);
+      await this.NewPolicy(premium, payoff, flight_number, timestamp);
     },
   },
 };

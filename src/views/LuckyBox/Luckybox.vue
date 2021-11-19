@@ -204,9 +204,12 @@ export default {
       this.modals.LbDetails = true;
       this.viewData = val;
     },
-    refundno(refundData) {
+    async refundno(refundData) {
       this.refundData = refundData;
-      this.modals.RefundConfirm = true;
+      console.log(this.refundData["lotteryid"])
+      await this.redeemTicketEvent([this.refundData["lotteryid"]])
+      await this.showUserInfoEvent()
+      //this.modals.RefundConfirm = true;
     },
 
     async showLotteryInfo() {
@@ -290,20 +293,18 @@ export default {
 
       for(var i=0; i<userTicketInfo[0].length; i++)
       {
-        var lorreryid = userTicketInfo[0][i]
+        var lotteryid = userTicketInfo[0][i]
         var number = this.int2array(userTicketInfo[1][i]["number"])
         var buylotteryid = userTicketInfo[1][i]["buyLotteryId"]
         var isredeemed = userTicketInfo[1][i]["isRedeemed"]
         var redeemlotteryid = userTicketInfo[1][i]["redeemLotteryId"]
 
-        this.lotteryData.push({lorreryid:lorreryid, number:number, buylotteryid:buylotteryid,isredeemed:isredeemed,redeemlotteryid:redeemlotteryid})
+        this.lotteryData.push({lotteryid:lotteryid, number:number, buylotteryid:buylotteryid,isredeemed:isredeemed,redeemlotteryid:redeemlotteryid})
       }
     },
 
-    async redeemTicketEvent() {
-      console.log("===========");
-      // var ticketIds = [3];
-      // await this.redeemTicket(ticketIds);
+    async redeemTicketEvent(ticketIds) {
+      await this.redeemTicket(ticketIds);
     },
   },
 };

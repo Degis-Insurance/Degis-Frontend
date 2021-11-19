@@ -115,6 +115,7 @@ export default {
   },
   methods: {
     closeModal() {
+      console.log(this.val)
       this.$emit("update:show", false);
       this.$emit("close");
     },
