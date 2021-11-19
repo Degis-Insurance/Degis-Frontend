@@ -7,8 +7,8 @@
           <div class="d-flex pb-5">
             <img src="img/function/flight-comp.png" style="width: 88px; height: 88px"/>
             <div>
-              <p class="fw-4 d-g1 fs-20 pl-3 pt-2">Norwegian</p>
-              <p class="fw-4 d-g3 fs-14 pl-3">CCA1835</p>
+              <p class="fw-4 d-g1 fs-20 pl-3 pt-2">{{ buyData.airline }}</p>
+              <p class="fw-4 d-g3 fs-14 pl-3">{{ buyData.flightno }}</p>
             </div>
           </div>
           <img src="img/function/flight-info.png" class="pb-4" style="width: 100%;"/>
@@ -78,16 +78,12 @@ export default {
   components: {
     OrderConfirm,
   },
+  props: {
+    buyData: Object,
+  },
   data() {
     return {
       BuyProduction: false,
-      datevalue: '',
-      flightoptions: ref([{value: 'FlightNo1', label: 'FlightNo1',}, {value: 'FlightNo2', label: 'FlightNo2',}, {value: 'FlightNo3', label: 'FlightNo3',},]),
-      flightno: ref(''),
-      ocoptions: ref([{value: 'City1', label: 'City1',}, {value: 'City2', label: 'City2',}, {value: 'City3', label: 'City3',}]),
-      origincity: ref(''),
-      dcoptions: ref([{value: 'City1', label: 'City1',}, {value: 'City2', label: 'City2',}, {value: 'City3', label: 'City3',}]),
-      destinationcity: ref(''),
     }
   }
 };

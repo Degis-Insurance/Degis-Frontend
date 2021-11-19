@@ -7,7 +7,7 @@
 
         <el-tab-pane label="Policies I Created">
           <template #label><p class="fw-7 d-g3 fs-16">Policies I Created</p></template>
-          <el-table :data="tableData" class="dg-cardtable" header-cell-style="text-align: center; height: 70px" cell-style="text-align: center; height: 70px">
+          <el-table :data="tableData" class="dg-cardtable" :header-cell-style="{'text-align': 'center', 'height': '70px'}" :cell-style="{'text-align': 'center', 'height': '70px'}">
             <el-table-column prop="airline" label="AIRLINE" sortable/>
             <el-table-column prop="flightno" label="FLIGHT NO." sortable/>
             <el-table-column prop="route" label="ROUTE" sortable/>
@@ -19,7 +19,7 @@
         </el-tab-pane>
         <el-tab-pane>
           <template #label><p class="fw-7 d-g3 fs-16">Bought</p></template>
-          <el-table :data="tableData" class="dg-cardtable" header-cell-style="text-align: center; height: 70px" cell-style="text-align: center; height: 70px">
+          <el-table :data="tableData" class="dg-cardtable" :header-cell-style="{'text-align': 'center', 'height': '70px'}" :cell-style="{'text-align': 'center', 'height': '70px'}">
             <el-table-column prop="airline" label="AIRLINE" sortable/>
             <el-table-column prop="flightno" label="FLIGHT NO." sortable/>
             <el-table-column prop="route" label="ROUTE" sortable/>
@@ -31,7 +31,7 @@
 
         <el-tab-pane>
           <template #label><p class="fw-7 d-g3 fs-16">SOLD</p></template>
-          <el-table :data="tableData" class="dg-cardtable" header-cell-style="text-align: center; height: 70px" cell-style="text-align: center; height: 70px">
+          <el-table :data="tableData" class="dg-cardtable" :header-cell-style="{'text-align': 'center', 'height': '70px'}" :cell-style="{'text-align': 'center', 'height': '70px'}">
             <el-table-column prop="airline" label="AIRLINE" sortable/>
             <el-table-column prop="flightno" label="FLIGHT NO." sortable/>
             <el-table-column prop="route" label="ROUTE" sortable/>
@@ -42,7 +42,7 @@
         </el-tab-pane>
         <el-tab-pane>
           <template #label><p class="fw-7 d-g3 fs-16">My Provision</p></template>
-          <el-table :data="tableData" class="dg-cardtable" header-cell-style="text-align: center; height: 70px" cell-style="text-align: center; height: 70px">
+          <el-table :data="tableData" class="dg-cardtable" :header-cell-style="{'text-align': 'center', 'height': '70px'}" :cell-style="{'text-align': 'center', 'height': '70px'}">
             <el-table-column prop="airline" label="AIRLINE" sortable/>
             <el-table-column prop="flightno" label="FLIGHT NO." sortable/>
             <el-table-column prop="route" label="ROUTE" sortable/>

@@ -35,7 +35,7 @@
         <el-tabs type="" :stretch="true">
           <el-tab-pane>
             <template #label><p class="fw-7 d-g3 fs-16">ALL LOTTERY ROUND</p></template>
-            <el-table :data="roundData" class="dg-cardtable" header-cell-style="text-align: center; height: 70px" cell-style="text-align: center; height: 70px">
+            <el-table :data="roundData" class="dg-cardtable" :header-cell-style="{'text-align': 'center', 'height': '70px'}" :cell-style="{'text-align': 'center', 'height': '70px'}">
               <el-table-column prop="round" label="ROUND NO.">
                 <template #default="scope">
                   <p class="fw-7 d-g1 fs-16 ma"># {{ scope.row.round }}</p>
@@ -63,21 +63,14 @@
               </el-table-column>
             </el-table>
             <div class="demo-pagination-block pt-4 pb-2" align="right">
-              <el-pagination
-                  :currentPage="12"
-                  :page-size="1"
-                  layout="prev, pager, next, jumper"
-                  :total="12"
-                  @size-change="handleSizeChange"
-                  @current-change="handleCurrentChange"
-              >
-              </el-pagination>
+              <!--              <el-pagination :currentPage="1" :page-size="1" layout="prev, pager, next, jumper" :total="1" @size-change="handleSizeChange" @current-change="handleCurrentChange"/>-->
+              <el-pagination :currentPage="1" :page-size="1" layout="prev, pager, next, jumper" :total="1"/>
             </div>
           </el-tab-pane>
 
           <el-tab-pane>
             <template #label><p class="fw-7 d-g3 fs-16">MY LOTTERY</p></template>
-            <el-table :data="lotteryData" class="dg-cardtable" header-cell-style="text-align: center; height: 70px" cell-style="text-align: center; height: 70px">
+            <el-table :data="lotteryData" class="dg-cardtable" :header-cell-style="{'text-align': 'center', 'height': '70px'}" :cell-style="{'text-align': 'center', 'height': '70px'}">
               <el-table-column prop="lotteryid" label="LOTTERY ID">
                 <template #default="scope">
                   <p class="fw-7 d-g1 fs-16 ma">{{ scope.row.lotteryid }}</p>
@@ -110,15 +103,8 @@
               </el-table-column>
             </el-table>
             <div class="demo-pagination-block pt-4 pb-2" align="right">
-              <el-pagination
-                  :currentPage="1"
-                  :page-size="1"
-                  layout="prev, pager, next, jumper"
-                  :total="1"
-                  @size-change="handleSizeChange"
-                  @current-change="handleCurrentChange"
-              >
-              </el-pagination>
+              <!--              <el-pagination :currentPage="1" :page-size="1" layout="prev, pager, next, jumper" :total="1" @size-change="handleSizeChange" @current-change="handleCurrentChange"/>-->
+              <el-pagination :currentPage="1" :page-size="1" layout="prev, pager, next, jumper" :total="1"/>
             </div>
           </el-tab-pane>
         </el-tabs>
@@ -126,12 +112,14 @@
     </el-card>
   </base-header>
 
-  <buy-tickets v-model:show="modals.BuyTickets"></buy-tickets>
+  <template v-if="modals.BuyTickets">
+    <buy-tickets v-model:show="modals.BuyTickets"></buy-tickets>
+  </template>
   <pending-prize v-model:show="modals.PendingPrize"></pending-prize>
   <template v-if="modals.LbDetails">
     <lb-details v-model:show="modals.LbDetails" :viewData="viewData"></lb-details>
   </template>
-    <template v-if="modals.RefundConfirm">
+  <template v-if="modals.RefundConfirm">
     <refund-confirm v-model:show="modals.RefundConfirm" :refundData="refundData"></refund-confirm>
   </template>
   <winning-rules v-model:show="modals.WinningRules"></winning-rules>

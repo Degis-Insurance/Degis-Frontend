@@ -38,7 +38,7 @@
         </div>
       </div>
     </stats-card>
-    <el-table :data="tableData" class="dg-table" header-cell-style="text-align: center; height: 70px" cell-style="text-align: center; height: 70px">
+    <el-table :data="tableData" class="dg-table" :header-cell-style="{'text-align': 'center', 'height': '70px'}" :cell-style="{'text-align': 'center', 'height': '70px'}">
       <el-table-column prop="airline" label="AIRLINE" sortable/>
       <el-table-column prop="flightno" label="FLIGHT NO." sortable/>
       <el-table-column prop="route" label="ROUTE" sortable/>

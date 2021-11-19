@@ -65,7 +65,8 @@ export default {
       this.$emit("close");
     },
     refund() {
-      console.log("点击refund就操作退票，lotteryId是", this.refundData.lotteryid)
+      console.log("点击refund就操作退票，lotteryId是", this.refundData.lotteryid);
+      this.closeModal();
     }
   },
   created() {
