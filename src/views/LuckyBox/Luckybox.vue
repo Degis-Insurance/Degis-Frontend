@@ -7,7 +7,7 @@
           <h1 class="fw-7 d-g1 fs-34 pt-8" style="margin: auto">The Degis Lucky Box</h1>
         </div>
         <div class="row align-items-center">
-          <h1 class="fw-9 d-p pt-4" style="font-size: 60px; margin: auto; text-align: center">$272,786</h1>
+          <h1 class="fw-9 d-p pt-4" style="font-size: 60px; margin: auto; text-align: center">${{inPrize}}</h1>
         </div>
         <div class="row align-items-center">
           <h5 class="fw-9 d-g2 fs-24 ma pt-4">IN PRIZES!</h5>
@@ -165,6 +165,7 @@ export default {
       },
       viewData: {},
       refundData: {},
+      inPrize: "--",
     };
   },
 
@@ -259,10 +260,14 @@ export default {
       console.log(lotteryDetails);
       for(var i=lotteryDetails.length-1; i>=0; i--)
       {
+        
         var lotteryDetail = lotteryDetails[i];
+        var status = lotteryDetail["status"]
         var round = lotteryDetail["lotteryId"]
         var drawtime = this.getExactTime(Number(lotteryDetail["startTime"])*1000)
         var prizenumber = this.int2array(lotteryDetail["finalNumber"])
+        if(status != 3)
+          prizenumber = ""
         var prizepot = (lotteryDetail["amountCollected"] / 1e18).toFixed(2)
         this.roundData.push({
             round: round,
@@ -272,6 +277,7 @@ export default {
         })
         console.log(lotteryDetails[i]);
       }
+      this.inPrize = (lotteryDetails[lotteryDetails.length-1]["amountCollected"]/ 1e18).toFixed(2)
     },
 
     async showUserInfoEvent() {

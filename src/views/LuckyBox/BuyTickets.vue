@@ -20,7 +20,7 @@
           </div>
           <div class="py-3">
             <p class="fw-5 d-g2 fs-16">AMOUNT</p>
-            <input class="fw-4 d-g4 fs-32 ta-c" value="0" style="background-color: #F2F2F2; border-radius: 12px; height: 88px; width: 100%; border-width: 0px; opacity: 0.6"/>
+            <input class="fw-4 d-g4 fs-32 ta-c" value="0" style="background-color: #F2F2F2; border-radius: 12px; height: 88px; width: 100%; border-width: 0px; opacity: 0.6" id="ticket-amount"/>
           </div>
         </div>
 
@@ -30,14 +30,14 @@
           <div class="row">
             <div class="col-sm-4">
               <h4 class="fw-5 d-g4 fs-14">Ticket Price</h4>
-              <h4 class="fw-7 d-g2 fs-24">12.3467</h4>
+              <h4 class="fw-7 d-g2 fs-24">10 DEGIS</h4>
             </div>
             <div class="col-sm-4">
               <h4 class="fw-5 d-g4 fs-14">You Will Pay</h4>
-              <h4 class="fw-7 d-p fs-24">12.3467</h4>
+              <h4 class="fw-7 d-p fs-24">--</h4>
             </div>
             <div class="col-sm-4 ma" align="center">
-              <base-button style="width: 100%; height: 100%" @click="buyTickets">Buy Tickets</base-button>
+              <base-button style="width: 100%; height: 100%" @click="BuyTicketEvent">Buy Tickets</base-button>
             </div>
           </div>
 
@@ -112,14 +112,15 @@ export default {
     },
 
     async BuyTicketEvent() {
+      console.log(this.buyNum)
       const luckNumber =
-        this.nums[0] * 1000 +
-        this.nums[1] * 100 +
-        this.nums[2] * 10 +
-        this.nums[3] * 1;
-
+        this.buyNum[0] * 1000 +
+        this.buyNum[1] * 100 +
+        this.buyNum[2] * 10 +
+        this.buyNum[3] * 1;
       console.log(luckNumber);
       const amount = document.getElementById("ticket-amount").value;
+      console.log(amount);
       let tickets = new Array();
       for (var i = 0; i < amount; i++) {
         tickets.push(luckNumber);

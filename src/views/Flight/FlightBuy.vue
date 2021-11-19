@@ -38,7 +38,7 @@
         <div class="col-xl-2">
           <p class="fw-7 d-p fs-18" style="color: white">Search</p>
           <div align="right">
-            <base-button style="padding: 13px 46px;" @click="mainFlight">SEARCH</base-button>
+            <base-button style="padding: 13px 46px;">SEARCH</base-button>
           </div>
         </div>
       </div>
@@ -70,7 +70,6 @@
 </template>
 
 <script>
-
 import OrderConfirm from "./OrderConfirm";
 import {ref} from 'vue';
 import {
@@ -87,36 +86,36 @@ export default {
     return {
       flightData: [
         {
-          airline: 'SouthWest',
-          flightno: '1111',
-          route: 'STL-AWL',
-          departtime: '2021-09-09 12:12',
-          arrivetime: '2021-09-10 01:00',
+          airline: 'AQ',
+          flightno: 'AQ1299',
+          route: 'Guangzhou-Shanghai',
+          departtime: '2021-11-22T19:35:00',
+          arrivetime: '2021-11-22T21:50:00',
           premium: '4',
         },
         {
-          airline: 'SouthEast',
-          flightno: '1119',
-          route: 'STL-AWL',
-          departtime: '2021-09-09 12:12',
-          arrivetime: '2021-09-10 01:00',
-          premium: '7',
+          airline: 'AQ',
+          flightno: 'AQ1299',
+          route: 'Guangzhou-Shanghai',
+          departtime: '2021-11-24T19:35:00',
+          arrivetime: '2021-11-24T21:50:00',
+          premium: '4',
         },
         {
-          airline: 'NorthWest',
-          flightno: '0003',
-          route: 'AWL-STL',
-          departtime: '2021-09-09 12:12',
-          arrivetime: '2021-09-10 01:00',
-          premium: '2',
+          airline: 'WN',
+          flightno: 'WN186',
+          route: 'Lihue-Honolulu',
+          departtime: '2021-11-22T08:45:00',
+          arrivetime: '2021-11-22T09:20:00',
+          premium: '4',
         },
         {
-          airline: 'NorthEast',
-          flightno: '2222',
-          route: 'STL-AWL',
-          departtime: '2021-09-09 12:12',
-          arrivetime: '2021-09-10 01:00',
-          premium: '3',
+          airline: 'WN',
+          flightno: 'WN186',
+          route: 'Lihue-Honolulu',
+          departtime: '2021-11-24T08:45:00',
+          arrivetime: '2021-11-24T09:20:00',
+          premium: '4',
         },
       ],
       BuyProduction: false,
@@ -132,6 +131,7 @@ export default {
   },
   methods: {
     actionbuy(val) {
+      console.log(val)
       this.buyData = val;
       this.BuyProduction = true;
     },
@@ -150,68 +150,26 @@ export default {
       return { policycount: policycount, userpolicy: userpolicy };
     },
 
-    async NewPolicy(premium, payoff, flight_number, timestamp1) {
-      const PolicyFlow = await getPolicyFlow();
-      const MockUSD = await getMockUSD();
-      const InsurancePool = await getInsurancePool();
-      const account = this.$store.state.selectedAccount;
+    // async mainFlight() {
+    //   var httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
+    //   var url = "http://39.101.132.228:8000/live/AQ1299/date=20211120"
 
-      var timestamp2 = timestamp1 + 300; // 飞行时间5min
-
-      console.log(flight_number, timestamp1);
-
-      const tx1 = await MockUSD.methods
-        .approve(InsurancePool.options.address, window.WEB3.utils.toBN(premium))
-        .send({ from: account });
-
-      console.log("Tx Hash:", tx1.transactionHash);
-
-      const tx2 = await PolicyFlow.methods
-        .newApplication(
-          account,
-          0,
-          flight_number,
-          window.WEB3.utils.toBN(premium),
-          window.WEB3.utils.toBN(payoff),
-          timestamp1,
-          timestamp2
-        )
-        .send({ from: account });
-      console.log("Tx Hash:", tx2.transactionHash);
-      console.log(tx2);
-      console.log("policy Id:", tx2.logs[0].args[0]);
-    },
-
-    async mainFlight() {
-      var httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
-      var url = "http://39.101.132.228:8000/live/AQ1299/date=20211120"
-
-      // httpRequest.withCredentials=true; 
-      httpRequest.open('GET', url, true);
-      httpRequest.send();
-      httpRequest.onreadystatechange = function () {
-          if (httpRequest.readyState == 4 && httpRequest.status == 200) {
-              var json = httpRequest.responseText;//获取到json字符串，还需解析
-              console.log(json);
-          }
-      };
-
-    },
+    //   // httpRequest.withCredentials=true; 
+    //   httpRequest.open('GET', url, true);
+    //   httpRequest.send();
+    //   httpRequest.onreadystatechange = function () {
+    //       if (httpRequest.readyState == 4 && httpRequest.status == 200) {
+    //           var json = httpRequest.responseText;//获取到json字符串，还需解析
+    //           console.log(json);
+    //       }
+    //   };
+    // },
 
     async ShowUserPolicyEvent() {
       const policyinfo = await this.ShowUserPolicy();
       
       console.log("======================");
       console.log(policyinfo);
-    },
-
-    async NewPolicyEvent() {
-      const premium = 1111;
-      const payoff = 111;
-      const flight_number = "WN186";
-      const timestamp = 1636189973;
-
-      await this.NewPolicy(premium, payoff, flight_number, timestamp);
     },
   },
 };
