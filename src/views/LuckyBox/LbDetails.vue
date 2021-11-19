@@ -70,8 +70,8 @@
           <div class="d-flex justify-content-between">
             <p class="fw-7 d-g1 fs-16" style="margin: auto 0">My Tickets</p>
             <div class="d-flex">
-              <p class="fw-7 d-p fs-24 ma pr-4">Totally $160</p>
-              <base-button>GET PRIZE</base-button>
+              <p class="fw-7 d-p fs-24 ma pr-4">Totally ${{userPrize}}</p>
+              <base-button @click="claimAllTicketsEvent">GET PRIZE</base-button>
             </div>
 
           </div>
@@ -100,42 +100,40 @@
 </template>
 
 <script>
+
+import {onMounted} from "vue";
+import {
+  getMockUSD,
+  getDegis,
+  getDegisLottery,
+} from "../../utils/contractInstance";
 export default {
   name: "lb-details",
   components: {},
   data() {
     return {
-      prizeData: [
-        {
-          lotteryid: "0x9547342134",
-          number: [3, 6, 8, 9],
-          lotteryrewards: 120,
-        },
-        {
-          lotteryid: "0x3453452435",
-          number: [2, 6, 3, 2],
-          lotteryrewards: 40,
-        }],
+      userPrize: "--",
+      prizeData: [ ],
       prizeDetail: {
         match1: {
-          totalMoney: 1517,
-          eachMoney: 32.85,
-          winnerNumber: 426,
+          totalMoney: "--",
+          eachMoney: "--",
+          winnerNumber: "--",
         },
         match2: {
-          totalMoney: 6575,
-          eachMoney: 185.34,
-          winnerNumber: 32,
+          totalMoney: "--",
+          eachMoney: "--",
+          winnerNumber: "--",
         },
         match3: {
-          totalMoney: 9575,
-          eachMoney: 443.85,
-          winnerNumber: 5,
+          totalMoney: "--",
+          eachMoney: "--",
+          winnerNumber: "--",
         },
         match4: {
-          totalMoney: 12575,
-          eachMoney: 3264.85,
-          winnerNumber: 0,
+          totalMoney: "--",
+          eachMoney: "--",
+          winnerNumber: "--",
         },
       },
     };
@@ -149,10 +147,96 @@ export default {
       this.$emit("update:show", false);
       this.$emit("close");
     },
+    
+    async showLotteryInfo(lotteryId) {
+      const DegisLottery = await getDegisLottery();
+
+      const lotteryDetails = await DegisLottery.methods
+        .viewLottery(lotteryId)
+        .call();
+
+      return lotteryDetails;
+    },
+
+    async showUserInfo(lotteryId) {
+      const DegisLottery = await getDegisLottery();
+      const account = this.$store.state.selectedAccount;
+
+      const userTicketInfo = await DegisLottery.methods
+        .viewClaimAllTickets(lotteryId)
+        .call({ from: account });
+
+      return userTicketInfo;
+    },
+
+    async claimAllTickets(lotteryId) {
+      const DegisLottery = await getDegisLottery();
+      const lotteryDetails = await DegisLottery.methods
+        .viewLottery(lotteryId)
+        .call();
+      const account = this.$store.state.selectedAccount;
+      if (lotteryDetails.status == 3) {
+        const tx = await DegisLottery.methods.claimAllTickets(lotteryId).send({
+          from: account,
+        });
+        console.log("Tx Hash:", tx.transactionHash);
+      } else {
+        alert("current round not claimable now");
+      }
+    },
+
+    async showLotteryInfoEvent() {
+        var lotteryId = this.viewData.round;
+        console.log(lotteryId);
+        const lotteryInfo = await this.showLotteryInfo(lotteryId);
+        
+        var matchs = ["match1","match2","match3","match4"]
+        for(var i=0; i<4;i++){
+          this.prizeDetail[matchs[i]]["winnerNumber"]=lotteryInfo["countWinnersPerBracket"][i];
+          this.prizeDetail[matchs[i]]["eachMoney"]=(lotteryInfo["rewardPerTicketInBracket"][i] / 1e18).toFixed(2);
+          this.prizeDetail[matchs[i]]["totalMoney"]=(lotteryInfo["amountCollected"]/1e18 * lotteryInfo["rewardsBreakdown"][i] / 1e4).toFixed(2);
+        }
+
+        console.log(lotteryInfo);
+    },
+
+    int2array(num)
+    {
+      var number = new Array()
+      number[0]=parseInt(Number(num) / 1000) %10
+      number[1]=parseInt(Number(num) / 100) %10
+      number[2]=parseInt(Number(num) / 10) %10
+      number[3]=parseInt(Number(num) / 1) %10
+      return number
+    },
+
+    async showUserInfoEvent() {
+      var lotteryId = this.viewData.round
+      const userTicketInfo = await this.showUserInfo(lotteryId);
+
+      this.userPrize = (userTicketInfo[1] / 1e18).toFixed(2);
+
+      console.log(userTicketInfo);
+      this.prizeData = []
+      for(var i=0;i<userTicketInfo[2].length;i++)
+      {
+        var lorreryid = userTicketInfo[2][i][0]
+        var number = this.int2array(userTicketInfo[2][i][1])
+        var lotteryrewards = (userTicketInfo[2][i][2] / 1e18).toFixed(2)
+        this.prizeData.push({lorreryid:lorreryid,number:number,lotteryrewards:lotteryrewards})
+      }
+    },
+
+    async claimAllTicketsEvent() {
+      var lotteryId = this.viewData.round
+      await this.claimAllTickets(lotteryId);
+      this.showUserInfoEvent();
+    }
   },
   created() {
+    this.showUserInfoEvent();
+    this.showLotteryInfoEvent();
     console.log("点击view按键之后开始创建LbDetails组件");
-  //  这里就可以写查询的语句了
   },
   watch: {
     show(val) {

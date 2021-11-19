@@ -20,7 +20,7 @@
           </div>
           <div class="py-3">
             <p class="fw-5 d-g2 fs-16">AMOUNT</p>
-            <input class="fw-4 d-g4 fs-32 ta-c" value="0" style="background-color: #F2F2F2; border-radius: 12px; height: 88px; width: 100%; border-width: 0px; opacity: 0.6"/>
+            <input class="fw-4 d-g4 fs-32 ta-c" value="0" style="background-color: #F2F2F2; border-radius: 12px; height: 88px; width: 100%; border-width: 0px; opacity: 0.6" id="ticket-amount"/>
           </div>
         </div>
 
@@ -30,14 +30,14 @@
           <div class="row">
             <div class="col-sm-4">
               <h4 class="fw-5 d-g4 fs-14">Ticket Price</h4>
-              <h4 class="fw-7 d-g2 fs-24">12.3467</h4>
+              <h4 class="fw-7 d-g2 fs-24">10 DEGIS</h4>
             </div>
             <div class="col-sm-4">
               <h4 class="fw-5 d-g4 fs-14">You Will Pay</h4>
-              <h4 class="fw-7 d-p fs-24">12.3467</h4>
+              <h4 class="fw-7 d-p fs-24">--</h4>
             </div>
             <div class="col-sm-4 ma" align="center">
-              <base-button style="width: 100%; height: 100%" @click="buyTickets">Buy Tickets</base-button>
+              <base-button style="width: 100%; height: 100%" @click="BuyTicketEvent">Buy Tickets</base-button>
             </div>
           </div>
 
@@ -48,7 +48,8 @@
 </template>
 <script>
 import BallSelect from "./BallSelect";
-
+import Web3 from "web3";
+import { getDegis, getDegisLottery } from "../../utils/contractInstance";
 export default {
   name: "buy-tickets",
   components: {
@@ -73,6 +74,60 @@ export default {
     },
     getBall(ballNum) {
       this.buyNum = ballNum;
+    },
+    randomNumber() {
+      this.num = [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)]
+    },
+    async BuyTicket(tickets) {
+      const DegisLottery = await getDegisLottery();
+      const Degis = await getDegis();
+      const account = this.$store.state.selectedAccount;
+      // if (tickets.length > 10) {
+      //   alert("amount must smaller than 10");
+      //   return;
+      // }
+
+      console.log(tickets);
+      let newTickets = new Array();
+      for (var i = 0; i < tickets.length; i++) {
+        var lotteryNumber = tickets;
+        if (parseInt(lotteryNumber) < 10000 && parseInt(lotteryNumber) >= 0) {
+          newTickets.push(parseInt(lotteryNumber) + 10000);
+        } else {
+          alert("Please enter 4 digits");
+          return;
+        }
+      }
+      console.log(newTickets);
+      let cost = newTickets.length * 10;
+      await Degis.methods
+        .approve(
+          DegisLottery.options.address,
+          window.WEB3.utils.toWei(cost.toString(), "ether")
+        )
+        .send({ from: account });
+
+      var tx = await DegisLottery.methods.buyTickets(newTickets).send({ from: account });
+      console.log("Tx Hash:", tx.transactionHash);
+    },
+
+    async BuyTicketEvent() {
+      console.log(this.buyNum)
+      const luckNumber =
+        this.buyNum[0] * 1000 +
+        this.buyNum[1] * 100 +
+        this.buyNum[2] * 10 +
+        this.buyNum[3] * 1;
+      console.log(luckNumber);
+      const amount = document.getElementById("ticket-amount").value;
+      console.log(amount);
+      let tickets = new Array();
+      for (var i = 0; i < amount; i++) {
+        tickets.push(luckNumber);
+      }
+      // console.log(tickets);
+
+      await this.BuyTicket(tickets);
     },
   },
   watch: {

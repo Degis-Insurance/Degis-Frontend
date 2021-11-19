@@ -72,7 +72,11 @@
 <script>
 import OrderConfirm from "./OrderConfirm";
 import {ref} from 'vue';
-
+import {
+  getMockUSD,
+  getPolicyFlow,
+  getInsurancePool,
+} from "../../utils/contractInstance";
 export default {
   name: "flight-buy",
   components: {
@@ -82,36 +86,36 @@ export default {
     return {
       flightData: [
         {
-          airline: 'SouthWest',
-          flightno: '1111',
-          route: 'STL-AWL',
-          departtime: '2021-09-09 12:12',
-          arrivetime: '2021-09-10 01:00',
+          airline: 'AQ',
+          flightno: 'AQ1299',
+          route: 'Guangzhou-Shanghai',
+          departtime: '2021-11-22T19:35:00',
+          arrivetime: '2021-11-22T21:50:00',
           premium: '4',
         },
         {
-          airline: 'SouthEast',
-          flightno: '1119',
-          route: 'STL-AWL',
-          departtime: '2021-09-09 12:12',
-          arrivetime: '2021-09-10 01:00',
-          premium: '7',
+          airline: 'AQ',
+          flightno: 'AQ1299',
+          route: 'Guangzhou-Shanghai',
+          departtime: '2021-11-24T19:35:00',
+          arrivetime: '2021-11-24T21:50:00',
+          premium: '4',
         },
         {
-          airline: 'NorthWest',
-          flightno: '0003',
-          route: 'AWL-STL',
-          departtime: '2021-09-09 12:12',
-          arrivetime: '2021-09-10 01:00',
-          premium: '2',
+          airline: 'WN',
+          flightno: 'WN186',
+          route: 'Lihue-Honolulu',
+          departtime: '2021-11-22T08:45:00',
+          arrivetime: '2021-11-22T09:20:00',
+          premium: '4',
         },
         {
-          airline: 'NorthEast',
-          flightno: '2222',
-          route: 'STL-AWL',
-          departtime: '2021-09-09 12:12',
-          arrivetime: '2021-09-10 01:00',
-          premium: '3',
+          airline: 'WN',
+          flightno: 'WN186',
+          route: 'Lihue-Honolulu',
+          departtime: '2021-11-24T08:45:00',
+          arrivetime: '2021-11-24T09:20:00',
+          premium: '4',
         },
       ],
       BuyProduction: false,
@@ -127,11 +131,49 @@ export default {
   },
   methods: {
     actionbuy(val) {
+      console.log(val)
       this.buyData = val;
       this.BuyProduction = true;
-    }
+    },
+    async ShowUserPolicy() {
+      const PolicyFlow = await getPolicyFlow();
+      const account = this.$store.state.selectedAccount;
+
+      const policycount = await PolicyFlow.methods
+        .getUserPolicyCount(account)
+        .call();
+        
+      // findPolicyBuyerById
+
+      const userpolicy = await PolicyFlow.methods.viewPolicy(account).call();
+
+      return { policycount: policycount, userpolicy: userpolicy };
+    },
+
+    // async mainFlight() {
+    //   var httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
+    //   var url = "http://39.101.132.228:8000/live/AQ1299/date=20211120"
+
+    //   // httpRequest.withCredentials=true; 
+    //   httpRequest.open('GET', url, true);
+    //   httpRequest.send();
+    //   httpRequest.onreadystatechange = function () {
+    //       if (httpRequest.readyState == 4 && httpRequest.status == 200) {
+    //           var json = httpRequest.responseText;//获取到json字符串，还需解析
+    //           console.log(json);
+    //       }
+    //   };
+    // },
+
+    async ShowUserPolicyEvent() {
+      const policyinfo = await this.ShowUserPolicy();
+      
+      console.log("======================");
+      console.log(policyinfo);
+    },
   },
 };
+
 </script>
 
 <style scoped>

@@ -65,10 +65,16 @@
 </template>
 
 <script>
+import OrderConfirm from "./OrderConfirm";
+import {ref} from 'vue';
+
 export default {
   name: "flight",
-  components: {},
+  components: {
+    OrderConfirm,
+  },
 };
+
 </script>
 
 <style scoped>

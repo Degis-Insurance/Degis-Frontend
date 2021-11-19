@@ -23,9 +23,9 @@
             </div>
             <img src="img/function/flight-info.png" class="pb-4" style="width: 100%;"/>
             <div class="d-flex justify-content-between">
-              <p class="fw-4 d-p fs-32">{{ buyData.route.split('-')[0] }}</p>
-              <p class="fw-4 d-g3 fs-16 pt-3">5h 25m</p>
-              <p class="fw-4 d-p fs-32">{{ buyData.route.split('-')[1] }}</p>
+              <p class="fw-4 d-p fs-32">{{ buyData.route }}</p>
+              <p class="fw-4 d-g3 fs-16 pt-3"> -- </p>
+              <p class="fw-4 d-p fs-32">{{ buyData.route }}</p>
             </div>
 
             <div class="d-flex justify-content-between">
@@ -60,15 +60,15 @@
               <div class="col-xl-6">
                 <div class="d-flex justify-content-between">
                   <p class="fw-4 d-g3 fs-16">Protection Premium:</p>
-                  <p class="fw-7 d-p fs-16">12.3467</p>
+                  <p class="fw-7 d-p fs-16">--</p>
                 </div>
                 <div class="d-flex justify-content-between" style="margin-top: -20px">
                   <p class="fw-4 d-g3 fs-16">Maximum Payoff:</p>
-                  <p class="fw-7 d-p fs-16">19.2824</p>
+                  <p class="fw-7 d-p fs-16">--</p>
                 </div>
               </div>
               <div class="col-xl-6 pt-1" align="right">
-                <base-button style="width: 70%" @click="closeModal">CONFIRM</base-button>
+                <base-button style="width: 70%" @click="NewPolicyEvent">CONFIRM</base-button>
               </div>
             </div>
           </div>
@@ -79,18 +79,70 @@
 </template>
 
 <script>
+import {
+  getMockUSD,
+  getPolicyFlow,
+  getInsurancePool,
+} from "../../utils/contractInstance";
 export default {
   name: "order-confirm",
   components: {},
   props: {
     show: Boolean,
-    buyData: Object,
+    buyData: {}
   },
   methods: {
     closeModal() {
       this.$emit("update:show", false);
       this.$emit("close");
     },
+    
+    async NewPolicy(premium, payoff, flight_number, timestamp1) {
+      const PolicyFlow = await getPolicyFlow();
+      const MockUSD = await getMockUSD();
+      const InsurancePool = await getInsurancePool();
+      const account = this.$store.state.selectedAccount;
+
+      var timestamp2 = timestamp1 + 300; // 飞行时间5min
+
+      console.log(flight_number, timestamp1);
+
+      const tx1 = await MockUSD.methods
+        .approve(InsurancePool.options.address, window.WEB3.utils.toBN(premium))
+        .send({ from: account });
+
+      console.log("Tx Hash:", tx1.transactionHash);
+
+      const tx2 = await PolicyFlow.methods
+        .newApplication(
+          account,
+          0,
+          flight_number,
+          window.WEB3.utils.toBN(premium),
+          window.WEB3.utils.toBN(payoff),
+          timestamp1,
+          timestamp2
+        )
+        .send({ from: account });
+      console.log("Tx Hash:", tx2.transactionHash);
+      console.log(tx2);
+      console.log("policy Id:", tx2.logs[0].args[0]);
+    },
+          // airline: 'WN',
+          // flightno: 'WN186',
+          // route: 'Lihue-Honolulu',
+          // departtime: '2021-11-24T08:45:00',
+          // arrivetime: '2021-11-24T09:20:00',
+          // premium: '4',
+    async NewPolicyEvent() {
+      const premium = this.buyData.premium;
+      const payoff = 100;
+      const flight_number = this.buyData.flightno;
+      const timestamp = new Date(this.buyData.departtime) / 1000;
+      // console.log(timestamp.valueOf())
+      await this.NewPolicy(premium, payoff, flight_number, timestamp);
+    },
+
   },
   watch: {
     show(val) {
