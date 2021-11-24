@@ -1,41 +1,73 @@
 <template>
   <base-header type="" class="pb-6 pb-8 pt-4">
     <h1 class="fw-7 d-g1 fs-34 mb-4">The Degis Lucky Box</h1>
-    <stats-card style="width: 100%; background-size: 100% 100%; background-repeat: no-repeat; background-image: url('img/homepage/degis-lucky-box.png');">
+    <stats-card
+      style="
+        width: 100%;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-image: url('img/homepage/degis-lucky-box.png');
+      "
+    >
       <div class="container" style="height: 620px">
         <div class="row row-grid align-items-center">
-          <h1 class="fw-7 d-g1 fs-34 pt-8" style="margin: auto">The Degis Lucky Box</h1>
+          <h1 class="fw-7 d-g1 fs-34 pt-8" style="margin: auto">
+            The Degis Lucky Box
+          </h1>
         </div>
         <div class="row align-items-center">
-          <h1 class="fw-9 d-p pt-4" style="font-size: 60px; margin: auto; text-align: center">${{inPrize}}</h1>
+          <h1
+            class="fw-9 d-p pt-4"
+            style="font-size: 60px; margin: auto; text-align: center"
+          >
+            ${{ inPrize }}
+          </h1>
         </div>
         <div class="row align-items-center">
           <h5 class="fw-9 d-g2 fs-24 ma pt-4">IN PRIZES!</h5>
         </div>
         <div class="row row-grid align-items-center">
-          <base-button style="margin: 5% auto; padding: 1% 5%" @click="modals.BuyTickets = true">Buy Tickets</base-button>
+          <base-button
+            style="margin: 5% auto; padding: 1% 5%"
+            @click="modals.BuyTickets = true"
+            >Buy Tickets</base-button
+          >
         </div>
       </div>
     </stats-card>
 
     <el-card class="dg-card">
       <div class="container-fluid">
-        <div class="row row-grid align-items-center justify-content-between pt-3 pb-2">
+        <div
+          class="row row-grid align-items-center justify-content-between pt-3 pb-2"
+        >
           <div>
             <h2 class="fw-7 d-g1 fs-28">Finished Rounds ></h2>
             <!--            <h4 class="fw-4 d-p fs-14 pt-1 pb-3" style="margin: auto" @click="modals.WinningRules = true">Winning rules ></h4>-->
           </div>
           <div class="d-flex">
-            <h4 class="fw-4 d-p fs-14 pt-1 pb-3" style="margin: auto" @click="modals.WinningRules = true">Winning rules ></h4>
+            <h4
+              class="fw-4 d-p fs-14 pt-1 pb-3"
+              style="margin: auto"
+              @click="modals.WinningRules = true"
+            >
+              Winning rules >
+            </h4>
             <!--            <base-button @click="modals.PendingPrize = true">PENDING PRIZE</base-button>-->
           </div>
         </div>
 
-
         <el-tabs type="" :stretch="true">
           <el-tab-pane>
-            <template #label><p class="fw-7 d-g3 fs-16">ALL LOTTERY ROUND</p></template>
-            <el-table :data="roundData" class="dg-cardtable" :header-cell-style="{'text-align': 'center', 'height': '70px'}" :cell-style="{'text-align': 'center', 'height': '70px'}">
+            <template #label
+              ><p class="fw-7 d-g3 fs-16">ALL LOTTERY ROUND</p></template
+            >
+            <el-table
+              :data="roundData"
+              class="dg-cardtable"
+              :header-cell-style="{ 'text-align': 'center', height: '70px' }"
+              :cell-style="{ 'text-align': 'center', height: '70px' }"
+            >
               <el-table-column prop="round" label="ROUND NO.">
                 <template #default="scope">
                   <p class="fw-7 d-g1 fs-16 ma"># {{ scope.row.round }}</p>
@@ -43,7 +75,12 @@
               </el-table-column>
               <el-table-column prop="prizenumber" label="PRIZE NUMBER">
                 <template #default="scope">
-                  <img v-for="num in scope.row.prizenumber" :src="'img/luckybox/num-'+ num +'.png'" style="max-width: 44px; max-height: 44px;" :key="num"/>
+                  <img
+                    v-for="num in scope.row.prizenumber"
+                    :src="'img/luckybox/num-' + num + '.png'"
+                    style="max-width: 44px; max-height: 44px"
+                    :key="num"
+                  />
                 </template>
               </el-table-column>
               <el-table-column prop="drawtime" label="DRAW TIME">
@@ -64,13 +101,25 @@
             </el-table>
             <div class="demo-pagination-block pt-4 pb-2" align="right">
               <!--              <el-pagination :currentPage="1" :page-size="1" layout="prev, pager, next, jumper" :total="1" @size-change="handleSizeChange" @current-change="handleCurrentChange"/>-->
-              <el-pagination :currentPage="1" :page-size="1" layout="prev, pager, next, jumper" :total="1"/>
+              <el-pagination
+                :currentPage="1"
+                :page-size="1"
+                layout="prev, pager, next, jumper"
+                :total="1"
+              />
             </div>
           </el-tab-pane>
 
           <el-tab-pane>
-            <template #label><p class="fw-7 d-g3 fs-16">MY LOTTERY</p></template>
-            <el-table :data="lotteryData" class="dg-cardtable" :header-cell-style="{'text-align': 'center', 'height': '70px'}" :cell-style="{'text-align': 'center', 'height': '70px'}">
+            <template #label
+              ><p class="fw-7 d-g3 fs-16">MY LOTTERY</p></template
+            >
+            <el-table
+              :data="lotteryData"
+              class="dg-cardtable"
+              :header-cell-style="{ 'text-align': 'center', height: '70px' }"
+              :cell-style="{ 'text-align': 'center', height: '70px' }"
+            >
               <el-table-column prop="lotteryid" label="LOTTERY ID">
                 <template #default="scope">
                   <p class="fw-7 d-g1 fs-16 ma">{{ scope.row.lotteryid }}</p>
@@ -78,7 +127,12 @@
               </el-table-column>
               <el-table-column prop="number" label="LOTTERY NUMBER">
                 <template #default="scope">
-                  <img v-for="num in scope.row.number" :src="'img/luckybox/num-'+ num +'.png'" style="max-width: 44px; max-height: 44px;" :key="num"/>
+                  <img
+                    v-for="num in scope.row.number"
+                    :src="'img/luckybox/num-' + num + '.png'"
+                    style="max-width: 44px; max-height: 44px"
+                    :key="num"
+                  />
                 </template>
               </el-table-column>
               <el-table-column prop="buylotteryid" label="BUY LOTTERY ID">
@@ -93,7 +147,9 @@
               </el-table-column>
               <el-table-column prop="redeemlotteryid" label="REDEEM LOTTERY ID">
                 <template #default="scope">
-                  <p class="fw-7 d-g1 fs-16 ma">{{ scope.row.redeemlotteryid }}</p>
+                  <p class="fw-7 d-g1 fs-16 ma">
+                    {{ scope.row.redeemlotteryid }}
+                  </p>
                 </template>
               </el-table-column>
               <el-table-column prop="action" label="ACTION">
@@ -104,7 +160,12 @@
             </el-table>
             <div class="demo-pagination-block pt-4 pb-2" align="right">
               <!--              <el-pagination :currentPage="1" :page-size="1" layout="prev, pager, next, jumper" :total="1" @size-change="handleSizeChange" @current-change="handleCurrentChange"/>-->
-              <el-pagination :currentPage="1" :page-size="1" layout="prev, pager, next, jumper" :total="1"/>
+              <el-pagination
+                :currentPage="1"
+                :page-size="1"
+                layout="prev, pager, next, jumper"
+                :total="1"
+              />
             </div>
           </el-tab-pane>
         </el-tabs>
@@ -117,10 +178,16 @@
   </template>
   <pending-prize v-model:show="modals.PendingPrize"></pending-prize>
   <template v-if="modals.LbDetails">
-    <lb-details v-model:show="modals.LbDetails" :viewData="viewData"></lb-details>
+    <lb-details
+      v-model:show="modals.LbDetails"
+      :viewData="viewData"
+    ></lb-details>
   </template>
   <template v-if="modals.RefundConfirm">
-    <refund-confirm v-model:show="modals.RefundConfirm" :refundData="refundData"></refund-confirm>
+    <refund-confirm
+      v-model:show="modals.RefundConfirm"
+      :refundData="refundData"
+    ></refund-confirm>
   </template>
   <winning-rules v-model:show="modals.WinningRules"></winning-rules>
 </template>
@@ -154,8 +221,8 @@ export default {
     return {
       num: [3, 5, 6, 7],
       // activeName: 'AllHistory',
-      roundData: [ ],
-      lotteryData: [ ],
+      roundData: [],
+      lotteryData: [],
       modals: {
         BuyTickets: false,
         PendingPrize: false,
@@ -195,9 +262,9 @@ export default {
     },
     async refundno(refundData) {
       this.refundData = refundData;
-      console.log(this.refundData["lotteryid"])
-      await this.redeemTicketEvent([this.refundData["lotteryid"]])
-      await this.showUserInfoEvent()
+      console.log(this.refundData["lotteryid"]);
+      await this.redeemTicketEvent([this.refundData["lotteryid"]]);
+      await this.showUserInfoEvent();
       //this.modals.RefundConfirm = true;
     },
 
@@ -205,10 +272,7 @@ export default {
       const DegisLottery = await getDegisLottery();
       const account = this.$store.state.selectedAccount;
 
-
-      const lotteryDetails = await DegisLottery.methods
-        .viewAllLottery()
-        .call();
+      const lotteryDetails = await DegisLottery.methods.viewAllLottery().call();
 
       return lotteryDetails;
     },
@@ -235,65 +299,73 @@ export default {
 
     getExactTime(time) {
       var date = new Date(time);
-      var year = date.getFullYear() + '-';
-      var month = (date.getMonth()+1 < 10 ? '0' + (date.getMonth()+1) : date.getMonth()+1) + '-';
-      var dates = date.getDate() + ' ';
-      var hour = date.getHours() + ':';
-      var min = date.getMinutes() + ':';
+      var year = date.getFullYear() + "-";
+      var month =
+        (date.getMonth() + 1 < 10
+          ? "0" + (date.getMonth() + 1)
+          : date.getMonth() + 1) + "-";
+      var dates = date.getDate() + " ";
+      var hour = date.getHours() + ":";
+      var min = date.getMinutes() + ":";
       var second = date.getSeconds();
-      return year + month + dates + hour + min + second ;
+      return year + month + dates + hour + min + second;
     },
 
-    int2array(num)
-    {
-      var number = new Array()
-      number[0]=parseInt(Number(num) / 1000) %10
-      number[1]=parseInt(Number(num) / 100) %10
-      number[2]=parseInt(Number(num) / 10) %10
-      number[3]=parseInt(Number(num) / 1) %10
-      return number
+    int2array(num) {
+      var number = new Array();
+      number[0] = parseInt(Number(num) / 1000) % 10;
+      number[1] = parseInt(Number(num) / 100) % 10;
+      number[2] = parseInt(Number(num) / 10) % 10;
+      number[3] = parseInt(Number(num) / 1) % 10;
+      return number;
     },
 
     async showLotteryInfoEvent() {
-      this.roundData = []
+      this.roundData = [];
       const lotteryDetails = await this.showLotteryInfo();
       console.log(lotteryDetails);
-      for(var i=lotteryDetails.length-1; i>=0; i--)
-      {
-        
+      for (var i = lotteryDetails.length - 1; i >= 0; i--) {
         var lotteryDetail = lotteryDetails[i];
-        var status = lotteryDetail["status"]
-        var round = lotteryDetail["lotteryId"]
-        var drawtime = this.getExactTime(Number(lotteryDetail["startTime"])*1000)
-        var prizenumber = this.int2array(lotteryDetail["finalNumber"])
-        if(status != 3)
-          prizenumber = ""
-        var prizepot = (lotteryDetail["amountCollected"] / 1e18).toFixed(2)
+        var status = lotteryDetail["status"];
+        var round = lotteryDetail["lotteryId"];
+        var drawtime = this.getExactTime(
+          Number(lotteryDetail["startTime"]) * 1000
+        );
+        var prizenumber = this.int2array(lotteryDetail["finalNumber"]);
+        if (status != 3) prizenumber = "";
+        var prizepot = (lotteryDetail["amountCollected"] / 1e18).toFixed(2);
         this.roundData.push({
-            round: round,
-            prizenumber: prizenumber,
-            drawtime: drawtime,
-            prizepot: prizepot,
-        })
+          round: round,
+          prizenumber: prizenumber,
+          drawtime: drawtime,
+          prizepot: prizepot,
+        });
         console.log(lotteryDetails[i]);
       }
-      this.inPrize = (lotteryDetails[lotteryDetails.length-1]["amountCollected"]/ 1e18).toFixed(2)
+      this.inPrize = (
+        lotteryDetails[lotteryDetails.length - 1]["amountCollected"] / 1e18
+      ).toFixed(2);
     },
 
     async showUserInfoEvent() {
       const userTicketInfo = await this.showUserInfo();
       console.log(userTicketInfo);
-      this.lotteryData = []
+      this.lotteryData = [];
 
-      for(var i=0; i<userTicketInfo[0].length; i++)
-      {
-        var lotteryid = userTicketInfo[0][i]
-        var number = this.int2array(userTicketInfo[1][i]["number"])
-        var buylotteryid = userTicketInfo[1][i]["buyLotteryId"]
-        var isredeemed = userTicketInfo[1][i]["isRedeemed"]
-        var redeemlotteryid = userTicketInfo[1][i]["redeemLotteryId"]
+      for (var i = 0; i < userTicketInfo[0].length; i++) {
+        var lotteryid = userTicketInfo[0][i];
+        var number = this.int2array(userTicketInfo[1][i]["number"]);
+        var buylotteryid = userTicketInfo[1][i]["buyLotteryId"];
+        var isredeemed = userTicketInfo[1][i]["isRedeemed"];
+        var redeemlotteryid = userTicketInfo[1][i]["redeemLotteryId"];
 
-        this.lotteryData.push({lotteryid:lotteryid, number:number, buylotteryid:buylotteryid,isredeemed:isredeemed,redeemlotteryid:redeemlotteryid})
+        this.lotteryData.push({
+          lotteryid: lotteryid,
+          number: number,
+          buylotteryid: buylotteryid,
+          isredeemed: isredeemed,
+          redeemlotteryid: redeemlotteryid,
+        });
       }
     },
 
@@ -304,6 +376,4 @@ export default {
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
