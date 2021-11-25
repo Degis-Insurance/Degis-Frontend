@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 
-import FunctionLayout from "@/layout/FunctionLayout";
-// import Layout from "@/layout/Layout";
+// import FunctionLayout from "@/layout/FunctionLayout";
+import Layout from "@/layout/Layout";
 
 import Homepage from "../views/Homepage/Homepage";
 import Account from "../views/Account/Account";
@@ -26,7 +26,8 @@ const routes = [
   },
   {
     path: "/",
-    component: FunctionLayout,
+    // component: FunctionLayout,
+    component: Layout,
     children: [
       {
         path: "/account",
