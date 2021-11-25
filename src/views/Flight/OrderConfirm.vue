@@ -62,7 +62,7 @@
                   <p class="fw-4 d-g3 fs-16">Protection Premium:</p>
                   <p class="fw-7 d-p fs-16">--</p>
                 </div>
-                <div class="d-flex justify-content-between" style="margin-top: -20px">
+                <div class="d-flex justify-content-between">
                   <p class="fw-4 d-g3 fs-16">Maximum Payoff:</p>
                   <p class="fw-7 d-p fs-16">--</p>
                 </div>
