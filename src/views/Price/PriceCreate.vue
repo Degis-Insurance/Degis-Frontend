@@ -1,7 +1,11 @@
 <template>
   <base-header type="" class="pb-6 pb-8 pt-4">
     <h1 class="fw-7 d-g1 fs-34 mb-4">The Naughty Price</h1>
-    <price-create-card v-for="data in cardData" :data="data" :key="data.coin"></price-create-card>
+    <price-create-card
+      v-for="data in cardData"
+      :data="data"
+      :key="data.coin"
+    ></price-create-card>
   </base-header>
 </template>
 
@@ -10,34 +14,42 @@ import PriceCreateCard from "./PriceCreateCard";
 
 export default {
   name: "price-create",
-  components: {PriceCreateCard},
+  components: { PriceCreateCard },
   data() {
     return {
       cardData: [
         {
           coin: "BTC",
-          price: 10,
-          balance1: 11,
-          balance2: 12,
+          name: "this is a name",
+          insurancetype: "this is insurance type",
+          price: 1000,
+          mybalance: 11,
         },
         {
           coin: "ETH",
+          name: "this is a name",
+          insurancetype: "this is insurance type",
           price: 100,
-          balance1: 11,
-          balance2: 12,
+          mybalance: 11,
+        },
+        {
+          coin: "ETH",
+          name: "this is a name",
+          insurancetype: "this is insurance type",
+          price: 100,
+          mybalance: 11,
         },
         {
           coin: "AVAX",
-          price: 1000,
-          balance1: 11,
-          balance2: 12,
+          name: "this is a name",
+          insurancetype: "this is insurance type",
+          price: 10,
+          mybalance: 11,
         },
-      ]
-    }
-  }
+      ],
+    };
+  },
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
