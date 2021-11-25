@@ -15,7 +15,7 @@ import PriceBuySell from "../views/Price/PriceBuySell";
 import PriceProvide from "../views/Price/PriceProvide";
 import Mining from "../views/Mining/Mining";
 import Luckybox from "../views/LuckyBox/Luckybox";
-import Bazaar from "../views/Bazaar/Bazaar";
+import MetaMarket from "../views/MetaMarket/MetaMarket";
 import Test from "../views/Test";
 
 const routes = [
@@ -84,9 +84,9 @@ const routes = [
         components: { default: Luckybox },
       },
       {
-        path: "/bazaar",
-        name: "bazaar",
-        components: { default: Bazaar },
+        path: "/metamarket",
+        name: "metamarket",
+        components: { default: MetaMarket },
       },
       {
         path: "/test",

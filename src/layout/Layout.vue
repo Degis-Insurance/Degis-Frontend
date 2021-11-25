@@ -52,7 +52,7 @@
           </el-submenu>
           <el-menu-item index="3"><sidebar-item :link="{ name: 'Mining', src: 'img/function/icon/mining.png', path: '/mining', }"/></el-menu-item>
           <el-menu-item index="4"><sidebar-item :link="{ name: 'Lucky Box', src: 'img/function/icon/luckybox.png', path: '/luckybox', }"/></el-menu-item>
-          <el-menu-item index="5"><sidebar-item :link="{ name: 'Bazaar', src: 'img/function/icon/bazaar.png', path: '/bazaar', }"/></el-menu-item>
+          <el-menu-item index="5"><sidebar-item :link="{ name: 'Meta Market', src: 'img/function/icon/metamarket.png', path: '/metamarket', }"/></el-menu-item>
 
         </el-menu>
         <img class="ml-4" style="width: 230px; padding-top: 10%;" src="img/function/sidebar-bottom.png"/>
