@@ -1,5 +1,5 @@
 <template>
-  <base-header type="" class="pb-6 pb-8 pt-4">
+  <base-header type="" class="pt-4">
     <h1 class="fw-7 d-g1 fs-34 mb-4">Provide on Miserable Flight</h1>
     <el-card class="dg-card">
       <div class="container-fluid">

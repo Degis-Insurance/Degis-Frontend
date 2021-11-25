@@ -1,11 +1,11 @@
 <template>
   <router-link :to="link.path" @click="linkClick" :target="link.target" :href="'#' + link.path">
-    <div v-if="$route.path === link.path">
-      <img :src="link.src" style="width: 26px; margin-right: 0.7rem;"/>
-      <span class="fw-4 fs-16 d-g3">{{ link.name }}</span>
+    <div v-if="$route.path === link.path" style="background-color: #6415FF; border-radius: 10px">
+      <img :src="'img/function/icon/' + link.src + '-white.png'" style="width: 26px; margin: 0 0.7rem;"/>
+      <span class="fw-4 fs-16 d-g0">{{ link.name }}</span>
     </div>
     <div v-else>
-      <img :src="link.src" style="width: 26px; margin-right: 0.7rem;"/>
+      <img :src="'img/function/icon/' + link.src + '.png'" style="width: 26px; margin: 0 0.7rem;"/>
       <span class="fw-4 fs-16 d-g3">{{ link.name }}</span>
     </div>
   </router-link>

@@ -1,5 +1,5 @@
 <template>
-  <base-header type="" class="pb-6 pb-8 pt-4">
+  <base-header type="" class="pt-4">
     <h1 class="fw-7 d-g1 fs-34 mb-4">The Degis Lucky Box</h1>
     <stats-card
       style="
