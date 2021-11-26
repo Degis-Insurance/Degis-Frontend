@@ -1,21 +1,31 @@
 <template>
   <base-header type="" class="pt-4">
-    <h1 class="fw-7 d-g1 fs-34 mb-4">Provide on Miserable Flight</h1>
+    <h1 class="fw-7 d-g1 fs-34 mb-4">Mining by DEGIS</h1>
     <el-card class="dg-card">
       <div class="container-fluid">
         <div class="row align-items-center">
           <div class="col-xl-6 order-md-1">
-            <h2 class="fw-7 d-g1 fs-28" style="padding: 3% 0">The Miserable Flight Pool</h2>
+            <h2 class="fw-7 d-g1 fs-28" style="padding: 3% 0">
+              The Miserable Flight Pool
+            </h2>
             <div class="row justify-content-between" style="padding: 2% 0">
               <div class="col-6">
                 <img src="img/function/mining-circle.png" class="img-fluid" style="width: 80%"/>
               </div>
               <div class="col-6">
-                <h5 class="text-l">Total Value Locker: <bold> {{ totalValueLocked }}</bold></h5>
-                <h5 class="text-l">Available Capacity: <bold> {{ availableCapacity }}</bold></h5>
-                <h5 class="text-l">Current Policies: <bold> {{ currentPolicies }}</bold></h5>
-                <h5 class="text-l">Locked Ratio: <bold> {{ lockedRatio }}</bold></h5>
-                <h5 class="text-l">APR: <bold> {{ APR }}%</bold></h5>
+                <h5 class="text-l">
+                  Total Value Locked: <bold> {{ totalValueLocked }}</bold>
+                </h5>
+                <h5 class="text-l">
+                  Available Capacity: <bold> {{ availableCapacity }}</bold>
+                </h5>
+                <h5 class="text-l">
+                  Current Policies: <bold> {{ currentPolicies }}</bold>
+                </h5>
+                <h5 class="text-l">
+                  Locked Ratio: <bold> {{ lockedRatio }}</bold>
+                </h5>
+                <h5 class="text-l">APR: <bold id="apr"> {{ APR }} </bold></h5>
               </div>
             </div>
             <h5 class="text-l">
@@ -23,7 +33,72 @@
             </h5>
           </div>
           <div class="col-xl-6 order-md-2">
-            <h5 class="text-r">Your Asset: <bold> {{ userAsset }} </bold></h5>
+            <h5 class="text-r">
+              Your Asset:
+              <bold> {{ userAsset }}</bold>
+            </h5>
+            <input
+              class="degis-input"
+              style="width: 100%; margin: 4% 0"
+              placeholder="0"
+              id="degis-input"
+            />
+            <div
+              class="d-flex justify-content-between"
+              style="padding-bottom: 11%"
+            >
+              <base-button style="width: 45%" @click="depositUSDEvent">
+                DEPOSIT
+              </base-button>
+              <base-button style="width: 45%" @click="withdrawUSDEvent">
+                WITHDRAW
+              </base-button>
+            </div>
+            <h5 class="text-r">
+              Your Premium Income:
+              <bold> {{ userPendingPremium }} </bold>
+            </h5>
+            <h5 class="text-r">
+              Your DEGIS Token Income:
+              <bold> {{ userPendingDegis }} </bold>
+            </h5>
+            <base-button
+              style="width: 100%; margin-bottom: 2%"
+              @click="harvestDegisEvent"
+            >
+              HARVEST REWARD</base-button
+            >
+          </div>
+        </div>
+      </div>
+    </el-card>
+    <el-card class="dg-card">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          <div class="col-xl-6 order-md-1">
+            <h2 class="fw-7 d-g1 fs-28" style="padding: 3% 0">
+              The Naughty Price Pool
+            </h2>
+            <div class="row justify-content-between" style="padding: 2% 0">
+              <div class="col-6">
+                <img
+                  src="img/function/mining-circle-2.png"
+                  class="img-fluid"
+                  style="width: 80%"
+                />
+              </div>
+              <div class="col-6">
+                <h5 class="text-l">Total Value Locker: <bold> --</bold></h5>
+                <h5 class="text-l">Available Capacity: <bold> --</bold></h5>
+                <h5 class="text-l">Current Policies: <bold> --</bold></h5>
+                <h5 class="text-l">Locked Ratio: <bold> --</bold></h5>
+                <h5 class="text-l">APR: <bold> XX%</bold></h5>
+              </div>
+            </div>
+            <h5 class="text-l">Pool Address: <bold> --</bold></h5>
+          </div>
+          <div class="col-xl-6 order-md-2">
+            <h5 class="text-r">Your Asset: <bold> -- (+--%)</bold></h5>
             <input
               class="degis-input"
               style="width: 100%; margin: 4% 0"
@@ -33,12 +108,14 @@
               class="d-flex justify-content-between"
               style="padding-bottom: 11%"
             >
-              <base-button style="width: 45%"> DEPOSIT </base-button>
-              <base-button style="width: 45%"> WITHDRAW </base-button>
+              <base-button style="width: 45%"> DEPOSIT</base-button>
+              <base-button style="width: 45%"> WITHDRAW</base-button>
             </div>
-            <h5 class="text-r">Your Premium Income: <bold> {{ userPendingDegis }}</bold></h5>
-            <h5 class="text-r">Your DEGIS Token Income: <bold> {{ userPendingDegis }}</bold></h5>
-            <base-button style="width: 100%; margin-bottom: 2%">HARVEST REWARD</base-button>
+            <h5 class="text-r">Your Premium Income: <bold> --</bold></h5>
+            <h5 class="text-r">Your DEGIS Token Income: <bold> --</bold></h5>
+            <base-button style="width: 100%; margin-bottom: 2%"
+              >HARVEST REWARD</base-button
+            >
           </div>
         </div>
       </div>
@@ -57,24 +134,22 @@ import {
 } from "../../utils/contractInstance";
 
 export default {
-  name: "flight-provide",
+  name: "mining",
   components: {
     BaseButton,
   },
-  
   data() {
     return {
-      userPendingPremium: "--",
-      userAsset: "--",
-      userPendingDegis: "--",
-      totalValueLocked: "--",
-      availableCapacity: "--",
-      currentPolicies: "--",
-      lockedRatio: "--",
-      APR: "--"
+      userPendingPremium: 0,
+      userAsset: 0,
+      userPendingDegis: 0,
+      totalValueLocked: 0,
+      availableCapacity: 0,
+      currentPolicies: 0,
+      lockedRatio: 0,
+      APR: 0
     };
   },
-
   computed: {
     currentAccount() {
       return this.$store.state.selectedAccount;
@@ -338,7 +413,6 @@ export default {
   },
 };
 </script>
-
 <style scoped>
 .text-l {
   font-weight: normal;

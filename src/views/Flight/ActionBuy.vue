@@ -1,5 +1,5 @@
 <template>
-  <base-header type="" class="pb-6 pb-8 pt-4">
+  <base-header type="" class="pt-4">
 
     <stats-card class="mt-5">
       <div class="row align-items-center pb-4">

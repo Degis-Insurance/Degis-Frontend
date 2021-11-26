@@ -11,7 +11,7 @@
         <a href="/#/luckybox" class="f-text-1">Lucky Box</a>
       </div>
       <div class="col-2">
-        <a href="/#/bazaar" class="f-text-1">Bazaar</a>
+        <a href="/#/metamarket" class="f-text-1">Meta Market</a>
       </div>
       <div class="col-1"></div>
     </div>

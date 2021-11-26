@@ -2,52 +2,185 @@
   <base-header type="" class="pb-6 pb-8 pt-4">
     <h1 class="fw-7 d-g1 fs-34 mb-4">Mining</h1>
     <el-card class="dg-card">
-      <div class="container">
-        <div class="row row-grid align-items-center">
-          <div class="col-lg-4">
-            <img src="img/protection/price/BTC.png" class="img-fluid" style="width: 64px"/>
-            <span class="fw-7 d-g1 fs-34 pl-3" style="vertical-align: middle">hWAR Pool</span>
-            <p class="fw-7 d-g1 fs-18 pt-3 mb-0">Buy BNB 1000-Helmet LPT</p>
-          </div>
-          <div class="col-lg-1">
-            <span class="fw-7 d-g1 fs-34 pl-3" style="vertical-align: middle">Earned</span>
-            <p class="fw-7 d-g1 fs-18 pt-3 mb-0">hWAR</p>
-          </div>
-          <div class="col-lg-3">
-            <span class="fw-7 d-g1 fs-34 pl-3" style="vertical-align: middle">hWAR Pool</span>
-            <p class="fw-7 d-g1 fs-18 pt-3 mb-0">Buy BNB 1000-Helmet LPT</p>
-          </div>
-          <div class="col-lg-3">
-            <span class="fw-7 d-g1 fs-34 pl-3" style="vertical-align: middle">hWAR Pool</span>
-            <p class="fw-7 d-g1 fs-18 pt-3 mb-0">Buy BNB 1000-Helmet LPT</p>
-          </div>
-          <div class="col-lg-1">
-            <div class="d-flex justify-content-between">
-              <a href="/#/flight" style="line-height: 50px; width: 40%" align="right">
-                <base-button style="padding: 0px; width: 50%">DEPOSIT</base-button>
-              </a>
-            </div>
-            <div class="d-flex justify-content-between">
-              <a href="/#/flight" style="line-height: 50px; width: 100%" align="right">
-                <base-button style="padding: 0px; width: 100%">CLAIM</base-button>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+      <h1 class="fw-7 d-g1 fs-34 mb-4">LP Mining</h1>
+      <mining-line
+        v-for="(data, index) in miningData"
+        :data="data"
+        :key="index"
+      ></mining-line>
     </el-card>
-
-
+    <el-card class="dg-card">
+      <h1 class="fw-7 d-g1 fs-34 mb-4">Buyer Incentive</h1>
+      <mining-line :data="buyerData"></mining-line>
+    </el-card>
+    <el-card class="dg-card">
+      <h1 class="fw-7 d-g1 fs-34 mb-4">Staking</h1>
+      <mining-line
+        v-for="(data, index) in stakingData"
+        :data="data"
+        :key="index"
+      ></mining-line>
+    </el-card>
   </base-header>
 </template>
 
 <script>
+import MiningLine from "./MiningLine";
+
 export default {
   name: "mining",
-  components: {},
+  components: {
+    MiningLine,
+  },
+  data() {
+    return {
+      miningData: [
+        {
+          pic: "flight",
+          name: "The Miserable Flight Pool",
+          status: "Ongoing",
+          apr: "47.63%",
+          available: 10,
+          mydeposits: 11,
+          totaldeposited: 12,
+          mypoolshare: 13,
+          address1: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
+          withdraw: 20,
+          reward: 21,
+          address2: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
+        },
+        {
+          pic: "AVAX",
+          name: "The Naught Price---AVAXL",
+          status: "Ongoing",
+          apr: "47.63%",
+          available: 10,
+          mydeposits: 11,
+          totaldeposited: 12,
+          mypoolshare: 13,
+          address1: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
+          withdraw: 20,
+          reward: 21,
+          address2: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
+        },
+        {
+          pic: "AVAX",
+          name: "The Naught Price---AVAXH",
+          status: "Ongoing",
+          apr: "47.63%",
+          available: 10,
+          mydeposits: 11,
+          totaldeposited: 12,
+          mypoolshare: 13,
+          address1: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
+          withdraw: 20,
+          reward: 21,
+          address2: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
+        },
+        {
+          pic: "BTC",
+          name: "The Naught Price---BTCL",
+          status: "Ongoing",
+          apr: "47.63%",
+          available: 10,
+          mydeposits: 11,
+          totaldeposited: 12,
+          mypoolshare: 13,
+          address1: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
+          withdraw: 20,
+          reward: 21,
+          address2: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
+        },
+        {
+          pic: "BTC",
+          name: "The Naught Price---BTCH",
+          status: "Ongoing",
+          apr: "47.63%",
+          available: 10,
+          mydeposits: 11,
+          totaldeposited: 12,
+          mypoolshare: 13,
+          address1: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
+          withdraw: 20,
+          reward: 21,
+          address2: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
+        },
+        {
+          pic: "ETH",
+          name: "The Naught Price---ETHL",
+          status: "Ongoing",
+          apr: "47.63%",
+          available: 10,
+          mydeposits: 11,
+          totaldeposited: 12,
+          mypoolshare: 13,
+          address1: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
+          withdraw: 20,
+          reward: 21,
+          address2: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
+        },
+        {
+          pic: "ETH",
+          name: "The Naught Price---ETHH",
+          status: "Ongoing",
+          apr: "47.63%",
+          available: 10,
+          mydeposits: 11,
+          totaldeposited: 12,
+          mypoolshare: 13,
+          address1: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
+          withdraw: 20,
+          reward: 21,
+          address2: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
+        },
+      ],
+      buyerData: {
+        pic: "buyer",
+        name: "Buyer Pool",
+        status: "Ongoing",
+        apr: "47.63%",
+        available: 10,
+        mydeposits: 11,
+        totaldeposited: 12,
+        mypoolshare: 13,
+        address1: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
+        withdraw: 20,
+        reward: 21,
+        address2: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
+      },
+      stakingData: [
+        {
+          pic: "token",
+          name: "DEG X DEG Pool",
+          status: "Ongoing",
+          apr: "47.63%",
+          available: 10,
+          mydeposits: 11,
+          totaldeposited: 12,
+          mypoolshare: 13,
+          address1: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
+          withdraw: 20,
+          reward: 21,
+          address2: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
+        },
+        {
+          pic: "token",
+          name: "DEG Pool",
+          status: "Ongoing",
+          apr: "47.63%",
+          available: 10,
+          mydeposits: 11,
+          totaldeposited: 12,
+          mypoolshare: 13,
+          address1: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
+          withdraw: 20,
+          reward: 21,
+          address2: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
+        },
+      ],
+    };
+  },
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

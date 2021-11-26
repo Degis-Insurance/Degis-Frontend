@@ -13,7 +13,7 @@
         <sidebar-item :link="{ name: 'Provide', src: 'img/function/icon/price.png', path: '/price-provide', }"/>
         <sidebar-item :link="{ name: 'Mining', src: 'img/function/icon/mining.png', path: '/mining', }"/>
         <sidebar-item :link="{ name: 'Lucky Box', src: 'img/function/icon/luckybox.png', path: '/luckybox', }"/>
-        <sidebar-item :link="{ name: 'Bazaar', src: 'img/function/icon/bazaar.png', path: '/bazaar', }"/>
+        <sidebar-item :link="{ name: 'Meta Market', src: 'img/function/icon/metamarket.png', path: '/metamarket', }"/>
         <img class="ml-4" style="width: 230px; padding-top: 10%;" src="img/function/sidebar-bottom.png"/>
         <!--        <div class="mt&#45;&#45;2" style="width: 260px; height: 280px; overflow: hidden; border: 0px">-->
         <!--          <div style="margin:-900px -1000px -200px -0px;">-->
