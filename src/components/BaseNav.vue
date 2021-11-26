@@ -8,8 +8,7 @@
     ]"
   >
     <div class="container-fluid">
-      <div class="">
-        <h6 class="fw-7 d-g3 fs-14">Hi dude,</h6>
+      <div>
         <h6 class="fw-7 d-g3 fs-24">Welcome to DEGIS!</h6>
       </div>
       <div>
