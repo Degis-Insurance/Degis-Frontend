@@ -11,12 +11,13 @@
       <div>
         <h6 class="fw-7 d-g3 fs-24">Welcome to DEGIS!</h6>
       </div>
-      <div>
+      <!-- <div>
         <span>{{ degisBalance }}</span>
         <base-button @click="getDegisBalance">check degis balance </base-button>
-      </div>
+      </div> -->
       <div>
-        <span id="userInfo">{{ selectedAccount }}</span>
+        <span id="userInfo"> {{ selectedAccount }}</span>
+      
         <base-button v-if="!isConnected" @click="connectWallet">{{
           walletstatus
         }}</base-button>
@@ -64,6 +65,11 @@ export default {
   },
   computed: {
     selectedAccount() {
+      var account = this.$store.state.selectedAccount;
+      if(account != null)
+      {
+        return account.substr(0,5) + "..." + account.substr(37,41);
+      }
       return this.$store.state.selectedAccount;
     },
   },

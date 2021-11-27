@@ -10,6 +10,11 @@ import InsurancePool_abi from "../abi/InsurancePool.json";
 import LPToken_abi from "../abi/LPToken.json";
 import PolicyFlow_abi from "../abi/PolicyFlow.json";
 import DegisLottery_abi from "../abi/DegisLottery.json";
+import NaughtyFactory_abi from "../abi/NaughtyFactory.json";
+import NaughtyRouter_abi from "../abi/NaughtyRouter.json";
+import PolicyCore_abi from "../abi/PolicyCore.json";
+import PolicyToken_abi from "../abi/PolicyToken.json";
+import NaughtyPair_abi from "../abi/NaughtyPair.json";
 
 export const getCurrentAccount = async () => {
   return getWeb3().then((res) => res.currentProvider.selectedAddress);
@@ -66,5 +71,50 @@ export const getDegisLottery = async () => {
   return await new web3.eth.Contract(
     DegisLottery_abi.abi,
     getAddress("DEGISLOTTERY", chainId)
+  );
+}
+
+export const getNaughtyFactory = async () => {
+  const web3 = await getWeb3();
+  const chainId = getChainId();
+  return await new web3.eth.Contract(
+    NaughtyFactory_abi.abi,
+    getAddress("NAUGHTYFACTORY", chainId)
+  );
+}
+
+export const getNaughtyRouter = async () => {
+  const web3 = await getWeb3();
+  const chainId = getChainId();
+  return await new web3.eth.Contract(
+    NaughtyRouter_abi.abi,
+    getAddress("NAUGHTYROUTER", chainId)
+  );
+}
+
+export const getPolicyCore = async () => {
+  const web3 = await getWeb3();
+  const chainId = getChainId();
+  return await new web3.eth.Contract(
+    PolicyCore_abi.abi,
+    getAddress("POLICYCORE", chainId)
+  );
+}
+
+export const getPolicyToken = async (tokenAddress) => {
+  const web3 = await getWeb3();
+  const chainId = getChainId();
+  return await new web3.eth.Contract(
+    PolicyToken_abi.abi,
+    tokenAddress
+  );
+}
+
+export const getNaughtyPair = async (pairAddress) => {
+  const web3 = await getWeb3();
+  const chainId = getChainId();
+  return await new web3.eth.Contract(
+    NaughtyPair_abi.abi,
+    pairAddress
   );
 }

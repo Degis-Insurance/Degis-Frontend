@@ -20,11 +20,11 @@
             class="fw-9 d-p pt-4"
             style="font-size: 60px; margin: auto; text-align: center"
           >
-            ${{ inPrize }}
+            ${{ inPrizeMin }}
           </h1>
         </div>
         <div class="row align-items-center">
-          <h5 class="fw-9 d-g2 fs-24 ma pt-4">IN PRIZES!</h5>
+          <h5 class="fw-9 d-g2 fs-24 ma pt-4"> {{inPrize}} IN PRIZES!</h5>
         </div>
         <div class="row row-grid align-items-center">
           <base-button
@@ -56,6 +56,7 @@
             <!--            <base-button @click="modals.PendingPrize = true">PENDING PRIZE</base-button>-->
           </div>
         </div>
+
 
         <el-tabs type="" :stretch="true">
           <el-tab-pane>
@@ -233,6 +234,7 @@ export default {
       viewData: {},
       refundData: {},
       inPrize: "--",
+      inPrizeMin: "--"
     };
   },
 
@@ -342,9 +344,8 @@ export default {
         });
         console.log(lotteryDetails[i]);
       }
-      this.inPrize = (
-        lotteryDetails[lotteryDetails.length - 1]["amountCollected"] / 1e18
-      ).toFixed(2);
+      this.inPrize = (lotteryDetails[lotteryDetails.length-1]["amountCollected"]/ 1e18).toFixed(2) 
+      this.inPrizeMin = Math.max(10000, this.inPrize).toFixed(2) 
     },
 
     async showUserInfoEvent() {

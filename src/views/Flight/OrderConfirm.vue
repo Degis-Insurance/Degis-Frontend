@@ -23,9 +23,9 @@
             </div>
             <img src="img/function/flight-info.png" class="pb-4" style="width: 100%;"/>
             <div class="d-flex justify-content-between">
-              <p class="fw-4 d-p fs-32">{{ buyData.route }}</p>
+              <p class="fw-4 d-p fs-32">{{ getFrom }}</p>
               <p class="fw-4 d-g3 fs-16 pt-3"> -- </p>
-              <p class="fw-4 d-p fs-32">{{ buyData.route }}</p>
+              <p class="fw-4 d-p fs-32">{{ getTo }}</p>
             </div>
 
             <div class="d-flex justify-content-between">
@@ -87,6 +87,24 @@ import {
 export default {
   name: "order-confirm",
   components: {},
+  computed: {
+    getFrom()
+    {
+      if(this.buyData.route != null)
+      {
+        return this.buyData.route.split("-")[0];
+      }
+      return "";
+    },
+    getTo()
+    {
+      if(this.buyData.route != null)
+      {
+        return this.buyData.route.split("-")[1];
+      }
+      return "";
+    }
+  },
   props: {
     show: Boolean,
     buyData: {}

@@ -10,7 +10,7 @@
                 <img :src="'img/protection/price/' + data.coin1 + '.png'" class="img-fluid" style="width: 64px"/>
                 <span class="fw-7 d-g1 fs-34 pl-3" style="vertical-align: middle">{{ data.coin1 }}</span>
               </div>
-              <input class="fw-4 d-g2 fs-32 mt-3 ta-c" value="0" style="background-color: #F2F2F2; border-radius: 12px; height: 58px; width: 100%; border-width: 0px" :id="coin1"/>
+              <input class="fw-4 d-g2 fs-32 mt-3 ta-c" style="background-color: #F2F2F2; border-radius: 12px; height: 58px; width: 100%; border-width: 0px" v-model="coin1"/>
             </div>
             <div class="col-2 d-flex justify-content-center">
               <i v-if="data.type === 'create'" class="el-icon-right d-p" style="font-size: 80px"/>
@@ -21,23 +21,34 @@
                 <img :src="'img/protection/price/' + data.coin2 + '.png'" class="img-fluid" style="width: 64px"/>
                 <span class="fw-7 d-g1 fs-34 pl-3" style="vertical-align: middle">{{ data.coin2 }}</span>
               </div>
-              <input class="fw-4 d-g2 fs-32 mt-3 ta-c" value="0" style="background-color: #F2F2F2; border-radius: 12px; height: 58px; width: 100%; border-width: 0px" :id="coin2"/>
+              <input class="fw-4 d-g2 fs-32 mt-3 ta-c" style="background-color: #F2F2F2; border-radius: 12px; height: 58px; width: 100%; border-width: 0px" v-model="coin2"/>
             </div>
           </div>
         </div>
 
         <div class="modal-footer pt-1" style="display: block">
-          <base-button v-if="data.type === 'create'" style="width: 100%" @click="create(data)">Create</base-button>
-          <base-button v-else style="width: 100%" @click="redeem(data)">Redeem</base-button>
+          <base-button v-if="data.type === 'create'" style="width: 100%" @click="createEvent()">Create</base-button>
+          <base-button v-else style="width: 100%" @click="redeemEvent()">Redeem</base-button>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import {
+  getMockUSD,
+  getNaughtyFactory,
+  getPolicyCore,
+} from "../../utils/contractInstance";
 export default {
   name: "create-redeem",
   components: {},
+  data() {
+    return {
+      coin1: 0,
+      coin2: 0
+    }
+  },
   props: {
     show: Boolean,
     data: Object,
@@ -47,14 +58,60 @@ export default {
       this.$emit("update:show", false);
       this.$emit("close");
     },
-    create(data) {
-      console.log(data);
+
+    async create(depositAmount,tokenName) {
+      const account = this.$store.state.selectedAccount;
+      const usdt = await getMockUSD();
+      const core = await getPolicyCore();
+      var amount = window.WEB3.utils.toWei(String(depositAmount), "ether");
+      console.log("core",core.options.address)
+      console.log("usdt",usdt.options.address)
+
+      const tx1 = await usdt.methods
+        .approve(core.options.address, amount)
+        .send({ from: account });
+
+      console.log(tx1);
+
+      const tx2 = await core.methods
+        .deposit(
+          tokenName,
+          usdt.options.address,
+          amount
+        )
+        .send({ from: account });
+      console.log(tx2.transactionHash);
+    },
+
+    async redeem(redeemAmount, tokenName) {
+      const account = this.$store.state.selectedAccount;
+      const usdt = await getMockUSD();
+      const core = await getPolicyCore();
+
+      var amount = window.WEB3.utils.toWei(String(redeemAmount), "ether");
+      const tx1 = await core.methods
+        .redeem(tokenName, usdt.options.address, window.WEB3.utils.toBN(amount))
+        .send({ from: account });
+      
+      console.log(tx1.transactionHash);
+    },
+
+    async createEvent() {
+      const createAmount = this.coin1;
+      const tokenName = this.data.coin2;
+      console.log(createAmount,tokenName)
+      await this.create(createAmount,tokenName);
       this.closeModal();
     },
-    redeem(data) {
-      console.log(data);
+
+    async redeemEvent() {
+      const redeemAmount = this.coin2;
+      const tokenName = this.data.coin2;
+      console.log(redeemAmount,tokenName)
+      await this.redeem(redeemAmount,tokenName);
       this.closeModal();
-    }
+    },
+
   },
   watch: {
     show(val) {

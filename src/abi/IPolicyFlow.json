@@ -1,0 +1,3779 @@
+{
+  "contractName": "IPolicyFlow",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_thresholdMin",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_thresholdMax",
+          "type": "uint256"
+        }
+      ],
+      "name": "DelayThresholdSet",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_policyId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "_requestId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "FulfilledOracleRequest",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_policyID",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "_userAddress",
+          "type": "address"
+        }
+      ],
+      "name": "PolicyClaimed",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_policyID",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "_userAddress",
+          "type": "address"
+        }
+      ],
+      "name": "PolicyDeclined",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_policyID",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "_userAddress",
+          "type": "address"
+        }
+      ],
+      "name": "PolicyExpired",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "_tokenId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "_newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "PolicyOwnerTransfer",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_policyID",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "_userAddress",
+          "type": "address"
+        }
+      ],
+      "name": "PolicySold",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_policyID",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "_userAddress",
+          "type": "address"
+        }
+      ],
+      "name": "newPolicyApplication",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_productId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "_flightNumber",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_premium",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_departureDate",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_landingDate",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_deadline",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "signature",
+          "type": "bytes"
+        }
+      ],
+      "name": "newApplication",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "policyId",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_policyId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "_flightNumber",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_date",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_path",
+          "type": "string"
+        },
+        {
+          "internalType": "bool",
+          "name": "_forceUpdate",
+          "type": "bool"
+        }
+      ],
+      "name": "newClaimRequest",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "viewUserPolicy",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "productId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "buyerAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "policyId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "flightNumber",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "premium",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "payoff",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "purchaseDate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "departureDate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "landingDate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "enum IPolicyTypes.PolicyStatus",
+              "name": "status",
+              "type": "uint8"
+            },
+            {
+              "internalType": "bool",
+              "name": "isUsed",
+              "type": "bool"
+            },
+            {
+              "internalType": "uint256",
+              "name": "delayResult",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct IPolicyTypes.PolicyInfo[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "getPolicyInfoById",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "productId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "buyerAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "policyId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "flightNumber",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "premium",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "payoff",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "purchaseDate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "departureDate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "landingDate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "enum IPolicyTypes.PolicyStatus",
+              "name": "status",
+              "type": "uint8"
+            },
+            {
+              "internalType": "bool",
+              "name": "isUsed",
+              "type": "bool"
+            },
+            {
+              "internalType": "uint256",
+              "name": "delayResult",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct IPolicyTypes.PolicyInfo",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "policyOwnerTransfer",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "_requestId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_result",
+          "type": "uint256"
+        }
+      ],
+      "name": "finalSettlement",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getChainlinkToken",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "getUserPolicyCount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.9+commit.e5eed63a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_thresholdMin\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_thresholdMax\",\"type\":\"uint256\"}],\"name\":\"DelayThresholdSet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_policyId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"_requestId\",\"type\":\"bytes32\"}],\"name\":\"FulfilledOracleRequest\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_policyID\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"_userAddress\",\"type\":\"address\"}],\"name\":\"PolicyClaimed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_policyID\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"_userAddress\",\"type\":\"address\"}],\"name\":\"PolicyDeclined\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_policyID\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"_userAddress\",\"type\":\"address\"}],\"name\":\"PolicyExpired\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"_tokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_newOwner\",\"type\":\"address\"}],\"name\":\"PolicyOwnerTransfer\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_policyID\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"_userAddress\",\"type\":\"address\"}],\"name\":\"PolicySold\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_policyID\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"_userAddress\",\"type\":\"address\"}],\"name\":\"newPolicyApplication\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_requestId\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"_result\",\"type\":\"uint256\"}],\"name\":\"finalSettlement\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getChainlinkToken\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"getPolicyInfoById\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"productId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"buyerAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"policyId\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"flightNumber\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"premium\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"payoff\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"purchaseDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"departureDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"landingDate\",\"type\":\"uint256\"},{\"internalType\":\"enum IPolicyTypes.PolicyStatus\",\"name\":\"status\",\"type\":\"uint8\"},{\"internalType\":\"bool\",\"name\":\"isUsed\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"delayResult\",\"type\":\"uint256\"}],\"internalType\":\"struct IPolicyTypes.PolicyInfo\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"getUserPolicyCount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_productId\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"_flightNumber\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"_premium\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_departureDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_landingDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_deadline\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"signature\",\"type\":\"bytes\"}],\"name\":\"newApplication\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"policyId\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_policyId\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"_flightNumber\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_date\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_path\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"_forceUpdate\",\"type\":\"bool\"}],\"name\":\"newClaimRequest\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"policyOwnerTransfer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"viewUserPolicy\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"productId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"buyerAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"policyId\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"flightNumber\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"premium\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"payoff\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"purchaseDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"departureDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"landingDate\",\"type\":\"uint256\"},{\"internalType\":\"enum IPolicyTypes.PolicyStatus\",\"name\":\"status\",\"type\":\"uint8\"},{\"internalType\":\"bool\",\"name\":\"isUsed\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"delayResult\",\"type\":\"uint256\"}],\"internalType\":\"struct IPolicyTypes.PolicyInfo[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"title\":\"IPolicyFlow\",\"version\":1},\"userdoc\":{\"events\":{\"newPolicyApplication(uint256,address)\":{\"notice\":\"Event list\"}},\"kind\":\"user\",\"methods\":{\"finalSettlement(bytes32,uint256)\":{\"notice\":\"Do the final settlement when receiving the oracle result\"},\"getPolicyInfoById(uint256)\":{\"notice\":\"Get the policy info by its policyId\"},\"newApplication(uint256,string,uint256,uint256,uint256,uint256,bytes)\":{\"notice\":\"Apply for a new policy\"},\"newClaimRequest(uint256,string,string,string,bool)\":{\"notice\":\"Start a new claim request\"},\"policyOwnerTransfer(uint256,address,address)\":{\"notice\":\"Update when the policy token is transferred to another owner\"},\"viewUserPolicy(address)\":{\"notice\":\"View a user's policy info\"}},\"notice\":\"This is the interface of PolicyFlow contract.         Contains some type definations, event list and function declarations.\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/interfaces/IPolicyFlow.sol\":\"IPolicyFlow\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/interfaces/IPolicyFlow.sol\":{\"keccak256\":\"0x77d419d95178f02019a763f2f4be51d680be61c4e1c77525655fb60bb8754cf9\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://0e435daf6878136d2c4e79fa21aac00fc2be20a3db93a1d58fbe8a6215f265d8\",\"dweb:/ipfs/QmSXKQC3ZhsgS8K2BFtQfQGnkSMufNYiyFhucANkR6AsWv\"]},\"project:/contracts/interfaces/IPolicyTypes.sol\":{\"keccak256\":\"0x10e5b2b50b8242c6da13dd3e60f26c120b48dfcb594a122f40cbce31d5e7d9cc\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://e3b8086d73159a5c23683b4296122aee0a385263be1507e37b2a53ec040fa74f\",\"dweb:/ipfs/QmfFBZhPdov75vSeLZRtXq87njqUUMVVmmUS5kX1R9Sfgx\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity 0.8.9;\nimport \"./IPolicyTypes.sol\";\n\n/**\n * @title  IPolicyFlow\n * @notice This is the interface of PolicyFlow contract.\n *         Contains some type definations, event list and function declarations.\n */\ninterface IPolicyFlow is IPolicyTypes {\n    /// @notice Event list\n    event newPolicyApplication(uint256 _policyID, address indexed _userAddress);\n    event PolicySold(uint256 _policyID, address indexed _userAddress);\n    event PolicyDeclined(uint256 _policyID, address indexed _userAddress);\n    event PolicyClaimed(uint256 _policyID, address indexed _userAddress);\n    event PolicyExpired(uint256 _policyID, address indexed _userAddress);\n    event FulfilledOracleRequest(uint256 _policyId, bytes32 _requestId);\n    event PolicyOwnerTransfer(uint256 indexed _tokenId, address _newOwner);\n    event DelayThresholdSet(uint256 _thresholdMin, uint256 _thresholdMax);\n\n    /// @notice Function declarations\n\n    /// @notice Apply for a new policy\n    function newApplication(\n        uint256 _productId,\n        string memory _flightNumber,\n        uint256 _premium,\n        uint256 _departureDate,\n        uint256 _landingDate,\n        uint256 _deadline,\n        bytes calldata signature\n    ) external returns (uint256 policyId);\n\n    /// @notice Start a new claim request\n    function newClaimRequest(\n        uint256 _policyId,\n        string memory _flightNumber,\n        string memory _date,\n        string memory _path,\n        bool _forceUpdate\n    ) external;\n\n    /// @notice View a user's policy info\n    function viewUserPolicy(address)\n        external\n        view\n        returns (PolicyInfo[] memory);\n\n    /// @notice Get the policy info by its policyId\n    function getPolicyInfoById(uint256)\n        external\n        view\n        returns (PolicyInfo memory);\n\n    /// @notice Update when the policy token is transferred to another owner\n    function policyOwnerTransfer(\n        uint256,\n        address,\n        address\n    ) external;\n\n    /// @notice Do the final settlement when receiving the oracle result\n    function finalSettlement(bytes32 _requestId, uint256 _result) external;\n\n    function getChainlinkToken() external view returns (address);\n\n    function getUserPolicyCount(address) external view returns (uint256);\n}\n",
+  "sourcePath": "/Volumes/Store/src/Degis-Contracts-1/contracts/interfaces/IPolicyFlow.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/interfaces/IPolicyFlow.sol",
+    "exportedSymbols": {
+      "IPolicyFlow": [
+        5994
+      ],
+      "IPolicyTypes": [
+        6078
+      ]
+    },
+    "id": 5995,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 5857,
+        "literals": [
+          "solidity",
+          "0.8",
+          ".9"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:22:30"
+      },
+      {
+        "absolutePath": "project:/contracts/interfaces/IPolicyTypes.sol",
+        "file": "./IPolicyTypes.sol",
+        "id": 5858,
+        "nameLocation": "-1:-1:-1",
+        "nodeType": "ImportDirective",
+        "scope": 5995,
+        "sourceUnit": 6079,
+        "src": "55:28:30",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 5860,
+              "name": "IPolicyTypes",
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 6078,
+              "src": "279:12:30"
+            },
+            "id": 5861,
+            "nodeType": "InheritanceSpecifier",
+            "src": "279:12:30"
+          }
+        ],
+        "canonicalName": "IPolicyFlow",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 5859,
+          "nodeType": "StructuredDocumentation",
+          "src": "85:168:30",
+          "text": " @title  IPolicyFlow\n @notice This is the interface of PolicyFlow contract.\n         Contains some type definations, event list and function declarations."
+        },
+        "fullyImplemented": false,
+        "id": 5994,
+        "linearizedBaseContracts": [
+          5994,
+          6078
+        ],
+        "name": "IPolicyFlow",
+        "nameLocation": "264:11:30",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": {
+              "id": 5862,
+              "nodeType": "StructuredDocumentation",
+              "src": "298:22:30",
+              "text": "@notice Event list"
+            },
+            "id": 5868,
+            "name": "newPolicyApplication",
+            "nameLocation": "331:20:30",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 5867,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5864,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_policyID",
+                  "nameLocation": "360:9:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5868,
+                  "src": "352:17:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5863,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "352:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5866,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "_userAddress",
+                  "nameLocation": "387:12:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5868,
+                  "src": "371:28:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5865,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "371:7:30",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "351:49:30"
+            },
+            "src": "325:76:30"
+          },
+          {
+            "anonymous": false,
+            "id": 5874,
+            "name": "PolicySold",
+            "nameLocation": "412:10:30",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 5873,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5870,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_policyID",
+                  "nameLocation": "431:9:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5874,
+                  "src": "423:17:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5869,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "423:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5872,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "_userAddress",
+                  "nameLocation": "458:12:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5874,
+                  "src": "442:28:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5871,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "442:7:30",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "422:49:30"
+            },
+            "src": "406:66:30"
+          },
+          {
+            "anonymous": false,
+            "id": 5880,
+            "name": "PolicyDeclined",
+            "nameLocation": "483:14:30",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 5879,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5876,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_policyID",
+                  "nameLocation": "506:9:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5880,
+                  "src": "498:17:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5875,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "498:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5878,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "_userAddress",
+                  "nameLocation": "533:12:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5880,
+                  "src": "517:28:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5877,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "517:7:30",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "497:49:30"
+            },
+            "src": "477:70:30"
+          },
+          {
+            "anonymous": false,
+            "id": 5886,
+            "name": "PolicyClaimed",
+            "nameLocation": "558:13:30",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 5885,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5882,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_policyID",
+                  "nameLocation": "580:9:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5886,
+                  "src": "572:17:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5881,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "572:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5884,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "_userAddress",
+                  "nameLocation": "607:12:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5886,
+                  "src": "591:28:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5883,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "591:7:30",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "571:49:30"
+            },
+            "src": "552:69:30"
+          },
+          {
+            "anonymous": false,
+            "id": 5892,
+            "name": "PolicyExpired",
+            "nameLocation": "632:13:30",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 5891,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5888,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_policyID",
+                  "nameLocation": "654:9:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5892,
+                  "src": "646:17:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5887,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "646:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5890,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "_userAddress",
+                  "nameLocation": "681:12:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5892,
+                  "src": "665:28:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5889,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "665:7:30",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "645:49:30"
+            },
+            "src": "626:69:30"
+          },
+          {
+            "anonymous": false,
+            "id": 5898,
+            "name": "FulfilledOracleRequest",
+            "nameLocation": "706:22:30",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 5897,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5894,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_policyId",
+                  "nameLocation": "737:9:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5898,
+                  "src": "729:17:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5893,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "729:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5896,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_requestId",
+                  "nameLocation": "756:10:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5898,
+                  "src": "748:18:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 5895,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "748:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "728:39:30"
+            },
+            "src": "700:68:30"
+          },
+          {
+            "anonymous": false,
+            "id": 5904,
+            "name": "PolicyOwnerTransfer",
+            "nameLocation": "779:19:30",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 5903,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5900,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "_tokenId",
+                  "nameLocation": "815:8:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5904,
+                  "src": "799:24:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5899,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "799:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5902,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_newOwner",
+                  "nameLocation": "833:9:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5904,
+                  "src": "825:17:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5901,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "825:7:30",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "798:45:30"
+            },
+            "src": "773:71:30"
+          },
+          {
+            "anonymous": false,
+            "id": 5910,
+            "name": "DelayThresholdSet",
+            "nameLocation": "855:17:30",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 5909,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5906,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_thresholdMin",
+                  "nameLocation": "881:13:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5910,
+                  "src": "873:21:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5905,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "873:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5908,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_thresholdMax",
+                  "nameLocation": "904:13:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5910,
+                  "src": "896:21:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5907,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "896:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "872:46:30"
+            },
+            "src": "849:70:30"
+          },
+          {
+            "documentation": {
+              "id": 5911,
+              "nodeType": "StructuredDocumentation",
+              "src": "964:34:30",
+              "text": "@notice Apply for a new policy"
+            },
+            "functionSelector": "21deab0e",
+            "id": 5930,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "newApplication",
+            "nameLocation": "1012:14:30",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5926,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5913,
+                  "mutability": "mutable",
+                  "name": "_productId",
+                  "nameLocation": "1044:10:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5930,
+                  "src": "1036:18:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5912,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1036:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5915,
+                  "mutability": "mutable",
+                  "name": "_flightNumber",
+                  "nameLocation": "1078:13:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5930,
+                  "src": "1064:27:30",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 5914,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1064:6:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5917,
+                  "mutability": "mutable",
+                  "name": "_premium",
+                  "nameLocation": "1109:8:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5930,
+                  "src": "1101:16:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5916,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1101:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5919,
+                  "mutability": "mutable",
+                  "name": "_departureDate",
+                  "nameLocation": "1135:14:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5930,
+                  "src": "1127:22:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5918,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1127:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5921,
+                  "mutability": "mutable",
+                  "name": "_landingDate",
+                  "nameLocation": "1167:12:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5930,
+                  "src": "1159:20:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5920,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1159:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5923,
+                  "mutability": "mutable",
+                  "name": "_deadline",
+                  "nameLocation": "1197:9:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5930,
+                  "src": "1189:17:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5922,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1189:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5925,
+                  "mutability": "mutable",
+                  "name": "signature",
+                  "nameLocation": "1231:9:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5930,
+                  "src": "1216:24:30",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 5924,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1216:5:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1026:220:30"
+            },
+            "returnParameters": {
+              "id": 5929,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5928,
+                  "mutability": "mutable",
+                  "name": "policyId",
+                  "nameLocation": "1273:8:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5930,
+                  "src": "1265:16:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5927,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1265:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1264:18:30"
+            },
+            "scope": 5994,
+            "src": "1003:280:30",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 5931,
+              "nodeType": "StructuredDocumentation",
+              "src": "1289:37:30",
+              "text": "@notice Start a new claim request"
+            },
+            "functionSelector": "0f42fd0b",
+            "id": 5944,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "newClaimRequest",
+            "nameLocation": "1340:15:30",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5942,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5933,
+                  "mutability": "mutable",
+                  "name": "_policyId",
+                  "nameLocation": "1373:9:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5944,
+                  "src": "1365:17:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5932,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1365:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5935,
+                  "mutability": "mutable",
+                  "name": "_flightNumber",
+                  "nameLocation": "1406:13:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5944,
+                  "src": "1392:27:30",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 5934,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1392:6:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5937,
+                  "mutability": "mutable",
+                  "name": "_date",
+                  "nameLocation": "1443:5:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5944,
+                  "src": "1429:19:30",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 5936,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1429:6:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5939,
+                  "mutability": "mutable",
+                  "name": "_path",
+                  "nameLocation": "1472:5:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5944,
+                  "src": "1458:19:30",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 5938,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1458:6:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5941,
+                  "mutability": "mutable",
+                  "name": "_forceUpdate",
+                  "nameLocation": "1492:12:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5944,
+                  "src": "1487:17:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 5940,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1487:4:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1355:155:30"
+            },
+            "returnParameters": {
+              "id": 5943,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1519:0:30"
+            },
+            "scope": 5994,
+            "src": "1331:189:30",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 5945,
+              "nodeType": "StructuredDocumentation",
+              "src": "1526:37:30",
+              "text": "@notice View a user's policy info"
+            },
+            "functionSelector": "6ce0403c",
+            "id": 5954,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "viewUserPolicy",
+            "nameLocation": "1577:14:30",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5948,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5947,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5954,
+                  "src": "1592:7:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5946,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1592:7:30",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1591:9:30"
+            },
+            "returnParameters": {
+              "id": 5953,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5952,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5954,
+                  "src": "1648:19:30",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_struct$_PolicyInfo_$6056_memory_ptr_$dyn_memory_ptr",
+                    "typeString": "struct IPolicyTypes.PolicyInfo[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 5950,
+                      "nodeType": "UserDefinedTypeName",
+                      "pathNode": {
+                        "id": 5949,
+                        "name": "PolicyInfo",
+                        "nodeType": "IdentifierPath",
+                        "referencedDeclaration": 6056,
+                        "src": "1648:10:30"
+                      },
+                      "referencedDeclaration": 6056,
+                      "src": "1648:10:30",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_PolicyInfo_$6056_storage_ptr",
+                        "typeString": "struct IPolicyTypes.PolicyInfo"
+                      }
+                    },
+                    "id": 5951,
+                    "nodeType": "ArrayTypeName",
+                    "src": "1648:12:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_struct$_PolicyInfo_$6056_storage_$dyn_storage_ptr",
+                      "typeString": "struct IPolicyTypes.PolicyInfo[]"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1647:21:30"
+            },
+            "scope": 5994,
+            "src": "1568:101:30",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 5955,
+              "nodeType": "StructuredDocumentation",
+              "src": "1675:47:30",
+              "text": "@notice Get the policy info by its policyId"
+            },
+            "functionSelector": "6b0edde9",
+            "id": 5963,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getPolicyInfoById",
+            "nameLocation": "1736:17:30",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5958,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5957,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5963,
+                  "src": "1754:7:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5956,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1754:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1753:9:30"
+            },
+            "returnParameters": {
+              "id": 5962,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5961,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5963,
+                  "src": "1810:17:30",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_PolicyInfo_$6056_memory_ptr",
+                    "typeString": "struct IPolicyTypes.PolicyInfo"
+                  },
+                  "typeName": {
+                    "id": 5960,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 5959,
+                      "name": "PolicyInfo",
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 6056,
+                      "src": "1810:10:30"
+                    },
+                    "referencedDeclaration": 6056,
+                    "src": "1810:10:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_PolicyInfo_$6056_storage_ptr",
+                      "typeString": "struct IPolicyTypes.PolicyInfo"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1809:19:30"
+            },
+            "scope": 5994,
+            "src": "1727:102:30",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 5964,
+              "nodeType": "StructuredDocumentation",
+              "src": "1835:72:30",
+              "text": "@notice Update when the policy token is transferred to another owner"
+            },
+            "functionSelector": "8e34ce35",
+            "id": 5973,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "policyOwnerTransfer",
+            "nameLocation": "1921:19:30",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5971,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5966,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5973,
+                  "src": "1950:7:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5965,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1950:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5968,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5973,
+                  "src": "1967:7:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5967,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1967:7:30",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5970,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5973,
+                  "src": "1984:7:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5969,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1984:7:30",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1940:57:30"
+            },
+            "returnParameters": {
+              "id": 5972,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2006:0:30"
+            },
+            "scope": 5994,
+            "src": "1912:95:30",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 5974,
+              "nodeType": "StructuredDocumentation",
+              "src": "2013:68:30",
+              "text": "@notice Do the final settlement when receiving the oracle result"
+            },
+            "functionSelector": "1a397db9",
+            "id": 5981,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "finalSettlement",
+            "nameLocation": "2095:15:30",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5979,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5976,
+                  "mutability": "mutable",
+                  "name": "_requestId",
+                  "nameLocation": "2119:10:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5981,
+                  "src": "2111:18:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 5975,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2111:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5978,
+                  "mutability": "mutable",
+                  "name": "_result",
+                  "nameLocation": "2139:7:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5981,
+                  "src": "2131:15:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5977,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2131:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2110:37:30"
+            },
+            "returnParameters": {
+              "id": 5980,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2156:0:30"
+            },
+            "scope": 5994,
+            "src": "2086:71:30",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "functionSelector": "165d35e1",
+            "id": 5986,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getChainlinkToken",
+            "nameLocation": "2172:17:30",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5982,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2189:2:30"
+            },
+            "returnParameters": {
+              "id": 5985,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5984,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5986,
+                  "src": "2215:7:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5983,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2215:7:30",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2214:9:30"
+            },
+            "scope": 5994,
+            "src": "2163:61:30",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "functionSelector": "3d21a7d1",
+            "id": 5993,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getUserPolicyCount",
+            "nameLocation": "2239:18:30",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5989,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5988,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5993,
+                  "src": "2258:7:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5987,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2258:7:30",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2257:9:30"
+            },
+            "returnParameters": {
+              "id": 5992,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5991,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5993,
+                  "src": "2290:7:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5990,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2290:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2289:9:30"
+            },
+            "scope": 5994,
+            "src": "2230:69:30",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 5995,
+        "src": "254:2047:30",
+        "usedErrors": []
+      }
+    ],
+    "src": "32:2270:30"
+  },
+  "legacyAST": {
+    "absolutePath": "project:/contracts/interfaces/IPolicyFlow.sol",
+    "exportedSymbols": {
+      "IPolicyFlow": [
+        5994
+      ],
+      "IPolicyTypes": [
+        6078
+      ]
+    },
+    "id": 5995,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 5857,
+        "literals": [
+          "solidity",
+          "0.8",
+          ".9"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:22:30"
+      },
+      {
+        "absolutePath": "project:/contracts/interfaces/IPolicyTypes.sol",
+        "file": "./IPolicyTypes.sol",
+        "id": 5858,
+        "nameLocation": "-1:-1:-1",
+        "nodeType": "ImportDirective",
+        "scope": 5995,
+        "sourceUnit": 6079,
+        "src": "55:28:30",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 5860,
+              "name": "IPolicyTypes",
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 6078,
+              "src": "279:12:30"
+            },
+            "id": 5861,
+            "nodeType": "InheritanceSpecifier",
+            "src": "279:12:30"
+          }
+        ],
+        "canonicalName": "IPolicyFlow",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 5859,
+          "nodeType": "StructuredDocumentation",
+          "src": "85:168:30",
+          "text": " @title  IPolicyFlow\n @notice This is the interface of PolicyFlow contract.\n         Contains some type definations, event list and function declarations."
+        },
+        "fullyImplemented": false,
+        "id": 5994,
+        "linearizedBaseContracts": [
+          5994,
+          6078
+        ],
+        "name": "IPolicyFlow",
+        "nameLocation": "264:11:30",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": {
+              "id": 5862,
+              "nodeType": "StructuredDocumentation",
+              "src": "298:22:30",
+              "text": "@notice Event list"
+            },
+            "id": 5868,
+            "name": "newPolicyApplication",
+            "nameLocation": "331:20:30",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 5867,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5864,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_policyID",
+                  "nameLocation": "360:9:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5868,
+                  "src": "352:17:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5863,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "352:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5866,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "_userAddress",
+                  "nameLocation": "387:12:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5868,
+                  "src": "371:28:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5865,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "371:7:30",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "351:49:30"
+            },
+            "src": "325:76:30"
+          },
+          {
+            "anonymous": false,
+            "id": 5874,
+            "name": "PolicySold",
+            "nameLocation": "412:10:30",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 5873,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5870,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_policyID",
+                  "nameLocation": "431:9:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5874,
+                  "src": "423:17:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5869,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "423:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5872,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "_userAddress",
+                  "nameLocation": "458:12:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5874,
+                  "src": "442:28:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5871,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "442:7:30",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "422:49:30"
+            },
+            "src": "406:66:30"
+          },
+          {
+            "anonymous": false,
+            "id": 5880,
+            "name": "PolicyDeclined",
+            "nameLocation": "483:14:30",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 5879,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5876,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_policyID",
+                  "nameLocation": "506:9:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5880,
+                  "src": "498:17:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5875,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "498:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5878,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "_userAddress",
+                  "nameLocation": "533:12:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5880,
+                  "src": "517:28:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5877,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "517:7:30",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "497:49:30"
+            },
+            "src": "477:70:30"
+          },
+          {
+            "anonymous": false,
+            "id": 5886,
+            "name": "PolicyClaimed",
+            "nameLocation": "558:13:30",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 5885,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5882,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_policyID",
+                  "nameLocation": "580:9:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5886,
+                  "src": "572:17:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5881,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "572:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5884,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "_userAddress",
+                  "nameLocation": "607:12:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5886,
+                  "src": "591:28:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5883,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "591:7:30",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "571:49:30"
+            },
+            "src": "552:69:30"
+          },
+          {
+            "anonymous": false,
+            "id": 5892,
+            "name": "PolicyExpired",
+            "nameLocation": "632:13:30",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 5891,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5888,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_policyID",
+                  "nameLocation": "654:9:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5892,
+                  "src": "646:17:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5887,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "646:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5890,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "_userAddress",
+                  "nameLocation": "681:12:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5892,
+                  "src": "665:28:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5889,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "665:7:30",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "645:49:30"
+            },
+            "src": "626:69:30"
+          },
+          {
+            "anonymous": false,
+            "id": 5898,
+            "name": "FulfilledOracleRequest",
+            "nameLocation": "706:22:30",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 5897,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5894,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_policyId",
+                  "nameLocation": "737:9:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5898,
+                  "src": "729:17:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5893,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "729:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5896,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_requestId",
+                  "nameLocation": "756:10:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5898,
+                  "src": "748:18:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 5895,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "748:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "728:39:30"
+            },
+            "src": "700:68:30"
+          },
+          {
+            "anonymous": false,
+            "id": 5904,
+            "name": "PolicyOwnerTransfer",
+            "nameLocation": "779:19:30",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 5903,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5900,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "_tokenId",
+                  "nameLocation": "815:8:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5904,
+                  "src": "799:24:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5899,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "799:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5902,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_newOwner",
+                  "nameLocation": "833:9:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5904,
+                  "src": "825:17:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5901,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "825:7:30",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "798:45:30"
+            },
+            "src": "773:71:30"
+          },
+          {
+            "anonymous": false,
+            "id": 5910,
+            "name": "DelayThresholdSet",
+            "nameLocation": "855:17:30",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 5909,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5906,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_thresholdMin",
+                  "nameLocation": "881:13:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5910,
+                  "src": "873:21:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5905,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "873:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5908,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_thresholdMax",
+                  "nameLocation": "904:13:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5910,
+                  "src": "896:21:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5907,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "896:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "872:46:30"
+            },
+            "src": "849:70:30"
+          },
+          {
+            "documentation": {
+              "id": 5911,
+              "nodeType": "StructuredDocumentation",
+              "src": "964:34:30",
+              "text": "@notice Apply for a new policy"
+            },
+            "functionSelector": "21deab0e",
+            "id": 5930,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "newApplication",
+            "nameLocation": "1012:14:30",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5926,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5913,
+                  "mutability": "mutable",
+                  "name": "_productId",
+                  "nameLocation": "1044:10:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5930,
+                  "src": "1036:18:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5912,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1036:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5915,
+                  "mutability": "mutable",
+                  "name": "_flightNumber",
+                  "nameLocation": "1078:13:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5930,
+                  "src": "1064:27:30",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 5914,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1064:6:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5917,
+                  "mutability": "mutable",
+                  "name": "_premium",
+                  "nameLocation": "1109:8:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5930,
+                  "src": "1101:16:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5916,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1101:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5919,
+                  "mutability": "mutable",
+                  "name": "_departureDate",
+                  "nameLocation": "1135:14:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5930,
+                  "src": "1127:22:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5918,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1127:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5921,
+                  "mutability": "mutable",
+                  "name": "_landingDate",
+                  "nameLocation": "1167:12:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5930,
+                  "src": "1159:20:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5920,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1159:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5923,
+                  "mutability": "mutable",
+                  "name": "_deadline",
+                  "nameLocation": "1197:9:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5930,
+                  "src": "1189:17:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5922,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1189:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5925,
+                  "mutability": "mutable",
+                  "name": "signature",
+                  "nameLocation": "1231:9:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5930,
+                  "src": "1216:24:30",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 5924,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1216:5:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1026:220:30"
+            },
+            "returnParameters": {
+              "id": 5929,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5928,
+                  "mutability": "mutable",
+                  "name": "policyId",
+                  "nameLocation": "1273:8:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5930,
+                  "src": "1265:16:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5927,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1265:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1264:18:30"
+            },
+            "scope": 5994,
+            "src": "1003:280:30",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 5931,
+              "nodeType": "StructuredDocumentation",
+              "src": "1289:37:30",
+              "text": "@notice Start a new claim request"
+            },
+            "functionSelector": "0f42fd0b",
+            "id": 5944,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "newClaimRequest",
+            "nameLocation": "1340:15:30",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5942,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5933,
+                  "mutability": "mutable",
+                  "name": "_policyId",
+                  "nameLocation": "1373:9:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5944,
+                  "src": "1365:17:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5932,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1365:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5935,
+                  "mutability": "mutable",
+                  "name": "_flightNumber",
+                  "nameLocation": "1406:13:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5944,
+                  "src": "1392:27:30",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 5934,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1392:6:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5937,
+                  "mutability": "mutable",
+                  "name": "_date",
+                  "nameLocation": "1443:5:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5944,
+                  "src": "1429:19:30",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 5936,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1429:6:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5939,
+                  "mutability": "mutable",
+                  "name": "_path",
+                  "nameLocation": "1472:5:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5944,
+                  "src": "1458:19:30",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 5938,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1458:6:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5941,
+                  "mutability": "mutable",
+                  "name": "_forceUpdate",
+                  "nameLocation": "1492:12:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5944,
+                  "src": "1487:17:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 5940,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1487:4:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1355:155:30"
+            },
+            "returnParameters": {
+              "id": 5943,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1519:0:30"
+            },
+            "scope": 5994,
+            "src": "1331:189:30",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 5945,
+              "nodeType": "StructuredDocumentation",
+              "src": "1526:37:30",
+              "text": "@notice View a user's policy info"
+            },
+            "functionSelector": "6ce0403c",
+            "id": 5954,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "viewUserPolicy",
+            "nameLocation": "1577:14:30",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5948,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5947,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5954,
+                  "src": "1592:7:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5946,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1592:7:30",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1591:9:30"
+            },
+            "returnParameters": {
+              "id": 5953,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5952,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5954,
+                  "src": "1648:19:30",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_struct$_PolicyInfo_$6056_memory_ptr_$dyn_memory_ptr",
+                    "typeString": "struct IPolicyTypes.PolicyInfo[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 5950,
+                      "nodeType": "UserDefinedTypeName",
+                      "pathNode": {
+                        "id": 5949,
+                        "name": "PolicyInfo",
+                        "nodeType": "IdentifierPath",
+                        "referencedDeclaration": 6056,
+                        "src": "1648:10:30"
+                      },
+                      "referencedDeclaration": 6056,
+                      "src": "1648:10:30",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_PolicyInfo_$6056_storage_ptr",
+                        "typeString": "struct IPolicyTypes.PolicyInfo"
+                      }
+                    },
+                    "id": 5951,
+                    "nodeType": "ArrayTypeName",
+                    "src": "1648:12:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_struct$_PolicyInfo_$6056_storage_$dyn_storage_ptr",
+                      "typeString": "struct IPolicyTypes.PolicyInfo[]"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1647:21:30"
+            },
+            "scope": 5994,
+            "src": "1568:101:30",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 5955,
+              "nodeType": "StructuredDocumentation",
+              "src": "1675:47:30",
+              "text": "@notice Get the policy info by its policyId"
+            },
+            "functionSelector": "6b0edde9",
+            "id": 5963,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getPolicyInfoById",
+            "nameLocation": "1736:17:30",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5958,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5957,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5963,
+                  "src": "1754:7:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5956,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1754:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1753:9:30"
+            },
+            "returnParameters": {
+              "id": 5962,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5961,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5963,
+                  "src": "1810:17:30",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_PolicyInfo_$6056_memory_ptr",
+                    "typeString": "struct IPolicyTypes.PolicyInfo"
+                  },
+                  "typeName": {
+                    "id": 5960,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 5959,
+                      "name": "PolicyInfo",
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 6056,
+                      "src": "1810:10:30"
+                    },
+                    "referencedDeclaration": 6056,
+                    "src": "1810:10:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_PolicyInfo_$6056_storage_ptr",
+                      "typeString": "struct IPolicyTypes.PolicyInfo"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1809:19:30"
+            },
+            "scope": 5994,
+            "src": "1727:102:30",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 5964,
+              "nodeType": "StructuredDocumentation",
+              "src": "1835:72:30",
+              "text": "@notice Update when the policy token is transferred to another owner"
+            },
+            "functionSelector": "8e34ce35",
+            "id": 5973,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "policyOwnerTransfer",
+            "nameLocation": "1921:19:30",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5971,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5966,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5973,
+                  "src": "1950:7:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5965,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1950:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5968,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5973,
+                  "src": "1967:7:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5967,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1967:7:30",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5970,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5973,
+                  "src": "1984:7:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5969,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1984:7:30",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1940:57:30"
+            },
+            "returnParameters": {
+              "id": 5972,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2006:0:30"
+            },
+            "scope": 5994,
+            "src": "1912:95:30",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 5974,
+              "nodeType": "StructuredDocumentation",
+              "src": "2013:68:30",
+              "text": "@notice Do the final settlement when receiving the oracle result"
+            },
+            "functionSelector": "1a397db9",
+            "id": 5981,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "finalSettlement",
+            "nameLocation": "2095:15:30",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5979,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5976,
+                  "mutability": "mutable",
+                  "name": "_requestId",
+                  "nameLocation": "2119:10:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5981,
+                  "src": "2111:18:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 5975,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2111:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5978,
+                  "mutability": "mutable",
+                  "name": "_result",
+                  "nameLocation": "2139:7:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5981,
+                  "src": "2131:15:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5977,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2131:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2110:37:30"
+            },
+            "returnParameters": {
+              "id": 5980,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2156:0:30"
+            },
+            "scope": 5994,
+            "src": "2086:71:30",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "functionSelector": "165d35e1",
+            "id": 5986,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getChainlinkToken",
+            "nameLocation": "2172:17:30",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5982,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2189:2:30"
+            },
+            "returnParameters": {
+              "id": 5985,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5984,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5986,
+                  "src": "2215:7:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5983,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2215:7:30",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2214:9:30"
+            },
+            "scope": 5994,
+            "src": "2163:61:30",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "functionSelector": "3d21a7d1",
+            "id": 5993,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getUserPolicyCount",
+            "nameLocation": "2239:18:30",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5989,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5988,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5993,
+                  "src": "2258:7:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5987,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2258:7:30",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2257:9:30"
+            },
+            "returnParameters": {
+              "id": 5992,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5991,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5993,
+                  "src": "2290:7:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5990,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2290:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2289:9:30"
+            },
+            "scope": 5994,
+            "src": "2230:69:30",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 5995,
+        "src": "254:2047:30",
+        "usedErrors": []
+      }
+    ],
+    "src": "32:2270:30"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.9+commit.e5eed63a.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.3",
+  "updatedAt": "2021-11-24T15:21:18.391Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "title": "IPolicyFlow",
+    "version": 1
+  },
+  "userdoc": {
+    "events": {
+      "newPolicyApplication(uint256,address)": {
+        "notice": "Event list"
+      }
+    },
+    "kind": "user",
+    "methods": {
+      "finalSettlement(bytes32,uint256)": {
+        "notice": "Do the final settlement when receiving the oracle result"
+      },
+      "getPolicyInfoById(uint256)": {
+        "notice": "Get the policy info by its policyId"
+      },
+      "newApplication(uint256,string,uint256,uint256,uint256,uint256,bytes)": {
+        "notice": "Apply for a new policy"
+      },
+      "newClaimRequest(uint256,string,string,string,bool)": {
+        "notice": "Start a new claim request"
+      },
+      "policyOwnerTransfer(uint256,address,address)": {
+        "notice": "Update when the policy token is transferred to another owner"
+      },
+      "viewUserPolicy(address)": {
+        "notice": "View a user's policy info"
+      }
+    },
+    "notice": "This is the interface of PolicyFlow contract.         Contains some type definations, event list and function declarations.",
+    "version": 1
+  }
+}

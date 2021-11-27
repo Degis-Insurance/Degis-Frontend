@@ -46,8 +46,8 @@
                 class="d-flex justify-content-between"
                 style="padding-bottom: 11%"
             >
-              <base-button style="width: 45%"> DEPOSIT</base-button>
-              <base-button style="width: 45%"> WITHDRAW</base-button>
+              <base-button style="width: 45%" @click="addLiquidityEvent"> DEPOSIT</base-button>
+              <base-button style="width: 45%" @click="removeLiquidityEvent"> WITHDRAW</base-button>
             </div>
             <h5 class="text-r">Your Premium Income:
               <bold> XXXX</bold>
@@ -55,7 +55,7 @@
             <h5 class="text-r">Your DEGIS Token Income:
               <bold> XXXX</bold>
             </h5>
-            <base-button style="width: 100%; margin-bottom: 2%">HARVEST REWARD</base-button>
+            <base-button style="width: 100%; margin-bottom: 2%" @click="showPoolEvent">HARVEST REWARD</base-button>
           </div>
         </div>
       </div>
@@ -65,11 +65,218 @@
 
 <script>
 import BaseButton from "@/components/BaseButton";
+import {
+  getMockUSD,
+  getNaughtyFactory,
+  getNaughtyRouter,
+  getPolicyCore,
+  getPolicyToken,
+  getNaughtyPair,
+} from "../../utils/contractInstance";
 
 export default {
   name: "price-provide",
-  components: {
-    BaseButton,
+  components: {BaseButton},
+  computed: {
+    currentAccount() {
+      return this.$store.state.selectedAccount;
+    },
+  },
+
+  watch: {
+    "$store.state.selectedAccount": function (newVal) {
+      this.showInfoEvent();
+    },
+  },
+
+  mounted() {
+    this.showInfoEvent();
+  },
+  methods: {
+    async getTokensName()
+    {
+      const core = await getPolicyCore();
+      var tonenNames = await core.methods.getAllTokens().call();
+      tonenNames = ["BTC_30000_L_202101","BTC_30000_L_202101"]
+      return tonenNames;
+    },
+
+    async showUserInfo(tokenName)
+    {
+      const account = this.$store.state.selectedAccount;
+      const usdt = await getMockUSD();
+      const core = await getPolicyCore();
+      const policyTokenAddress = await core.methods.findAddressbyName(tokenName).call(); 
+      const policyToken = await getPolicyToken(policyTokenAddress);
+      const userQuota = await core.methods.checkUserQuota(account, policyToken.options.address).call({ from : account})
+      const usdtBalance = await usdt.methods.balanceOf(account).call();
+      const policyTokenBalance = await policyToken.methods.balanceOf(account).call();
+      return {"userQuota": userQuota, "usdtBalance": usdtBalance, "policyTokenBalance":policyTokenBalance};
+    },
+
+    async showPoolInfo(tokenName)
+    {
+      const usdt = await getMockUSD();
+      const factory = await getNaughtyFactory();
+      const core = await getPolicyCore();
+      var policyInfo = await core.methods.getPolicyTokenInfo(tokenName).call();
+
+      const policyTokenAddress = await core.methods
+        .findAddressbyName(tokenName)
+        .call();
+      const pairAddress = await factory.methods
+        .getPairAddress(policyTokenAddress, usdt.options.address)
+        .call();
+
+      const pair = await getNaughtyPair(pairAddress);
+      const poolInfo = await pair.methods.getReserves().call();
+
+      return {"policyInfo": policyInfo ,"poolInfo": {"udstAmmount":poolInfo[0], "policyTokenAmmount":poolInfo[1]}}
+    },
+
+    async addLiquidity(amountUSDT, amountPolicyToken, tokenName) {
+      const account = this.$store.state.selectedAccount;
+      const usdt = await getMockUSD();
+      const factory = await getNaughtyFactory();
+      const core = await getPolicyCore();
+      const router = await getNaughtyRouter();
+
+      const tokenAddress = await core.methods
+        .findAddressbyName(tokenName)
+        .call();
+      const pairAddress = await factory.methods
+        .getPairAddress(tokenAddress, usdt.options.address)
+        .call();
+      console.log("tokenAddress:",tokenAddress)
+      console.log("pairAddress:",pairAddress)
+      console.log("factory address", factory.options.address);
+      console.log("core address", core.options.address);
+      console.log("router address", router.options.address);
+      
+      const policyToken = await getPolicyToken(tokenAddress);
+      const amountUSDTEther = window.WEB3.utils.toWei(String(amountUSDT), "ether");
+      const amountPolicyTokenEther = window.WEB3.utils.toWei(String(amountPolicyToken), "ether");
+      const amountUSDTEtherMin = window.WEB3.utils.toWei(String(amountUSDT/4), "ether");
+      const amountPolicyTokenEtherMin = window.WEB3.utils.toWei(String(amountPolicyToken/4), "ether");
+
+      console.log(amountUSDTEther, amountPolicyTokenEther, amountUSDTEtherMin, amountPolicyTokenEtherMin)
+
+      const tx1 = await policyToken.methods
+        .approve(router.options.address, window.WEB3.utils.toBN(amountPolicyTokenEther))
+        .send({ from: account });
+      console.log(tx1.transactionHash)
+
+      const tx2 = await usdt.methods
+        .approve(router.options.address, window.WEB3.utils.toBN(amountUSDTEther))
+        .send({ from: account });
+      console.log(tx2.transactionHash)
+
+      let date = new Date().getTime();
+      date = parseInt(date / 1000);
+      console.log("now:", date);
+
+      const tx = await router.methods
+        .addLiquidity(
+          tokenAddress,
+          usdt.options.address,
+          window.WEB3.utils.toBN(amountPolicyTokenEther),
+          window.WEB3.utils.toBN(amountUSDTEther),
+          window.WEB3.utils.toBN(amountPolicyTokenEtherMin),
+          window.WEB3.utils.toBN(amountUSDTEtherMin),
+          account,
+          date + 6000
+        )
+        .send({ from: account });
+      console.log(tx.transactionHash)
+    },
+
+    async removeLiquidity(percentage, tokenName) {
+      const account = this.$store.state.selectedAccount;
+      const usdt = await getMockUSD();
+      const factory = await getNaughtyFactory();
+      const core = await getPolicyCore();
+      const router = await getNaughtyRouter();
+
+      const tokenAddress = await core.methods
+        .findAddressbyName(tokenName)
+        .call();
+      const pairAddress = await factory.methods
+        .getPairAddress(tokenAddress, usdt.options.address)
+        .call();
+      const pair = await getNaughtyPair(pairAddress);
+      console.log(tokenAddress,pairAddress)
+      const policyToken = await getPolicyToken(tokenAddress);
+      
+      const liquidityToken = await pair.methods.balanceOf(account).call();
+      
+      const tx1 = await pair.methods
+        .approve(router.options.address, window.WEB3.utils.toBN(liquidityToken))
+        .send({ from: account });
+      console.log(tx1.transactionHash)
+
+      const liquidityTokenAll = await pair.methods.totalSupply().call();
+      const  pair_amount = await pair.methods.getReserves().call();
+
+      const amountPolicyToken = percentage * liquidityToken / liquidityTokenAll * pair_amount[0] * 0.8;
+      const amountUSDT = percentage * liquidityToken / liquidityTokenAll * pair_amount[1] * 0.8;
+      // console.log("====",amountUSDT, amountPolicyToken)
+
+      // liquidity = Math.max(liquidity, amountPolicyTokenEther / pair_amount[0]);
+      // liquidity = Math.max(liquidity, amountUSDTEther / pair_amount[1]);
+
+      console.log("liquidity:",liquidityToken , liquidityTokenAll, amountPolicyToken, amountUSDT)
+      let date = new Date().getTime();
+      date = parseInt(date / 1000);
+      console.log("now:", date);
+
+      const tx = await router.methods
+        .removeLiquidity(
+          tokenAddress,  //
+          usdt.options.address, //
+          window.WEB3.utils.toBN(liquidityToken * percentage), 
+          window.WEB3.utils.toBN(amountPolicyToken),
+          window.WEB3.utils.toBN(amountUSDT),
+          account,
+          date + 6000
+        )
+        .send({ from: account });
+      // console.log(tx.transactionHash)
+    },
+
+    async addLiquidityEvent(){
+      var amountUSDT = 50;
+      var amountPolicyToken = 50;
+      const tokenName = "BTC_30000_L_202101";
+      await this.showInfoEvent(tokenName)
+      await this.addLiquidity(amountUSDT, amountPolicyToken, tokenName);
+      await this.showInfoEvent(tokenName)
+    },
+
+    async removeLiquidityEvent(){
+      var percentage = 0.5
+      const tokenName = "BTC_30000_L_202101";
+      await this.showInfoEvent(tokenName)
+      await this.removeLiquidity(percentage, tokenName);
+      await this.showInfoEvent(tokenName)
+    },
+    
+    async showInfoEvent() {
+      const tokenNames = await this.getTokensNameEvent();
+      for(var i=0; i<tokenNames.length; i++)
+      {
+        const tokenName  = tokenNames[i];
+        const info = await this.showPoolInfo(tokenName);
+        const policyInfo = info["policyInfo"];
+        const poolInfo = info["poolInfo"]
+        const userInfo = await this.showUserInfo(tokenName);
+        console.log(policyInfo,poolInfo,userInfo)
+      }
+    },
+    
+    async getTokensNameEvent()
+    {
+      return this.getTokensName()
+    }
   },
 };
 </script>
