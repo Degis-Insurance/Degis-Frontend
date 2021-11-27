@@ -17,13 +17,13 @@
       </div> -->
       <div>
         <span id="userInfo"> {{ selectedAccount }}</span>
-      
-        <base-button v-if="!isConnected" @click="connectWallet">{{
-          walletstatus
-        }}</base-button>
-        <base-button v-if="isConnected" @click="disconnectWallet">{{
-          walletstatus
-        }}</base-button>
+
+        <base-button v-if="!isConnected" @click="connectWallet"
+          >{{ walletstatus }}
+        </base-button>
+        <base-button v-if="isConnected" @click="disconnectWallet"
+          >{{ walletstatus }}
+        </base-button>
       </div>
     </div>
   </nav>
@@ -66,9 +66,8 @@ export default {
   computed: {
     selectedAccount() {
       var account = this.$store.state.selectedAccount;
-      if(account != null)
-      {
-        return account.substr(0,5) + "..." + account.substr(37,41);
+      if (account != null) {
+        return account.substr(0, 5) + "..." + account.substr(37, 41);
       }
       return this.$store.state.selectedAccount;
     },

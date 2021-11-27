@@ -4,7 +4,7 @@
       <div class="container-fluid" style="min-height: 700px;">
 
         <router-link to="/">
-          <img src="img/function/func-logo.png" class="ml-4 mt-5 mb-4" style="width: 130px"/>
+          <img src="img/function/func-logo.png" class="ml-4 mt-4 mb-4 pt-1" style="width: 130px"/>
         </router-link>
 
         <el-menu>

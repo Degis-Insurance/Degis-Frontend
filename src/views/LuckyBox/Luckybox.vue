@@ -1,37 +1,21 @@
 <template>
   <base-header type="" class="pt-4">
     <h1 class="fw-7 d-g1 fs-34 mb-4">The Degis Lucky Box</h1>
-    <stats-card
-      style="
-        width: 100%;
-        background-size: 100% 100%;
-        background-repeat: no-repeat;
-        background-image: url('img/homepage/degis-lucky-box.png');
-      "
-    >
-      <div class="container" style="height: 620px">
+    <stats-card style=" background-size: cover; background-position: center; background-image: url('img/luckybox/luckybox.png');">
+      <div class="container" style="height: 450px">
         <div class="row row-grid align-items-center">
-          <h1 class="fw-7 d-g1 fs-34 pt-8" style="margin: auto">
+          <h1 class="fw-7 d-g1 fs-34 pt-5" style="margin: auto">
             The Degis Lucky Box
           </h1>
         </div>
         <div class="row align-items-center">
-          <h1
-            class="fw-9 d-p pt-4"
-            style="font-size: 60px; margin: auto; text-align: center"
-          >
-            ${{ inPrizeMin }}
-          </h1>
+          <h1 class="fw-9 d-p pt-4" style="font-size: 60px; margin: auto; text-align: center">${{ inPrizeMin }}</h1>
         </div>
         <div class="row align-items-center">
-          <h5 class="fw-9 d-g2 fs-24 ma pt-4"> {{inPrize}} IN PRIZES!</h5>
+          <h5 class="fw-9 d-g2 fs-24 ma pt-3"> {{inPrize}} IN PRIZES!</h5>
         </div>
         <div class="row row-grid align-items-center">
-          <base-button
-            style="margin: 5% auto; padding: 1% 5%"
-            @click="modals.BuyTickets = true"
-            >Buy Tickets</base-button
-          >
+          <base-button style="margin: 3% auto;" @click="modals.BuyTickets = true">Buy Tickets</base-button>
         </div>
       </div>
     </stats-card>
@@ -344,8 +328,8 @@ export default {
         });
         console.log(lotteryDetails[i]);
       }
-      this.inPrize = (lotteryDetails[lotteryDetails.length-1]["amountCollected"]/ 1e18).toFixed(2) 
-      this.inPrizeMin = Math.max(10000, this.inPrize).toFixed(2) 
+      this.inPrize = (lotteryDetails[lotteryDetails.length-1]["amountCollected"]/ 1e18).toFixed(2)
+      this.inPrizeMin = Math.max(10000, this.inPrize).toFixed(2)
     },
 
     async showUserInfoEvent() {
