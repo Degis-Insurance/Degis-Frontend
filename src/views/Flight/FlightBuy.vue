@@ -6,21 +6,51 @@
         <div>
           <p class="fw-7 d-p fs-18">Search by Flight</p>
           <div class="d-flex">
-            <el-select v-model="flightno" filterable placeholder="Select Flight">
-              <el-option v-for="item in flightoptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
+            <el-select
+              v-model="flightno"
+              filterable
+              placeholder="Select Flight"
+            >
+              <el-option
+                v-for="item in flightoptions"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              ></el-option>
             </el-select>
           </div>
         </div>
         <div>
           <p class="fw-7 d-p fs-18">Search by Route</p>
           <div class="d-flex align-items-center">
-            <el-select v-model="origincity" filterable placeholder="Origin City">
-              <el-option v-for="item in ocoptions" :key="item.value" :label="item.label" :value="item.value">
+            <el-select
+              v-model="origincity"
+              filterable
+              placeholder="Origin City"
+            >
+              <el-option
+                v-for="item in ocoptions"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              >
               </el-option>
             </el-select>
-            <img src="img/function/flight-rarrow.png" style="width: 15px; margin: 0 8px"/>
-            <el-select v-model="destinationcity" filterable placeholder="Destination City">
-              <el-option v-for="item in dcoptions" :key="item.value" :label="item.label" :value="item.value">
+            <img
+              src="img/function/flight-rarrow.png"
+              style="width: 15px; margin: 0 8px"
+            />
+            <el-select
+              v-model="destinationcity"
+              filterable
+              placeholder="Destination City"
+            >
+              <el-option
+                v-for="item in dcoptions"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              >
               </el-option>
             </el-select>
           </div>
@@ -28,7 +58,11 @@
 
         <div>
           <p class="fw-7 d-p fs-18">Date</p>
-          <el-date-picker v-model="datevalue" type="date" placeholder="Pick a day"></el-date-picker>
+          <el-date-picker
+            v-model="datevalue"
+            type="date"
+            placeholder="Pick a day"
+          ></el-date-picker>
         </div>
         <div>
           <p class="fw-7 d-p fs-18" style="color: white">Search</p>
@@ -40,7 +74,12 @@
     </stats-card>
 
     <el-card class="dg-card">
-      <el-table :data="flightData" class="dg-cardtable" :header-cell-style="{ 'text-align': 'center', height: '70px' }" :cell-style="{ 'text-align': 'center', height: '70px' }">
+      <el-table
+        :data="flightData"
+        class="dg-cardtable"
+        :header-cell-style="{ 'text-align': 'center', height: '70px' }"
+        :cell-style="{ 'text-align': 'center', height: '70px' }"
+      >
         <el-table-column prop="airline" label="AIRLINE" sortable />
         <el-table-column prop="flightno" label="FLIGHT NO." sortable />
         <el-table-column prop="route" label="ROUTE" sortable />
@@ -55,7 +94,12 @@
       </el-table>
       <div class="demo-pagination-block pt-4 pb-2" align="right">
         <!--        <el-pagination :currentPage="12" :page-size="1" layout="prev, pager, next, jumper" :total="12" @size-change="handleSizeChange" @current-change="handleCurrentChange"/>-->
-        <el-pagination :currentPage="12" :page-size="1" layout="prev, pager, next, jumper" :total="12"/>
+        <el-pagination
+          :currentPage="12"
+          :page-size="1"
+          layout="prev, pager, next, jumper"
+          :total="12"
+        />
       </div>
     </el-card>
 
@@ -64,7 +108,7 @@
 </template>
 
 <script>
-import { getFlight, } from "@/api/user";
+import { getFlightByRoute, } from "@/api/functions";
 import OrderConfirm from "./OrderConfirm";
 import { ref } from "vue";
 import {
@@ -144,9 +188,9 @@ export default {
     },
 
     search() {
-      getFlight().then(response => {
+      getFlightByRoute().then((response) => {
         console.log(response);
-      })
+      });
     },
 
     async ShowUserPolicy() {

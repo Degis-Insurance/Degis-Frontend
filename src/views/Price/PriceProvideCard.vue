@@ -3,8 +3,14 @@
     <div class="container">
       <div class="row row-grid align-items-center">
         <div class="col-lg-5 order-md-1">
-          <img :src="'img/protection/price/' + data.coin + '.png'" class="img-fluid" style="width: 64px"/>
-          <span class="fw-7 d-g1 fs-34 pl-3" style="vertical-align: middle">{{ data.name.replace(/_/g, "") }}</span>
+          <img
+            :src="'img/protection/price/' + data.coin + '.png'"
+            class="img-fluid"
+            style="width: 64px"
+          />
+          <span class="fw-7 d-g1 fs-34 pl-3" style="vertical-align: middle">{{
+            data.name.replace(/_/g, "")
+          }}</span>
           <p class="fw-7 d-g1 fs-18 mb-0">
             Current Price:
             <span class="fw-7 d-p fs-18"> {{ data.currentPrice }}</span>
@@ -41,8 +47,7 @@
             </div>
             <div>
               <div>
-                <base-button @click="buy(data)">Buy</base-button>
-                <base-button @click="sell(data)">Sell</base-button>
+                <base-button @click="provide(data)">provide</base-button>
               </div>
             </div>
           </div>
@@ -51,12 +56,12 @@
     </div>
   </el-card>
   <template v-if="modals">
-    <buy-sell v-model:show="modals" :data="modalData"></buy-sell>
+    <provide v-model:show="modals" :data="modalData"></provide>
   </template>
 </template>
 
 <script>
-import BuySell from "./BuySell";
+import Provide from "./Provide";
 
 export default {
   name: "price-provide-card",
@@ -64,24 +69,18 @@ export default {
     return {
       modals: false,
       modalData: {
-        coin1: 'USDT',
+        coin1: "USDT",
         coin2: this.data.name,
         type: "",
-      }
-    }
+      },
+    };
   },
   components: {
-    BuySell,
+    Provide,
   },
   props: ["data"],
   methods: {
-    buy() {
-      this.modalData.type = "buy";
-      this.modals = true;
-      console.log(this.data);
-    },
-    sell() {
-      this.modalData.type = "sell";
+    provide() {
       this.modals = true;
       console.log(this.data);
     },

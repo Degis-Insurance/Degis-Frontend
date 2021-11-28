@@ -77,15 +77,7 @@
         </div>
 
         <div class="modal-footer pt-1" style="display: block">
-          <base-button
-            v-if="data.type === 'create'"
-            style="width: 100%"
-            @click="createEvent()"
-            >Create</base-button
-          >
-          <base-button v-else style="width: 100%" @click="redeemEvent()"
-            >Redeem</base-button
-          >
+          <base-button style="width: 100%" @click="createEvent()">Provide</base-button>
         </div>
       </div>
     </div>
@@ -98,7 +90,7 @@ import {
   getPolicyCore,
 } from "../../utils/contractInstance";
 export default {
-  name: "create-redeem",
+  name: "provide",
   components: {},
   data() {
     return {

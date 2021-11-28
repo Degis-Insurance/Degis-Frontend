@@ -69,14 +69,17 @@
                   width: 100%;
                   border-width: 0px;
                 "
-                v-model="coin2"
+                v-model="calc_coin2"
+                disabled
               />
             </div>
           </div>
         </div>
 
         <div class="modal-footer pt-1" style="display: block">
-          <base-button v-if="data.type === 'buy'" style="width: 100%">Buy</base-button>
+          <base-button v-if="data.type === 'buy'" style="width: 100%"
+            >Buy</base-button
+          >
           <base-button v-else style="width: 100%">Sell</base-button>
         </div>
       </div>
@@ -102,6 +105,11 @@ export default {
       this.$emit("update:show", false);
       this.$emit("close");
     },
+  },
+  computed: {
+    calc_coin2() {
+      return 1*this.coin1;
+    }
   },
   watch: {
     show(val) {
