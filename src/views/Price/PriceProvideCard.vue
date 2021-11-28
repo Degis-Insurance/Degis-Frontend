@@ -3,11 +3,7 @@
     <div class="container">
       <div class="row row-grid align-items-center">
         <div class="col-lg-5 order-md-1">
-          <img
-              :src="'img/protection/price/' + data.coin + '.png'"
-              class="img-fluid"
-              style="width: 64px"
-          />
+          <img :src="'img/protection/price/' + data.coin + '.png'" class="img-fluid" style="width: 64px"/>
           <span class="fw-7 d-g1 fs-34 pl-3" style="vertical-align: middle">{{ data.name.replace(/_/g, "") }}</span>
           <p class="fw-7 d-g1 fs-18 mb-0">
             Current Price:

@@ -7,8 +7,7 @@
           <p class="fw-7 d-p fs-18">Search by Flight</p>
           <div class="d-flex">
             <el-select v-model="flightno" filterable placeholder="Select Flight">
-              <el-option v-for="item in flightoptions" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
+              <el-option v-for="item in flightoptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
             </el-select>
           </div>
         </div>
@@ -34,19 +33,14 @@
         <div>
           <p class="fw-7 d-p fs-18" style="color: white">Search</p>
           <div>
-            <base-button>SEARCH</base-button>
+            <base-button @click="search">SEARCH</base-button>
           </div>
         </div>
       </div>
     </stats-card>
 
     <el-card class="dg-card">
-      <el-table
-        :data="flightData"
-        class="dg-cardtable"
-        :header-cell-style="{ 'text-align': 'center', height: '70px' }"
-        :cell-style="{ 'text-align': 'center', height: '70px' }"
-      >
+      <el-table :data="flightData" class="dg-cardtable" :header-cell-style="{ 'text-align': 'center', height: '70px' }" :cell-style="{ 'text-align': 'center', height: '70px' }">
         <el-table-column prop="airline" label="AIRLINE" sortable />
         <el-table-column prop="flightno" label="FLIGHT NO." sortable />
         <el-table-column prop="route" label="ROUTE" sortable />
@@ -61,12 +55,7 @@
       </el-table>
       <div class="demo-pagination-block pt-4 pb-2" align="right">
         <!--        <el-pagination :currentPage="12" :page-size="1" layout="prev, pager, next, jumper" :total="12" @size-change="handleSizeChange" @current-change="handleCurrentChange"/>-->
-        <el-pagination
-          :currentPage="12"
-          :page-size="1"
-          layout="prev, pager, next, jumper"
-          :total="12"
-        />
+        <el-pagination :currentPage="12" :page-size="1" layout="prev, pager, next, jumper" :total="12"/>
       </div>
     </el-card>
 
@@ -75,6 +64,7 @@
 </template>
 
 <script>
+import { getFlight, } from "@/api/user";
 import OrderConfirm from "./OrderConfirm";
 import { ref } from "vue";
 import {
@@ -152,6 +142,13 @@ export default {
       this.buyData = val;
       this.BuyProduction = true;
     },
+
+    search() {
+      getFlight().then(response => {
+        console.log(response);
+      })
+    },
+
     async ShowUserPolicy() {
       const PolicyFlow = await getPolicyFlow();
       const account = this.$store.state.selectedAccount;
