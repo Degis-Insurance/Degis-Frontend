@@ -1,25 +1,30 @@
 <template>
   <base-header type="" class="pt-4">
-    <h1 class="fw-7 d-g1 fs-34 mb-4">The Miserable Flight</h1>
-    <el-card class="dg-card">
-      <div class="container">
-        <div class="row row-grid align-items-center">
-          <div class="col-lg-5 order-md-1 d-flex justify-content-between">
-            <img src="img/protection/flight.png" class="img-fluid" style="width: 300px"/>
-          </div>
-          <div class="col-lg-7 order-md-2">
-            <div class="d-flex justify-content-between">
-              <p class="fw-7 d-g1 fs-34">Intruduction</p>
-            </div>
-            <p class="fw-4 d-g3 fs-16 pt-3">
+    <h1 class="fw-7 d-g1 fs-34 mb-1">The Miserable Flight</h1>
+                <p class="fw-4 d-g3 fs-16 pt-1 pb-4">
               In this crazy world, especially during the pandemic, flights tend to be miserable. Few is on time, most are delayed, and some are even cancelled. At Degis Miserable Flight, protect
               yourself by predicting whether flights are delayed and get paid accordingly.
             </p>
-          </div>
-        </div>
-      </div>
-    </el-card>
-    <el-card class="dg-card">
+<!--    <el-card class="dg-card">-->
+<!--      <div class="container">-->
+<!--        <div class="row row-grid align-items-center">-->
+<!--          <div class="col-lg-5 order-md-1 d-flex justify-content-between">-->
+<!--            <img src="img/protection/flight.png" class="img-fluid" style="width: 300px"/>-->
+<!--          </div>-->
+<!--          <div class="col-lg-7 order-md-2">-->
+<!--            <div class="d-flex justify-content-between">-->
+<!--              <p class="fw-7 d-g1 fs-34">Intruduction</p>-->
+<!--            </div>-->
+<!--            <p class="fw-4 d-g3 fs-16 pt-3">-->
+<!--              In this crazy world, especially during the pandemic, flights tend to be miserable. Few is on time, most are delayed, and some are even cancelled. At Degis Miserable Flight, protect-->
+<!--              yourself by predicting whether flights are delayed and get paid accordingly.-->
+<!--            </p>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </el-card>-->
+    <div class="row">
+      <div class="col-lg-6"><el-card class="dg-card">
       <div class="container">
         <div class="row row-grid align-items-center">
           <div class="col-lg-5 order-md-1 d-flex justify-content-between">
@@ -38,8 +43,8 @@
           </div>
         </div>
       </div>
-    </el-card>
-    <el-card class="dg-card">
+    </el-card></div>
+      <div class="col-lg-6"><el-card class="dg-card">
       <div class="container">
         <div class="row row-grid align-items-center">
           <div class="col-lg-5 order-md-1 d-flex justify-content-between">
@@ -58,7 +63,8 @@
           </div>
         </div>
       </div>
-    </el-card>
+    </el-card></div>
+    </div>
   </base-header>
 </template>
 

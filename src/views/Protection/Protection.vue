@@ -5,7 +5,7 @@
       <div class="container">
         <div class="row row-grid align-items-center">
           <div class="col-lg-5 order-md-1">
-            <img src="img/protection/flight.png" class="img-fluid" style="width: 450px"/>
+            <img src="img/protection/flight.png" class="img-fluid" style="width: 300px"/>
           </div>
           <div class="col-lg-7 order-md-2">
             <p class="fw-7 d-g1 fs-34">Miserable Flight</p>
@@ -31,7 +31,7 @@
       <div class="container">
         <div class="row row-grid align-items-center">
           <div class="col-lg-5 order-md-1">
-            <img src="img/protection/price.png" class="img-fluid" style="width: 450px"/>
+            <img src="img/protection/price.png" class="img-fluid" style="width: 300px"/>
           </div>
           <div class="col-lg-7 order-md-2">
             <p class="fw-7 d-g1 fs-34">Naughty Price</p>
