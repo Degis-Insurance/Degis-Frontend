@@ -95,10 +95,10 @@
       <div class="demo-pagination-block pt-4 pb-2" align="right">
         <!--        <el-pagination :currentPage="12" :page-size="1" layout="prev, pager, next, jumper" :total="12" @size-change="handleSizeChange" @current-change="handleCurrentChange"/>-->
         <el-pagination
-          :currentPage="12"
+          :currentPage="1"
           :page-size="1"
           layout="prev, pager, next, jumper"
-          :total="12"
+          :total="1"
         />
       </div>
     </el-card>
