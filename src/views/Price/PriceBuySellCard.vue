@@ -68,8 +68,11 @@ export default {
     return {
       modals: false,
       modalData: {
-        coin1: 'USDT',
-        coin2: this.data.name,
+        coin1: "USDT",
+        coin2: this.data.coin,
+        name1: "USDT",
+        name2: this.data.name,
+        currentPrice : this.data.currentPrice,
         type: "",
       }
     }

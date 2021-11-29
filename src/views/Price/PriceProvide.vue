@@ -85,31 +85,59 @@ export default {
       cardData: [
         {
           coin: "BTC",
-          name: "this is a nameeeeeeeeeeeeeeeeeeeeeeeeeeee",
-          insurancetype: "this is insurance type",
-          price: 1000,
-          mybalance: 11,
-        },
-        {
-          coin: "BTC",
           name: "this is a name",
-          insurancetype: "this is insurance type",
-          price: 1000,
-          mybalance: 11,
+          currentPrice: "--",
+          coinPrice: "--",
+          type: "--",
+          strike: "--",
+          expiry: "--",
+          tvl: "--",
+          tradingVolume: "--",
+          change: "--",
+          minted: "--",
+          balance: "--",
         },
         {
           coin: "ETH",
           name: "this is a name",
-          insurancetype: "this is insurance type",
-          price: 100,
-          mybalance: 11,
+          currentPrice: "--",
+          coinPrice: "--",
+          type: "--",
+          strike: "--",
+          expiry: "--",
+          tvl: "--",
+          tradingVolume: "--",
+          change: "--",
+          minted: "--",
+          balance: "--",
+        },
+        {
+          coin: "ETH",
+          name: "this is a name",
+          currentPrice: "--",
+          coinPrice: "--",
+          type: "--",
+          strike: "--",
+          expiry: "--",
+          tvl: "--",
+          tradingVolume: "--",
+          change: "--",
+          minted: "--",
+          balance: "--",
         },
         {
           coin: "AVAX",
           name: "this is a name",
-          insurancetype: "this is insurance type",
-          price: 10,
-          mybalance: 11,
+          currentPrice: "--",
+          coinPrice: "--",
+          type: "--",
+          strike: "--",
+          expiry: "--",
+          tvl: "--",
+          tradingVolume: "--",
+          change: "--",
+          minted: "--",
+          balance: "--",
         },
       ],
     }
@@ -132,9 +160,14 @@ export default {
   methods: {
     async getTokensName() {
       const core = await getPolicyCore();
-      var tonenNames = await core.methods.getAllTokens().call();
-      tonenNames = ["BTC_30000_L_202101", "BTC_30000_L_202101"]
-      return tonenNames;
+      const tokenInfos = await core.methods.getAllTokens().call();
+      var tokenNames = []
+      for(var i=0;i<tokenInfos.length;i++)
+      {
+        var tokenName = await core.methods.findNamebyAddress(tokenInfos[i]["policyTokenAddress"]).call();
+        tokenNames.push(tokenName);
+      }
+      return tokenNames;
     },
 
     async showUserInfo(tokenName) {
@@ -150,6 +183,7 @@ export default {
     },
 
     async showPoolInfo(tokenName) {
+      const account = this.$store.state.selectedAccount;
       const usdt = await getMockUSD();
       const factory = await getNaughtyFactory();
       const core = await getPolicyCore();
@@ -164,145 +198,59 @@ export default {
 
       const pair = await getNaughtyPair(pairAddress);
       const poolInfo = await pair.methods.getReserves().call();
+      const poolLiquidityToken = await pair.methods.totalSupply().call();
+      const userLiquidityToken = await pair.methods.balanceOf(account).call();
 
-      return {"policyInfo": policyInfo, "poolInfo": {"udstAmmount": poolInfo[0], "policyTokenAmmount": poolInfo[1]}}
+      return {"policyInfo": policyInfo, 
+      "poolInfo": {
+        "policyTokenAmmount": poolInfo[0], 
+        "udstAmmount": poolInfo[1], 
+        "poolLiquidityToken": poolLiquidityToken,
+        "userLiquidityToken": userLiquidityToken }}
     },
 
-    async addLiquidity(amountUSDT, amountPolicyToken, tokenName) {
-      const account = this.$store.state.selectedAccount;
-      const usdt = await getMockUSD();
-      const factory = await getNaughtyFactory();
-      const core = await getPolicyCore();
-      const router = await getNaughtyRouter();
-
-      const tokenAddress = await core.methods
-          .findAddressbyName(tokenName)
-          .call();
-      const pairAddress = await factory.methods
-          .getPairAddress(tokenAddress, usdt.options.address)
-          .call();
-      console.log("tokenAddress:", tokenAddress)
-      console.log("pairAddress:", pairAddress)
-      console.log("factory address", factory.options.address);
-      console.log("core address", core.options.address);
-      console.log("router address", router.options.address);
-
-      const policyToken = await getPolicyToken(tokenAddress);
-      const amountUSDTEther = window.WEB3.utils.toWei(String(amountUSDT), "ether");
-      const amountPolicyTokenEther = window.WEB3.utils.toWei(String(amountPolicyToken), "ether");
-      const amountUSDTEtherMin = window.WEB3.utils.toWei(String(amountUSDT / 4), "ether");
-      const amountPolicyTokenEtherMin = window.WEB3.utils.toWei(String(amountPolicyToken / 4), "ether");
-
-      console.log(amountUSDTEther, amountPolicyTokenEther, amountUSDTEtherMin, amountPolicyTokenEtherMin)
-
-      const tx1 = await policyToken.methods
-          .approve(router.options.address, window.WEB3.utils.toBN(amountPolicyTokenEther))
-          .send({from: account});
-      console.log(tx1.transactionHash)
-
-      const tx2 = await usdt.methods
-          .approve(router.options.address, window.WEB3.utils.toBN(amountUSDTEther))
-          .send({from: account});
-      console.log(tx2.transactionHash)
-
-      let date = new Date().getTime();
-      date = parseInt(date / 1000);
-      console.log("now:", date);
-
-      const tx = await router.methods
-          .addLiquidity(
-              tokenAddress,
-              usdt.options.address,
-              window.WEB3.utils.toBN(amountPolicyTokenEther),
-              window.WEB3.utils.toBN(amountUSDTEther),
-              window.WEB3.utils.toBN(amountPolicyTokenEtherMin),
-              window.WEB3.utils.toBN(amountUSDTEtherMin),
-              account,
-              date + 6000
-          )
-          .send({from: account});
-      console.log(tx.transactionHash)
-    },
-
-    async removeLiquidity(percentage, tokenName) {
-      const account = this.$store.state.selectedAccount;
-      const usdt = await getMockUSD();
-      const factory = await getNaughtyFactory();
-      const core = await getPolicyCore();
-      const router = await getNaughtyRouter();
-
-      const tokenAddress = await core.methods
-          .findAddressbyName(tokenName)
-          .call();
-      const pairAddress = await factory.methods
-          .getPairAddress(tokenAddress, usdt.options.address)
-          .call();
-      const pair = await getNaughtyPair(pairAddress);
-      console.log(tokenAddress, pairAddress)
-      const policyToken = await getPolicyToken(tokenAddress);
-
-      const liquidityToken = await pair.methods.balanceOf(account).call();
-
-      const tx1 = await pair.methods
-          .approve(router.options.address, window.WEB3.utils.toBN(liquidityToken))
-          .send({from: account});
-      console.log(tx1.transactionHash)
-
-      const liquidityTokenAll = await pair.methods.totalSupply().call();
-      const pair_amount = await pair.methods.getReserves().call();
-
-      const amountPolicyToken = percentage * liquidityToken / liquidityTokenAll * pair_amount[0] * 0.8;
-      const amountUSDT = percentage * liquidityToken / liquidityTokenAll * pair_amount[1] * 0.8;
-      // console.log("====",amountUSDT, amountPolicyToken)
-
-      // liquidity = Math.max(liquidity, amountPolicyTokenEther / pair_amount[0]);
-      // liquidity = Math.max(liquidity, amountUSDTEther / pair_amount[1]);
-
-      console.log("liquidity:", liquidityToken, liquidityTokenAll, amountPolicyToken, amountUSDT)
-      let date = new Date().getTime();
-      date = parseInt(date / 1000);
-      console.log("now:", date);
-
-      const tx = await router.methods
-          .removeLiquidity(
-              tokenAddress,  //
-              usdt.options.address, //
-              window.WEB3.utils.toBN(liquidityToken * percentage),
-              window.WEB3.utils.toBN(amountPolicyToken),
-              window.WEB3.utils.toBN(amountUSDT),
-              account,
-              date + 6000
-          )
-          .send({from: account});
-      // console.log(tx.transactionHash)
-    },
-
-    async addLiquidityEvent() {
-      var amountUSDT = 50;
-      var amountPolicyToken = 50;
-      const tokenName = "BTC_30000_L_202101";
-      await this.showInfoEvent(tokenName)
-      await this.addLiquidity(amountUSDT, amountPolicyToken, tokenName);
-      await this.showInfoEvent(tokenName)
-    },
-
-    async removeLiquidityEvent() {
-      var percentage = 0.5
-      const tokenName = "BTC_30000_L_202101";
-      await this.showInfoEvent(tokenName)
-      await this.removeLiquidity(percentage, tokenName);
-      await this.showInfoEvent(tokenName)
-    },
-
-    async showInfoEvent() {
+    async showInfoEvent()
+    {
       const tokenNames = await this.getTokensNameEvent();
-      for (var i = 0; i < tokenNames.length; i++) {
-        const tokenName = tokenNames[i];
+      this.cardData = []
+      for(var i=0; i<tokenNames.length; i++)
+      {
+        const tokenName  = tokenNames[i];
         const info = await this.showPoolInfo(tokenName);
         const policyInfo = info["policyInfo"];
-        const poolInfo = info["poolInfo"]
+        const poolInfo = info["poolInfo"];
+
         const userInfo = await this.showUserInfo(tokenName);
-        console.log(policyInfo, poolInfo, userInfo)
+        
+        const types = {"H" : "Payout if Higher", "L": "Pay out if Lower"}
+        var date = new Date(parseInt(policyInfo["deadline"]) * 1000)
+        var expiry = date.getDate()+
+          "/"+(date.getMonth()+1)+
+          "/"+date.getFullYear()
+        
+        var currentPrice = "--";
+        if(poolInfo["policyTokenAmmount"] != 0)
+        {
+          currentPrice = (poolInfo["udstAmmount"] / poolInfo["policyTokenAmmount"]).toFixed(4);
+        }
+
+        var policyTokeninfo = {
+          "coin": tokenName.split("_")[0],
+          "name": tokenName,
+          "currentPrice": currentPrice,
+          "coinPrice": "--",
+          "type" : types[tokenName.split("_")[2]],
+          "strike" : policyInfo["strikePrice"],
+          "expiry" : expiry,
+          "tvl": "--",
+          "tradingVolume": "--",
+          "change": "--",
+          "minted": userInfo["userQuota"], 
+          "balance": userInfo["policyTokenBalance"],
+          "poolLiquidityToken": poolInfo["poolLiquidityToken"],
+          "userLiquidityToken": poolInfo["userLiquidityToken"]
+        };
+        this.cardData.push(policyTokeninfo)
       }
     },
 

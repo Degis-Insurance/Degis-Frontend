@@ -9,6 +9,7 @@
   >
     <div class="modal-dialog modal-dialog-centered" style="max-width: 100%">
       <div class="modal-content" style="width: 70%; border-radius: 24px; margin: auto">
+
         <div class="modal-header pl-4 pt-4 pb-2">
           <h1 class="fw-7 d-g1 fs-24">Order Confirm</h1>
           <button class="close pr-4" @click="closeModal">
@@ -164,6 +165,7 @@ export default {
       // console.log(timestamp.valueOf())
       await this.NewPolicy(premium, payoff, flight_number, timestamp);
     },
+
   },
   watch: {
     show(val) {

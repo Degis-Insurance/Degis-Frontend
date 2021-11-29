@@ -44,6 +44,12 @@
               <p class="fw-7 d-g1 fs-18">
                 24h Change: <span class="d-p">{{ data.change }}</span>
               </p>
+              <p class="fw-7 d-g1 fs-18">
+                Pool Liquidity Token: <span class="d-p">{{ (data.poolLiquidityToken/1e18).toFixed(4) }}</span>
+              </p>
+              <p class="fw-7 d-g1 fs-18">
+                User Liquidity Token: <span class="d-p">{{ (data.userLiquidityToken/1e18).toFixed(4) }}</span>
+              </p>
             </div>
             <div>
               <div>
@@ -71,7 +77,12 @@ export default {
       modals: false,
       modalData: {
         coin1: "USDT",
-        coin2: this.data.name,
+        coin2: this.data.coin,
+        name1: "USDT",
+        name2: this.data.name,
+        currentPrice : this.data.currentPrice,
+        poolLiquidityToken: this.data.poolLiquidityToken,
+        userLiquidityToken: this.data.userLiquidityToken,
         type: "",
       },
     };

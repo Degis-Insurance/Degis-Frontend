@@ -24,7 +24,7 @@
                 <span
                   class="fw-7 d-g1 fs-34 pl-3"
                   style="vertical-align: middle"
-                  >{{ data.coin1 }}</span
+                  >{{ data.name1 }}</span
                 >
               </div>
               <input
@@ -36,7 +36,7 @@
                   width: 100%;
                   border-width: 0px;
                 "
-                v-model="coin1"
+                v-model="amount1"
               />
             </div>
             <div class="col-2 d-flex justify-content-center">
@@ -57,7 +57,7 @@
                 <span
                   class="fw-7 d-g1 fs-34 pl-3"
                   style="vertical-align: middle; word-break: break-all"
-                  >{{ data.coin2 }}</span
+                  >{{ data.name2.replace(/_/g,'') }}</span
                 >
               </div>
               <input
@@ -69,7 +69,7 @@
                   width: 100%;
                   border-width: 0px;
                 "
-                v-model="calc_coin2"
+                v-model="calc_amount2"
                 disabled
               />
             </div>
@@ -77,7 +77,7 @@
         </div>
 
         <div class="modal-footer pt-1" style="display: block">
-          <base-button style="width: 100%" @click="createEvent()">Provide</base-button>
+          <base-button style="width: 100%" @click="addLiquidityEvent()">Provide</base-button>
         </div>
       </div>
     </div>
@@ -88,14 +88,17 @@ import {
   getMockUSD,
   getNaughtyFactory,
   getPolicyCore,
+  getNaughtyRouter,
+  getPolicyToken,
+  getNaughtyPair,
 } from "../../utils/contractInstance";
 export default {
   name: "provide",
   components: {},
   data() {
     return {
-      coin1: 0,
-      coin2: 0,
+      amount1: 0,
+      amount2: 0,
     };
   },
   props: {
@@ -108,54 +111,128 @@ export default {
       this.$emit("close");
     },
 
-    async create(depositAmount, tokenName) {
+    async addLiquidity(amountUSDT, amountPolicyToken, tokenName) {
       const account = this.$store.state.selectedAccount;
       const usdt = await getMockUSD();
+      const factory = await getNaughtyFactory();
       const core = await getPolicyCore();
-      var amount = window.WEB3.utils.toWei(String(depositAmount), "ether");
-      console.log("core", core.options.address);
-      console.log("usdt", usdt.options.address);
+      const router = await getNaughtyRouter();
 
-      const tx1 = await usdt.methods
-        .approve(core.options.address, amount)
-        .send({ from: account });
+      const tokenAddress = await core.methods
+          .findAddressbyName(tokenName)
+          .call();
+      const pairAddress = await factory.methods
+          .getPairAddress(tokenAddress, usdt.options.address)
+          .call();
+      console.log("tokenAddress:", tokenAddress)
+      console.log("pairAddress:", pairAddress)
+      console.log("factory address", factory.options.address);
+      console.log("core address", core.options.address);
+      console.log("router address", router.options.address);
 
-      console.log(tx1);
+      const policyToken = await getPolicyToken(tokenAddress);
+      const amountUSDTEther = window.WEB3.utils.toWei(String(amountUSDT), "ether");
+      const amountPolicyTokenEther = window.WEB3.utils.toWei(String(amountPolicyToken), "ether");
+      const amountUSDTEtherMin = window.WEB3.utils.toWei(String(amountUSDT / 4), "ether");
+      const amountPolicyTokenEtherMin = window.WEB3.utils.toWei(String(amountPolicyToken / 4), "ether");
 
-      const tx2 = await core.methods
-        .deposit(tokenName, usdt.options.address, amount)
-        .send({ from: account });
-      console.log(tx2.transactionHash);
+      console.log(amountUSDTEther, amountPolicyTokenEther, amountUSDTEtherMin, amountPolicyTokenEtherMin)
+
+      const tx1 = await policyToken.methods
+          .approve(router.options.address, window.WEB3.utils.toBN(amountPolicyTokenEther))
+          .send({from: account});
+      console.log(tx1.transactionHash)
+
+      const tx2 = await usdt.methods
+          .approve(router.options.address, window.WEB3.utils.toBN(amountUSDTEther))
+          .send({from: account});
+      console.log(tx2.transactionHash)
+
+      let date = new Date().getTime();
+      date = parseInt(date / 1000);
+      console.log("now:", date);
+
+      const tx = await router.methods
+          .addLiquidity(
+              tokenAddress,
+              usdt.options.address,
+              window.WEB3.utils.toBN(amountPolicyTokenEther),
+              window.WEB3.utils.toBN(amountUSDTEther),
+              window.WEB3.utils.toBN(amountPolicyTokenEtherMin),
+              window.WEB3.utils.toBN(amountUSDTEtherMin),
+              account,
+              date + 6000
+          )
+          .send({from: account});
+      console.log(tx.transactionHash)
     },
-
-    async redeem(redeemAmount, tokenName) {
+    
+    async removeLiquidity(amountUSDT, amountPolicyToken, tokenName) {
+      
       const account = this.$store.state.selectedAccount;
       const usdt = await getMockUSD();
+      const factory = await getNaughtyFactory();
       const core = await getPolicyCore();
+      const router = await getNaughtyRouter();
 
-      var amount = window.WEB3.utils.toWei(String(redeemAmount), "ether");
-      const tx1 = await core.methods
-        .redeem(tokenName, usdt.options.address, window.WEB3.utils.toBN(amount))
-        .send({ from: account });
+      const tokenAddress = await core.methods
+          .findAddressbyName(tokenName)
+          .call();
 
-      console.log(tx1.transactionHash);
+      const pairAddress = await factory.methods
+          .getPairAddress(tokenAddress, usdt.options.address)
+          .call();
+
+      const pair = await getNaughtyPair(pairAddress);
+      console.log(tokenAddress, pairAddress)
+
+      const liquidityToken = await pair.methods.balanceOf(account).call();
+
+      const tx1 = await pair.methods
+          .approve(router.options.address, window.WEB3.utils.toBN(liquidityToken))
+          .send({from: account});
+      console.log(tx1.transactionHash)
+
+      const liquidityTokenAll = await pair.methods.totalSupply().call();
+      const pair_amount = await pair.methods.getReserves().call();
+
+      amountUSDT = window.WEB3.utils.toWei(String(amountUSDT), "ether");
+      amountPolicyToken = window.WEB3.utils.toWei(String(amountPolicyToken), "ether");
+
+      var percentage = amountPolicyToken / pair_amount[0] * liquidityTokenAll / liquidityToken;
+      percentage = Math.max(percentage, amountUSDT / pair_amount[1] * liquidityTokenAll / liquidityToken);
+      percentage = Math.min(percentage, 1);
+      
+      const amountPolicyTokenMin = percentage * liquidityToken / liquidityTokenAll * pair_amount[0] * 0.8;
+      const amountUSDTMin = percentage * liquidityToken / liquidityTokenAll * pair_amount[1] * 0.8;
+
+      console.log("liquidity:", liquidityToken, liquidityTokenAll, amountPolicyTokenMin, amountUSDTMin)
+      let date = new Date().getTime();
+      date = parseInt(date / 1000);
+      console.log("now:", date);
+
+      const tx = await router.methods
+          .removeLiquidity(
+              tokenAddress,  //
+              usdt.options.address, //
+              window.WEB3.utils.toBN(liquidityToken * percentage),
+              window.WEB3.utils.toBN(amountPolicyTokenMin),
+              window.WEB3.utils.toBN(amountUSDTMin),
+              account,
+              date + 6000
+          )
+          .send({from: account});
     },
 
-    async createEvent() {
-      const createAmount = this.coin1;
-      const tokenName = this.data.coin2;
-      console.log(createAmount, tokenName);
-      await this.create(createAmount, tokenName);
-      this.closeModal();
+    async addLiquidityEvent() {
+      console.log(this.amount1, this.amount2, this.data.name2)
+      await this.addLiquidity(this.amount1, this.amount2, this.data.name2);
     },
 
-    async redeemEvent() {
-      const redeemAmount = this.coin2;
-      const tokenName = this.data.coin2;
-      console.log(redeemAmount, tokenName);
-      await this.redeem(redeemAmount, tokenName);
-      this.closeModal();
+    async removeLiquidityEvent() {
+      await this.removeLiquidity(this.amount1, this.amount2, this.data.name2);
     },
+
   },
   watch: {
     show(val) {
@@ -168,10 +245,16 @@ export default {
     },
   },
   computed: {
-    calc_coin2() {
-      return 1 * this.coin1;
-    },
-  },
+    calc_amount2() {
+      if(this.data.currentPrice == "--") {
+        this.amount2 = this.amount1 
+      }
+      else{
+        this.amount2 = this.amount1 / this.data.currentPrice
+      }
+      return this.amount2;
+    }
+  }
 };
 </script>
 <style>

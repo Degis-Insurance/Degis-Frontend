@@ -15,6 +15,7 @@ import NaughtyRouter_abi from "../abi/NaughtyRouter.json";
 import PolicyCore_abi from "../abi/PolicyCore.json";
 import PolicyToken_abi from "../abi/PolicyToken.json";
 import NaughtyPair_abi from "../abi/NaughtyPair.json";
+import BuyerToken_abi from "../abi/BuyerToken.json";
 
 export const getCurrentAccount = async () => {
   return getWeb3().then((res) => res.currentProvider.selectedAddress);
@@ -22,88 +23,88 @@ export const getCurrentAccount = async () => {
 
 export const getDegis = async () => {
   const web3 = await getWeb3();
-  const chainId = getChainId();
+  const chainId = await getChainId();
   return await new web3.eth.Contract(
     Degis_abi.abi,
-    getAddress("DEGIS", chainId)
+    await getAddress("DEGIS", chainId)
   );
 };
 
 export const getMockUSD = async () => {
   const web3 = await getWeb3();
-  const chainId = getChainId();
+  const chainId = await getChainId();
   return await new web3.eth.Contract(
     MockUSD_abi.abi,
-    getAddress("MOCKUSD", chainId)
+    await getAddress("MOCKUSD", chainId)
   );
 }
 
 export const getInsurancePool = async () => {
   const web3 = await getWeb3();
-  const chainId = getChainId();
+  const chainId = await getChainId();
   return await new web3.eth.Contract(
     InsurancePool_abi.abi,
-    getAddress("INSURANCEPOOL", chainId)
+    await getAddress("INSURANCEPOOL", chainId)
   );
 }
 
 export const getLPToken = async () => {
   const web3 = await getWeb3();
-  const chainId = getChainId();
+  const chainId = await getChainId();
   return await new web3.eth.Contract(
     LPToken_abi.abi,
-    getAddress("LPTOKEN", chainId)
+    await getAddress("LPTOKEN", chainId)
   );
 }
 
 export const getPolicyFlow = async () => {
   const web3 = await getWeb3();
-  const chainId = getChainId();
+  const chainId = await getChainId();
   return await new web3.eth.Contract(
     PolicyFlow_abi.abi,
-    getAddress("POLICYFLOW", chainId)
+    await getAddress("POLICYFLOW", chainId)
   );
 }
 
 export const getDegisLottery = async () => {
   const web3 = await getWeb3();
-  const chainId = getChainId();
+  const chainId = await getChainId();
   return await new web3.eth.Contract(
     DegisLottery_abi.abi,
-    getAddress("DEGISLOTTERY", chainId)
+    await getAddress("DEGISLOTTERY", chainId)
   );
 }
 
 export const getNaughtyFactory = async () => {
   const web3 = await getWeb3();
-  const chainId = getChainId();
+  const chainId = await getChainId();
   return await new web3.eth.Contract(
     NaughtyFactory_abi.abi,
-    getAddress("NAUGHTYFACTORY", chainId)
+    await getAddress("NAUGHTYFACTORY", chainId)
   );
 }
 
 export const getNaughtyRouter = async () => {
   const web3 = await getWeb3();
-  const chainId = getChainId();
+  const chainId = await getChainId();
   return await new web3.eth.Contract(
     NaughtyRouter_abi.abi,
-    getAddress("NAUGHTYROUTER", chainId)
+    await getAddress("NAUGHTYROUTER", chainId)
   );
 }
 
 export const getPolicyCore = async () => {
   const web3 = await getWeb3();
-  const chainId = getChainId();
+  const chainId = await getChainId();
   return await new web3.eth.Contract(
     PolicyCore_abi.abi,
-    getAddress("POLICYCORE", chainId)
+    await getAddress("POLICYCORE", chainId)
   );
 }
 
 export const getPolicyToken = async (tokenAddress) => {
   const web3 = await getWeb3();
-  const chainId = getChainId();
+  const chainId = await getChainId();
   return await new web3.eth.Contract(
     PolicyToken_abi.abi,
     tokenAddress
@@ -112,9 +113,18 @@ export const getPolicyToken = async (tokenAddress) => {
 
 export const getNaughtyPair = async (pairAddress) => {
   const web3 = await getWeb3();
-  const chainId = getChainId();
+  const chainId = await getChainId();
   return await new web3.eth.Contract(
     NaughtyPair_abi.abi,
     pairAddress
+  );
+}
+
+export const getBuyerToken = async () => {
+  const web3 = await getWeb3();
+  const chainId = await getChainId();
+  return await new web3.eth.Contract(
+    BuyerToken_abi.abi,
+    await getAddress("BUYERTOKEN", chainId)
   );
 }

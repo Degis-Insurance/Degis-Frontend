@@ -93,11 +93,13 @@ export default {
   watch: {
     "$store.state.selectedAccount": function (newVal) {
       this.showInfoEvent()
+      // this.mint()
     },
   },
 
   mounted() {
     this.showInfoEvent()
+    // this.mint()
   },
 
   methods: {
@@ -119,7 +121,6 @@ export default {
         var tokenName = await core.methods.findNamebyAddress(tokenInfos[i]["policyTokenAddress"]).call();
         tokenNames.push(tokenName);
       }
-      tokenNames = ["BTC_30000_L_202101","BTC_30000_L_202101"]
       return tokenNames;
     },
 
@@ -142,7 +143,6 @@ export default {
       const factory = await getNaughtyFactory();
       const core = await getPolicyCore();
       var policyInfo = await core.methods.getPolicyTokenInfo(tokenName).call();
-
       const policyTokenAddress = await core.methods
         .findAddressbyName(tokenName)
         .call();
@@ -153,7 +153,7 @@ export default {
       const pair = await getNaughtyPair(pairAddress);
       const poolInfo = await pair.methods.getReserves().call();
 
-      return {"policyInfo": policyInfo ,"poolInfo": {"udstAmmount":poolInfo[0], "policyTokenAmmount":poolInfo[1]}}
+      return {"policyInfo": policyInfo ,"poolInfo": {"udstAmmount":poolInfo[1], "policyTokenAmmount":poolInfo[0]}}
     },
 
     async showInfoEvent()
@@ -187,13 +187,13 @@ export default {
           "currentPrice": currentPrice,
           "coinPrice": "--",
           "type" : types[tokenName.split("_")[2]],
-          "strike" : policyInfo["strikePrice"] / 1e18,
+          "strike" : policyInfo["strikePrice"],
           "expiry" : expiry,
           "tvl": "--",
           "tradingVolume": "--",
           "change": "--",
-          "minted": userInfo["userQuota"] / 1e18, 
-          "balance": userInfo["policyTokenBalance"] / 1e18
+          "minted": userInfo["userQuota"], 
+          "balance": userInfo["policyTokenBalance"]
         };
         this.cardData.push(policyTokeninfo)
       }

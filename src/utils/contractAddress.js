@@ -1,16 +1,17 @@
+import _CollapseTransition from "element-plus/lib/el-collapse-transition";
 import { RINKEBY, AVA_MAINNET } from "../abi/config";
 
 const selectNetwork = (chainId) => {
   switch (chainId) {
-    case 888:
-      return AVA_MAINNET;
-    default:
+    case 4:
       return RINKEBY;
+    default:
+      alert("Wrong network, place switch to renkeby.")
   }
 };
 
-export const getAddress = (contractName, chainId) => {
-  const networkList = selectNetwork(chainId);
+export const getAddress = async (contractName, chainId) => {
+  const networkList = await selectNetwork(chainId);
   let address = networkList[contractName];
   if (address) {
     return address.toLowerCase();

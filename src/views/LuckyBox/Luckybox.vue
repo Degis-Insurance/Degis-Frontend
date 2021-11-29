@@ -218,7 +218,6 @@ export default {
       viewData: {},
       refundData: {},
       inPrize: "--",
-      inPrizeMin: "--"
     };
   },
 

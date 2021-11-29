@@ -24,7 +24,7 @@
                 <span
                   class="fw-7 d-g1 fs-34 pl-3"
                   style="vertical-align: middle"
-                  >{{ data.coin1 }}</span
+                  >{{ data.name1 }}</span
                 >
               </div>
               <input
@@ -36,7 +36,7 @@
                   width: 100%;
                   border-width: 0px;
                 "
-                v-model="coin1"
+                v-model="amount1"
               />
             </div>
             <div class="col-2 d-flex justify-content-center">
@@ -57,7 +57,7 @@
                 <span
                   class="fw-7 d-g1 fs-34 pl-3"
                   style="vertical-align: middle; word-break: break-all"
-                  >{{ data.coin2 }}</span
+                  >{{ data.name2.replace(/_/g,'') }}  </span
                 >
               </div>
               <input
@@ -69,7 +69,7 @@
                   width: 100%;
                   border-width: 0px;
                 "
-                v-model="calc_coin2"
+                v-model="calc_amount2"
                 disabled
               />
             </div>
@@ -102,8 +102,8 @@ export default {
   components: {},
   data() {
     return {
-      coin1: 0,
-      coin2: 0,
+      amount1: 0,
+      amount2: 0,
     };
   },
   props: {
@@ -150,16 +150,16 @@ export default {
     },
 
     async createEvent() {
-      const createAmount = this.coin1;
-      const tokenName = this.data.coin2;
+      const createAmount = this.amount1;
+      const tokenName = this.data.name2;
       console.log(createAmount, tokenName);
       await this.create(createAmount, tokenName);
       this.closeModal();
     },
 
     async redeemEvent() {
-      const redeemAmount = this.coin2;
-      const tokenName = this.data.coin2;
+      const redeemAmount = this.amount2;
+      const tokenName = this.data.name2;
       console.log(redeemAmount, tokenName);
       await this.redeem(redeemAmount, tokenName);
       this.closeModal();
@@ -176,10 +176,11 @@ export default {
     },
   },
   computed: {
-    calc_coin2() {
-      return 1 * this.coin1;
-    },
-  },
+    calc_amount2() {
+      this.amount2 = 1 * this.amount1;
+      return this.amount2;
+    }
+  }
 };
 </script>
 <style>
