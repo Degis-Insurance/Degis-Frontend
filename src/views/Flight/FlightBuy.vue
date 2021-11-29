@@ -108,7 +108,7 @@
 </template>
 
 <script>
-import { getFlightByRoute, } from "@/api/functions";
+import { getFlightByRoute } from "@/api/functions";
 import OrderConfirm from "./OrderConfirm";
 import { ref } from "vue";
 import {
