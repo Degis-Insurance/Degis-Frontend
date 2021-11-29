@@ -15,12 +15,12 @@
               even cancelled. At Degis Miserable Flight, protect yourself by
               predicting whether flights are delayed and get paid accordingly.
             </p>
-            <div class="d-flex justify-content-between pt-4">
-              <a href="/#/flight" style="line-height: 50px; width: 50%" align="left">
-                <base-button style="padding: 0px 30%">BUY</base-button>
+            <div class="d-flex justify-content-around pt-4">
+              <a href="/#/flight">
+                <base-button> BUY </base-button>
               </a>
-              <a href="/#/flight" style="line-height: 50px; width: 50%" align="right">
-                <base-button style="padding: 0px 30%">Provide</base-button>
+              <a href="/#/flight">
+                <base-button>Provide</base-button>
               </a>
             </div>
           </div>
@@ -40,14 +40,14 @@
               change and purchase the right policy.
             </p>
             <div class="d-flex justify-content-between pt-4">
-              <a href="/#/price" style="line-height: 50px; width: 50%;" align="left">
-                <base-button style="padding: 0px 25%">CREATE</base-button>
+                <a href="/#/price">
+                  <base-button @click="window.href.location('/#/price')">CREATE</base-button>
+                </a>
+              <a href="/#/price">
+                <base-button>BUY/SELL</base-button>
               </a>
-              <a href="/#/price" style="line-height: 50px; width: 50%;" align="left">
-                <base-button style="padding: 0px 25%">BUY/SELL</base-button>
-              </a>
-              <a href="/#/price" style="line-height: 50px; width: 50%;" align="right">
-                <base-button style="padding: 0px 25%">PROVIDE</base-button>
+              <a href="/#/price">
+                <base-button>PROVIDE</base-button>
               </a>
             </div>
           </div>

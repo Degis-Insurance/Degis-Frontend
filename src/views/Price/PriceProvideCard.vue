@@ -48,6 +48,7 @@
             <div>
               <div>
                 <base-button @click="provide(data)">provide</base-button>
+                <base-button @click="remove(data)">remove</base-button>
               </div>
             </div>
           </div>
@@ -81,6 +82,10 @@ export default {
   props: ["data"],
   methods: {
     provide() {
+      this.modals = true;
+      console.log(this.data);
+    },
+    remove() {
       this.modals = true;
       console.log(this.data);
     },

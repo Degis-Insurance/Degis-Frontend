@@ -10,7 +10,7 @@
     <div class="modal-dialog modal-dialog-centered" style="max-width: 100%">
       <div
         class="modal-content"
-        style="width: 40%; border-radius: 24px; margin: auto"
+        style="width: 80%; border-radius: 24px; margin: auto"
       >
         <div class="modal-body">
           <div class="row d-flex align-items-center">
@@ -45,7 +45,7 @@
                 class="el-icon-right d-p"
                 style="font-size: 80px"
               />
-              <i v-else class="el-icon-back d-p" style="font-size: 80px" />
+              <i v-else class="el-icon-plus d-p" style="font-size: 80px" />
             </div>
             <div class="col-5">
               <div class="d-flex align-items-center">
@@ -56,7 +56,7 @@
                 />
                 <span
                   class="fw-7 d-g1 fs-34 pl-3"
-                  style="vertical-align: middle"
+                  style="vertical-align: middle; word-break: break-all"
                   >{{ data.coin2 }}</span
                 >
               </div>
@@ -169,9 +169,9 @@ export default {
   },
   computed: {
     calc_coin2() {
-      return 1*this.coin1;
-    }
-  }
+      return 1 * this.coin1;
+    },
+  },
 };
 </script>
 <style>

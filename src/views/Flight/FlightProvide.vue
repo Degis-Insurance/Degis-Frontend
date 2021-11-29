@@ -2,7 +2,7 @@
   <base-header type="" class="pt-4">
     <h1 class="fw-7 d-g1 fs-34 mb-4">Provide on Miserable Flight</h1>
     <el-card class="dg-card">
-      <div class="container-fluid">
+      <div class="container">
         <div class="row align-items-center">
           <div class="col-xl-6 order-md-1">
             <h2 class="fw-7 d-g1 fs-28" style="padding: 3% 0">The Miserable Flight Pool</h2>

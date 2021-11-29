@@ -85,7 +85,7 @@ export default {
       cardData: [
         {
           coin: "BTC",
-          name: "this is a name",
+          name: "this is a nameeeeeeeeeeeeeeeeeeeeeeeeeeee",
           insurancetype: "this is insurance type",
           price: 1000,
           mybalance: 11,
