@@ -93,10 +93,12 @@ export default {
   props: ["data"],
   methods: {
     provide() {
+      this.modalData.type = "provide",
       this.modals = true;
       console.log(this.data);
     },
     remove() {
+      this.modalData.type = "remove",
       this.modals = true;
       console.log(this.data);
     },

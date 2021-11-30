@@ -51,7 +51,7 @@ export default {
         },
         {
           pic: "AVAX",
-          name: "The Naught Price---AVAXL",
+          name: "The naughty Price---AVAXL",
           status: "Ongoing",
           apr: "47.63%",
           available: 10,
@@ -65,7 +65,7 @@ export default {
         },
         {
           pic: "AVAX",
-          name: "The Naught Price---AVAXH",
+          name: "The naughty Price---AVAXH",
           status: "Ongoing",
           apr: "47.63%",
           available: 10,
@@ -79,7 +79,7 @@ export default {
         },
         {
           pic: "BTC",
-          name: "The Naught Price---BTCL",
+          name: "The naughty Price---BTCL",
           status: "Ongoing",
           apr: "47.63%",
           available: 10,
@@ -93,7 +93,7 @@ export default {
         },
         {
           pic: "BTC",
-          name: "The Naught Price---BTCH",
+          name: "The naughty Price---BTCH",
           status: "Ongoing",
           apr: "47.63%",
           available: 10,
@@ -107,7 +107,7 @@ export default {
         },
         {
           pic: "ETH",
-          name: "The Naught Price---ETHL",
+          name: "The naughty Price---ETHL",
           status: "Ongoing",
           apr: "47.63%",
           available: 10,
@@ -121,7 +121,7 @@ export default {
         },
         {
           pic: "ETH",
-          name: "The Naught Price---ETHH",
+          name: "The naughty Price---ETHH",
           status: "Ongoing",
           apr: "47.63%",
           available: 10,

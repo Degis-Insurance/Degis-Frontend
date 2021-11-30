@@ -1,5 +1,19 @@
 import request from "@/api/request";
 
+export function getCity() {
+  return request({
+    url: "/city_list",
+    method: "get",
+  });
+}
+
+export function getFlight() {
+  return request({
+    url: "/flight_info",
+    method: "get",
+  });
+}
+
 export function getFlightByRoute() {
   return request({
     url: "/flight_info",
@@ -11,7 +25,6 @@ export function getFlightByRoute() {
     },
   });
 }
-
 
 export function getFlightByNo() {
   return request({
@@ -43,4 +56,3 @@ export function getTokenInfo() {
     },
   });
 }
-

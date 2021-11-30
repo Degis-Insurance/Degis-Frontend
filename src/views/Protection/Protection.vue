@@ -36,7 +36,7 @@
           <div class="col-lg-7 order-md-2">
             <p class="fw-7 d-g1 fs-34">Naughty Price</p>
             <p class="fw-4 d-g3 fs-16 pt-2">
-              The world of Blockchain is beyond imagination. Token prices are very naught, as they can drop to zero immediately. At Degis Naughty Price, protect your money by foreseeing the price
+              The world of Blockchain is beyond imagination. Token prices are very naughty, as they can drop to zero immediately. At Degis Naughty Price, protect your money by foreseeing the price
               change and purchase the right policy.
             </p>
             <div class="d-flex justify-content-between pt-4">

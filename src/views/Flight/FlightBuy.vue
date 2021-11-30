@@ -67,7 +67,7 @@
         <div>
           <p class="fw-7 d-p fs-18" style="color: white">Search</p>
           <div>
-            <base-button @click="search">SEARCH</base-button>
+            <base-button @click="getCity()">SEARCH</base-button>
           </div>
         </div>
       </div>
@@ -108,7 +108,7 @@
 </template>
 
 <script>
-import { getFlightByRoute } from "@/api/functions";
+import { getFlight, getCity, getFlightByRoute } from "@/api/functions";
 import OrderConfirm from "./OrderConfirm";
 import { ref } from "vue";
 import {
@@ -123,40 +123,40 @@ export default {
   },
   data() {
     return {
-      flightData: [
-        {
-          airline: "AQ",
-          flightno: "AQ1299",
-          route: "Guangzhou-Shanghai",
-          departtime: "2021-11-22T19:35:00",
-          arrivetime: "2021-11-22T21:50:00",
-          premium: "4",
-        },
-        {
-          airline: "AQ",
-          flightno: "AQ1299",
-          route: "Guangzhou-Shanghai",
-          departtime: "2021-11-24T19:35:00",
-          arrivetime: "2021-11-24T21:50:00",
-          premium: "4",
-        },
-        {
-          airline: "WN",
-          flightno: "WN186",
-          route: "Lihue-Honolulu",
-          departtime: "2021-11-22T08:45:00",
-          arrivetime: "2021-11-22T09:20:00",
-          premium: "4",
-        },
-        {
-          airline: "WN",
-          flightno: "WN186",
-          route: "Lihue-Honolulu",
-          departtime: "2021-11-24T08:45:00",
-          arrivetime: "2021-11-24T09:20:00",
-          premium: "4",
-        },
-      ],
+      // flightData: [
+      //   {
+      //     airline: "AQ",
+      //     flightno: "AQ1299",
+      //     route: "Guangzhou-Shanghai",
+      //     departtime: "2021-11-22T19:35:00",
+      //     arrivetime: "2021-11-22T21:50:00",
+      //     premium: "4",
+      //   },
+      //   {
+      //     airline: "AQ",
+      //     flightno: "AQ1299",
+      //     route: "Guangzhou-Shanghai",
+      //     departtime: "2021-11-24T19:35:00",
+      //     arrivetime: "2021-11-24T21:50:00",
+      //     premium: "4",
+      //   },
+      //   {
+      //     airline: "WN",
+      //     flightno: "WN186",
+      //     route: "Lihue-Honolulu",
+      //     departtime: "2021-11-22T08:45:00",
+      //     arrivetime: "2021-11-22T09:20:00",
+      //     premium: "4",
+      //   },
+      //   {
+      //     airline: "WN",
+      //     flightno: "WN186",
+      //     route: "Lihue-Honolulu",
+      //     departtime: "2021-11-24T08:45:00",
+      //     arrivetime: "2021-11-24T09:20:00",
+      //     premium: "4",
+      //   },
+      // ],
       BuyProduction: false,
       datevalue: "",
       flightoptions: ref([
@@ -164,7 +164,7 @@ export default {
         { value: "FlightNo2", label: "FlightNo2" },
         { value: "FlightNo3", label: "FlightNo3" },
       ]),
-      flightno: ref(""),
+      // flightno: ref(""),
       ocoptions: ref([
         { value: "City1", label: "City1" },
         { value: "City2", label: "City2" },
@@ -180,7 +180,29 @@ export default {
       buyData: {},
     };
   },
+
+  computed: {
+    // flightno() {
+    //   var ci = getCity();
+    //   console.log(ci);
+    //   return getCity()
+    // }
+  },
+
   methods: {
+
+    getCity() {
+      getCity().then((response) => {
+        console.log(response);
+      });
+    },
+
+    getFlight() {
+      getFlight().then((response) => {
+        console.log(response);
+      });
+    },
+
     actionbuy(val) {
       console.log(val);
       this.buyData = val;

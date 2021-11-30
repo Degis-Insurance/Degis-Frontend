@@ -9,11 +9,10 @@
           </div>
           <div class="col-lg-7 order-md-2">
             <div class="d-flex justify-content-between">
-              <p class="fw-7 d-g1 fs-34">Intruduction</p>
+              <p class="fw-7 d-g1 fs-34">Introduction</p>
             </div>
             <p class="fw-4 d-g3 fs-16 pt-3">
-              In this crazy world, especially during the pandemic, flights tend to be miserable. Few is on time, most are delayed, and some are even cancelled. At Degis Miserable Flight, protect
-              yourself by predicting whether flights are delayed and get paid accordingly.
+              In this crazy world, especially during the pandemic, flights tend to be miserable. Some are on time, some are delayed, and some are even canceled. At Degis Miserable Flight, protect yourself from delayed flights and get paid accordingly.
             </p>
           </div>
         </div>

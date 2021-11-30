@@ -77,7 +77,8 @@
         </div>
 
         <div class="modal-footer pt-1" style="display: block">
-          <base-button style="width: 100%" @click="addLiquidityEvent()">Provide</base-button>
+          <base-button v-if="data.type === 'provide'" style="width: 100%" @click="addLiquidityEvent()">Provide</base-button>
+          <base-button v-else style="width: 100%">Remove</base-button>
         </div>
       </div>
     </div>
