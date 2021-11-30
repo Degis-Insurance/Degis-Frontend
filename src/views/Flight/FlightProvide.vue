@@ -1,6 +1,6 @@
 <template>
   <base-header type="" class="pt-4">
-    <h1 class="fw-7 d-g1 fs-34 mb-4">Provide on Miserable Flight</h1>
+    <h1 class="fw-7 d-g1 fs-34 mb-4">Provide on Miserable Flight Pool</h1>
     <el-card class="dg-card">
       <div class="container">
         <div class="row align-items-center">
@@ -18,12 +18,13 @@
                 <h5 class="text-l">APR: <bold> {{ APR }}%</bold></h5>
               </div>
             </div>
-            <h5 class="text-l">
+            <!-- <h5 class="text-l">
               Pool Address: <bold> {{ poolAddress }}</bold>
-            </h5>
+            </h5> -->
           </div>
           <div class="col-xl-6 order-md-2">
-            <h5 class="text-r">Your Asset: <bold> {{ userAsset }} </bold></h5>
+            <h5 class="text-r">Deposit Available: <bold> {{ depositAvailable }} </bold></h5>
+            <h5 class="text-r">Withdraw Available: <bold> {{ withdrawAvailable }} </bold></h5>
             <input
               class="degis-input"
               style="width: 100%; margin: 4% 0"
@@ -39,7 +40,7 @@
             </div>
             <!-- <h5 class="text-r">Your Premium Income: <bold> {{ userPendingDegis }}</bold></h5> -->
             <!-- <h5 class="text-r">Your DEGIS Token Income: <bold> {{ userPendingDegis }}</bold></h5> -->
-            <base-button style="width: 100%; margin-bottom: 2%">HARVEST REWARD</base-button>
+            <!-- <base-button style="width: 100%; margin-bottom: 2%">HARVEST REWARD</base-button> -->
           </div>
         </div>
       </div>
@@ -70,6 +71,8 @@ export default {
       lockedRatio: "--",
       LPValue: "--",
       APR: "--",
+      depositAvailable: "--",
+      withdrawAvailable: "--",
       amount: 0
     };
   },
@@ -112,18 +115,16 @@ export default {
 
     async withdrawUSD(withdrawAmount) {
       const insurancePool = await getInsurancePool();
-      const lpToken = await getLPToken() 
       const account = this.$store.state.selectedAccount;
+
+      const lpTokenTotalSupply = await insurancePool.methods.totalSupply().call();
+      const usdtTotalStakingBalance = await insurancePool.methods.totalStakingBalance().call();
       
-      const amount = window.WEB3.utils.toWei(String(withdrawAmount), "ether");
-      const tx1 = await lpToken.methods
-        .approve(insurancePool.options.address, window.WEB3.utils.toBN(amount))
-        .send({ from: account });
-
-      console.log("Tx Hash:", tx1.transactionHash);
-
+      var amount = withdrawAmount / usdtTotalStakingBalance * lpTokenTotalSupply;
+      amount = window.WEB3.utils.toWei(String(amount), "ether");
+      
       const tx = await insurancePool.methods
-        .unstake(account, window.WEB3.utils.toBN(amount))
+        .unstake(window.WEB3.utils.toBN(amount))
         .send({
           from: account,
         });
@@ -131,29 +132,32 @@ export default {
     },
 
 
-    async mintDegis() {
-      const account = this.$store.state.selectedAccount;
-      const degis = await getDegis();
-      const amount = window.WEB3.utils.toWei("10000", "ether");
+    // async mintDegis() {
+    //   const account = this.$store.state.selectedAccount;
+    //   const degis = await getDegis();
+    //   const amount = window.WEB3.utils.toWei("10000", "ether");
 
-      const tx = await degis.methods.mintByOwner(account, amount).send({
-        from: account,
-      });
-      console.log("Tx Hash:", tx.transactionHash);
-    },
+    //   const tx = await degis.methods.mintByOwner(account, amount).send({
+    //     from: account,
+    //   });
+    //   console.log("Tx Hash:", tx.transactionHash);
+    // },
 
     async showInfo() {
       const account = this.$store.state.selectedAccount;
-      const InsurancePool = await getInsurancePool();
-      const LPValue = await InsurancePool.methods.LPValue().call();
+      const insurancePool = await getInsurancePool();
+      const usdt = await getMockUSD();
+      const LPValue = await insurancePool.methods.LPValue().call();
       
-      const totalStakingBalance = await InsurancePool.methods.totalStakingBalance().call();
-      const lockedRatio = await InsurancePool.methods.lockedRatio().call();
-      const availableCapacity = await InsurancePool.methods.availableCapacity().call();
-      const activePremiums = await InsurancePool.methods.activePremiums().call();
-      const lockedBalance = await InsurancePool.methods.lockedBalance().call();
-      const userBalance = await InsurancePool.methods.getUserBalance(account).call();
-
+      const totalStakingBalance = await insurancePool.methods.totalStakingBalance().call();
+      const lockedRatio = await insurancePool.methods.lockedRatio().call();
+      const availableCapacity = await insurancePool.methods.availableCapacity().call();
+      const activePremiums = await insurancePool.methods.activePremiums().call();
+      const lockedBalance = await insurancePool.methods.lockedBalance().call();
+      const userBalance = await insurancePool.methods.getUserBalance(account).call();
+      const depositAvailable = await usdt.methods.balanceOf(account).call();
+      const totalSupply = await insurancePool.methods.totalSupply().call();
+      const withdrawAvailable = userBalance / totalSupply * totalStakingBalance;
       return {
         totalStakingBalance: totalStakingBalance,
         activePremiums: activePremiums,
@@ -163,6 +167,8 @@ export default {
         lockedBalance: lockedBalance,
         availableCapacity: availableCapacity,
         userBalance: userBalance,
+        depositAvailable: depositAvailable,
+        withdrawAvailable: withdrawAvailable,
        };
     },
 
@@ -188,6 +194,8 @@ export default {
       this.LPValue = (res["LPValue"] / 1e18).toFixed(2);
       this.APR = res["APR"];
       this.userAsset = (res["userBalance"] / 1e18).toFixed(2);
+      this.depositAvailable = (res["depositAvailable"] / 1e18).toFixed(2);
+      this.withdrawAvailable = (res["withdrawAvailable"] / 1e18).toFixed(2);
       console.log(res);
     },
   },
