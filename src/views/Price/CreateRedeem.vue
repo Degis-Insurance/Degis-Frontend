@@ -135,6 +135,7 @@ export default {
         .deposit(tokenName, usdt.options.address, amount)
         .send({ from: account });
       console.log(tx2.transactionHash);
+      this.$store.commit("SET_LASTTRANSACTIONHASH", tx2.transactionHash);
     },
 
     async redeem(redeemAmount, tokenName) {
@@ -148,6 +149,7 @@ export default {
         .send({ from: account });
 
       console.log(tx1.transactionHash);
+      this.$store.commit("SET_LASTTRANSACTIONHASH", tx1.transactionHash);
     },
 
     async createEvent() {

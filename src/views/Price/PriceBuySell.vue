@@ -67,6 +67,9 @@ export default {
     "$store.state.selectedAccount": function (newVal) {
       this.showInfoEvent();
     },
+    "$store.state.lastTransactionHash": function (newVal) {
+      this.showInfoEvent();
+    },
   },
 
   mounted() {

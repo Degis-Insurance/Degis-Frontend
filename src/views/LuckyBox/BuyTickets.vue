@@ -149,7 +149,9 @@ export default {
       var tx = await DegisLottery.methods
         .buyTickets(newTickets)
         .send({ from: account });
+      this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
       console.log("Tx Hash:", tx.transactionHash);
+      console.log(this.$store.lastTransactionHash)
     },
 
     async BuyTicketEvent() {

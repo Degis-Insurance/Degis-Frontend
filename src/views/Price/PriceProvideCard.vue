@@ -45,10 +45,10 @@
                 24h Change: <span class="d-p">{{ data.change }}</span>
               </p>
               <p class="fw-7 d-g1 fs-18">
-                Pool Liquidity Token: <span class="d-p">{{ (data.poolLiquidityToken/1e18).toFixed(4) }}</span>
+                Pool Liquidity Token: <span class="d-p">{{ (data.poolLiquidityToken/1e18).toFixed(2) }}</span>
               </p>
               <p class="fw-7 d-g1 fs-18">
-                User Liquidity Token: <span class="d-p">{{ (data.userLiquidityToken/1e18).toFixed(4) }}</span>
+                User Liquidity Token: <span class="d-p">{{ (data.userLiquidityToken/1e18).toFixed(2) }}</span>
               </p>
             </div>
             <div>

@@ -232,6 +232,10 @@ export default {
       this.showLotteryInfoEvent();
       this.showUserInfoEvent();
     },
+    "$store.state.lastTransactionHash": function (newVal) {
+      this.showLotteryInfoEvent();
+      this.showUserInfoEvent();
+    },
   },
 
   mounted() {
@@ -280,6 +284,7 @@ export default {
         .redeemTickets(ticketIds)
         .send({ from: account });
       console.log("Tx Hash:", tx.transactionHash);
+      this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
     },
 
     getExactTime(time) {

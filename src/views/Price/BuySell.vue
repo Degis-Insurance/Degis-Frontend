@@ -194,6 +194,7 @@ export default {
             )
             .send({ from: account });
             console.log("Tx Hash:", tx.transactionHash);
+            this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
         }
 
         // 用最多policyTokenAmount个policy, 换usdtAmount个usdt token出来
@@ -209,6 +210,7 @@ export default {
             )
             .send({ from: account });
             console.log("Tx Hash:", tx.transactionHash);
+            this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
         }
       }
       if (buy_usdt_policy == "usdt2policy") {
@@ -245,6 +247,7 @@ export default {
             )
             .send({ from: account });
             console.log("Tx Hash:", tx.transactionHash);
+            this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
         }
 
         // 用最多usdtAmount个usdt, 换policyTokenAmount个policy token出来
@@ -260,6 +263,7 @@ export default {
             )
             .send({ from: account });
             console.log("Tx Hash:", tx.transactionHash);
+            this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
         }
       }
 

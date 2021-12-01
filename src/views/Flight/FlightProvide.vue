@@ -111,6 +111,9 @@ export default {
     "$store.state.selectedAccount": function (newVal) {
       this.showInfoEvent();
     },
+    "$store.state.lastTransactionHash": function (newVal) {
+      this.showInfoEvent();
+    },
   },
 
   mounted() {
@@ -145,6 +148,7 @@ export default {
         .send({ from: account });
 
       console.log("Tx Hash:", tx2.transactionHash);
+      this.$store.commit("SET_LASTTRANSACTIONHASH", tx2.transactionHash);
     },
 
     async withdrawUSD(withdrawAmount) {
@@ -168,6 +172,7 @@ export default {
           from: account,
         });
       console.log("Tx Hash:", tx.transactionHash);
+      this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
     },
 
     // async mintDegis() {
@@ -223,14 +228,12 @@ export default {
       const depositAmount = this.amount;
       console.log(depositAmount);
       await this.depositUSD(depositAmount);
-      await this.showInfoEvent();
     },
 
     async withdrawUSDEvent() {
       const withdrawAmount = this.amount;
       console.log(withdrawAmount);
       await this.withdrawUSD(withdrawAmount);
-      await this.showInfoEvent();
     },
 
     async showInfoEvent() {

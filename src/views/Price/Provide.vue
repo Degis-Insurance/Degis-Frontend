@@ -186,6 +186,7 @@ export default {
           )
           .send({from: account});
       console.log(tx.transactionHash)
+      this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
     },
     
     async removeLiquidity(amountUSDT, amountPolicyToken, tokenName) {
@@ -253,6 +254,8 @@ export default {
               date + 6000
           )
           .send({from: account});
+      console.log("Tx Hash:", tx.transactionHash);
+      this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
     },
 
     async addLiquidityEvent() {
@@ -263,7 +266,6 @@ export default {
     async removeLiquidityEvent() {
       await this.removeLiquidity(this.amount1, this.amount2, this.data.name2);
     },
-
   },
   watch: {
     show(val) {

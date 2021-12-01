@@ -93,13 +93,14 @@ export default {
   watch: {
     "$store.state.selectedAccount": function (newVal) {
       this.showInfoEvent()
-      // this.mint()
+    },
+    "$store.state.lastTransactionHash": function (newVal) {
+      this.showInfoEvent();
     },
   },
 
   mounted() {
     this.showInfoEvent()
-    // this.mint()
   },
 
   methods: {

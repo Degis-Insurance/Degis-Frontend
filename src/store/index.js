@@ -7,6 +7,7 @@ const store = createStore({
       web3Modal: null,
       selectedAccount: null,
       chainId: null,
+      lastTransactionHash: null,
     };
   },
   mutations: {
@@ -24,6 +25,10 @@ const store = createStore({
 
     SET_CHAIN(state, data) {
       state.chainId = data;
+    },
+
+    SET_LASTTRANSACTIONHASH(state, data) {
+      state.lastTransactionHash = data;
     },
   },
 });
