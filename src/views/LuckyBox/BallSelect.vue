@@ -8,32 +8,32 @@
             <img class="ball" style="margin-top: 11px" :src="'img/luckybox/num-' + nums[0] + '.png'"/>
           </template>
           <img v-for="(num,i) in 10" class="ball" :src="'img/luckybox/num-' + i + '.png'" @click="set(0, i)" :key="i"/>
-          <span class="fw-7 d-p fs-18 pl-4" style="line-height: 88px; text-align: center; cursor: pointer" @click="random(0)">RANDOM</span>
+          <span class="d-f-4 pl-4" style="line-height: 88px; text-align: center; cursor: pointer" @click="random(0)">RANDOM</span>
         </el-popover>
         <el-popover :width="318" trigger="hover" transition="false">
           <template #reference>
             <img class="ball" style="margin-top: 11px" :src="'img/luckybox/num-' + nums[1] + '.png'"/>
           </template>
           <img v-for="(num,i) in 10" class="ball" :src="'img/luckybox/num-' + i + '.png'" @click="set(1, i)" :key="i"/>
-          <span class="fw-7 d-p fs-18 pl-4" style="line-height: 88px; text-align: center; cursor: pointer" @click="random(1)">RANDOM</span>
+          <span class="d-f-4 pl-4" style="line-height: 88px; text-align: center; cursor: pointer" @click="random(1)">RANDOM</span>
         </el-popover>
         <el-popover :width="318" trigger="hover" transition="false">
           <template #reference>
             <img class="ball" style="margin-top: 11px" :src="'img/luckybox/num-' + nums[2] + '.png'"/>
           </template>
           <img v-for="(num,i) in 10" class="ball" :src="'img/luckybox/num-' + i + '.png'" @click="set(2, i)" :key="i"/>
-          <span class="fw-7 d-p fs-18 pl-4" style="line-height: 88px; text-align: center; cursor: pointer" @click="random(2)">RANDOM</span>
+          <span class="d-f-4 pl-4" style="line-height: 88px; text-align: center; cursor: pointer" @click="random(2)">RANDOM</span>
         </el-popover>
         <el-popover :width="318" trigger="hover" transition="false">
           <template #reference>
             <img class="ball" style="margin-top: 11px" :src="'img/luckybox/num-' + nums[3] + '.png'"/>
           </template>
           <img v-for="(num,i) in 10" class="ball" :src="'img/luckybox/num-' + i + '.png'" @click="set(3, i)" :key="i"/>
-          <span class="fw-7 d-p fs-18 pl-4" style="line-height: 88px; text-align: center; cursor: pointer" @click="random(3)">RANDOM</span>
+          <span class="d-f-4 pl-4" style="line-height: 88px; text-align: center; cursor: pointer" @click="random(3)">RANDOM</span>
         </el-popover>
       </div>
       <!--                <div class="col-xl-3">-->
-      <!--                  <p class="fw-7 d-p fs-18" style="line-height: 88px; text-align: center; cursor: pointer" @click="randomNumber">RANDOM</p>-->
+      <!--                  <p class="d-f-4" style="line-height: 88px; text-align: center; cursor: pointer" @click="randomNumber">RANDOM</p>-->
       <!--                </div>-->
     </div>
   </div>

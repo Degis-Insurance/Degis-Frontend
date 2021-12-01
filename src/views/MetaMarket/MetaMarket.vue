@@ -1,6 +1,6 @@
 <template>
   <base-header type="" class="pt-4">
-    <h1 class="fw-7 d-g1 fs-34 mb-4">Meta Market</h1>
+    <h1 class="d-f-1 mb-4">Meta Market</h1>
     <el-card class="dg-card">
       <div class="container-fluid">
         <div class="row">

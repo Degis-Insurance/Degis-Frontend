@@ -25,7 +25,7 @@
               <img src="img/function/flight-comp.png" style="width: 88px; height: 88px"/>
               <div>
                 <p class="fw-4 d-g1 fs-20 pl-3 pt-2">{{ buyData.airline }}</p>
-                <p class="fw-4 d-g2 fs-14 pl-3">{{ buyData.flightno }}</p>
+                <p class="fw-4 d-g2 fs-14 pl-3">{{ buyData.flight_no }}</p>
               </div>
             </div>
             <img
@@ -46,9 +46,9 @@
                 <p class="fw-4 d-g2 fs-16">Premium</p>
               </div>
               <div>
-                <p class="fw-4 d-g2 fs-16">{{ buyData.departtime }}</p>
-                <p class="fw-4 d-g2 fs-16">{{ buyData.arrivetime }}</p>
-                <p class="fw-4 d-g2 fs-16">{{ buyData.premium }}</p>
+                <p class="fw-4 d-g2 fs-16 ta-r">{{ buyData.depart_time }}</p>
+                <p class="fw-4 d-g2 fs-16 ta-r">{{ buyData.arrive_time }}</p>
+                <p class="fw-4 d-g2 fs-16 ta-r">{{ buyData.premium }}</p>
               </div>
               <!--              <p class="fw-4 d-g2 fs-14">Depart Time</p>-->
               <!--              <p class="fw-4 d-g2 fs-14">{{ buyData.departtime }}</p>-->

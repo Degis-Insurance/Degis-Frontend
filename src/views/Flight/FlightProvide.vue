@@ -1,36 +1,31 @@
 <template>
   <base-header type="" class="pt-4">
-    <h1 class="fw-7 d-g1 fs-34 mb-4">Provide on Miserable Flight Pool</h1>
+    <h1 class="d-f-1 mb-4">Provide on Miserable Flight Pool</h1>
     <el-card class="dg-card">
-      <div class="container">
+      <h1 class="d-f-1">Miserable Flight Pool</h1>
+      <div class="container" style="padding: 1% 0">
         <div class="row align-items-center">
           <div class="col-xl-6 order-md-1">
-            <h2 class="fw-7 d-g1 fs-28" style="padding: 3% 0">
-              The Miserable Flight Pool
-            </h2>
-            <div class="row justify-content-between" style="padding: 2% 0">
-              <div class="col-6">
-                <img
-                  src="img/function/mining-circle.png"
-                  class="img-fluid"
-                  style="width: 80%"
-                />
-              </div>
-              <div class="col-6">
-                <h5 class="text-l">
-                  Total Staking Balance: <bold> {{ totalStakingBalance }}</bold>
+<!--            <h2 class="d-f-1" style="padding: 1% 0">The Miserable Flight Pool</h2>-->
+            <div class="d-flex justify-content-center">
+<!--              <div class="col-5">-->
+                <img src="img/function/mining-circle.png" class="img-fluid mr-5" style="width: 170px; height: 170px"/>
+<!--              </div>-->
+              <div class="">
+                <h5 class="d-f-3">
+                  Total Staking Balance: <span class="d-f-2"> {{ totalStakingBalance }}</span>
                 </h5>
-                <h5 class="text-l">
-                  Active Premiums: <bold> {{ activePremiums }}</bold>
+                <h5 class="d-f-3">
+                  Active Premiums: <span class="d-f-2"> {{ activePremiums }}</span>
                 </h5>
-                <h5 class="text-l">
-                  Locked Ratio: <bold> {{ lockedRatio }}</bold>
+                <h5 class="d-f-3">
+                  Locked Ratio: <span class="d-f-2"> {{ lockedRatio }}</span>
                 </h5>
-                <h5 class="text-l">
-                  LP Value: <bold> {{ LPValue }}</bold>
+                <h5 class="d-f-3">
+                  LP Value: <span class="d-f-2"> {{ LPValue }}</span>
                 </h5>
-                <h5 class="text-l">
-                  APR: <bold> {{ APR }}%</bold>
+                <h5 class="d-f-3">
+                  APR: <span class="d-f-2"> {{ APR }}%</span>
                 </h5>
               </div>
             </div>
@@ -39,28 +34,16 @@
             </h5> -->
           </div>
           <div class="col-xl-6 order-md-2">
-            <h5 class="text-r">
-              Deposit Available: <bold> {{ depositAvailable }} </bold>
+            <h5 class="d-f-3">
+              Deposit Available: <span class="d-f-2"> {{ depositAvailable }} </span>
             </h5>
-            <h5 class="text-r">
-              Withdraw Available: <bold> {{ withdrawAvailable }} </bold>
+            <h5 class="d-f-3">
+              Withdraw Available: <span class="d-f-2"> {{ withdrawAvailable }} </span>
             </h5>
-            <input
-              class="degis-input"
-              style="width: 100%; margin: 4% 0"
-              placeholder="0"
-              v-model="amount"
-            />
-            <div
-              class="d-flex justify-content-between"
-              style="padding-bottom: 11%"
-            >
-              <base-button style="width: 45%" @click="depositUSDEvent">
-                DEPOSIT
-              </base-button>
-              <base-button style="width: 45%" @click="withdrawUSDEvent">
-                WITHDRAW
-              </base-button>
+            <input class="degis-input" style="width: 100%; margin: 2% 0" placeholder="0" v-model="amount"/>
+            <div class="d-flex justify-content-between">
+              <base-button style="width: 45%" @click="depositUSDEvent">DEPOSIT</base-button>
+              <base-button style="width: 45%" @click="withdrawUSDEvent">WITHDRAW</base-button>
             </div>
             <!-- <h5 class="text-r">Your Premium Income: <bold> {{ userPendingDegis }}</bold></h5> -->
             <!-- <h5 class="text-r">Your DEGIS Token Income: <bold> {{ userPendingDegis }}</bold></h5> -->
@@ -253,23 +236,5 @@ export default {
 </script>
 
 <style scoped>
-.text-l {
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 22px;
-  color: #86898c;
-  padding: 4% 0;
-}
 
-.text-r {
-  font-weight: normal;
-  font-size: 16px;
-  color: #86898c;
-  padding-bottom: 2%;
-}
-
-bold {
-  padding-left: 5px;
-  font-weight: bold;
-}
 </style>

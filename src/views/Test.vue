@@ -1,10 +1,10 @@
 <template>
   <base-header type="" class="pt-4">
-    <h1 class="fw-7 d-g1 fs-34 mb-4">The Miserable Flight</h1>
+    <h1 class="d-f-1 mb-4">The Miserable Flight</h1>
     <stats-card>
       <div class="row align-items-center pb-2">
         <div class="col-xl-3">
-          <p class="fw-7 d-p fs-18">Search by Flight</p>
+          <p class="d-f-4">Search by Flight</p>
           <div class="d-flex">
             <el-select v-model="flightno" filterable placeholder="Select Flight">
               <el-option v-for="item in tableData" :key="item.flightno" :label="item.flightno" :value="item.flightno"/>
@@ -12,7 +12,7 @@
           </div>
         </div>
         <div class="col-xl-5">
-          <p class="fw-7 d-p fs-18">Search by Route</p>
+          <p class="d-f-4">Search by Route</p>
           <div class="d-flex align-items-center">
             <el-select v-model="origincity" filterable placeholder="Origin City">
               <el-option v-for="item in tableData" :key="item.route" :label="item.route" :value="item.route"/>
@@ -26,12 +26,12 @@
         </div>
 
         <div class="col-xl-2">
-          <p class="fw-7 d-p fs-18">Date</p>
+          <p class="d-f-4">Date</p>
           <el-date-picker v-model="datevalue" style="width: 100%" type="date" placeholder="Pick a day"></el-date-picker>
         </div>
 
         <div class="col-xl-2">
-          <p class="fw-7 d-p fs-18" style="color: white">Search</p>
+          <p class="d-f-4" style="color: white">Search</p>
           <div align="right">
             <base-button style="padding: 13px 0; width: 100%">SEARCH</base-button>
           </div>

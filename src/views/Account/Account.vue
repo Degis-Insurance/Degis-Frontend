@@ -1,6 +1,6 @@
 <template>
   <base-header type="" class="pt-4">
-    <h1 class="fw-7 d-g1 fs-34 mb-4">Policies I Bought / Sold</h1>
+    <h1 class="d-f-1 mb-4">Policies I Bought / Sold</h1>
 
     <el-card>
       <el-tabs type="" :stretch="true">

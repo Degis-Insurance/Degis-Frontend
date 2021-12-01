@@ -14,7 +14,7 @@
           <img src="img/function/flight-info.png" class="pb-4" style="width: 100%;"/>
           <div class="d-flex justify-content-between">
             <p class="fw-4 d-p fs-32">ABC</p>
-            <p class="fw-4 d-g3 fs-16 pt-3">5h 25m</p>
+            <p class="d-f-2 pt-3">5h 25m</p>
             <p class="fw-4 d-p fs-32">CBA</p>
           </div>
 
@@ -44,11 +44,11 @@
           <div class="row d-flex justify-content-between pt-4">
             <div class="col-xl-6">
               <div class="d-flex justify-content-between">
-                <p class="fw-4 d-g3 fs-16">Protection Premium:</p>
+                <p class="d-f-2">Protection Premium:</p>
                 <p class="fw-7 d-p fs-16">12.3467</p>
               </div>
               <div class="d-flex justify-content-between" style="margin-top: -20px">
-                <p class="fw-4 d-g3 fs-16">Maximum Payoff:</p>
+                <p class="d-f-2">Maximum Payoff:</p>
                 <p class="fw-7 d-p fs-16">19.2824</p>
               </div>
             </div>

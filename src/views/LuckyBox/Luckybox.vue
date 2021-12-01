@@ -1,10 +1,10 @@
 <template>
   <base-header type="" class="pt-4">
-    <h1 class="fw-7 d-g1 fs-34 mb-4">The Degis Lucky Box</h1>
+    <h1 class="d-f-1 mb-4">The Degis Lucky Box</h1>
     <stats-card style=" background-size: cover; background-position: center; background-image: url('img/luckybox/luckybox.png');">
       <div class="container" style="height: 450px">
         <div class="row row-grid align-items-center">
-          <h1 class="fw-7 d-g1 fs-34 pt-5" style="margin: auto">
+          <h1 class="d-f-1 pt-5" style="margin: auto">
             The Degis Lucky Box
           </h1>
         </div>

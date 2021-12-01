@@ -22,7 +22,7 @@
                   style="width: 64px"
                 />
                 <span
-                  class="fw-7 d-g1 fs-34 pl-3"
+                  class="d-f-1 pl-3"
                   style="vertical-align: middle"
                   >{{ data.name1 }}</span
                 >
@@ -55,7 +55,7 @@
                   style="width: 64px"
                 />
                 <span
-                  class="fw-7 d-g1 fs-34 pl-3"
+                  class="d-f-1 pl-3"
                   style="vertical-align: middle; word-break: break-all"
                   >{{ data.name2.replace(/_/g,'') }}  </span
                 >

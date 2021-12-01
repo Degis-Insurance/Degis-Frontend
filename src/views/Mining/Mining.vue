@@ -1,8 +1,8 @@
 <template>
   <base-header type="" class="pb-6 pb-8 pt-4">
-    <h1 class="fw-7 d-g1 fs-34 mb-4">Mining</h1>
+    <h1 class="d-f-1 mb-4">Mining</h1>
     <el-card class="dg-card">
-      <h1 class="fw-7 d-g1 fs-34 mb-4">LP Mining</h1>
+      <h1 class="d-f-1 mb-4 pl-3">LP Mining</h1>
       <mining-line
         v-for="(data, index) in miningData"
         :data="data"
@@ -10,11 +10,11 @@
       ></mining-line>
     </el-card>
     <el-card class="dg-card">
-      <h1 class="fw-7 d-g1 fs-34 mb-4">Buyer Incentive</h1>
+      <h1 class="d-f-1 mb-4 pl-3">Buyer Incentive</h1>
       <mining-line :data="buyerData"></mining-line>
     </el-card>
     <el-card class="dg-card">
-      <h1 class="fw-7 d-g1 fs-34 mb-4">Staking</h1>
+      <h1 class="d-f-1 mb-4 pl-3">Staking</h1>
       <mining-line
         v-for="(data, index) in stakingData"
         :data="data"

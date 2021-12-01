@@ -14,26 +14,19 @@ export function getFlight() {
   });
 }
 
-export function getFlightByRoute() {
+export function getFlightByRoute(data) {
   return request({
     url: "/flight_info",
     method: "get",
-    params: {
-      origin: "Shanghai",
-      dest: "HongKong",
-      depart_date: "20211013",
-    },
+    params: data,
   });
 }
 
-export function getFlightByNo() {
+export function getFlightByNo(data) {
   return request({
     url: "/flight_info",
     method: "get",
-    params: {
-      flight_no: "AQ1211",
-      depart_date: "20211113",
-    },
+    params: data,
   });
 }
 
