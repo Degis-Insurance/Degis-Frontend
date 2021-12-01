@@ -57,7 +57,7 @@
                 <span
                   class="fw-7 d-g1 fs-34 pl-3"
                   style="vertical-align: middle; word-break: break-all"
-                  >{{ data.name2.replace(/_/g,'') }}</span
+                  >{{ data.name2.replace(/_/g, "") }}</span
                 >
               </div>
               <input
@@ -77,10 +77,15 @@
         </div>
 
         <div class="modal-footer pt-1" style="display: block">
-          <base-button v-if="data.type === 'buy'" style="width: 100%" @click="buyEvent"
+          <base-button
+            v-if="data.type === 'buy'"
+            style="width: 100%"
+            @click="buyEvent"
             >Buy</base-button
           >
-          <base-button v-else style="width: 100%" @click="sellEvent">Sell</base-button>
+          <base-button v-else style="width: 100%" @click="sellEvent"
+            >Sell</base-button
+          >
         </div>
       </div>
     </div>
@@ -121,7 +126,7 @@ export default {
       buy_usdt_policy,
       exact_former_later,
       tokenName,
-      slip,
+      slip
     ) {
       console.log(buy_usdt_policy, exact_former_later);
       const account = this.$store.state.selectedAccount;
@@ -133,7 +138,7 @@ export default {
       // console.log("==============");
       // await buyerToken.methods.addMinter(router.options.address).send({from:account});
       // console.log("==============");
-      
+
       const policyTokenAddress = await core.methods
         .findAddressbyName(tokenName)
         .call();
@@ -157,60 +162,78 @@ export default {
         "ether"
       );
 
-      if(buy_usdt_policy == "policy2usdt"){
-        const tx1 = await policyToken.methods
-          .approve(router.options.address, window.WEB3.utils.toBN(policyTokenAmount / slip))
-          .send({ from: account });
-        console.log(tx1.transactionHash);
-        
+      if (buy_usdt_policy == "policy2usdt") {
+        const allowance = await policyToken.methods
+          .allowance(account, router.options.address)
+          .call();
+        if (parseInt(allowance) < parseInt(window.WEB3.utils.toWei("100000000", "ether"))) {
+          const tx1 = await policyToken.methods
+            .approve(
+              router.options.address,
+              window.WEB3.utils.toBN(
+                "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+              )
+            )
+            .send({ from: account });
+          console.log("Tx Hash:", tx1.transactionHash);
+        }
+
         let date = new Date().getTime();
         date = parseInt(date / 1000);
 
         //用最多policyTokenAmount个policy token 换usdtAmount个usdt出来
-        if(exact_former_later == "former")
-        {
+        if (exact_former_later == "former") {
           const tx = await router.methods
-          .swapExactTokensforTokens(
-            policyTokenAmount,
-            window.WEB3.utils.toBN(usdtAmount * slip),
-            policyTokenAddress,
-            usdtAddress,
-            account,
-            date + 6000
-          )
-          .send({ from: account });
+            .swapExactTokensforTokens(
+              policyTokenAmount,
+              window.WEB3.utils.toBN(usdtAmount * slip),
+              policyTokenAddress,
+              usdtAddress,
+              account,
+              date + 6000
+            )
+            .send({ from: account });
+            console.log("Tx Hash:", tx.transactionHash);
         }
 
         // 用最多policyTokenAmount个policy, 换usdtAmount个usdt token出来
-        if(exact_former_later == "later")
-        {
+        if (exact_former_later == "later") {
           const tx = await router.methods
-          .swapTokensforExactTokens(
-            window.WEB3.utils.toBN(policyTokenAmount / slip),
-            usdtAmount,
-            policyTokenAddress,
-            usdtAddress,
-            account,
-            date + 6000
-          )
-          .send({ from: account });
+            .swapTokensforExactTokens(
+              window.WEB3.utils.toBN(policyTokenAmount / slip),
+              usdtAmount,
+              policyTokenAddress,
+              usdtAddress,
+              account,
+              date + 6000
+            )
+            .send({ from: account });
+            console.log("Tx Hash:", tx.transactionHash);
         }
       }
-      if(buy_usdt_policy == "usdt2policy")
-      {
-        const tx2 = await usdt.methods
-        .approve(router.options.address, window.WEB3.utils.toBN(usdtAmount / slip))
-        .send({ from: account });
-        console.log(tx2.transactionHash);
+      if (buy_usdt_policy == "usdt2policy") {
+        const allowance = await usdt.methods
+          .allowance(account, router.options.address)
+          .call();
+        if (parseInt(allowance) < parseInt(window.WEB3.utils.toWei("100000000", "ether"))) {
+          const tx2 = await usdt.methods
+            .approve(
+              router.options.address,
+              window.WEB3.utils.toBN(
+                "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+              )
+            )
+            .send({ from: account });
+          console.log("Tx Hash:", tx2.transactionHash);
+        }
 
         let date = new Date().getTime();
         date = parseInt(date / 1000);
 
         // 用usdtAmount个usdt token, 换至少policyTokenAmount个policy出来
-        if(exact_former_later == "former")
-        {
-          console.log(usdtAmount)
-          console.log(policyTokenAmount * slip)
+        if (exact_former_later == "former") {
+          console.log(usdtAmount);
+          console.log(policyTokenAmount * slip);
           const tx = await router.methods
             .swapExactTokensforTokens(
               usdtAmount,
@@ -220,7 +243,8 @@ export default {
               account,
               date + 6000
             )
-          .send({ from: account });
+            .send({ from: account });
+            console.log("Tx Hash:", tx.transactionHash);
         }
 
         // 用最多usdtAmount个usdt, 换policyTokenAmount个policy token出来
@@ -235,6 +259,7 @@ export default {
               date + 6000
             )
             .send({ from: account });
+            console.log("Tx Hash:", tx.transactionHash);
         }
       }
 
@@ -278,9 +303,9 @@ export default {
   },
   computed: {
     calc_amount2() {
-      this.amount2 = this.amount1 / this.data.currentPrice
+      this.amount2 = this.amount1 / this.data.currentPrice;
       return this.amount2;
-    }
+    },
   },
   watch: {
     show(val) {

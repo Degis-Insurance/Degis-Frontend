@@ -170,7 +170,8 @@ export default {
           tradingVolume: "--",
           change: "--",
           minted: userInfo["userQuota"] / 1e18,
-          balance: userInfo["policyTokenBalance"] / 1e18,
+          policyTokenBalance: (userInfo["policyTokenBalance"] / 1e18).toFixed(2),
+          usdtBalance: (userInfo["usdtBalance"] / 1e18).toFixed(2)
         };
         this.cardData.push(policyTokeninfo);
       }

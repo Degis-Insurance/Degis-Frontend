@@ -78,7 +78,7 @@
 
         <div class="modal-footer pt-1" style="display: block">
           <base-button v-if="data.type === 'provide'" style="width: 100%" @click="addLiquidityEvent()">Provide</base-button>
-          <base-button v-else style="width: 100%">Remove</base-button>
+          <base-button v-else style="width: 100%" @click="removeLiquidityEvent">Remove</base-button>
         </div>
       </div>
     </div>
@@ -139,15 +139,35 @@ export default {
 
       console.log(amountUSDTEther, amountPolicyTokenEther, amountUSDTEtherMin, amountPolicyTokenEtherMin)
 
-      const tx1 = await policyToken.methods
-          .approve(router.options.address, window.WEB3.utils.toBN(amountPolicyTokenEther))
-          .send({from: account});
-      console.log(tx1.transactionHash)
+      var allowance = await policyToken.methods
+        .allowance(account, router.options.address)
+        .call();
+      if (parseInt(allowance) < parseInt(window.WEB3.utils.toWei("100000000", "ether"))) {
+        const tx1 = await policyToken.methods
+          .approve(
+            router.options.address,
+            window.WEB3.utils.toBN(
+              "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+            )
+          )
+          .send({ from: account });
+        console.log("Tx Hash:", tx1.transactionHash);
+      }
 
-      const tx2 = await usdt.methods
-          .approve(router.options.address, window.WEB3.utils.toBN(amountUSDTEther))
-          .send({from: account});
-      console.log(tx2.transactionHash)
+      allowance = await usdt.methods
+        .allowance(account, router.options.address)
+        .call();
+      if (parseInt(allowance) < parseInt(window.WEB3.utils.toWei("100000000", "ether"))) {
+        const tx2 = await usdt.methods
+          .approve(
+            router.options.address,
+            window.WEB3.utils.toBN(
+              "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+            )
+          )
+          .send({ from: account });
+        console.log("Tx Hash:", tx2.transactionHash);
+      }
 
       let date = new Date().getTime();
       date = parseInt(date / 1000);
@@ -189,10 +209,20 @@ export default {
 
       const liquidityToken = await pair.methods.balanceOf(account).call();
 
-      const tx1 = await pair.methods
-          .approve(router.options.address, window.WEB3.utils.toBN(liquidityToken))
-          .send({from: account});
-      console.log(tx1.transactionHash)
+      const allowance = await pair.methods
+        .allowance(account, router.options.address)
+        .call();
+      if (parseInt(allowance) < parseInt(window.WEB3.utils.toWei("100000000", "ether"))) {
+        const tx1 = await pair.methods
+          .approve(
+            router.options.address,
+            window.WEB3.utils.toBN(
+              "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+            )
+          )
+          .send({ from: account });
+        console.log("Tx Hash:", tx1.transactionHash);
+      }
 
       const liquidityTokenAll = await pair.methods.totalSupply().call();
       const pair_amount = await pair.methods.getReserves().call();

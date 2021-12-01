@@ -117,12 +117,20 @@ export default {
       console.log("core", core.options.address);
       console.log("usdt", usdt.options.address);
 
-      const tx1 = await usdt.methods
-        .approve(core.options.address, amount)
-        .send({ from: account });
-
-      console.log(tx1);
-
+      const allowance = await usdt.methods
+        .allowance(account, core.options.address)
+        .call();
+      if (parseInt(allowance) < parseInt(window.WEB3.utils.toWei("100000000", "ether"))) {
+        const tx1 = await usdt.methods
+          .approve(
+            core.options.address,
+            window.WEB3.utils.toBN(
+              "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+            )
+          )
+          .send({ from: account });
+        console.log("Tx Hash:", tx1.transactionHash);
+      }
       const tx2 = await core.methods
         .deposit(tokenName, usdt.options.address, amount)
         .send({ from: account });

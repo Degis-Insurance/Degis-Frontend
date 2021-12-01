@@ -42,6 +42,12 @@
               <p class="fw-7 d-g1 fs-18">
                 24h Change: <span class="d-p">{{ data.change }}</span>
               </p>
+              <p class="fw-7 d-g1 fs-18">
+                USDT Balance: <span class="d-p">{{ data.usdtBalance }}</span>
+              </p>
+              <p class="fw-7 d-g1 fs-18">
+                Policy Token Balance: <span class="d-p">{{ data.policyTokenBalance }}</span>
+              </p>
             </div>
             <div>
               <div>

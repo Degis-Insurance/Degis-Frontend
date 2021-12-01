@@ -5,17 +5,33 @@
       <div class="container">
         <div class="row align-items-center">
           <div class="col-xl-6 order-md-1">
-            <h2 class="fw-7 d-g1 fs-28" style="padding: 3% 0">The Miserable Flight Pool</h2>
+            <h2 class="fw-7 d-g1 fs-28" style="padding: 3% 0">
+              The Miserable Flight Pool
+            </h2>
             <div class="row justify-content-between" style="padding: 2% 0">
               <div class="col-6">
-                <img src="img/function/mining-circle.png" class="img-fluid" style="width: 80%"/>
+                <img
+                  src="img/function/mining-circle.png"
+                  class="img-fluid"
+                  style="width: 80%"
+                />
               </div>
               <div class="col-6">
-                <h5 class="text-l">Total Staking Balance: <bold> {{ totalStakingBalance }}</bold></h5>
-                <h5 class="text-l">Active Premiums: <bold> {{ activePremiums }}</bold></h5>
-                <h5 class="text-l">Locked Ratio: <bold> {{ lockedRatio }}</bold></h5>
-                <h5 class="text-l">LP Value: <bold> {{ LPValue }}</bold></h5>
-                <h5 class="text-l">APR: <bold> {{ APR }}%</bold></h5>
+                <h5 class="text-l">
+                  Total Staking Balance: <bold> {{ totalStakingBalance }}</bold>
+                </h5>
+                <h5 class="text-l">
+                  Active Premiums: <bold> {{ activePremiums }}</bold>
+                </h5>
+                <h5 class="text-l">
+                  Locked Ratio: <bold> {{ lockedRatio }}</bold>
+                </h5>
+                <h5 class="text-l">
+                  LP Value: <bold> {{ LPValue }}</bold>
+                </h5>
+                <h5 class="text-l">
+                  APR: <bold> {{ APR }}%</bold>
+                </h5>
               </div>
             </div>
             <!-- <h5 class="text-l">
@@ -23,8 +39,12 @@
             </h5> -->
           </div>
           <div class="col-xl-6 order-md-2">
-            <h5 class="text-r">Deposit Available: <bold> {{ depositAvailable }} </bold></h5>
-            <h5 class="text-r">Withdraw Available: <bold> {{ withdrawAvailable }} </bold></h5>
+            <h5 class="text-r">
+              Deposit Available: <bold> {{ depositAvailable }} </bold>
+            </h5>
+            <h5 class="text-r">
+              Withdraw Available: <bold> {{ withdrawAvailable }} </bold>
+            </h5>
             <input
               class="degis-input"
               style="width: 100%; margin: 4% 0"
@@ -35,8 +55,12 @@
               class="d-flex justify-content-between"
               style="padding-bottom: 11%"
             >
-              <base-button style="width: 45%" @click="depositUSDEvent"> DEPOSIT </base-button>
-              <base-button style="width: 45%" @click="withdrawUSDEvent"> WITHDRAW </base-button>
+              <base-button style="width: 45%" @click="depositUSDEvent">
+                DEPOSIT
+              </base-button>
+              <base-button style="width: 45%" @click="withdrawUSDEvent">
+                WITHDRAW
+              </base-button>
             </div>
             <!-- <h5 class="text-r">Your Premium Income: <bold> {{ userPendingDegis }}</bold></h5> -->
             <!-- <h5 class="text-r">Your DEGIS Token Income: <bold> {{ userPendingDegis }}</bold></h5> -->
@@ -73,7 +97,7 @@ export default {
       APR: "--",
       depositAvailable: "--",
       withdrawAvailable: "--",
-      amount: 0
+      amount: 0,
     };
   },
 
@@ -98,14 +122,24 @@ export default {
       const account = this.$store.state.selectedAccount;
       const usdt = await getMockUSD();
       const insurancePool = await getInsurancePool();
-      
-      const amount = window.WEB3.utils.toWei(String(depositAmount), "ether");
-      const tx1 = await usdt.methods
-        .approve(insurancePool.options.address, window.WEB3.utils.toBN(amount))
-        .send({ from: account });
 
-      console.log("Tx Hash:", tx1.transactionHash);
-      
+      const amount = window.WEB3.utils.toWei(String(depositAmount), "ether");
+
+      const allowance = await usdt.methods
+        .allowance(account, insurancePool.options.address)
+        .call();
+      if (parseInt(allowance) < parseInt(window.WEB3.utils.toWei("100000000", "ether"))) {
+        const tx1 = await usdt.methods
+          .approve(
+            insurancePool.options.address,
+            window.WEB3.utils.toBN(
+              "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+            )
+          )
+          .send({ from: account });
+        console.log("Tx Hash:", tx1.transactionHash);
+      }
+
       const tx2 = await insurancePool.methods
         .stake(account, window.WEB3.utils.toBN(amount))
         .send({ from: account });
@@ -117,12 +151,17 @@ export default {
       const insurancePool = await getInsurancePool();
       const account = this.$store.state.selectedAccount;
 
-      const lpTokenTotalSupply = await insurancePool.methods.totalSupply().call();
-      const usdtTotalStakingBalance = await insurancePool.methods.totalStakingBalance().call();
-      
-      var amount = withdrawAmount / usdtTotalStakingBalance * lpTokenTotalSupply;
+      const lpTokenTotalSupply = await insurancePool.methods
+        .totalSupply()
+        .call();
+      const usdtTotalStakingBalance = await insurancePool.methods
+        .totalStakingBalance()
+        .call();
+
+      var amount =
+        (withdrawAmount / usdtTotalStakingBalance) * lpTokenTotalSupply;
       amount = window.WEB3.utils.toWei(String(amount), "ether");
-      
+
       const tx = await insurancePool.methods
         .unstake(window.WEB3.utils.toBN(amount))
         .send({
@@ -130,7 +169,6 @@ export default {
         });
       console.log("Tx Hash:", tx.transactionHash);
     },
-
 
     // async mintDegis() {
     //   const account = this.$store.state.selectedAccount;
@@ -148,40 +186,49 @@ export default {
       const insurancePool = await getInsurancePool();
       const usdt = await getMockUSD();
       const LPValue = await insurancePool.methods.LPValue().call();
-      
-      const totalStakingBalance = await insurancePool.methods.totalStakingBalance().call();
+
+      const totalStakingBalance = await insurancePool.methods
+        .totalStakingBalance()
+        .call();
       const lockedRatio = await insurancePool.methods.lockedRatio().call();
-      const availableCapacity = await insurancePool.methods.availableCapacity().call();
-      const activePremiums = await insurancePool.methods.activePremiums().call();
+      const availableCapacity = await insurancePool.methods
+        .availableCapacity()
+        .call();
+      const activePremiums = await insurancePool.methods
+        .activePremiums()
+        .call();
       const lockedBalance = await insurancePool.methods.lockedBalance().call();
-      const userBalance = await insurancePool.methods.getUserBalance(account).call();
+      const userBalance = await insurancePool.methods
+        .getUserBalance(account)
+        .call();
       const depositAvailable = await usdt.methods.balanceOf(account).call();
       const totalSupply = await insurancePool.methods.totalSupply().call();
-      const withdrawAvailable = userBalance / totalSupply * totalStakingBalance;
+      const withdrawAvailable =
+        (userBalance / totalSupply) * totalStakingBalance;
       return {
         totalStakingBalance: totalStakingBalance,
         activePremiums: activePremiums,
-        lockedRatio:lockedRatio,
-        LPValue:LPValue,
+        lockedRatio: lockedRatio,
+        LPValue: LPValue,
         APR: "--",
         lockedBalance: lockedBalance,
         availableCapacity: availableCapacity,
         userBalance: userBalance,
         depositAvailable: depositAvailable,
         withdrawAvailable: withdrawAvailable,
-       };
+      };
     },
 
     async depositUSDEvent() {
       const depositAmount = this.amount;
-      console.log(depositAmount)
+      console.log(depositAmount);
       await this.depositUSD(depositAmount);
       await this.showInfoEvent();
     },
 
     async withdrawUSDEvent() {
       const withdrawAmount = this.amount;
-      console.log(withdrawAmount)
+      console.log(withdrawAmount);
       await this.withdrawUSD(withdrawAmount);
       await this.showInfoEvent();
     },
