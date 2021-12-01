@@ -165,35 +165,32 @@ export default {
         { value: "FlightNo3", label: "FlightNo3" },
       ]),
       // flightno: ref(""),
-      ocoptions: ref([
-        { value: "City1", label: "City1" },
-        { value: "City2", label: "City2" },
-        { value: "City3", label: "City3" },
-      ]),
+      ocoptions: "",
       origincity: ref(""),
-      dcoptions: ref([
-        { value: "City1", label: "City1" },
-        { value: "City2", label: "City2" },
-        { value: "City3", label: "City3" },
-      ]),
+      dcoptions: "",
       destinationcity: ref(""),
       buyData: {},
     };
   },
 
   computed: {
-    // flightno() {
-    //   var ci = getCity();
-    //   console.log(ci);
-    //   return getCity()
-    // }
+    flightdata() {
+      var ci = getFlight();
+      console.log(ci);
+      return ci
+    }
+  },
+
+  mounted() {
+    this.ocoptions = this.getCity();
+    console.log(this.ocoptions)
+    this.dcoptions = getCity();
   },
 
   methods: {
-
     getCity() {
       getCity().then((response) => {
-        console.log(response);
+        return response.data.city_list;
       });
     },
 
