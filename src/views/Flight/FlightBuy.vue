@@ -43,9 +43,21 @@
         <el-table-column prop="airline" label="AIRLINE" sortable/>
         <el-table-column prop="flight_no" label="FLIGHT NO." sortable/>
         <el-table-column prop="route" label="ROUTE" sortable/>
-        <el-table-column prop="depart_time" label="DEPART TIME" sortable/>
-        <el-table-column prop="arrive_time" label="ARRIVE TIME" sortable/>
-        <el-table-column prop="premium" label="PREMIUM" sortable/>
+        <el-table-column prop="depart_time" label="DEPART TIME" sortable>
+          <template #default="scope">
+            {{ scope.row.depart_time.split(' ')[1] }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="arrive_time" label="ARRIVE TIME" sortable>
+          <template #default="scope">
+            {{ scope.row.arrive_time.split(' ')[1] }} {{ scope.row.arrive_time.split(' ')[1] > scope.row.depart_time.split(' ')[1] ? '' : "(+1)" }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="premium" label="PREMIUM" sortable>
+          <template #default="scope">
+            {{ scope.row.premium.toString().substr(0, 4) }}
+          </template>
+        </el-table-column>
         <el-table-column prop="action" label="ACTION">
           <template #default="scope">
             <base-button @click="actionbuy(scope.row)">Buy</base-button>

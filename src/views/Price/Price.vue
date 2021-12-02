@@ -12,8 +12,7 @@
               <p class="d-f-1">Introduction</p>
             </div>
             <p class="d-f-3 pt-3">
-              In this crazy world, especially during the pandemic, flights tend to be miserable. Few is on time, most are delayed, and some are even cancelled. At Degis Miserable Flight, protect
-              yourself by predicting whether flights are delayed and get paid accordingly.
+              The world of Blockchain is beyond imagination. Token prices are very naughty, as they can drop to zero immediately. At Degis Naughty Price, protect your money by foreseeing the price change and purchase the right policy.
             </p>
           </div>
         </div>
