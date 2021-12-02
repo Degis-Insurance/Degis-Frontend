@@ -158,17 +158,6 @@ export default {
       this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
     },
 
-    // async mintDegis() {
-    //   const account = this.$store.state.selectedAccount;
-    //   const degis = await getDegis();
-    //   const amount = window.WEB3.utils.toWei("10000", "ether");
-
-    //   const tx = await degis.methods.mintByOwner(account, amount).send({
-    //     from: account,
-    //   });
-    //   console.log("Tx Hash:", tx.transactionHash);
-    // },
-
     async showInfo() {
       const account = this.$store.state.selectedAccount;
       const insurancePool = await getInsurancePool();
