@@ -27,7 +27,7 @@ export default {
       cardData: [
         {
           coin: "BTC",
-          name: "this is a name",
+          name: "thisisanamenamename",
           currentPrice: "--",
           coinPrice: "--",
           type: "--",

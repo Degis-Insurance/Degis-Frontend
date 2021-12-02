@@ -1,6 +1,6 @@
 <template>
   <el-card class="dg-card">
-    <div class="container">
+    <div class="container-fluid">
       <div class="row row-grid align-items-center">
         <div class="col-lg-4">
           <img :src="'img/protection/price/' + data.coin + '.png'" class="img-fluid" style="width: 64px"/>
