@@ -26,12 +26,40 @@
 
 <script>
 import MiningLine from "./MiningLine";
+import {
+  getLPToken,
+  getFarmingPool,
+  getPolicyToken,
+  getDegis,
+} from "../../utils/contractInstance";
 
 export default {
   name: "mining",
   components: {
     MiningLine,
   },
+
+  computed: {
+    currentAccount() {
+      return this.$store.state.selectedAccount;
+    },
+  },
+
+  watch: {
+    "$store.state.selectedAccount": function (newVal) {
+      this.showFarmingPoolInfoEvent();
+    },
+    "$store.state.lastTransactionHash": function (newVal) {
+      this.showFarmingPoolInfoEvent();
+    },
+  },
+
+  mounted() {
+    // this.addMiningPool();
+    // this.mintDegis();
+    this.showFarmingPoolInfoEvent();
+  },
+
   data() {
     return {
       miningData: [
@@ -178,9 +206,95 @@ export default {
           address2: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
         },
       ],
+
+      async mintDegis() {
+        const account = this.$store.state.selectedAccount;
+        const degis = await getDegis();
+        const amount = window.WEB3.utils.toWei("10000", "ether");
+
+        const tx = await degis.methods.mintByOwner(account, amount).send({
+          from: account,
+        });
+        console.log("Tx Hash:", tx.transactionHash);
+      },
+
+      async addMiningPool() {
+        const account = this.$store.state.selectedAccount;
+        const lpToken = await getLPToken();
+        const farm = await getFarmingPool();
+        const degisPerBlock = window.WEB3.utils.toWei(String(1), "ether");
+
+        const t1 = await farm.methods
+          .add(lpToken.options.address, degisPerBlock, false)
+          .send({ from: account });
+        
+        const degis = await getDegis();
+        await degis.methods.addMinter(farm.options.address).send({from:account});
+      },
+
+      async getFarmingPoolName() {
+        const farmPoolNames = [[0, "flight", "The Miserable Flight Pool"]];
+        return farmPoolNames;
+      },
+
+      async showFarmingPoolInfo() {
+        const account = this.$store.state.selectedAccount;
+        const farmPoolNames = await this.getFarmingPoolName();
+        const farm = await getFarmingPool();
+        // const xxx = await farm.methods.getPoolList().call();
+        // console.log("xxxx",xxx)
+        this.miningData = [];
+        for (var i = 0; i < farmPoolNames.length; i++) {
+          const poolId = farmPoolNames[i][0];
+          const poolPic = farmPoolNames[i][1];
+          const poolName = farmPoolNames[i][2];
+          const poolInfo = await farm.methods.poolList(poolId).call();
+          const poolstatus = await farm.methods.isFarming(poolId).call();
+          const lpTokenAddress = poolInfo["lpToken"];
+          const lpToken = await getPolicyToken(lpTokenAddress);
+          const depositLimit = await lpToken.methods.balanceOf(account).call();
+          const availableToWithdraw = await farm.methods
+            .getUserBalance(poolId, account)
+            .call();
+          const totalRewards = poolInfo["degisPerBlock"] * 10000;
+          const totalDeposited = await lpToken.methods
+            .balanceOf(farm.options.address)
+            .call();
+          var myPoolShare = 0;
+          if (availableToWithdraw != 0) {
+            myPoolShare = (
+              (availableToWithdraw / totalDeposited) *
+              totalRewards
+            ).toFixed(2);
+          }
+          const degRewards = "--"
+          // const degRewards = await farm.methods
+          //   .pendingDegis(poolId, account)
+          //   .call({"from" : account});
+          poolInfo = {};
+          if (poolstatus) {
+            poolInfo["pic"] = poolPic;
+            poolInfo["name"] = poolName;
+            poolInfo["status"] = "Ongoing";
+            poolInfo["apr"] = "--";
+            poolInfo["depositLimit"] = depositLimit;
+            poolInfo["availableToWithdraw"] = availableToWithdraw;
+            poolInfo["totalRewards"] = totalRewards;
+            poolInfo["totalDeposited"] = totalDeposited;
+            poolInfo["myPoolShare"] = myPoolShare;
+            poolInfo["degRewards"] = degRewards;
+            poolInfo["poolType"] = "lpMining";
+            poolInfo["poolId"] = poolId;
+            this.miningData.push(poolInfo);
+          }
+        }
+      },
+
+      async showFarmingPoolInfoEvent() {
+        await this.showFarmingPoolInfo();
+      },
     };
   },
 };
 </script>
-
 <style scoped></style>

@@ -16,6 +16,7 @@ import PolicyCore_abi from "../abi/PolicyCore.json";
 import PolicyToken_abi from "../abi/PolicyToken.json";
 import NaughtyPair_abi from "../abi/NaughtyPair.json";
 import BuyerToken_abi from "../abi/BuyerToken.json";
+import FarmingPool_abi from "../abi/FarmingPool.json";
 
 export const getCurrentAccount = async () => {
   return getWeb3().then((res) => res.currentProvider.selectedAddress);
@@ -126,5 +127,14 @@ export const getBuyerToken = async () => {
   return await new web3.eth.Contract(
     BuyerToken_abi.abi,
     await getAddress("BUYERTOKEN", chainId)
+  );
+}
+
+export const getFarmingPool = async () => {
+  const web3 = await getWeb3();
+  const chainId = await getChainId();
+  return await new web3.eth.Contract(
+    FarmingPool_abi.abi,
+    await getAddress("FARMINGPOOL", chainId)
   );
 }
