@@ -14,13 +14,13 @@
           <p class="d-f-2 mb-0">Expiry: <span class="d-f-4"> {{ data.expiry }}</span></p>
           <p class="d-f-2">TVL: <span class="d-p">{{ data.tvl }}</span></p>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-3">
           <p class="d-f-2">24h Trading Volume: <span class="d-p">{{ data.tradingVolume }}</span></p>
           <p class="d-f-2">24h Change: <span class="d-p">{{ data.change }}</span></p>
           <p class="d-f-2">Minted: <span class="d-p">{{ (data.minted / 1e18).toFixed(2) }}</span></p>
           <p class="d-f-2">Avaliable: <span class="d-p">{{ (data.balance / 1e18).toFixed(2) }}</span></p>
         </div>
-        <div class="col-lg-1">
+        <div class="col-lg-2">
           <base-button @click="create(data)">Create</base-button>
           <br/>
           <br/>
