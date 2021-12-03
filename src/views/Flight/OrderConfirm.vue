@@ -120,50 +120,64 @@ export default {
       this.$emit("close");
     },
 
-    async NewPolicy(premium, payoff, flight_number, timestamp1) {
-      const PolicyFlow = await getPolicyFlow();
-      const MockUSD = await getMockUSD();
-      const InsurancePool = await getInsurancePool();
+    async NewPolicy(productId, flight_number, premium, departure_timestamp, landing_timestamp, deadline, signature) {
       const account = this.$store.state.selectedAccount;
+      const policyFlow = await getPolicyFlow();
+      const usdt = await getMockUSD();
+      const insurancePool = await getInsurancePool();
 
-      var timestamp2 = timestamp1 + 300; // 飞行时间5min
+      console.log("===================1111")
 
-      console.log(flight_number, timestamp1);
-
-      const tx1 = await MockUSD.methods
-          .approve(InsurancePool.options.address, window.WEB3.utils.toBN(premium))
-          .send({from: account});
-
-      console.log("Tx Hash:", tx1.transactionHash);
-
-      const tx2 = await PolicyFlow.methods
-          .newApplication(
-              account,
-              0,
-              flight_number,
-              window.WEB3.utils.toBN(premium),
-              window.WEB3.utils.toBN(payoff),
-              timestamp1,
-              timestamp2
+      const allowance = await usdt.methods
+        .allowance(account, insurancePool.options.address)
+        .call();
+      if (parseInt(allowance) < parseInt(window.WEB3.utils.toWei("100000000", "ether"))) {
+        const tx1 = await usdt.methods
+          .approve(
+            insurancePool.options.address,
+            window.WEB3.utils.toBN(
+              "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+            )
           )
-          .send({from: account});
+          .send({ from: account });
+        console.log("Tx Hash:", tx1.transactionHash);
+      }
+      console.log("==============")
+      console.log(premium)
+      console.log("==============")
+      
+      const tx = await policyFlow.methods
+        .newApplication(
+          productId, 
+          flight_number, 
+          premium, 
+          departure_timestamp, 
+          landing_timestamp, 
+          deadline, 
+          signature
+        )
+        .send({from: account});
       console.log("Tx Hash:", tx2.transactionHash);
       console.log(tx2);
       console.log("policy Id:", tx2.logs[0].args[0]);
     },
-    // airline: 'WN',
-    // flightno: 'WN186',
-    // route: 'Lihue-Honolulu',
-    // departtime: '2021-11-24T08:45:00',
-    // arrivetime: '2021-11-24T09:20:00',
-    // premium: '4',
+
     async NewPolicyEvent() {
+      const productId = 0;
+      const flight_number = this.buyData.flight_no;
+      const departure_timestamp = new Date(this.buyData.depart_time) / 1000;
+      const landing_timestamp = new Date(this.buyData.arrive_time) / 1000;
+      const deadline = new Date().getTime() / 1000;
       const premium = this.buyData.premium;
-      const payoff = 100;
-      const flight_number = this.buyData.flightno;
-      const timestamp = new Date(this.buyData.departtime) / 1000;
-      // console.log(timestamp.valueOf())
-      await this.NewPolicy(premium, payoff, flight_number, timestamp);
+      const signature = "50e90e2e44c1cbb7032a337ed33185a350e90e2e44c1cbb7032a337ed33185a3"
+
+      const premium_wei = window.WEB3.utils.toWei(String(premium), "ether")
+      const departure_timestamp_wei = window.WEB3.utils.toWei(String(departure_timestamp), "ether")
+      const landing_timestamp_wei = window.WEB3.utils.toWei(String(landing_timestamp), "ether")
+      const deadline_wei = window.WEB3.utils.toWei(String(deadline), "ether")
+      const signature_byte = window.WEB3.utils.asciiToHex(signature)
+
+      await this.NewPolicy(productId, flight_number, premium_wei, departure_timestamp_wei, landing_timestamp_wei, deadline_wei, signature_byte);
     },
 
   },

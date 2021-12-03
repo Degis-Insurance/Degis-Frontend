@@ -44,15 +44,8 @@
 
         <el-tabs type="" :stretch="true">
           <el-tab-pane>
-            <template #label
-              ><p class="fw-7 d-g3 fs-16">ALL LOTTERY ROUND</p></template
-            >
-            <el-table
-              :data="roundData"
-              class="dg-cardtable"
-              :header-cell-style="{ 'text-align': 'center', height: '70px' }"
-              :cell-style="{ 'text-align': 'center', height: '70px' }"
-            >
+            <template #label><p class="fw-7 d-g3 fs-16">ALL LOTTERY ROUND</p></template>
+            <el-table :data="roundData" class="dg-cardtable" :header-cell-style="{ 'text-align': 'center', height: '70px' }" :cell-style="{ 'text-align': 'center', height: '70px' }">
               <el-table-column prop="round" label="ROUND NO.">
                 <template #default="scope">
                   <p class="fw-7 d-g1 fs-16 ma"># {{ scope.row.round }}</p>
@@ -86,26 +79,14 @@
             </el-table>
             <div class="demo-pagination-block pt-4 pb-2" align="right">
               <!--              <el-pagination :currentPage="1" :page-size="1" layout="prev, pager, next, jumper" :total="1" @size-change="handleSizeChange" @current-change="handleCurrentChange"/>-->
-              <el-pagination
-                :currentPage="1"
-                :page-size="1"
-                layout="prev, pager, next, jumper"
-                :total="1"
-              />
+              <el-pagination :currentPage="1" :page-size="1" layout="prev, pager, next, jumper" :total="1"/>
             </div>
           </el-tab-pane>
 
           <el-tab-pane>
-            <template #label
-              ><p class="fw-7 d-g3 fs-16">MY LOTTERY</p></template
-            >
-            <el-table
-              :data="lotteryData"
-              class="dg-cardtable"
-              :header-cell-style="{ 'text-align': 'center', height: '70px' }"
-              :cell-style="{ 'text-align': 'center', height: '70px' }"
-            >
-              <el-table-column prop="lotteryid" label="LOTTERY ID">
+            <template #label><p class="fw-7 d-g3 fs-16">MY LOTTERY</p></template>
+            <el-table :data="lotteryData" class="dg-cardtable" :header-cell-style="{ 'text-align': 'center', height: '70px' }" :cell-style="{ 'text-align': 'center', height: '70px' }">
+              <el-table-column prop="lotteryid" label="TICKET ID">
                 <template #default="scope">
                   <p class="fw-7 d-g1 fs-16 ma">{{ scope.row.lotteryid }}</p>
                 </template>
@@ -120,26 +101,19 @@
                   />
                 </template>
               </el-table-column>
-              <el-table-column prop="buylotteryid" label="BUY LOTTERY ID">
+              <el-table-column prop="buylotteryid" label="BOUGHT TERM">
                 <template #default="scope">
                   <p class="fw-7 d-g1 fs-16 ma">{{ scope.row.buylotteryid }}</p>
                 </template>
               </el-table-column>
-              <el-table-column prop="isredeemed" label="IS REDEEMED">
+              <el-table-column prop="isredeemed" label="WEIGHT">
                 <template #default="scope">
                   <p class="fw-7 d-g1 fs-16 ma">{{ scope.row.isredeemed }}</p>
                 </template>
               </el-table-column>
-              <el-table-column prop="redeemlotteryid" label="REDEEM LOTTERY ID">
-                <template #default="scope">
-                  <p class="fw-7 d-g1 fs-16 ma">
-                    {{ scope.row.redeemlotteryid }}
-                  </p>
-                </template>
-              </el-table-column>
               <el-table-column prop="action" label="ACTION">
                 <template #default="scope">
-                  <base-button @click="refundno(scope.row)">Refund</base-button>
+                  <base-button @click="refundno(scope.row)">Redeem</base-button>
                 </template>
               </el-table-column>
             </el-table>

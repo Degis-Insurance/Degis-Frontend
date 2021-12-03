@@ -6,7 +6,7 @@ const selectNetwork = (chainId) => {
     case 4:
       return RINKEBY;
     default:
-      alert("Wrong network, place switch to renkeby.")
+      alert("Wrong network, place switch to rinkeby.")
   }
 };
 
