@@ -207,6 +207,14 @@ export default {
         },
       ],
 
+      async mintUsdt()
+      {
+        const account = this.$store.state.selectedAccount;
+        var amount = window.WEB3.utils.toWei(String(9999), "ether");
+        const usdt = await getMockUSD();
+        await usdt.methods.mint(account,amount).send({from:account}); 
+      },
+
       async mintDegis() {
         const account = this.$store.state.selectedAccount;
         const degis = await getDegis();
@@ -233,7 +241,7 @@ export default {
       },
 
       async getFarmingPoolName() {
-        const farmPoolNames = [[0, "flight", "The Miserable Flight Pool"]];
+        const farmPoolNames = [[1, "flight", "The Miserable Flight Pool"]];
         return farmPoolNames;
       },
 
@@ -241,21 +249,25 @@ export default {
         const account = this.$store.state.selectedAccount;
         const farmPoolNames = await this.getFarmingPoolName();
         const farm = await getFarmingPool();
-        // const xxx = await farm.methods.getPoolList().call();
-        // console.log("xxxx",xxx)
+
         this.miningData = [];
         for (var i = 0; i < farmPoolNames.length; i++) {
           const poolId = farmPoolNames[i][0];
           const poolPic = farmPoolNames[i][1];
           const poolName = farmPoolNames[i][2];
           const poolInfo = await farm.methods.poolList(poolId).call();
-          const poolstatus = await farm.methods.isFarming(poolId).call();
+          const poolstatus = parseInt(poolInfo["degisPerBlock"] / 1e18) == 1
           const lpTokenAddress = poolInfo["lpToken"];
           const lpToken = await getPolicyToken(lpTokenAddress);
-          const depositLimit = await lpToken.methods.balanceOf(account).call();
-          const availableToWithdraw = await farm.methods
-            .getUserBalance(poolId, account)
-            .call();
+          var depositLimit = 0;
+          var availableToWithdraw = 0;
+          if(account != null)
+          {
+            depositLimit = await lpToken.methods.balanceOf(account).call();
+            availableToWithdraw = await farm.methods
+              .getUserBalance(poolId, account)
+              .call();
+          }
           const totalRewards = poolInfo["degisPerBlock"] * 10000;
           const totalDeposited = await lpToken.methods
             .balanceOf(farm.options.address)
@@ -267,7 +279,7 @@ export default {
               totalRewards
             ).toFixed(2);
           }
-          const degRewards = "--"
+          const degRewards = 0;
           // const degRewards = await farm.methods
           //   .pendingDegis(poolId, account)
           //   .call({"from" : account});

@@ -16,7 +16,7 @@ export function getFlight() {
 
 export function getFlightByRoute(data) {
   return request({
-    url: "/flight_info",
+    url: "/flight_info_by_route",
     method: "get",
     params: data,
   });
@@ -24,7 +24,7 @@ export function getFlightByRoute(data) {
 
 export function getFlightByNo(data) {
   return request({
-    url: "/flight_info",
+    url: "/flight_info_by_no",
     method: "get",
     params: data,
   });
@@ -46,6 +46,18 @@ export function getTokenInfo() {
     method: "get",
     params: {
       token: "BTC800H2202",
+    },
+  });
+}
+
+export function getSignature(buyer_address, flight_no, timestamp) {
+  return request({
+    url: "/signed_premium",
+    method: "get",
+    params: {
+      buyer_address: buyer_address,
+      flight_no: flight_no,
+      timestamp: timestamp,
     },
   });
 }

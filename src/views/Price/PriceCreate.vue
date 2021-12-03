@@ -24,64 +24,7 @@ export default {
   components: { PriceCreateCard },
   data() {
     return {
-      cardData: [
-        {
-          coin: "BTC",
-          name: "thisisanamenamename",
-          currentPrice: "--",
-          coinPrice: "--",
-          type: "--",
-          strike: "--",
-          expiry: "--",
-          tvl: "--",
-          tradingVolume: "--",
-          change: "--",
-          minted: "--",
-          balance: "--",
-        },
-        {
-          coin: "ETH",
-          name: "this is a name",
-          currentPrice: "--",
-          coinPrice: "--",
-          type: "--",
-          strike: "--",
-          expiry: "--",
-          tvl: "--",
-          tradingVolume: "--",
-          change: "--",
-          minted: "--",
-          balance: "--",
-        },
-        {
-          coin: "ETH",
-          name: "this is a name",
-          currentPrice: "--",
-          coinPrice: "--",
-          type: "--",
-          strike: "--",
-          expiry: "--",
-          tvl: "--",
-          tradingVolume: "--",
-          change: "--",
-          minted: "--",
-          balance: "--",
-        },
-        {
-          coin: "AVAX",
-          name: "this is a name",
-          currentPrice: "--",
-          coinPrice: "--",
-          type: "--",
-          strike: "--",
-          expiry: "--",
-          tvl: "--",
-          tradingVolume: "--",
-          change: "--",
-          minted: "--",
-          balance: "--",
-        },
-      ]
+      cardData: [ ]
     }
   },
   computed: {
@@ -104,14 +47,6 @@ export default {
   },
 
   methods: {
-    // async mint()
-    // {
-    //   const account = this.$store.state.selectedAccount;
-    //   var amount = window.WEB3.utils.toWei(String(9999), "ether");
-    //   const usdt = await getMockUSD();
-    //   await usdt.methods.mint(account,amount).send({from:account}); 
-    // },
-
     async getTokensName()
     {
       const core = await getPolicyCore();
@@ -128,14 +63,18 @@ export default {
     async showUserInfo(tokenName)
     {
       const account = this.$store.state.selectedAccount;
-      const usdt = await getMockUSD();
-      const core = await getPolicyCore();
-      const policyTokenAddress = await core.methods.findAddressbyName(tokenName).call(); 
-      const policyToken = await getPolicyToken(policyTokenAddress);
-      const userQuota = await core.methods.checkUserQuota(account, policyToken.options.address).call({ from : account})
-      const usdtBalance = await usdt.methods.balanceOf(account).call();
-      const policyTokenBalance = await policyToken.methods.balanceOf(account).call();
-      return {"userQuota": userQuota, "usdtBalance": usdtBalance, "policyTokenBalance":policyTokenBalance};
+      if(account != null)
+      {
+        const usdt = await getMockUSD();
+        const core = await getPolicyCore();
+        const policyTokenAddress = await core.methods.findAddressbyName(tokenName).call(); 
+        const policyToken = await getPolicyToken(policyTokenAddress);
+        const userQuota = await core.methods.checkUserQuota(account, policyToken.options.address).call({ from : account})
+        const usdtBalance = await usdt.methods.balanceOf(account).call();
+        const policyTokenBalance = await policyToken.methods.balanceOf(account).call();
+        return {"userQuota": userQuota, "usdtBalance": usdtBalance, "policyTokenBalance":policyTokenBalance};
+      }
+      return {"userQuota": 0, "usdtBalance": 0, "policyTokenBalance":0};
     },
 
     async showPoolInfo(tokenName)

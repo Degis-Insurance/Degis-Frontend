@@ -106,6 +106,16 @@ export default {
   methods: {
     async depositUSD(depositAmount) {
       const account = this.$store.state.selectedAccount;
+      if(account == null)
+      {
+        alert("Please Connect Wallet")
+        return
+      } 
+      if(depositAmount == 0)
+      {
+        alert("Please Input Amount")
+        return
+      } 
       const usdt = await getMockUSD();
       const insurancePool = await getInsurancePool();
 
@@ -137,7 +147,16 @@ export default {
     async withdrawUSD(withdrawAmount) {
       const insurancePool = await getInsurancePool();
       const account = this.$store.state.selectedAccount;
-
+      if(account == null)
+      {
+        alert("Please Connect Wallet")
+        return
+      } 
+      if(withdrawAmount == 0)
+      {
+        alert("Please Input Amount")
+        return
+      } 
       const lpTokenTotalSupply = await insurancePool.methods
         .totalSupply()
         .call();
@@ -175,13 +194,21 @@ export default {
         .activePremiums()
         .call();
       const lockedBalance = await insurancePool.methods.lockedBalance().call();
-      const userBalance = await insurancePool.methods
-        .getUserBalance(account)
-        .call();
-      const depositAvailable = await usdt.methods.balanceOf(account).call();
+
+      var userBalance = 0;
+      var depositAvailable = 0;
+      if(account != null){
+        userBalance = await insurancePool.methods
+          .getUserBalance(account)
+          .call();
+        depositAvailable = await usdt.methods.balanceOf(account).call();
+      }
       const totalSupply = await insurancePool.methods.totalSupply().call();
-      const withdrawAvailable =
-        (userBalance / totalSupply) * totalStakingBalance;
+      var withdrawAvailable = 0;
+      if(parseInt(totalSupply) != 0) {
+        withdrawAvailable =
+            (userBalance / totalSupply) * totalStakingBalance;
+      }
       return {
         totalStakingBalance: totalStakingBalance,
         activePremiums: activePremiums,

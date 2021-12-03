@@ -163,15 +163,15 @@
     "absolutePath": "project:/contracts/interfaces/IDegisLottery.sol",
     "exportedSymbols": {
       "IDegisLottery": [
-        4772
+        4813
       ]
     },
-    "id": 4773,
+    "id": 4814,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 4700,
+        "id": 4741,
         "literals": [
           "solidity",
           "0.8",
@@ -187,9 +187,9 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "fullyImplemented": false,
-        "id": 4772,
+        "id": 4813,
         "linearizedBaseContracts": [
-          4772
+          4813
         ],
         "name": "IDegisLottery",
         "nameLocation": "66:13:14",
@@ -197,13 +197,13 @@
         "nodes": [
           {
             "documentation": {
-              "id": 4701,
+              "id": 4742,
               "nodeType": "StructuredDocumentation",
               "src": "86:172:14",
               "text": " @notice Buy tickets for the current lottery\n @param _ticketNumbers: array of ticket numbers between 10,000 and 19,999\n @dev Callable by users"
             },
             "functionSelector": "e1059fe5",
-            "id": 4707,
+            "id": 4748,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -211,17 +211,17 @@
             "nameLocation": "272:10:14",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4705,
+              "id": 4746,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4704,
+                  "id": 4745,
                   "mutability": "mutable",
                   "name": "_ticketNumbers",
                   "nameLocation": "301:14:14",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4707,
+                  "scope": 4748,
                   "src": "283:32:14",
                   "stateVariable": false,
                   "storageLocation": "calldata",
@@ -231,7 +231,7 @@
                   },
                   "typeName": {
                     "baseType": {
-                      "id": 4702,
+                      "id": 4743,
                       "name": "uint32",
                       "nodeType": "ElementaryTypeName",
                       "src": "283:6:14",
@@ -240,7 +240,7 @@
                         "typeString": "uint32"
                       }
                     },
-                    "id": 4703,
+                    "id": 4744,
                     "nodeType": "ArrayTypeName",
                     "src": "283:8:14",
                     "typeDescriptions": {
@@ -254,12 +254,12 @@
               "src": "282:34:14"
             },
             "returnParameters": {
-              "id": 4706,
+              "id": 4747,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "325:0:14"
             },
-            "scope": 4772,
+            "scope": 4813,
             "src": "263:63:14",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -267,13 +267,13 @@
           },
           {
             "documentation": {
-              "id": 4708,
+              "id": 4749,
               "nodeType": "StructuredDocumentation",
               "src": "332:133:14",
               "text": " @notice Redeem tickets for all lottery\n @param _ticketIds: array of ticket ids\n @dev Callable by users"
             },
             "functionSelector": "967159f3",
-            "id": 4714,
+            "id": 4755,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -281,17 +281,17 @@
             "nameLocation": "479:13:14",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4712,
+              "id": 4753,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4711,
+                  "id": 4752,
                   "mutability": "mutable",
                   "name": "_ticketIds",
                   "nameLocation": "512:10:14",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4714,
+                  "scope": 4755,
                   "src": "493:29:14",
                   "stateVariable": false,
                   "storageLocation": "calldata",
@@ -301,7 +301,7 @@
                   },
                   "typeName": {
                     "baseType": {
-                      "id": 4709,
+                      "id": 4750,
                       "name": "uint256",
                       "nodeType": "ElementaryTypeName",
                       "src": "493:7:14",
@@ -310,7 +310,7 @@
                         "typeString": "uint256"
                       }
                     },
-                    "id": 4710,
+                    "id": 4751,
                     "nodeType": "ArrayTypeName",
                     "src": "493:9:14",
                     "typeDescriptions": {
@@ -324,12 +324,12 @@
               "src": "492:31:14"
             },
             "returnParameters": {
-              "id": 4713,
+              "id": 4754,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "532:0:14"
             },
-            "scope": 4772,
+            "scope": 4813,
             "src": "470:63:14",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -337,13 +337,13 @@
           },
           {
             "documentation": {
-              "id": 4715,
+              "id": 4756,
               "nodeType": "StructuredDocumentation",
               "src": "539:204:14",
               "text": " @notice Claim a set of winning tickets for a lottery\n @param _lotteryId: lottery id\n @param _ticketIds: array of ticket ids\n @dev Callable by users only, not contract!"
             },
             "functionSelector": "e49eb0da",
-            "id": 4723,
+            "id": 4764,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -351,17 +351,17 @@
             "nameLocation": "757:12:14",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4721,
+              "id": 4762,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4717,
+                  "id": 4758,
                   "mutability": "mutable",
                   "name": "_lotteryId",
                   "nameLocation": "778:10:14",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4723,
+                  "scope": 4764,
                   "src": "770:18:14",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -370,7 +370,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 4716,
+                    "id": 4757,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "770:7:14",
@@ -383,12 +383,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 4720,
+                  "id": 4761,
                   "mutability": "mutable",
                   "name": "_ticketIds",
                   "nameLocation": "809:10:14",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4723,
+                  "scope": 4764,
                   "src": "790:29:14",
                   "stateVariable": false,
                   "storageLocation": "calldata",
@@ -398,7 +398,7 @@
                   },
                   "typeName": {
                     "baseType": {
-                      "id": 4718,
+                      "id": 4759,
                       "name": "uint256",
                       "nodeType": "ElementaryTypeName",
                       "src": "790:7:14",
@@ -407,7 +407,7 @@
                         "typeString": "uint256"
                       }
                     },
-                    "id": 4719,
+                    "id": 4760,
                     "nodeType": "ArrayTypeName",
                     "src": "790:9:14",
                     "typeDescriptions": {
@@ -421,12 +421,12 @@
               "src": "769:51:14"
             },
             "returnParameters": {
-              "id": 4722,
+              "id": 4763,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "837:0:14"
             },
-            "scope": 4772,
+            "scope": 4813,
             "src": "748:90:14",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -434,13 +434,13 @@
           },
           {
             "documentation": {
-              "id": 4724,
+              "id": 4765,
               "nodeType": "StructuredDocumentation",
               "src": "844:153:14",
               "text": " @notice Claim all winning tickets for a lottery\n @param _lotteryId: lottery id\n @dev Callable by users only, not contract!"
             },
             "functionSelector": "44848a99",
-            "id": 4729,
+            "id": 4770,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -448,17 +448,17 @@
             "nameLocation": "1011:15:14",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4727,
+              "id": 4768,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4726,
+                  "id": 4767,
                   "mutability": "mutable",
                   "name": "_lotteryId",
                   "nameLocation": "1035:10:14",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4729,
+                  "scope": 4770,
                   "src": "1027:18:14",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -467,7 +467,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 4725,
+                    "id": 4766,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1027:7:14",
@@ -482,12 +482,12 @@
               "src": "1026:20:14"
             },
             "returnParameters": {
-              "id": 4728,
+              "id": 4769,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1055:0:14"
             },
-            "scope": 4772,
+            "scope": 4813,
             "src": "1002:54:14",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -495,13 +495,13 @@
           },
           {
             "documentation": {
-              "id": 4730,
+              "id": 4771,
               "nodeType": "StructuredDocumentation",
               "src": "1062:110:14",
               "text": " @notice Close lottery\n @param _lotteryId: lottery id\n @dev Callable by operator"
             },
             "functionSelector": "9d8ca531",
-            "id": 4735,
+            "id": 4776,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -509,17 +509,17 @@
             "nameLocation": "1186:12:14",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4733,
+              "id": 4774,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4732,
+                  "id": 4773,
                   "mutability": "mutable",
                   "name": "_lotteryId",
                   "nameLocation": "1207:10:14",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4735,
+                  "scope": 4776,
                   "src": "1199:18:14",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -528,7 +528,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 4731,
+                    "id": 4772,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1199:7:14",
@@ -543,12 +543,12 @@
               "src": "1198:20:14"
             },
             "returnParameters": {
-              "id": 4734,
+              "id": 4775,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1227:0:14"
             },
-            "scope": 4772,
+            "scope": 4813,
             "src": "1177:51:14",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -556,13 +556,13 @@
           },
           {
             "documentation": {
-              "id": 4736,
+              "id": 4777,
               "nodeType": "StructuredDocumentation",
               "src": "1234:268:14",
               "text": " @notice Draw the final number, calculate reward in CAKE per group, and make lottery claimable\n @param _lotteryId: lottery id\n @param _autoInjection: reinjects funds into next lottery (vs. withdrawing all)\n @dev Callable by operator"
             },
             "functionSelector": "c38de539",
-            "id": 4743,
+            "id": 4784,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -570,17 +570,17 @@
             "nameLocation": "1516:38:14",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4741,
+              "id": 4782,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4738,
+                  "id": 4779,
                   "mutability": "mutable",
                   "name": "_lotteryId",
                   "nameLocation": "1572:10:14",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4743,
+                  "scope": 4784,
                   "src": "1564:18:14",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -589,7 +589,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 4737,
+                    "id": 4778,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1564:7:14",
@@ -602,12 +602,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 4740,
+                  "id": 4781,
                   "mutability": "mutable",
                   "name": "_autoInjection",
                   "nameLocation": "1597:14:14",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4743,
+                  "scope": 4784,
                   "src": "1592:19:14",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -616,7 +616,7 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 4739,
+                    "id": 4780,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
                     "src": "1592:4:14",
@@ -631,12 +631,12 @@
               "src": "1554:63:14"
             },
             "returnParameters": {
-              "id": 4742,
+              "id": 4783,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1626:0:14"
             },
-            "scope": 4772,
+            "scope": 4813,
             "src": "1507:120:14",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -644,13 +644,13 @@
           },
           {
             "documentation": {
-              "id": 4744,
+              "id": 4785,
               "nodeType": "StructuredDocumentation",
               "src": "1633:163:14",
               "text": " @notice Inject funds\n @param _lotteryId: lottery id\n @param _amount: amount to inject in CAKE token\n @dev Callable by operator"
             },
             "functionSelector": "471aeab4",
-            "id": 4751,
+            "id": 4792,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -658,17 +658,17 @@
             "nameLocation": "1810:11:14",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4749,
+              "id": 4790,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4746,
+                  "id": 4787,
                   "mutability": "mutable",
                   "name": "_lotteryId",
                   "nameLocation": "1830:10:14",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4751,
+                  "scope": 4792,
                   "src": "1822:18:14",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -677,7 +677,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 4745,
+                    "id": 4786,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1822:7:14",
@@ -690,12 +690,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 4748,
+                  "id": 4789,
                   "mutability": "mutable",
                   "name": "_amount",
                   "nameLocation": "1850:7:14",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4751,
+                  "scope": 4792,
                   "src": "1842:15:14",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -704,7 +704,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 4747,
+                    "id": 4788,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1842:7:14",
@@ -719,12 +719,12 @@
               "src": "1821:37:14"
             },
             "returnParameters": {
-              "id": 4750,
+              "id": 4791,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1867:0:14"
             },
-            "scope": 4772,
+            "scope": 4813,
             "src": "1801:67:14",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -732,13 +732,13 @@
           },
           {
             "documentation": {
-              "id": 4752,
+              "id": 4793,
               "nodeType": "StructuredDocumentation",
               "src": "1874:338:14",
               "text": " @notice Start the lottery\n @dev Callable by operator\n @param _endTime: endTime of the lottery\n @param _priceTicketInCake: price of a ticket in CAKE\n @param _rewardsBreakdown: breakdown of rewards per bracket (must sum to 10,000)\n @param _treasuryFee: treasury fee (10,000 = 100%, 100 = 1%)"
             },
             "functionSelector": "b3e3649b",
-            "id": 4765,
+            "id": 4806,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -746,17 +746,17 @@
             "nameLocation": "2226:12:14",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4763,
+              "id": 4804,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4754,
+                  "id": 4795,
                   "mutability": "mutable",
                   "name": "_endTime",
                   "nameLocation": "2256:8:14",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4765,
+                  "scope": 4806,
                   "src": "2248:16:14",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -765,7 +765,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 4753,
+                    "id": 4794,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "2248:7:14",
@@ -778,12 +778,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 4756,
+                  "id": 4797,
                   "mutability": "mutable",
                   "name": "_priceTicketInCake",
                   "nameLocation": "2282:18:14",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4765,
+                  "scope": 4806,
                   "src": "2274:26:14",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -792,7 +792,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 4755,
+                    "id": 4796,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "2274:7:14",
@@ -805,12 +805,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 4760,
+                  "id": 4801,
                   "mutability": "mutable",
                   "name": "_rewardsBreakdown",
                   "nameLocation": "2330:17:14",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4765,
+                  "scope": 4806,
                   "src": "2310:37:14",
                   "stateVariable": false,
                   "storageLocation": "calldata",
@@ -820,7 +820,7 @@
                   },
                   "typeName": {
                     "baseType": {
-                      "id": 4757,
+                      "id": 4798,
                       "name": "uint256",
                       "nodeType": "ElementaryTypeName",
                       "src": "2310:7:14",
@@ -829,10 +829,10 @@
                         "typeString": "uint256"
                       }
                     },
-                    "id": 4759,
+                    "id": 4800,
                     "length": {
                       "hexValue": "34",
-                      "id": 4758,
+                      "id": 4799,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -857,12 +857,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 4762,
+                  "id": 4803,
                   "mutability": "mutable",
                   "name": "_treasuryFee",
                   "nameLocation": "2365:12:14",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4765,
+                  "scope": 4806,
                   "src": "2357:20:14",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -871,7 +871,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 4761,
+                    "id": 4802,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "2357:7:14",
@@ -886,12 +886,12 @@
               "src": "2238:145:14"
             },
             "returnParameters": {
-              "id": 4764,
+              "id": 4805,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2392:0:14"
             },
-            "scope": 4772,
+            "scope": 4813,
             "src": "2217:176:14",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -899,13 +899,13 @@
           },
           {
             "documentation": {
-              "id": 4766,
+              "id": 4807,
               "nodeType": "StructuredDocumentation",
               "src": "2399:50:14",
               "text": " @notice View current lottery id"
             },
             "functionSelector": "80a06160",
-            "id": 4771,
+            "id": 4812,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -913,23 +913,23 @@
             "nameLocation": "2463:20:14",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4767,
+              "id": 4808,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2483:2:14"
             },
             "returnParameters": {
-              "id": 4770,
+              "id": 4811,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4769,
+                  "id": 4810,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4771,
+                  "scope": 4812,
                   "src": "2509:7:14",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -938,7 +938,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 4768,
+                    "id": 4809,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "2509:7:14",
@@ -952,14 +952,14 @@
               ],
               "src": "2508:9:14"
             },
-            "scope": 4772,
+            "scope": 4813,
             "src": "2454:64:14",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 4773,
+        "scope": 4814,
         "src": "56:2464:14",
         "usedErrors": []
       }
@@ -970,15 +970,15 @@
     "absolutePath": "project:/contracts/interfaces/IDegisLottery.sol",
     "exportedSymbols": {
       "IDegisLottery": [
-        4772
+        4813
       ]
     },
-    "id": 4773,
+    "id": 4814,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 4700,
+        "id": 4741,
         "literals": [
           "solidity",
           "0.8",
@@ -994,9 +994,9 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "fullyImplemented": false,
-        "id": 4772,
+        "id": 4813,
         "linearizedBaseContracts": [
-          4772
+          4813
         ],
         "name": "IDegisLottery",
         "nameLocation": "66:13:14",
@@ -1004,13 +1004,13 @@
         "nodes": [
           {
             "documentation": {
-              "id": 4701,
+              "id": 4742,
               "nodeType": "StructuredDocumentation",
               "src": "86:172:14",
               "text": " @notice Buy tickets for the current lottery\n @param _ticketNumbers: array of ticket numbers between 10,000 and 19,999\n @dev Callable by users"
             },
             "functionSelector": "e1059fe5",
-            "id": 4707,
+            "id": 4748,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -1018,17 +1018,17 @@
             "nameLocation": "272:10:14",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4705,
+              "id": 4746,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4704,
+                  "id": 4745,
                   "mutability": "mutable",
                   "name": "_ticketNumbers",
                   "nameLocation": "301:14:14",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4707,
+                  "scope": 4748,
                   "src": "283:32:14",
                   "stateVariable": false,
                   "storageLocation": "calldata",
@@ -1038,7 +1038,7 @@
                   },
                   "typeName": {
                     "baseType": {
-                      "id": 4702,
+                      "id": 4743,
                       "name": "uint32",
                       "nodeType": "ElementaryTypeName",
                       "src": "283:6:14",
@@ -1047,7 +1047,7 @@
                         "typeString": "uint32"
                       }
                     },
-                    "id": 4703,
+                    "id": 4744,
                     "nodeType": "ArrayTypeName",
                     "src": "283:8:14",
                     "typeDescriptions": {
@@ -1061,12 +1061,12 @@
               "src": "282:34:14"
             },
             "returnParameters": {
-              "id": 4706,
+              "id": 4747,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "325:0:14"
             },
-            "scope": 4772,
+            "scope": 4813,
             "src": "263:63:14",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -1074,13 +1074,13 @@
           },
           {
             "documentation": {
-              "id": 4708,
+              "id": 4749,
               "nodeType": "StructuredDocumentation",
               "src": "332:133:14",
               "text": " @notice Redeem tickets for all lottery\n @param _ticketIds: array of ticket ids\n @dev Callable by users"
             },
             "functionSelector": "967159f3",
-            "id": 4714,
+            "id": 4755,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -1088,17 +1088,17 @@
             "nameLocation": "479:13:14",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4712,
+              "id": 4753,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4711,
+                  "id": 4752,
                   "mutability": "mutable",
                   "name": "_ticketIds",
                   "nameLocation": "512:10:14",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4714,
+                  "scope": 4755,
                   "src": "493:29:14",
                   "stateVariable": false,
                   "storageLocation": "calldata",
@@ -1108,7 +1108,7 @@
                   },
                   "typeName": {
                     "baseType": {
-                      "id": 4709,
+                      "id": 4750,
                       "name": "uint256",
                       "nodeType": "ElementaryTypeName",
                       "src": "493:7:14",
@@ -1117,7 +1117,7 @@
                         "typeString": "uint256"
                       }
                     },
-                    "id": 4710,
+                    "id": 4751,
                     "nodeType": "ArrayTypeName",
                     "src": "493:9:14",
                     "typeDescriptions": {
@@ -1131,12 +1131,12 @@
               "src": "492:31:14"
             },
             "returnParameters": {
-              "id": 4713,
+              "id": 4754,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "532:0:14"
             },
-            "scope": 4772,
+            "scope": 4813,
             "src": "470:63:14",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -1144,13 +1144,13 @@
           },
           {
             "documentation": {
-              "id": 4715,
+              "id": 4756,
               "nodeType": "StructuredDocumentation",
               "src": "539:204:14",
               "text": " @notice Claim a set of winning tickets for a lottery\n @param _lotteryId: lottery id\n @param _ticketIds: array of ticket ids\n @dev Callable by users only, not contract!"
             },
             "functionSelector": "e49eb0da",
-            "id": 4723,
+            "id": 4764,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -1158,17 +1158,17 @@
             "nameLocation": "757:12:14",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4721,
+              "id": 4762,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4717,
+                  "id": 4758,
                   "mutability": "mutable",
                   "name": "_lotteryId",
                   "nameLocation": "778:10:14",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4723,
+                  "scope": 4764,
                   "src": "770:18:14",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1177,7 +1177,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 4716,
+                    "id": 4757,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "770:7:14",
@@ -1190,12 +1190,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 4720,
+                  "id": 4761,
                   "mutability": "mutable",
                   "name": "_ticketIds",
                   "nameLocation": "809:10:14",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4723,
+                  "scope": 4764,
                   "src": "790:29:14",
                   "stateVariable": false,
                   "storageLocation": "calldata",
@@ -1205,7 +1205,7 @@
                   },
                   "typeName": {
                     "baseType": {
-                      "id": 4718,
+                      "id": 4759,
                       "name": "uint256",
                       "nodeType": "ElementaryTypeName",
                       "src": "790:7:14",
@@ -1214,7 +1214,7 @@
                         "typeString": "uint256"
                       }
                     },
-                    "id": 4719,
+                    "id": 4760,
                     "nodeType": "ArrayTypeName",
                     "src": "790:9:14",
                     "typeDescriptions": {
@@ -1228,12 +1228,12 @@
               "src": "769:51:14"
             },
             "returnParameters": {
-              "id": 4722,
+              "id": 4763,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "837:0:14"
             },
-            "scope": 4772,
+            "scope": 4813,
             "src": "748:90:14",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -1241,13 +1241,13 @@
           },
           {
             "documentation": {
-              "id": 4724,
+              "id": 4765,
               "nodeType": "StructuredDocumentation",
               "src": "844:153:14",
               "text": " @notice Claim all winning tickets for a lottery\n @param _lotteryId: lottery id\n @dev Callable by users only, not contract!"
             },
             "functionSelector": "44848a99",
-            "id": 4729,
+            "id": 4770,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -1255,17 +1255,17 @@
             "nameLocation": "1011:15:14",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4727,
+              "id": 4768,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4726,
+                  "id": 4767,
                   "mutability": "mutable",
                   "name": "_lotteryId",
                   "nameLocation": "1035:10:14",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4729,
+                  "scope": 4770,
                   "src": "1027:18:14",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1274,7 +1274,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 4725,
+                    "id": 4766,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1027:7:14",
@@ -1289,12 +1289,12 @@
               "src": "1026:20:14"
             },
             "returnParameters": {
-              "id": 4728,
+              "id": 4769,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1055:0:14"
             },
-            "scope": 4772,
+            "scope": 4813,
             "src": "1002:54:14",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -1302,13 +1302,13 @@
           },
           {
             "documentation": {
-              "id": 4730,
+              "id": 4771,
               "nodeType": "StructuredDocumentation",
               "src": "1062:110:14",
               "text": " @notice Close lottery\n @param _lotteryId: lottery id\n @dev Callable by operator"
             },
             "functionSelector": "9d8ca531",
-            "id": 4735,
+            "id": 4776,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -1316,17 +1316,17 @@
             "nameLocation": "1186:12:14",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4733,
+              "id": 4774,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4732,
+                  "id": 4773,
                   "mutability": "mutable",
                   "name": "_lotteryId",
                   "nameLocation": "1207:10:14",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4735,
+                  "scope": 4776,
                   "src": "1199:18:14",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1335,7 +1335,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 4731,
+                    "id": 4772,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1199:7:14",
@@ -1350,12 +1350,12 @@
               "src": "1198:20:14"
             },
             "returnParameters": {
-              "id": 4734,
+              "id": 4775,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1227:0:14"
             },
-            "scope": 4772,
+            "scope": 4813,
             "src": "1177:51:14",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -1363,13 +1363,13 @@
           },
           {
             "documentation": {
-              "id": 4736,
+              "id": 4777,
               "nodeType": "StructuredDocumentation",
               "src": "1234:268:14",
               "text": " @notice Draw the final number, calculate reward in CAKE per group, and make lottery claimable\n @param _lotteryId: lottery id\n @param _autoInjection: reinjects funds into next lottery (vs. withdrawing all)\n @dev Callable by operator"
             },
             "functionSelector": "c38de539",
-            "id": 4743,
+            "id": 4784,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -1377,17 +1377,17 @@
             "nameLocation": "1516:38:14",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4741,
+              "id": 4782,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4738,
+                  "id": 4779,
                   "mutability": "mutable",
                   "name": "_lotteryId",
                   "nameLocation": "1572:10:14",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4743,
+                  "scope": 4784,
                   "src": "1564:18:14",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1396,7 +1396,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 4737,
+                    "id": 4778,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1564:7:14",
@@ -1409,12 +1409,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 4740,
+                  "id": 4781,
                   "mutability": "mutable",
                   "name": "_autoInjection",
                   "nameLocation": "1597:14:14",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4743,
+                  "scope": 4784,
                   "src": "1592:19:14",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1423,7 +1423,7 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 4739,
+                    "id": 4780,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
                     "src": "1592:4:14",
@@ -1438,12 +1438,12 @@
               "src": "1554:63:14"
             },
             "returnParameters": {
-              "id": 4742,
+              "id": 4783,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1626:0:14"
             },
-            "scope": 4772,
+            "scope": 4813,
             "src": "1507:120:14",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -1451,13 +1451,13 @@
           },
           {
             "documentation": {
-              "id": 4744,
+              "id": 4785,
               "nodeType": "StructuredDocumentation",
               "src": "1633:163:14",
               "text": " @notice Inject funds\n @param _lotteryId: lottery id\n @param _amount: amount to inject in CAKE token\n @dev Callable by operator"
             },
             "functionSelector": "471aeab4",
-            "id": 4751,
+            "id": 4792,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -1465,17 +1465,17 @@
             "nameLocation": "1810:11:14",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4749,
+              "id": 4790,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4746,
+                  "id": 4787,
                   "mutability": "mutable",
                   "name": "_lotteryId",
                   "nameLocation": "1830:10:14",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4751,
+                  "scope": 4792,
                   "src": "1822:18:14",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1484,7 +1484,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 4745,
+                    "id": 4786,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1822:7:14",
@@ -1497,12 +1497,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 4748,
+                  "id": 4789,
                   "mutability": "mutable",
                   "name": "_amount",
                   "nameLocation": "1850:7:14",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4751,
+                  "scope": 4792,
                   "src": "1842:15:14",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1511,7 +1511,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 4747,
+                    "id": 4788,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1842:7:14",
@@ -1526,12 +1526,12 @@
               "src": "1821:37:14"
             },
             "returnParameters": {
-              "id": 4750,
+              "id": 4791,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1867:0:14"
             },
-            "scope": 4772,
+            "scope": 4813,
             "src": "1801:67:14",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -1539,13 +1539,13 @@
           },
           {
             "documentation": {
-              "id": 4752,
+              "id": 4793,
               "nodeType": "StructuredDocumentation",
               "src": "1874:338:14",
               "text": " @notice Start the lottery\n @dev Callable by operator\n @param _endTime: endTime of the lottery\n @param _priceTicketInCake: price of a ticket in CAKE\n @param _rewardsBreakdown: breakdown of rewards per bracket (must sum to 10,000)\n @param _treasuryFee: treasury fee (10,000 = 100%, 100 = 1%)"
             },
             "functionSelector": "b3e3649b",
-            "id": 4765,
+            "id": 4806,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -1553,17 +1553,17 @@
             "nameLocation": "2226:12:14",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4763,
+              "id": 4804,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4754,
+                  "id": 4795,
                   "mutability": "mutable",
                   "name": "_endTime",
                   "nameLocation": "2256:8:14",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4765,
+                  "scope": 4806,
                   "src": "2248:16:14",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1572,7 +1572,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 4753,
+                    "id": 4794,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "2248:7:14",
@@ -1585,12 +1585,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 4756,
+                  "id": 4797,
                   "mutability": "mutable",
                   "name": "_priceTicketInCake",
                   "nameLocation": "2282:18:14",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4765,
+                  "scope": 4806,
                   "src": "2274:26:14",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1599,7 +1599,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 4755,
+                    "id": 4796,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "2274:7:14",
@@ -1612,12 +1612,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 4760,
+                  "id": 4801,
                   "mutability": "mutable",
                   "name": "_rewardsBreakdown",
                   "nameLocation": "2330:17:14",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4765,
+                  "scope": 4806,
                   "src": "2310:37:14",
                   "stateVariable": false,
                   "storageLocation": "calldata",
@@ -1627,7 +1627,7 @@
                   },
                   "typeName": {
                     "baseType": {
-                      "id": 4757,
+                      "id": 4798,
                       "name": "uint256",
                       "nodeType": "ElementaryTypeName",
                       "src": "2310:7:14",
@@ -1636,10 +1636,10 @@
                         "typeString": "uint256"
                       }
                     },
-                    "id": 4759,
+                    "id": 4800,
                     "length": {
                       "hexValue": "34",
-                      "id": 4758,
+                      "id": 4799,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -1664,12 +1664,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 4762,
+                  "id": 4803,
                   "mutability": "mutable",
                   "name": "_treasuryFee",
                   "nameLocation": "2365:12:14",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4765,
+                  "scope": 4806,
                   "src": "2357:20:14",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1678,7 +1678,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 4761,
+                    "id": 4802,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "2357:7:14",
@@ -1693,12 +1693,12 @@
               "src": "2238:145:14"
             },
             "returnParameters": {
-              "id": 4764,
+              "id": 4805,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2392:0:14"
             },
-            "scope": 4772,
+            "scope": 4813,
             "src": "2217:176:14",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -1706,13 +1706,13 @@
           },
           {
             "documentation": {
-              "id": 4766,
+              "id": 4807,
               "nodeType": "StructuredDocumentation",
               "src": "2399:50:14",
               "text": " @notice View current lottery id"
             },
             "functionSelector": "80a06160",
-            "id": 4771,
+            "id": 4812,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -1720,23 +1720,23 @@
             "nameLocation": "2463:20:14",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4767,
+              "id": 4808,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2483:2:14"
             },
             "returnParameters": {
-              "id": 4770,
+              "id": 4811,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4769,
+                  "id": 4810,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4771,
+                  "scope": 4812,
                   "src": "2509:7:14",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1745,7 +1745,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 4768,
+                    "id": 4809,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "2509:7:14",
@@ -1759,14 +1759,14 @@
               ],
               "src": "2508:9:14"
             },
-            "scope": 4772,
+            "scope": 4813,
             "src": "2454:64:14",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 4773,
+        "scope": 4814,
         "src": "56:2464:14",
         "usedErrors": []
       }
@@ -1779,7 +1779,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-11-27T11:10:11.202Z",
+  "updatedAt": "2021-12-02T14:39:30.131Z",
   "devdoc": {
     "kind": "dev",
     "methods": {
