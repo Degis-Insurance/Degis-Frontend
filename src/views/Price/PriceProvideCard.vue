@@ -4,7 +4,7 @@
       <div class="row row-grid align-items-center">
         <div class="col-lg-4">
           <img :src="'img/protection/price/' + data.coin + '.png'" class="img-fluid" style="width: 64px"/>
-          <span class="fw-7 d-g1 fs-28 pl-3" style="vertical-align: middle">{{ data.name.replace(/_/g, "") }}</span>
+          <span class="fw-7 d-g1 fs-28 pl-3" style="vertical-align: middle; word-break: break-all">{{ data.name.replace(/_/g, "") }}</span>
           <p class="d-f-2 mb-0">Current Price:<span class="d-f-4"> {{ data.currentPrice }}</span></p>
           <p class="d-f-2 mb-0">{{ data.coin }} Price:<span class="d-f-4"> {{ data.coinPrice }}</span></p>
         </div>
