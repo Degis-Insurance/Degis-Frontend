@@ -130,6 +130,16 @@ export default {
     ) {
       console.log(buy_usdt_policy, exact_former_later);
       const account = this.$store.state.selectedAccount;
+      if(account == null)
+      {
+        alert("Please Connect Wallet")
+        return
+      } 
+      if(usdtAmount == 0)
+      {
+        alert("Please Input Amount")
+        return
+      } 
       const usdt = await getMockUSD();
       const core = await getPolicyCore();
       const router = await getNaughtyRouter();

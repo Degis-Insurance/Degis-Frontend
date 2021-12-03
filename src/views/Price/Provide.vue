@@ -114,6 +114,16 @@ export default {
 
     async addLiquidity(amountUSDT, amountPolicyToken, tokenName) {
       const account = this.$store.state.selectedAccount;
+      if(account == null)
+      {
+        alert("Please Connect Wallet")
+        return
+      } 
+      if(amountUSDT == 0 || amountPolicyToken == 0)
+      {
+        alert("Please Input Amount")
+        return
+      } 
       const usdt = await getMockUSD();
       const factory = await getNaughtyFactory();
       const core = await getPolicyCore();
@@ -192,6 +202,16 @@ export default {
     async removeLiquidity(amountUSDT, amountPolicyToken, tokenName) {
       
       const account = this.$store.state.selectedAccount;
+      if(account == null)
+      {
+        alert("Please Connect Wallet")
+        return
+      } 
+      if(amountUSDT == 0 || amountPolicyToken == 0)
+      {
+        alert("Please Input Amount")
+        return
+      } 
       const usdt = await getMockUSD();
       const factory = await getNaughtyFactory();
       const core = await getPolicyCore();

@@ -42,7 +42,7 @@
             <p class="d-f-2">Deposit Limit</p>
             <p class="d-f-2">{{ (data.depositLimit / 1e18).toFixed(2) }} LPT</p>
           </div>
-          <base-input :value="depositAmount"/>
+          <input v-model="depositAmount"/>
           <base-button style="width: 100%" @click="depositEvent">DEPOSIT</base-button>
           <div class="d-flex justify-content-between">
             <div>
@@ -66,7 +66,7 @@
             <p class="d-f-2">Available to Withdraw:</p>
             <p class="d-f-2">{{ (data.availableToWithdraw / 1e18).toFixed(2) }} LPT</p>
           </div>
-          <base-input :value="withdrawAmount"/>
+          <input v-model="withdrawAmount"/>
           <base-button style="width: 100%" @click="withdrawEvent">Withdraw</base-button>
           <div class="d-flex justify-content-between">
             <p class="d-f-2">DEG Rewards:</p>
@@ -102,8 +102,8 @@ export default {
   data() {
     return {
       more: false,
-      depositAmount : 10,
-      withdrawAmount : 10,
+      depositAmount : 0,
+      withdrawAmount : 0,
     };
   },
   methods: {
@@ -128,9 +128,17 @@ export default {
       }
     },
     async deposit(amount) {
-
       const account = this.$store.state.selectedAccount;
-      
+      if(account == null)
+      {
+        alert("Please Connect Wallet")
+        return
+      } 
+      if(amount == 0)
+      {
+        alert("Please Input Amount")
+        return
+      } 
       if(this.data.poolType == "lpMining")
       {
         const pool = await getFarmingPool();
@@ -148,7 +156,16 @@ export default {
 
     async withdraw(amount) {
       const account = this.$store.state.selectedAccount;
-      
+      if(account == null)
+      {
+        alert("Please Connect Wallet")
+        return
+      } 
+      if(amount == 0)
+      {
+        alert("Please Input Amount")
+        return
+      } 
       if(this.data.poolType == "lpMining")
       {
         const pool = await getFarmingPool();

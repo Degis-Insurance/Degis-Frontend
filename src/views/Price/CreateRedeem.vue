@@ -111,6 +111,16 @@ export default {
 
     async create(depositAmount, tokenName) {
       const account = this.$store.state.selectedAccount;
+      if(account == null)
+      {
+        alert("Please Connect Wallet")
+        return
+      } 
+      if(depositAmount == 0)
+      {
+        alert("Please Input Amount")
+        return
+      } 
       const usdt = await getMockUSD();
       const core = await getPolicyCore();
       var amount = window.WEB3.utils.toWei(String(depositAmount), "ether");
@@ -140,6 +150,16 @@ export default {
 
     async redeem(redeemAmount, tokenName) {
       const account = this.$store.state.selectedAccount;
+      if(account == null)
+      {
+        alert("Please Connect Wallet")
+        return
+      } 
+      if(redeemAmount == 0)
+      {
+        alert("Please Input Amount")
+        return
+      } 
       const usdt = await getMockUSD();
       const core = await getPolicyCore();
 

@@ -108,7 +108,7 @@
               </el-table-column>
               <el-table-column prop="isredeemed" label="WEIGHT">
                 <template #default="scope">
-                  <p class="fw-7 d-g1 fs-16 ma">{{ scope.row.isredeemed }}</p>
+                  <p class="fw-7 d-g1 fs-16 ma">{{ scope.row.weight }}</p>
                 </template>
               </el-table-column>
               <el-table-column prop="action" label="ACTION">
@@ -233,8 +233,6 @@ export default {
 
     async showLotteryInfo() {
       const DegisLottery = await getDegisLottery();
-      const account = this.$store.state.selectedAccount;
-
       const lotteryDetails = await DegisLottery.methods.viewAllLottery().call();
 
       return lotteryDetails;
@@ -243,12 +241,14 @@ export default {
     async showUserInfo() {
       const DegisLottery = await getDegisLottery();
       const account = this.$store.state.selectedAccount;
-
-      const userTicketInfo = await DegisLottery.methods
-        .viewUserInfo(account)
-        .call();
-
-      return userTicketInfo;
+      if(account != null)
+      {
+        const userTicketInfo = await DegisLottery.methods
+          .viewUserInfo(account)
+          .call();
+        return userTicketInfo;
+      }
+      return [[]];
     },
 
     async redeemTicket(ticketIds) {
@@ -312,23 +312,28 @@ export default {
 
     async showUserInfoEvent() {
       const userTicketInfo = await this.showUserInfo();
+      const DegisLottery = await getDegisLottery();
+      const currentLotteryId = await DegisLottery.methods.currentLotteryId().call();
       console.log(userTicketInfo);
       this.lotteryData = [];
-
       for (var i = 0; i < userTicketInfo[0].length; i++) {
         var lotteryid = userTicketInfo[0][i];
         var number = this.int2array(userTicketInfo[1][i]["number"]);
         var buylotteryid = userTicketInfo[1][i]["buyLotteryId"];
         var isredeemed = userTicketInfo[1][i]["isRedeemed"];
         var redeemlotteryid = userTicketInfo[1][i]["redeemLotteryId"];
-
-        this.lotteryData.push({
-          lotteryid: lotteryid,
-          number: number,
-          buylotteryid: buylotteryid,
-          isredeemed: isredeemed,
-          redeemlotteryid: redeemlotteryid,
-        });
+        var weight = (1 + Math.log(buylotteryid - currentLotteryId + 1)).toFixed(2);
+        if(isredeemed == false)
+        {
+          this.lotteryData.push({
+            lotteryid: lotteryid,
+            number: number,
+            buylotteryid: buylotteryid,
+            isredeemed: isredeemed,
+            redeemlotteryid: redeemlotteryid,
+            weight: weight,
+          });
+        }
       }
     },
 

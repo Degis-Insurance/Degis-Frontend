@@ -114,12 +114,7 @@ export default {
       const DegisLottery = await getDegisLottery();
       const Degis = await getDegis();
       const account = this.$store.state.selectedAccount;
-      // if (tickets.length > 10) {
-      //   alert("amount must smaller than 10");
-      //   return;
-      // }
 
-      console.log(tickets);
       let newTickets = new Array();
       for (var i = 0; i < tickets.length; i++) {
         var lotteryNumber = tickets;
@@ -130,6 +125,7 @@ export default {
           return;
         }
       }
+      
       console.log(newTickets);
       let cost = newTickets.length * 10;
       const allowance = await Degis.methods
@@ -155,7 +151,6 @@ export default {
     },
 
     async BuyTicketEvent() {
-      console.log(this.buyNum);
       const luckNumber =
         this.buyNum[0] * 1000 +
         this.buyNum[1] * 100 +
@@ -168,8 +163,6 @@ export default {
       for (var i = 0; i < amount; i++) {
         tickets.push(luckNumber);
       }
-      // console.log(tickets);
-
       await this.BuyTicket(tickets);
     },
   },

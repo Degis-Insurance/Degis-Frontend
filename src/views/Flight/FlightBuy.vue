@@ -26,7 +26,7 @@
 
         <div>
           <p class="d-f-4">Date</p>
-          <el-date-picker v-model="datevalue" format="YYYY-MM-DD" value-format="YYYY-MM-DD" placeholder="Pick a day"></el-date-picker>
+          <el-date-picker v-model="datevalue" format="YYYY-MM-DD" value-format="YYYY-MM-DD" placeholder="Pick a day"  @change="flightByNo()"></el-date-picker>
         </div>
         <div>
           <p class="d-f-4" style="color: white">Search</p>
@@ -96,7 +96,7 @@ export default {
       BuyProduction: false,
       datevalue: "",
       flightoptions: ref([
-        {value: "FlightNo1", label: "FlightNo1"},
+        {value: "AQ1299", label: "AQ1299"},
         {value: "FlightNo2", label: "FlightNo2"},
         {value: "FlightNo3", label: "FlightNo3"},
       ]),
@@ -142,9 +142,16 @@ export default {
         flight_no: this.flightno,
         depart_date: dayjs(this.datevalue).format('YYYYMMDD'),
       };
-      getFlightByNo(data).then((response) => {
-        this.flightData = response.data.data;
-      });
+      if(data["depart_date"] === "Invalid Date")
+      {
+        alert("Input Depart Date")
+      }
+      else
+      {
+        getFlightByNo(data).then((response) => {
+          this.flightData = response.data.data;
+        });
+      }
     },
 
     actionbuy(val) {
