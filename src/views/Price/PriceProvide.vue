@@ -60,7 +60,11 @@
     <!--        </div>-->
     <!--      </div>-->
     <!--    </el-card>-->
-    <price-provide-card v-for="data in cardData" :data="data" :key="data.coin"></price-provide-card>
+    <price-provide-card
+      v-for="data in cardData"
+      :data="data"
+      :key="data.coin"
+    ></price-provide-card>
   </base-header>
 </template>
 
@@ -71,7 +75,6 @@ import PriceProvideCard from "./PriceProvideCard";
 import {
   getMockUSD,
   getNaughtyFactory,
-  getNaughtyRouter,
   getPolicyCore,
   getPolicyToken,
   getNaughtyPair,
@@ -79,11 +82,11 @@ import {
 
 export default {
   name: "price-provide",
-  components: {BaseButton, PriceProvideCard},
+  components: { BaseButton, PriceProvideCard },
   data() {
     return {
       cardData: [],
-    }
+    };
   },
   computed: {
     currentAccount() {
@@ -107,10 +110,11 @@ export default {
     async getTokensName() {
       const core = await getPolicyCore();
       const tokenInfos = await core.methods.getAllTokens().call();
-      var tokenNames = []
-      for(var i=0;i<tokenInfos.length;i++)
-      {
-        var tokenName = await core.methods.findNamebyAddress(tokenInfos[i]["policyTokenAddress"]).call();
+      var tokenNames = [];
+      for (var i = 0; i < tokenInfos.length; i++) {
+        var tokenName = await core.methods
+          .findNamebyAddress(tokenInfos[i]["policyTokenAddress"])
+          .call();
         tokenNames.push(tokenName);
       }
       return tokenNames;
@@ -118,18 +122,27 @@ export default {
 
     async showUserInfo(tokenName) {
       const account = this.$store.state.selectedAccount;
-      if(account != null)
-      {
+      if (account != null) {
         const usdt = await getMockUSD();
         const core = await getPolicyCore();
-        const policyTokenAddress = await core.methods.findAddressbyName(tokenName).call();
+        const policyTokenAddress = await core.methods
+          .findAddressbyName(tokenName)
+          .call();
         const policyToken = await getPolicyToken(policyTokenAddress);
-        const userQuota = await core.methods.checkUserQuota(account, policyToken.options.address).call({from: account})
+        const userQuota = await core.methods
+          .checkUserQuota(account, policyToken.options.address)
+          .call({ from: account });
         const usdtBalance = await usdt.methods.balanceOf(account).call();
-        const policyTokenBalance = await policyToken.methods.balanceOf(account).call();
-        return {"userQuota": userQuota, "usdtBalance": usdtBalance, "policyTokenBalance": policyTokenBalance};
+        const policyTokenBalance = await policyToken.methods
+          .balanceOf(account)
+          .call();
+        return {
+          userQuota: userQuota,
+          usdtBalance: usdtBalance,
+          policyTokenBalance: policyTokenBalance,
+        };
       }
-      return {"userQuota": 0, "usdtBalance": 0, "policyTokenBalance":0};
+      return { userQuota: 0, usdtBalance: 0, policyTokenBalance: 0 };
     },
 
     async showPoolInfo(tokenName) {
@@ -140,75 +153,80 @@ export default {
       var policyInfo = await core.methods.getPolicyTokenInfo(tokenName).call();
 
       const policyTokenAddress = await core.methods
-          .findAddressbyName(tokenName)
-          .call();
+        .findAddressbyName(tokenName)
+        .call();
       const pairAddress = await factory.methods
-          .getPairAddress(policyTokenAddress, usdt.options.address)
-          .call();
+        .getPairAddress(policyTokenAddress, usdt.options.address)
+        .call();
 
       const pair = await getNaughtyPair(pairAddress);
       const poolInfo = await pair.methods.getReserves().call();
       const poolLiquidityToken = await pair.methods.totalSupply().call();
       var userLiquidityToken = 0;
-      if(account != null){
+      if (account != null) {
         userLiquidityToken = await pair.methods.balanceOf(account).call();
       }
-      return {"policyInfo": policyInfo, 
-      "poolInfo": {
-        "policyTokenAmmount": poolInfo[0], 
-        "udstAmmount": poolInfo[1], 
-        "poolLiquidityToken": poolLiquidityToken,
-        "userLiquidityToken": userLiquidityToken }}
+      return {
+        policyInfo: policyInfo,
+        poolInfo: {
+          policyTokenAmmount: poolInfo[0],
+          udstAmmount: poolInfo[1],
+          poolLiquidityToken: poolLiquidityToken,
+          userLiquidityToken: userLiquidityToken,
+        },
+      };
     },
 
-    async showInfoEvent()
-    {
+    async showInfoEvent() {
       const tokenNames = await this.getTokensNameEvent();
-      this.cardData = []
-      for(var i=0; i<tokenNames.length; i++)
-      {
-        const tokenName  = tokenNames[i];
+      this.cardData = [];
+      for (var i = 0; i < tokenNames.length; i++) {
+        const tokenName = tokenNames[i];
         const info = await this.showPoolInfo(tokenName);
         const policyInfo = info["policyInfo"];
         const poolInfo = info["poolInfo"];
 
         const userInfo = await this.showUserInfo(tokenName);
-        
-        const types = {"H" : "Payout if Higher", "L": "Pay out if Lower"}
-        var date = new Date(parseInt(policyInfo["deadline"]) * 1000)
-        var expiry = date.getDate()+
-          "/"+(date.getMonth()+1)+
-          "/"+date.getFullYear()
-        
+
+        const types = { H: "Payout if Higher", L: "Pay out if Lower" };
+        var date = new Date(parseInt(policyInfo["deadline"]) * 1000);
+        var expiry =
+          date.getDate() +
+          "/" +
+          (date.getMonth() + 1) +
+          "/" +
+          date.getFullYear();
+
         var currentPrice = "--";
-        if(poolInfo["policyTokenAmmount"] != 0)
-        {
-          currentPrice = (poolInfo["udstAmmount"] / poolInfo["policyTokenAmmount"]).toFixed(4);
+        if (poolInfo["policyTokenAmmount"] != 0) {
+          currentPrice = (
+            poolInfo["udstAmmount"] / poolInfo["policyTokenAmmount"]
+          ).toFixed(4);
         }
 
         var policyTokeninfo = {
-          "coin": tokenName.split("_")[0],
-          "name": tokenName,
-          "currentPrice": currentPrice,
-          "coinPrice": "--",
-          "type" : types[tokenName.split("_")[2]],
-          "strike" : policyInfo["strikePrice"],
-          "expiry" : expiry,
-          "tvl": "--",
-          "tradingVolume": "--",
-          "change": "--",
-          "minted": userInfo["userQuota"], 
-          "balance": userInfo["policyTokenBalance"],
-          "poolLiquidityToken": poolInfo["poolLiquidityToken"],
-          "userLiquidityToken": poolInfo["userLiquidityToken"]
+          coin: tokenName.split("_")[0],
+          name: tokenName,
+          currentPrice: currentPrice,
+          coinPrice: "--",
+          type: types[tokenName.split("_")[2]],
+          strike: policyInfo["strikePrice"],
+          expiry: expiry,
+          tvl: "--",
+          tradingVolume: "--",
+          change: "--",
+          minted: userInfo["userQuota"],
+          balance: userInfo["policyTokenBalance"],
+          poolLiquidityToken: poolInfo["poolLiquidityToken"],
+          userLiquidityToken: poolInfo["userLiquidityToken"],
         };
-        this.cardData.push(policyTokeninfo)
+        this.cardData.push(policyTokeninfo);
       }
     },
 
     async getTokensNameEvent() {
-      return this.getTokensName()
-    }
+      return this.getTokensName();
+    },
   },
 };
 </script>

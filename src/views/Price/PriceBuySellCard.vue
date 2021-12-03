@@ -3,27 +3,58 @@
     <div class="container-fluid">
       <div class="row row-grid align-items-center">
         <div class="col-lg-4">
-          <img :src="'img/protection/price/' + data.coin + '.png'" class="img-fluid" style="width: 64px"/>
-          <span class="fw-7 d-g1 fs-28 pl-3" style="vertical-align: middle; word-break: break-all">{{ data.name.replace(/_/g, "") }}</span>
-          <p class="d-f-2">Current Price:<span class="d-f-4"> {{ data.currentPrice }}</span></p>
-          <p class="d-f-2">{{ data.coin }} Price:<span class="d-f-4"> {{ data.coinPrice }}</span></p>
+          <img
+            :src="'img/protection/price/' + data.coin + '.png'"
+            class="img-fluid"
+            style="width: 64px"
+          />
+          <span
+            class="fw-7 d-g1 fs-28 pl-3"
+            style="vertical-align: middle; word-break: break-all"
+            >{{ data.name.replace(/_/g, "") }}</span
+          >
+          <p class="d-f-2">
+            Current Price:<span class="d-f-4"> {{ data.currentPrice }}</span>
+          </p>
+          <p class="d-f-2">
+            {{ data.coin }} Price:<span class="d-f-4">
+              {{ data.coinPrice }}</span
+            >
+          </p>
         </div>
         <div class="col-lg-3">
-          <p class="d-f-2 mb-0">Type: <span class="d-f-4"> {{ data.type }}</span></p>
-          <p class="d-f-2 mb-0">Strike: <span class="d-f-4"> {{ data.strike }}</span></p>
-          <p class="d-f-2 mb-0">Expiry: <span class="d-f-4"> {{ data.expiry }}</span></p>
-          <p class="d-f-2">TVL: <span class="d-p">{{ data.tvl }}</span></p>
+          <p class="d-f-2 mb-0">
+            Type: <span class="d-f-4"> {{ data.type }}</span>
+          </p>
+          <p class="d-f-2 mb-0">
+            Strike: <span class="d-f-4"> {{ data.strike }}</span>
+          </p>
+          <p class="d-f-2 mb-0">
+            Expiry: <span class="d-f-4"> {{ data.expiry }}</span>
+          </p>
+          <p class="d-f-2">
+            TVL: <span class="d-p">{{ data.tvl }}</span>
+          </p>
         </div>
         <div class="col-lg-3">
-          <p class="d-f-2">24h Trading Volume:<span class="d-p">{{ data.tradingVolume }}</span></p>
-          <p class="d-f-2">24h Change: <span class="d-p">{{ data.change }}</span></p>
-          <p class="d-f-2">USDT Balance: <span class="d-p">{{ data.usdtBalance }}</span></p>
-          <p class="d-f-2">Policy Token Balance: <span class="d-p">{{ data.policyTokenBalance }}</span></p>
+          <p class="d-f-2">
+            24h Trading Volume:<span class="d-p">{{ data.tradingVolume }}</span>
+          </p>
+          <p class="d-f-2">
+            24h Change: <span class="d-p">{{ data.change }}</span>
+          </p>
+          <p class="d-f-2">
+            USDT Balance: <span class="d-p">{{ data.usdtBalance }}</span>
+          </p>
+          <p class="d-f-2">
+            Policy Token Balance:
+            <span class="d-p">{{ data.policyTokenBalance }}</span>
+          </p>
         </div>
         <div class="col-lg-2">
           <base-button @click="buy(data)">Buy</base-button>
-          <br/>
-          <br/>
+          <br />
+          <br />
           <base-button @click="sell(data)">Sell</base-button>
         </div>
       </div>
@@ -49,8 +80,8 @@ export default {
         name2: this.data.name,
         currentPrice: this.data.currentPrice,
         type: "",
-      }
-    }
+      },
+    };
   },
   components: {
     BuySell,

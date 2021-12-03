@@ -24,8 +24,8 @@ export default {
   components: { PriceCreateCard },
   data() {
     return {
-      cardData: [ ]
-    }
+      cardData: [],
+    };
   },
   computed: {
     currentAccount() {
@@ -35,7 +35,7 @@ export default {
 
   watch: {
     "$store.state.selectedAccount": function (newVal) {
-      this.showInfoEvent()
+      this.showInfoEvent();
     },
     "$store.state.lastTransactionHash": function (newVal) {
       this.showInfoEvent();
@@ -43,42 +43,49 @@ export default {
   },
 
   mounted() {
-    this.showInfoEvent()
+    this.showInfoEvent();
   },
 
   methods: {
-    async getTokensName()
-    {
+    async getTokensName() {
       const core = await getPolicyCore();
       const tokenInfos = await core.methods.getAllTokens().call();
-      var tokenNames = []
-      for(var i=0;i<tokenInfos.length;i++)
-      {
-        var tokenName = await core.methods.findNamebyAddress(tokenInfos[i]["policyTokenAddress"]).call();
+      var tokenNames = [];
+      for (var i = 0; i < tokenInfos.length; i++) {
+        var tokenName = await core.methods
+          .findNamebyAddress(tokenInfos[i]["policyTokenAddress"])
+          .call();
         tokenNames.push(tokenName);
       }
       return tokenNames;
     },
 
-    async showUserInfo(tokenName)
-    {
+    async showUserInfo(tokenName) {
       const account = this.$store.state.selectedAccount;
-      if(account != null)
-      {
+      if (account != null) {
         const usdt = await getMockUSD();
         const core = await getPolicyCore();
-        const policyTokenAddress = await core.methods.findAddressbyName(tokenName).call(); 
+        const policyTokenAddress = await core.methods
+          .findAddressbyName(tokenName)
+          .call();
         const policyToken = await getPolicyToken(policyTokenAddress);
-        const userQuota = await core.methods.checkUserQuota(account, policyToken.options.address).call({ from : account})
+        const userQuota = await core.methods
+          .checkUserQuota(account, policyToken.options.address)
+          .call({ from: account });
         const usdtBalance = await usdt.methods.balanceOf(account).call();
-        const policyTokenBalance = await policyToken.methods.balanceOf(account).call();
-        return {"userQuota": userQuota, "usdtBalance": usdtBalance, "policyTokenBalance":policyTokenBalance};
+        const policyTokenBalance = await policyToken.methods
+          .balanceOf(account)
+          .call();
+        return {
+          userQuota: userQuota,
+          usdtBalance: usdtBalance,
+          policyTokenBalance: policyTokenBalance,
+        };
       }
-      return {"userQuota": 0, "usdtBalance": 0, "policyTokenBalance":0};
+      return { userQuota: 0, usdtBalance: 0, policyTokenBalance: 0 };
     },
 
-    async showPoolInfo(tokenName)
-    {
+    async showPoolInfo(tokenName) {
       const usdt = await getMockUSD();
       const factory = await getNaughtyFactory();
       const core = await getPolicyCore();
@@ -93,56 +100,60 @@ export default {
       const pair = await getNaughtyPair(pairAddress);
       const poolInfo = await pair.methods.getReserves().call();
 
-      return {"policyInfo": policyInfo ,"poolInfo": {"udstAmmount":poolInfo[1], "policyTokenAmmount":poolInfo[0]}}
+      return {
+        policyInfo: policyInfo,
+        poolInfo: { udstAmmount: poolInfo[1], policyTokenAmmount: poolInfo[0] },
+      };
     },
 
-    async showInfoEvent()
-    {
+    async showInfoEvent() {
       const tokenNames = await this.getTokensNameEvent();
-      this.cardData = []
-      for(var i=0; i<tokenNames.length; i++)
-      {
-        const tokenName  = tokenNames[i];
+      this.cardData = [];
+      for (var i = 0; i < tokenNames.length; i++) {
+        const tokenName = tokenNames[i];
         const info = await this.showPoolInfo(tokenName);
         const policyInfo = info["policyInfo"];
         const poolInfo = info["poolInfo"];
 
         const userInfo = await this.showUserInfo(tokenName);
-        
-        const types = {"H" : "Payout if Higher", "L": "Pay out if Lower"}
-        var date = new Date(parseInt(policyInfo["deadline"]) * 1000)
-        var expiry = date.getDate()+
-          "/"+(date.getMonth()+1)+
-          "/"+date.getFullYear()
-        
+
+        const types = { H: "Payout if Higher", L: "Pay out if Lower" };
+        var date = new Date(parseInt(policyInfo["deadline"]) * 1000);
+        var expiry =
+          date.getDate() +
+          "/" +
+          (date.getMonth() + 1) +
+          "/" +
+          date.getFullYear();
+
         var currentPrice = "--";
-        if(poolInfo["policyTokenAmmount"] != 0)
-        {
-          currentPrice = (poolInfo["udstAmmount"] / poolInfo["policyTokenAmmount"]).toFixed(4);
+        if (poolInfo["policyTokenAmmount"] != 0) {
+          currentPrice = (
+            poolInfo["udstAmmount"] / poolInfo["policyTokenAmmount"]
+          ).toFixed(4);
         }
 
         var policyTokeninfo = {
-          "coin": tokenName.split("_")[0],
-          "name": tokenName,
-          "currentPrice": currentPrice,
-          "coinPrice": "--",
-          "type" : types[tokenName.split("_")[2]],
-          "strike" : policyInfo["strikePrice"],
-          "expiry" : expiry,
-          "tvl": "--",
-          "tradingVolume": "--",
-          "change": "--",
-          "minted": userInfo["userQuota"], 
-          "balance": userInfo["policyTokenBalance"]
+          coin: tokenName.split("_")[0],
+          name: tokenName,
+          currentPrice: currentPrice,
+          coinPrice: "--",
+          type: types[tokenName.split("_")[2]],
+          strike: policyInfo["strikePrice"],
+          expiry: expiry,
+          tvl: "--",
+          tradingVolume: "--",
+          change: "--",
+          minted: userInfo["userQuota"],
+          balance: userInfo["policyTokenBalance"],
         };
-        this.cardData.push(policyTokeninfo)
+        this.cardData.push(policyTokeninfo);
       }
     },
-    async getTokensNameEvent()
-    {
-      return this.getTokensName()
-    }
-  }
+    async getTokensNameEvent() {
+      return this.getTokensName();
+    },
+  },
 };
 </script>
 

@@ -21,11 +21,9 @@
                   class="img-fluid"
                   style="width: 64px"
                 />
-                <span
-                  class="d-f-1 pl-3"
-                  style="vertical-align: middle"
-                  >{{ data.name1 }}</span
-                >
+                <span class="d-f-1 pl-3" style="vertical-align: middle">{{
+                  data.name1
+                }}</span>
               </div>
               <input
                 class="fw-4 d-g2 fs-32 mt-3 ta-c"
@@ -57,8 +55,8 @@
                 <span
                   class="d-f-1 pl-3"
                   style="vertical-align: middle; word-break: break-all"
-                  >{{ data.name2.replace(/_/g,'') }}  </span
-                >
+                  >{{ data.name2.replace(/_/g, "") }}
+                </span>
               </div>
               <input
                 class="fw-4 d-g2 fs-32 mt-3 ta-c"
@@ -77,8 +75,15 @@
         </div>
 
         <div class="modal-footer pt-1" style="display: block">
-          <base-button v-if="data.type === 'create'" style="width: 100%" @click="createEvent()">Create</base-button>
-          <base-button v-else style="width: 100%" @click="redeemEvent()">Redeem</base-button>
+          <base-button
+            v-if="data.type === 'create'"
+            style="width: 100%"
+            @click="createEvent()"
+            >Create</base-button
+          >
+          <base-button v-else style="width: 100%" @click="redeemEvent()"
+            >Redeem</base-button
+          >
         </div>
       </div>
     </div>
@@ -111,16 +116,14 @@ export default {
 
     async create(depositAmount, tokenName) {
       const account = this.$store.state.selectedAccount;
-      if(account == null)
-      {
-        alert("Please Connect Wallet")
-        return
-      } 
-      if(depositAmount == 0)
-      {
-        alert("Please Input Amount")
-        return
-      } 
+      if (account == null) {
+        alert("Please Connect Wallet");
+        return;
+      }
+      if (depositAmount == 0) {
+        alert("Please Input Amount");
+        return;
+      }
       const usdt = await getMockUSD();
       const core = await getPolicyCore();
       var amount = window.WEB3.utils.toWei(String(depositAmount), "ether");
@@ -130,7 +133,10 @@ export default {
       const allowance = await usdt.methods
         .allowance(account, core.options.address)
         .call();
-      if (parseInt(allowance) < parseInt(window.WEB3.utils.toWei("100000000", "ether"))) {
+      if (
+        parseInt(allowance) <
+        parseInt(window.WEB3.utils.toWei("100000000", "ether"))
+      ) {
         const tx1 = await usdt.methods
           .approve(
             core.options.address,
@@ -150,16 +156,14 @@ export default {
 
     async redeem(redeemAmount, tokenName) {
       const account = this.$store.state.selectedAccount;
-      if(account == null)
-      {
-        alert("Please Connect Wallet")
-        return
-      } 
-      if(redeemAmount == 0)
-      {
-        alert("Please Input Amount")
-        return
-      } 
+      if (account == null) {
+        alert("Please Connect Wallet");
+        return;
+      }
+      if (redeemAmount == 0) {
+        alert("Please Input Amount");
+        return;
+      }
       const usdt = await getMockUSD();
       const core = await getPolicyCore();
 
@@ -202,8 +206,8 @@ export default {
     calc_amount2() {
       this.amount2 = 1 * this.amount1;
       return this.amount2;
-    }
-  }
+    },
+  },
 };
 </script>
 <style>
