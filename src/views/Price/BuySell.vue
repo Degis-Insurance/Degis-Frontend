@@ -21,11 +21,9 @@
                   class="img-fluid"
                   style="width: 64px"
                 />
-                <span
-                  class="d-f-1 pl-3"
-                  style="vertical-align: middle"
-                  >{{ data.name1 }}</span
-                >
+                <span class="d-f-1 pl-3" style="vertical-align: middle">{{
+                  data.name1
+                }}</span>
               </div>
               <input
                 class="fw-4 d-g2 fs-32 mt-3 ta-c"
@@ -130,16 +128,14 @@ export default {
     ) {
       console.log(buy_usdt_policy, exact_former_later);
       const account = this.$store.state.selectedAccount;
-      if(account == null)
-      {
-        alert("Please Connect Wallet")
-        return
-      } 
-      if(usdtAmount == 0)
-      {
-        alert("Please Input Amount")
-        return
-      } 
+      if (account == null) {
+        alert("Please Connect Wallet");
+        return;
+      }
+      if (usdtAmount == 0) {
+        alert("Please Input Amount");
+        return;
+      }
       const usdt = await getMockUSD();
       const core = await getPolicyCore();
       const router = await getNaughtyRouter();
@@ -176,7 +172,10 @@ export default {
         const allowance = await policyToken.methods
           .allowance(account, router.options.address)
           .call();
-        if (parseInt(allowance) < parseInt(window.WEB3.utils.toWei("100000000", "ether"))) {
+        if (
+          parseInt(allowance) <
+          parseInt(window.WEB3.utils.toWei("100000000", "ether"))
+        ) {
           const tx1 = await policyToken.methods
             .approve(
               router.options.address,
@@ -203,8 +202,8 @@ export default {
               date + 6000
             )
             .send({ from: account });
-            console.log("Tx Hash:", tx.transactionHash);
-            this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
+          console.log("Tx Hash:", tx.transactionHash);
+          this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
         }
 
         // 用最多policyTokenAmount个policy, 换usdtAmount个usdt token出来
@@ -219,15 +218,18 @@ export default {
               date + 6000
             )
             .send({ from: account });
-            console.log("Tx Hash:", tx.transactionHash);
-            this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
+          console.log("Tx Hash:", tx.transactionHash);
+          this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
         }
       }
       if (buy_usdt_policy == "usdt2policy") {
         const allowance = await usdt.methods
           .allowance(account, router.options.address)
           .call();
-        if (parseInt(allowance) < parseInt(window.WEB3.utils.toWei("100000000", "ether"))) {
+        if (
+          parseInt(allowance) <
+          parseInt(window.WEB3.utils.toWei("100000000", "ether"))
+        ) {
           const tx2 = await usdt.methods
             .approve(
               router.options.address,
@@ -256,8 +258,8 @@ export default {
               date + 6000
             )
             .send({ from: account });
-            console.log("Tx Hash:", tx.transactionHash);
-            this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
+          console.log("Tx Hash:", tx.transactionHash);
+          this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
         }
 
         // 用最多usdtAmount个usdt, 换policyTokenAmount个policy token出来
@@ -272,8 +274,8 @@ export default {
               date + 6000
             )
             .send({ from: account });
-            console.log("Tx Hash:", tx.transactionHash);
-            this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
+          console.log("Tx Hash:", tx.transactionHash);
+          this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
         }
       }
 

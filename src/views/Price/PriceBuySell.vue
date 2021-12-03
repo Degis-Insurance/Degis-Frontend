@@ -25,36 +25,7 @@ export default {
   components: { PriceBuySellCard },
   data() {
     return {
-      cardData: [
-        {
-          coin: "BTC",
-          name: "this is a name",
-          insurancetype: "this is insurance type",
-          price: 1000,
-          mybalance: 11,
-        },
-        {
-          coin: "BTC",
-          name: "this is a name",
-          insurancetype: "this is insurance type",
-          price: 1000,
-          mybalance: 11,
-        },
-        {
-          coin: "ETH",
-          name: "this is a name",
-          insurancetype: "this is insurance type",
-          price: 100,
-          mybalance: 11,
-        },
-        {
-          coin: "AVAX",
-          name: "this is a name",
-          insurancetype: "this is insurance type",
-          price: 10,
-          mybalance: 11,
-        },
-      ],
+      cardData: [],
     };
   },
   computed: {
@@ -76,7 +47,6 @@ export default {
     this.showInfoEvent();
   },
   methods: {
-
     async getTokensName() {
       const core = await getPolicyCore();
       const tokenInfos = await core.methods.getAllTokens().call();
@@ -92,8 +62,7 @@ export default {
 
     async showUserInfo(tokenName) {
       const account = this.$store.state.selectedAccount;
-        if(account != null)
-        {
+      if (account != null) {
         const usdt = await getMockUSD();
         const core = await getPolicyCore();
         const policyTokenAddress = await core.methods
@@ -117,7 +86,7 @@ export default {
         userQuota: 0,
         usdtBalance: 0,
         policyTokenBalance: 0,
-      }
+      };
     },
 
     async showPoolInfo(tokenName) {
@@ -181,8 +150,10 @@ export default {
           tradingVolume: "--",
           change: "--",
           minted: userInfo["userQuota"] / 1e18,
-          policyTokenBalance: (userInfo["policyTokenBalance"] / 1e18).toFixed(2),
-          usdtBalance: (userInfo["usdtBalance"] / 1e18).toFixed(2)
+          policyTokenBalance: (userInfo["policyTokenBalance"] / 1e18).toFixed(
+            2
+          ),
+          usdtBalance: (userInfo["usdtBalance"] / 1e18).toFixed(2),
         };
         this.cardData.push(policyTokeninfo);
       }
@@ -190,7 +161,7 @@ export default {
     async getTokensNameEvent() {
       return this.getTokensName();
     },
-  }
+  },
 };
 </script>
 
