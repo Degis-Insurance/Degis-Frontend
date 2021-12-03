@@ -21,8 +21,16 @@ export const getAddress = async (contractName, chainId) => {
 };
 
 export const getChainId = async () => {
+  console.log(window.ethereum)
   if (typeof window.ethereum !== "undefined") {
-    const chainId = await window.WEB3.eth.net.getId();
+    var chainId; 
+    try{
+      chainId = await window.WEB3.eth.net.getId();
+    }
+    catch(e) {
+      console.log('Abnormal Chain ID');
+      chainId = 4;
+    }
     return chainId;
   } else {
     const walletConnectProvider = new WalletConnectProvider({

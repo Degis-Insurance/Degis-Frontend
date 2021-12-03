@@ -279,10 +279,10 @@ export default {
               totalRewards
             ).toFixed(2);
           }
-          const degRewards = 0;
-          // const degRewards = await farm.methods
-          //   .pendingDegis(poolId, account)
-          //   .call({"from" : account});
+          // const degRewards = 0;
+          const degRewards = await farm.methods
+            .pendingDegis(poolId, account)
+            .call({"from" : account});
           poolInfo = {};
           if (poolstatus) {
             poolInfo["pic"] = poolPic;
