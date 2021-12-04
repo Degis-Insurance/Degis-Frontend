@@ -11,10 +11,9 @@
       <div>
         <h6 class="fw-7 d-g3 fs-24">Welcome to DEGIS!</h6>
       </div>
-      <!-- <div>
-        <span>{{ degisBalance }}</span>
-        <base-button @click="getDegisBalance">check degis balance </base-button>
-      </div> -->
+      <div>
+        <base-button @click="getUSD">GET 10000 USD</base-button>
+      </div>
       <div>
         <span id="userInfo"> {{ selectedAccount }}</span>
 
@@ -32,7 +31,7 @@
 import BaseButton from "./BaseButton";
 import { getWeb3 } from "../utils/getWeb3";
 import Web3 from "web3";
-import { getDegis } from "../utils/contractInstance";
+import { getDegis, getMockUSD } from "../utils/contractInstance";
 
 export default {
   name: "base-nav",
@@ -96,7 +95,14 @@ export default {
 
       this.setConnected(false);
     },
-
+    async getUSD() {
+      const account = this.$store.state.selectedAccount;
+      const usd = await getMockUSD();
+      const amount = window.WEB3.utils.toWei("10000", "ether");
+      const tx = await usd.methods
+        .mint(account, amount)
+        .send({ from: account });
+    },
     async getDegisBalance() {
       const degis = await getDegis();
       const account = this.$store.state.selectedAccount;

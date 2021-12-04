@@ -133,7 +133,7 @@
   </base-header>
 
   <template v-if="modals.BuyTickets">
-    <buy-tickets v-model:show="modals.BuyTickets"></buy-tickets>
+    <buy-tickets :roundData="currentRound" :drawTime="drawTime" v-model:show="modals.BuyTickets"></buy-tickets>
   </template>
   <pending-prize v-model:show="modals.PendingPrize"></pending-prize>
   <template v-if="modals.LbDetails">
@@ -178,8 +178,10 @@ export default {
   },
   data() {
     return {
+      currentRound: 0,
+      drawTime: "--", 
       num: [3, 5, 6, 7],
-      // activeName: 'AllHistory',
+      // activeName: 'AllHistory',  
       roundData: [],
       lotteryData: [],
       modals: {
@@ -287,13 +289,15 @@ export default {
     async showLotteryInfoEvent() {
       this.roundData = [];
       const lotteryDetails = await this.showLotteryInfo();
-      console.log(lotteryDetails);
+      console.log("lotteryDetails",lotteryDetails);
+      this.currentRound = lotteryDetails[lotteryDetails.length - 1]["lotteryId"]
+      this.drawTime = this.getExactTime(lotteryDetails[ lotteryDetails.length - 1]["endTime"]*1000);
       for (var i = lotteryDetails.length - 1; i >= 0; i--) {
         var lotteryDetail = lotteryDetails[i];
         var status = lotteryDetail["status"];
         var round = lotteryDetail["lotteryId"];
         var drawtime = this.getExactTime(
-          Number(lotteryDetail["startTime"]) * 1000
+          Number(lotteryDetail["endTime"]) * 1000
         );
         var prizenumber = this.int2array(lotteryDetail["finalNumber"]);
         if (status != 3) prizenumber = "";
@@ -314,7 +318,7 @@ export default {
       const userTicketInfo = await this.showUserInfo();
       const DegisLottery = await getDegisLottery();
       const currentLotteryId = await DegisLottery.methods.currentLotteryId().call();
-      console.log(userTicketInfo);
+      console.log("userTicketInfo",userTicketInfo);
       this.lotteryData = [];
       for (var i = 0; i < userTicketInfo[0].length; i++) {
         var lotteryid = userTicketInfo[0][i];
@@ -322,7 +326,7 @@ export default {
         var buylotteryid = userTicketInfo[1][i]["buyLotteryId"];
         var isredeemed = userTicketInfo[1][i]["isRedeemed"];
         var redeemlotteryid = userTicketInfo[1][i]["redeemLotteryId"];
-        var weight = (1 + Math.log(buylotteryid - currentLotteryId + 1)).toFixed(2);
+        var weight = (1 + Math.log(currentLotteryId - buylotteryid + 1)).toFixed(2);
         if(isredeemed == false)
         {
           this.lotteryData.push({

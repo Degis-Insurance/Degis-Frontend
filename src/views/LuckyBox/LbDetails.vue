@@ -77,17 +77,17 @@
           </div>
 
           <el-table :data="prizeData" :header-cell-style="{'text-align': 'center', 'height': '70px'}" :cell-style="{'text-align': 'center', 'height': '70px'}">
-            <el-table-column prop="lotteryid" label="LOTTERY ID" sortable>
+            <el-table-column prop="lotteryid" label="Ticket ID" sortable>
               <template #default="scope">
                 <p class="fw-7 d-g1 fs-16 ma">{{ scope.row.lotteryid }}</p>
               </template>
             </el-table-column>
-            <el-table-column prop="lotterynumber" label="LOTTERY NUMBERS" sortable>
+            <el-table-column prop="lotterynumber" label="TICKET NUMBERS" sortable>
               <template #default="scope">
                 <img v-for="num in scope.row.number" :src="'img/luckybox/num-'+ num +'.png'" style="max-width: 44px; max-height: 44px;" :key="num"/>
               </template>
             </el-table-column>
-            <el-table-column prop="lotteryrewards" label="LOTTERY REWARDS" sortable>
+            <el-table-column prop="lotteryrewards" label="TICKET REWARDS" sortable>
               <template #default="scope">
                 <p class="fw-7 d-p fs-24 ma">${{ scope.row.lotteryrewards }}</p>
               </template>
@@ -189,11 +189,11 @@ export default {
         var lotteryId = this.viewData.round;
         console.log(lotteryId);
         const lotteryInfo = await this.showLotteryInfo(lotteryId);
-        
+        console.log(lotteryInfo)
         var matchs = ["match1","match2","match3","match4"]
         for(var i=0; i<4;i++){
-          this.prizeDetail[matchs[i]]["winnerNumber"]=lotteryInfo["countWinnersPerBracket"][i];
-          this.prizeDetail[matchs[i]]["eachMoney"]=(lotteryInfo["rewardPerTicketInBracket"][i] / 1e18).toFixed(2);
+          this.prizeDetail[matchs[i]]["winnerNumber"]=(lotteryInfo["countWinnersPerBracket"][i] / 10000).toFixed(2);
+          this.prizeDetail[matchs[i]]["eachMoney"]=(lotteryInfo["rewardPerTicketInBracket"][i] / 1e18 * 10000).toFixed(2);
           this.prizeDetail[matchs[i]]["totalMoney"]=(lotteryInfo["amountCollected"]/1e18 * lotteryInfo["rewardsBreakdown"][i] / 1e4).toFixed(2);
         }
 
@@ -220,10 +220,10 @@ export default {
       this.prizeData = []
       for(var i=0;i<userTicketInfo[2].length;i++)
       {
-        var lorreryid = userTicketInfo[2][i][0]
+        var lotteryid = userTicketInfo[2][i][0]
         var number = this.int2array(userTicketInfo[2][i][1])
         var lotteryrewards = (userTicketInfo[2][i][2] / 1e18).toFixed(2)
-        this.prizeData.push({lorreryid:lorreryid,number:number,lotteryrewards:lotteryrewards})
+        this.prizeData.push({lotteryid:lotteryid,number:number,lotteryrewards:lotteryrewards})
       }
     },
 

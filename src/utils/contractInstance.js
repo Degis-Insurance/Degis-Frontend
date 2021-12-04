@@ -7,13 +7,13 @@ import { getAddress, getChainId } from "./contractAddress";
 import Degis_abi from "../abi/DegisToken.json";
 import MockUSD_abi from "../abi/MockUSD.json";
 import InsurancePool_abi from "../abi/InsurancePool.json";
-import LPToken_abi from "../abi/LPToken.json";
 import PolicyFlow_abi from "../abi/PolicyFlow.json";
 import DegisLottery_abi from "../abi/DegisLottery.json";
 import NaughtyFactory_abi from "../abi/NaughtyFactory.json";
 import NaughtyRouter_abi from "../abi/NaughtyRouter.json";
 import PolicyCore_abi from "../abi/PolicyCore.json";
-import PolicyToken_abi from "../abi/PolicyToken.json";
+import FL_PolicyToken_abi from "../abi/FL_PolicyToken.json";
+import NP_PolicyToken_abi from "../abi/NP_PolicyToken.json";
 import NaughtyPair_abi from "../abi/NaughtyPair.json";
 import BuyerToken_abi from "../abi/BuyerToken.json";
 import FarmingPool_abi from "../abi/FarmingPool.json";
@@ -46,15 +46,6 @@ export const getInsurancePool = async () => {
   return await new web3.eth.Contract(
     InsurancePool_abi.abi,
     await getAddress("INSURANCEPOOL", chainId)
-  );
-}
-
-export const getLPToken = async () => {
-  const web3 = await getWeb3();
-  const chainId = await getChainId();
-  return await new web3.eth.Contract(
-    LPToken_abi.abi,
-    await getAddress("LPTOKEN", chainId)
   );
 }
 
@@ -103,11 +94,20 @@ export const getPolicyCore = async () => {
   );
 }
 
-export const getPolicyToken = async (tokenAddress) => {
+export const getFLPolicyToken = async () => {
   const web3 = await getWeb3();
   const chainId = await getChainId();
   return await new web3.eth.Contract(
-    PolicyToken_abi.abi,
+    FL_PolicyToken_abi.abi,
+    await getAddress("FL_POLICYTOKEN", chainId)
+  );
+}
+
+export const getNPPolicyToken = async (tokenAddress) => {
+  const web3 = await getWeb3();
+  const chainId = await getChainId();
+  return await new web3.eth.Contract(
+    NP_PolicyToken_abi.abi,
     tokenAddress
   );
 }

@@ -27,9 +27,9 @@
 <script>
 import MiningLine from "./MiningLine";
 import {
-  getLPToken,
   getFarmingPool,
-  getPolicyToken,
+  getNPPolicyToken,
+  getInsurancePool,
   getDegis,
 } from "../../utils/contractInstance";
 
@@ -228,13 +228,18 @@ export default {
 
       async addMiningPool() {
         const account = this.$store.state.selectedAccount;
-        const lpToken = await getLPToken();
+        const insurancePool = await getInsurancePool();
         const farm = await getFarmingPool();
-        const degisPerBlock = window.WEB3.utils.toWei(String(1), "ether");
+        const degisPerBlock = window.WEB3.utils.toWei(String(100), "ether");
 
         const t1 = await farm.methods
-          .add(lpToken.options.address, degisPerBlock, false)
+          .add(insurancePool.options.address, degisPerBlock, false)
           .send({ from: account });
+        // const t1 = await farm.methods.setDegisReward(
+        //   window.WEB3.utils.toBN(String(1), "ether"),
+        //   window.WEB3.utils.toWei(String(100), "ether"),
+        //   true,
+        // ).send({ from: account });
         
         const degis = await getDegis();
         await degis.methods.addMinter(farm.options.address).send({from:account});
@@ -249,16 +254,18 @@ export default {
         const account = this.$store.state.selectedAccount;
         const farmPoolNames = await this.getFarmingPoolName();
         const farm = await getFarmingPool();
-
+        const xxx = await farm.methods.getPoolList().call();
+        console.log(xxx)
         this.miningData = [];
         for (var i = 0; i < farmPoolNames.length; i++) {
           const poolId = farmPoolNames[i][0];
           const poolPic = farmPoolNames[i][1];
           const poolName = farmPoolNames[i][2];
           const poolInfo = await farm.methods.poolList(poolId).call();
-          const poolstatus = parseInt(poolInfo["degisPerBlock"] / 1e18) == 1
+          const poolstatus = await farm.methods.isFarming(poolId).call();
           const lpTokenAddress = poolInfo["lpToken"];
-          const lpToken = await getPolicyToken(lpTokenAddress);
+
+          const lpToken = await getNPPolicyToken(lpTokenAddress);
           var depositLimit = 0;
           var availableToWithdraw = 0;
           if(account != null)
@@ -284,6 +291,7 @@ export default {
             .pendingDegis(poolId, account)
             .call({"from" : account});
           poolInfo = {};
+          
           if (poolstatus) {
             poolInfo["pic"] = poolPic;
             poolInfo["name"] = poolName;

@@ -19,7 +19,7 @@
                   Active Premiums: <span class="d-f-2"> {{ activePremiums }}</span>
                 </h5>
                 <h5 class="d-f-3">
-                  Locked Ratio: <span class="d-f-2"> {{ lockedRatio }}</span>
+                  Locked Ratio: <span class="d-f-2"> {{ (lockedRatio*100).toFixed(2) }}% </span>
                 </h5>
                 <h5 class="d-f-3">
                   LP Value: <span class="d-f-2"> {{ LPValue }}</span>

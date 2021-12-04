@@ -91,7 +91,7 @@ import {
   getLPToken,
   getDegis,
   getFarmingPool,
-  getPolicyToken,
+  getNPPolicyToken,
 } from "../../utils/contractInstance";
 export default {
   name: "mining-line",
@@ -145,7 +145,7 @@ export default {
         const poolId = this.data.poolId;
         const poolInfo = await pool.methods.poolList(poolId).call();
         const lpTokenAddress = poolInfo["lpToken"];
-        const lpToken = await getPolicyToken(lpTokenAddress);
+        const lpToken = await getNPPolicyToken(lpTokenAddress);
         await this.approve(lpToken, account, pool.options.address);
         amount = window.WEB3.utils.toWei(String(amount), "ether");
         const tx = await pool.methods.stake(poolId, amount).send({from:account});
@@ -172,7 +172,7 @@ export default {
         const poolId = this.data.poolId;
         const poolInfo = await pool.methods.poolList(poolId).call();
         const lpTokenAddress = poolInfo["lpToken"];
-        const lpToken = await getPolicyToken(lpTokenAddress);
+        const lpToken = await getNPPolicyToken(lpTokenAddress);
         amount = window.WEB3.utils.toWei(String(amount), "ether");
         const tx = await pool.methods.withdraw(poolId, amount).send({from:account});
         console.log("Tx Hash:", tx.transactionHash);
@@ -189,7 +189,7 @@ export default {
         const poolId = this.data.poolId;
         const poolInfo = await pool.methods.poolList(poolId).call();
         const lpTokenAddress = poolInfo["lpToken"];
-        const lpToken = await getPolicyToken(lpTokenAddress);
+        const lpToken = await getNPPolicyToken(lpTokenAddress);
         const tx = await pool.methods.harvest(poolId,account).send({from:account});
         console.log("Tx Hash:", tx.transactionHash);
         this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
