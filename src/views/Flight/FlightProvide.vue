@@ -6,20 +6,29 @@
       <div class="container" style="padding: 1% 0">
         <div class="row align-items-center">
           <div class="col-xl-6 order-md-1">
-<!--            <h2 class="d-f-1" style="padding: 1% 0">The Miserable Flight Pool</h2>-->
+            <!--            <h2 class="d-f-1" style="padding: 1% 0">The Miserable Flight Pool</h2>-->
             <div class="d-flex justify-content-center">
-<!--              <div class="col-5">-->
-                <img src="img/function/mining-circle.png" class="img-fluid mr-5" style="width: 170px; height: 170px"/>
-<!--              </div>-->
+              <!--              <div class="col-5">-->
+              <img
+                src="img/function/mining-circle.png"
+                class="img-fluid mr-5"
+                style="width: 170px; height: 170px"
+              />
+              <!--              </div>-->
               <div class="">
                 <h5 class="d-f-3">
-                  Total Staking Balance: <span class="d-f-2"> {{ totalStakingBalance }}</span>
+                  Total Staking Balance:
+                  <span class="d-f-2"> {{ totalStakingBalance }}</span>
                 </h5>
                 <h5 class="d-f-3">
-                  Active Premiums: <span class="d-f-2"> {{ activePremiums }}</span>
+                  Active Premiums:
+                  <span class="d-f-2"> {{ activePremiums }}</span>
                 </h5>
                 <h5 class="d-f-3">
-                  Locked Ratio: <span class="d-f-2"> {{ (lockedRatio*100).toFixed(2) }}% </span>
+                  Locked Ratio:
+                  <span class="d-f-2">
+                    {{ (lockedRatio * 100).toFixed(2) }}%
+                  </span>
                 </h5>
                 <h5 class="d-f-3">
                   LP Value: <span class="d-f-2"> {{ LPValue }}</span>
@@ -34,16 +43,27 @@
             </h5> -->
           </div>
           <div class="col-xl-6 order-md-2">
-            <h5 class="d-f-3">
-              Deposit Available: <span class="d-f-2"> {{ depositAvailable }} </span>
-            </h5>
-            <h5 class="d-f-3">
-              Withdraw Available: <span class="d-f-2"> {{ withdrawAvailable }} </span>
-            </h5>
-            <input class="degis-input" style="width: 100%; margin: 2% 0" placeholder="0" v-model="amount"/>
             <div class="d-flex justify-content-between">
-              <base-button style="width: 45%" @click="depositUSDEvent">DEPOSIT</base-button>
-              <base-button style="width: 45%" @click="withdrawUSDEvent">WITHDRAW</base-button>
+              <p class="d-f-3">Deposit Available:</p>
+              <p class="d-f-2">{{ depositAvailable }}</p>
+            </div>
+            <div class="d-flex justify-content-between">
+              <p class="d-f-3">Withdraw Available:</p>
+              <p class="d-f-2">{{ withdrawAvailable }}</p>
+            </div>
+            <input
+              class="degis-input"
+              style="width: 100%; margin: 2% 0"
+              placeholder="0"
+              v-model="amount"
+            />
+            <div class="d-flex justify-content-between">
+              <base-button style="width: 45%" @click="depositUSDEvent"
+                >DEPOSIT</base-button
+              >
+              <base-button style="width: 45%" @click="withdrawUSDEvent"
+                >WITHDRAW</base-button
+              >
             </div>
             <!-- <h5 class="text-r">Your Premium Income: <bold> {{ userPendingDegis }}</bold></h5> -->
             <!-- <h5 class="text-r">Your DEGIS Token Income: <bold> {{ userPendingDegis }}</bold></h5> -->
@@ -106,16 +126,14 @@ export default {
   methods: {
     async depositUSD(depositAmount) {
       const account = this.$store.state.selectedAccount;
-      if(account == null)
-      {
-        alert("Please Connect Wallet")
-        return
-      } 
-      if(depositAmount == 0)
-      {
-        alert("Please Input Amount")
-        return
-      } 
+      if (account == null) {
+        alert("Please Connect Wallet");
+        return;
+      }
+      if (depositAmount == 0) {
+        alert("Please Input Amount");
+        return;
+      }
       const usdt = await getMockUSD();
       const insurancePool = await getInsurancePool();
 
@@ -124,7 +142,10 @@ export default {
       const allowance = await usdt.methods
         .allowance(account, insurancePool.options.address)
         .call();
-      if (parseInt(allowance) < parseInt(window.WEB3.utils.toWei("100000000", "ether"))) {
+      if (
+        parseInt(allowance) <
+        parseInt(window.WEB3.utils.toWei("100000000", "ether"))
+      ) {
         const tx1 = await usdt.methods
           .approve(
             insurancePool.options.address,
@@ -147,16 +168,14 @@ export default {
     async withdrawUSD(withdrawAmount) {
       const insurancePool = await getInsurancePool();
       const account = this.$store.state.selectedAccount;
-      if(account == null)
-      {
-        alert("Please Connect Wallet")
-        return
-      } 
-      if(withdrawAmount == 0)
-      {
-        alert("Please Input Amount")
-        return
-      } 
+      if (account == null) {
+        alert("Please Connect Wallet");
+        return;
+      }
+      if (withdrawAmount == 0) {
+        alert("Please Input Amount");
+        return;
+      }
       const lpTokenTotalSupply = await insurancePool.methods
         .totalSupply()
         .call();
@@ -197,7 +216,7 @@ export default {
 
       var userBalance = 0;
       var depositAvailable = 0;
-      if(account != null){
+      if (account != null) {
         userBalance = await insurancePool.methods
           .getUserBalance(account)
           .call();
@@ -205,9 +224,8 @@ export default {
       }
       const totalSupply = await insurancePool.methods.totalSupply().call();
       var withdrawAvailable = 0;
-      if(parseInt(totalSupply) != 0) {
-        withdrawAvailable =
-            (userBalance / totalSupply) * totalStakingBalance;
+      if (parseInt(totalSupply) != 0) {
+        withdrawAvailable = (userBalance / totalSupply) * totalStakingBalance;
       }
       return {
         totalStakingBalance: totalStakingBalance,
@@ -251,6 +269,4 @@ export default {
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

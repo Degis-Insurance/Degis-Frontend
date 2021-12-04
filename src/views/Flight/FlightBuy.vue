@@ -124,7 +124,7 @@ export default {
 
     FlightNos() {
       getFlightNos().then((response) => {
-        this.flightoptions = response.data.data;
+        this.flightoptions = response.data.city_list;
       });
     },
 
