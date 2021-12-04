@@ -95,7 +95,7 @@ import {
   getNaughtyFactory,
   getPolicyCore,
   getNaughtyRouter,
-  getPolicyToken,
+  getNPPolicyToken,
   getNaughtyPair,
   getBuyerToken,
 } from "../../utils/contractInstance";
@@ -150,7 +150,7 @@ export default {
         .call();
       const usdtAddress = usdt.options.address;
 
-      const policyToken = await getPolicyToken(policyTokenAddress);
+      const policyToken = await getNPPolicyToken(policyTokenAddress);
 
       const usdt_before = await usdt.methods.balanceOf(account).call({
         from: account,

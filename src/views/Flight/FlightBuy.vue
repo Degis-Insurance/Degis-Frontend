@@ -12,7 +12,7 @@
           </div>
         </div>
         <div>
-          <p class="d-f-4">Search by Route</p>
+          <!-- <p class="d-f-4">Search by Route</p>
           <div class="d-flex align-items-center">
             <el-select v-model="origincity" filterable placeholder="Origin City">
               <el-option v-for="item in cityoptions" :key="item" :value="item"></el-option>
@@ -21,7 +21,7 @@
             <el-select v-model="destinationcity" filterable placeholder="Destination City">
               <el-option v-for="item in cityoptions" :key="item" :value="item"></el-option>
             </el-select>
-          </div>
+          </div> -->
         </div>
 
         <div>
@@ -171,8 +171,6 @@ export default {
       const account = this.$store.state.selectedAccount;
 
       const policycount = await PolicyFlow.methods.getUserPolicyCount(account).call();
-
-      // findPolicyBuyerById
 
       const userpolicy = await PolicyFlow.methods.viewPolicy(account).call();
 

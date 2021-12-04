@@ -66,7 +66,7 @@
               <div class="col-xl-6">
                 <div class="d-flex justify-content-between">
                   <p class="fw-4 d-g2 fs-16">Protection Premium:</p>
-                  <p class="fw-7 d-p fs-16">${{ buyData.premium }}</p>
+                  <p class="fw-7 d-p fs-16">${{ buyData.premium.toFixed(2) }}</p>
                 </div>
                 <div class="d-flex justify-content-between">
                   <p class="fw-4 d-g2 fs-16">Maximum Payoff:</p>
@@ -89,6 +89,7 @@ import {
   getMockUSD,
   getPolicyFlow,
   getInsurancePool,
+  getFLPolicyToken,
 } from "../../utils/contractInstance";
 import {getSignature} from "@/api/functions";
 export default {
@@ -126,7 +127,7 @@ export default {
         return
       } 
       const info = await getSignature(String(account),flight_no,timestamp)
-      console.log(info.data.detail)
+      console.log("info",info.data.detail)
 
       const policyFlow = await getPolicyFlow();
       const usdt = await getMockUSD();
@@ -146,14 +147,17 @@ export default {
           .send({ from: account });
         console.log("Tx Hash:", tx1.transactionHash);
       }
-      const productId = window.WEB3.utils.toBN(0);
+      
+      const productId = window.WEB3.utils.toBN(String(0));
       const flight_number =  info.data.detail["flight_no"]
-      const premium = window.WEB3.utils.toBN(info.data.detail["premium"])
-      const departure_timestamp =  window.WEB3.utils.toBN(info.data.detail["timestamp"])
-      const landing_timestamp = window.WEB3.utils.toBN(0);
-      const deadline = window.WEB3.utils.toBN(info.data.detail["deadline"])
+      const premium = window.WEB3.utils.toBN(String(info.data.detail["premium"]))
+      const departure_timestamp =  window.WEB3.utils.toBN(String(info.data.detail["timestamp"]))
+      const landing_timestamp = window.WEB3.utils.toBN(String(0));
+      const deadline = window.WEB3.utils.toBN(String(info.data.detail["deadline"]))
       const signature = info.data.detail["signature"]
-
+      // const policyToken = await getFLPolicyToken();
+      // await policyToken.methods.updatePolicyFlow(policyFlow.options.address).send({"from":account})
+      // await insurancePool.methods.setPolicyFlow(policyFlow.options.address).send({"from":account})
       const tx = await policyFlow.methods
         .newApplication(
           productId, 
@@ -165,17 +169,20 @@ export default {
           signature
         )
         .send({from: account});
-      console.log("Tx Hash:", tx2.transactionHash);
-      console.log(tx2);
-      console.log("policy Id:", tx2.logs[0].args[0]);
+      console.log("Tx Hash:", tx.transactionHash);
+      console.log(tx);
+      console.log("policy Id:", tx.logs[0].args[0]);
     },
 
     async NewPolicyEvent() {
       
       console.log(this.buyData)
-      const timestamp = this.buyData.timestamp;
+      var timestamp = this.buyData.timestamp;
+      // console.log("timestamp:",timestamp)
+      timestamp = new Date(this.buyData.arrive_time);
+      timestamp = timestamp.valueOf() / 1e3 + 24*60*60*4;
+      console.log("timestamp:",timestamp)
       const flight_no = this.buyData.flight_no;
-      const account = this.$store.state.selectedAccount;
       await this.NewPolicy(timestamp, flight_no);
 
       // const productId = 0;

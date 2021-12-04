@@ -19,8 +19,7 @@
           </button>
         </div>
         <p class="fw-7 d-g2 fs-16 pl-4">
-          Round # 124 <span class="fw-4 d-g4"> | Ends in </span> 20:00,
-          15/10/2021
+          Round # {{roundData}} <span class="fw-4 d-g4"> | Ends in </span> {{drawTime}}
         </p>
 
         <img src="img/luckybox/modal-split.png" style="height: 1px" />
@@ -89,6 +88,8 @@ export default {
   },
   props: {
     show: Boolean,
+    roundData: Number,
+    drawTime: String,
   },
   methods: {
     closeModal() {

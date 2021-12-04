@@ -16,7 +16,7 @@ import {
   getNaughtyFactory,
   getNaughtyRouter,
   getPolicyCore,
-  getPolicyToken,
+  getNPPolicyToken,
   getNaughtyPair,
 } from "../../utils/contractInstance";
 
@@ -68,7 +68,7 @@ export default {
         const policyTokenAddress = await core.methods
           .findAddressbyName(tokenName)
           .call();
-        const policyToken = await getPolicyToken(policyTokenAddress);
+        const policyToken = await getNPPolicyToken(policyTokenAddress);
         const userQuota = await core.methods
           .checkUserQuota(account, policyToken.options.address)
           .call({ from: account });
