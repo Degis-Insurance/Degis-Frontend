@@ -39,7 +39,7 @@
             </div>
             <div class="col-2 d-flex justify-content-center">
               <i
-                v-if="data.type === 'create'"
+                v-if="data.type === 'buy'"
                 class="el-icon-right d-p"
                 style="font-size: 80px"
               />
