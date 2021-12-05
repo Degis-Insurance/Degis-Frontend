@@ -180,26 +180,11 @@ export default {
       var timestamp = this.buyData.timestamp;
       // console.log("timestamp:",timestamp)
       timestamp = new Date(this.buyData.arrive_time);
-      timestamp = timestamp.valueOf() / 1e3 + 24*60*60*4;
+      timestamp = timestamp.valueOf() / 1e3;
       console.log("timestamp:",timestamp)
       const flight_no = this.buyData.flight_no;
       await this.NewPolicy(timestamp, flight_no);
 
-      // const productId = 0;
-      // const flight_number = this.buyData.flight_no;
-      // const departure_timestamp = new Date(this.buyData.depart_time) / 1000;
-      // const landing_timestamp = new Date(this.buyData.arrive_time) / 1000;
-      // const deadline = new Date().getTime() / 1000;
-      // const premium = this.buyData.premium;
-      // const signature = "50e90e2e44c1cbb7032a337ed33185a350e90e2e44c1cbb7032a337ed33185a3"
-
-      // const premium_wei = window.WEB3.utils.toWei(String(premium), "ether")
-      // const departure_timestamp_wei = window.WEB3.utils.toWei(String(departure_timestamp), "ether")
-      // const landing_timestamp_wei = window.WEB3.utils.toWei(String(landing_timestamp), "ether")
-      // const deadline_wei = window.WEB3.utils.toWei(String(deadline), "ether")
-      // const signature_byte = window.WEB3.utils.asciiToHex(signature)
-
-      // await this.NewPolicy(productId, flight_number, premium_wei, departure_timestamp_wei, landing_timestamp_wei, deadline_wei, signature_byte);
     },
 
   },
