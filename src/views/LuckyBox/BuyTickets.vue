@@ -53,7 +53,7 @@
           <div class="row">
             <div class="col-sm-4">
               <h4 class="fw-5 d-g4 fs-14">Ticket Price</h4>
-              <h4 class="fw-7 d-g2 fs-24">10 DEGIS</h4>
+              <h4 class="fw-7 d-g2 fs-24">10 DEG</h4>
             </div>
             <div class="col-sm-4">
               <h4 class="fw-5 d-g4 fs-14">You Will Pay</h4>
