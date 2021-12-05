@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="col-lg-2">
-        <p class="d-f-2">{{ data.apr }} APR</p>
+        <p class="d-f-2">{{ (data.apr * 100).toFixed(2) }}% APR</p>
       </div>
       <div class="col-lg-2 d-flex justify-content-center">
         <base-button v-if="!more" @click="showmore"
@@ -51,9 +51,9 @@
               <p class="d-f-2">My 24 Hour rewards:</p>
             </div>
             <div>
-              <p class="d-f-2">{{ (data.totalRewards / 1e18).toFixed(0) }}</p>
+              <p class="d-f-2">{{ (data.totalRewards / 1e18).toFixed(2) }}</p>
               <p class="d-f-2">{{ (data.totalDeposited / 1e18).toFixed(2) }}</p>
-              <p class="d-f-2">{{ (data.myPoolShare / 1e18).toFixed(2) }}</p>
+              <p class="d-f-2">{{ (data.myTotalRewards / 1e18).toFixed(2) }}</p>
             </div>
           </div>
           <!-- <p class="d-f-4">From @ Get BNB1000-HELMET LPT</p>
@@ -93,9 +93,10 @@
 import BaseButton from "@/components/BaseButton";
 import {
   getLPToken,
-  getDegis,
+  getBuyerToken,
   getFarmingPool,
   getNPPolicyToken,
+  getPurchaseIncentiveVault,
 } from "../../utils/contractInstance";
 export default {
   name: "mining-line",
@@ -159,6 +160,15 @@ export default {
         console.log("Tx Hash:", tx.transactionHash);
         this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
       }
+      if (this.data.poolType == "buyerIncentive") { 
+        const pool =  await getPurchaseIncentiveVault();
+        const buyerToken = await getBuyerToken();
+        await this.approve(buyerToken, account, pool.options.address);
+        amount = window.WEB3.utils.toWei(String(amount), "ether");
+        const tx = await pool.methods.stakeBuyerToken(amount).send({"from": account})
+        console.log("Tx Hash:", tx.transactionHash);
+        this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
+      }
     },
 
     async withdraw(amount) {
@@ -184,6 +194,14 @@ export default {
         console.log("Tx Hash:", tx.transactionHash);
         this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
       }
+
+      if (this.data.poolType == "buyerIncentive") { 
+        const pool =  await getPurchaseIncentiveVault();
+        amount = window.WEB3.utils.toWei(String(amount), "ether");
+        const tx = await pool.methods.redeemBuyerToken(amount).send({"from": account})
+        console.log("Tx Hash:", tx.transactionHash);
+        this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
+      }
     },
 
     async harvest() {
@@ -198,6 +216,13 @@ export default {
         const tx = await pool.methods
           .harvest(poolId, account)
           .send({ from: account });
+        console.log("Tx Hash:", tx.transactionHash);
+        this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
+      }
+      
+      if (this.data.poolType == "buyerIncentive") { 
+        const pool =  await getPurchaseIncentiveVault();
+        const tx = await pool.methods.claimReward().send({"from": account})
         console.log("Tx Hash:", tx.transactionHash);
         this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
       }

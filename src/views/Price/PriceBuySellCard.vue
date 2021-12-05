@@ -44,7 +44,7 @@
             24h Change: <span class="d-p">{{ data.change }}</span>
           </p>
           <p class="d-f-2">
-            USDT Balance: <span class="d-p">{{ data.usdtBalance }}</span>
+            USDC Balance: <span class="d-p">{{ data.usdBalance }}</span>
           </p>
           <p class="d-f-2">
             Policy Token Balance:
@@ -74,9 +74,9 @@ export default {
     return {
       modals: false,
       modalData: {
-        coin1: "USDT",
+        coin1: "USDC",
         coin2: this.data.coin,
-        name1: "USDT",
+        name1: "USDC",
         name2: this.data.name,
         currentPrice: this.data.currentPrice,
         type: "",

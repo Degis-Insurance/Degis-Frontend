@@ -37,12 +37,12 @@ export function getFlightByNo(data) {
   });
 }
 
-export function getTokenPrice() {
+export function getTokenPrice(token) {
   return request({
     url: "/token_price",
     method: "get",
     params: {
-      token: "BTC",
+      token: token,
     },
   });
 }

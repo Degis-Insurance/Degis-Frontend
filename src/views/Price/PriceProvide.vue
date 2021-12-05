@@ -79,6 +79,7 @@ import {
   getNPPolicyToken,
   getNaughtyPair,
 } from "../../utils/contractInstance";
+import {getTokenPrice} from "@/api/functions";
 
 export default {
   name: "price-provide",
@@ -123,7 +124,7 @@ export default {
     async showUserInfo(tokenName) {
       const account = this.$store.state.selectedAccount;
       if (account != null) {
-        const usdt = await getMockUSD();
+        const usd = await getMockUSD();
         const core = await getPolicyCore();
         const policyTokenAddress = await core.methods
           .findAddressbyName(tokenName)
@@ -132,22 +133,22 @@ export default {
         const userQuota = await core.methods
           .checkUserQuota(account, policyToken.options.address)
           .call({ from: account });
-        const usdtBalance = await usdt.methods.balanceOf(account).call();
+        const usdBalance = await usd.methods.balanceOf(account).call();
         const policyTokenBalance = await policyToken.methods
           .balanceOf(account)
           .call();
         return {
           userQuota: userQuota,
-          usdtBalance: usdtBalance,
+          usdBalance: usdBalance,
           policyTokenBalance: policyTokenBalance,
         };
       }
-      return { userQuota: 0, usdtBalance: 0, policyTokenBalance: 0 };
+      return { userQuota: 0, usdBalance: 0, policyTokenBalance: 0 };
     },
 
     async showPoolInfo(tokenName) {
       const account = this.$store.state.selectedAccount;
-      const usdt = await getMockUSD();
+      const usd = await getMockUSD();
       const factory = await getNaughtyFactory();
       const core = await getPolicyCore();
       var policyInfo = await core.methods.getPolicyTokenInfo(tokenName).call();
@@ -156,7 +157,7 @@ export default {
         .findAddressbyName(tokenName)
         .call();
       const pairAddress = await factory.methods
-        .getPairAddress(policyTokenAddress, usdt.options.address)
+        .getPairAddress(policyTokenAddress, usd.options.address)
         .call();
 
       const pair = await getNaughtyPair(pairAddress);
@@ -204,11 +205,15 @@ export default {
           ).toFixed(4);
         }
 
+        var coin = tokenName.split("_")[0];
+        var priceInfo = await getTokenPrice(coin);
+        var coinPrice = priceInfo["data"]["data"];
+
         var policyTokeninfo = {
-          coin: tokenName.split("_")[0],
+          coin: coin,
           name: tokenName,
           currentPrice: currentPrice,
-          coinPrice: "--",
+          coinPrice: coinPrice,
           type: types[tokenName.split("_")[2]],
           strike: policyInfo["strikePrice"],
           expiry: expiry,

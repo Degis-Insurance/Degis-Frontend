@@ -17,6 +17,7 @@ import NP_PolicyToken_abi from "../abi/NP_PolicyToken.json";
 import NaughtyPair_abi from "../abi/NaughtyPair.json";
 import BuyerToken_abi from "../abi/BuyerToken.json";
 import FarmingPool_abi from "../abi/FarmingPool.json";
+import PurchaseIncentiveVault_abi from "../abi/PurchaseIncentiveVault.json";
 
 export const getCurrentAccount = async () => {
   return getWeb3().then((res) => res.currentProvider.selectedAddress);
@@ -136,5 +137,14 @@ export const getFarmingPool = async () => {
   return await new web3.eth.Contract(
     FarmingPool_abi.abi,
     await getAddress("FARMINGPOOL", chainId)
+  );
+}
+
+export const getPurchaseIncentiveVault = async () => {
+  const web3 = await getWeb3();
+  const chainId = await getChainId();
+  return await new web3.eth.Contract(
+    PurchaseIncentiveVault_abi.abi,
+    await getAddress("PURCHASEINCENTIVEVAULT", chainId)
   );
 }

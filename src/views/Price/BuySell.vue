@@ -117,24 +117,24 @@ export default {
     },
 
     async swap(
-      usdtAmount,
+      usdAmount,
       policyTokenAmount,
-      buy_usdt_policy,
+      buy_usd_policy,
       exact_former_later,
       tokenName,
       slip
     ) {
-      console.log(buy_usdt_policy, exact_former_later);
+      console.log(buy_usd_policy, exact_former_later);
       const account = this.$store.state.selectedAccount;
       if (account == null) {
         alert("Please Connect Wallet");
         return;
       }
-      if (usdtAmount == 0) {
+      if (usdAmount == 0) {
         alert("Please Input Amount");
         return;
       }
-      const usdt = await getMockUSD();
+      const usd = await getMockUSD();
       const core = await getPolicyCore();
       const router = await getNaughtyRouter();
       const buyerToken = await getBuyerToken();
@@ -146,27 +146,27 @@ export default {
       const policyTokenAddress = await core.methods
         .findAddressbyName(tokenName)
         .call();
-      const usdtAddress = usdt.options.address;
+      const usdAddress = usd.options.address;
 
       const policyToken = await getNPPolicyToken(policyTokenAddress);
 
-      const usdt_before = await usdt.methods.balanceOf(account).call({
+      const usd_before = await usd.methods.balanceOf(account).call({
         from: account,
       });
       const policy_before = await policyToken.methods.balanceOf(account).call({
         from: account,
       });
 
-      console.log("user:", usdt_before / 1e18, policy_before / 1e18);
+      console.log("user:", usd_before / 1e18, policy_before / 1e18);
 
-      usdtAmount = window.WEB3.utils.toWei(String(usdtAmount), "ether");
+      usdAmount = window.WEB3.utils.toWei(String(usdAmount), "ether");
 
       policyTokenAmount = window.WEB3.utils.toWei(
         String(policyTokenAmount),
         "ether"
       );
 
-      if (buy_usdt_policy == "policy2usdt") {
+      if (buy_usd_policy == "policy2usd") {
         const allowance = await policyToken.methods
           .allowance(account, router.options.address)
           .call();
@@ -188,14 +188,14 @@ export default {
         let date = new Date().getTime();
         date = parseInt(date / 1000);
 
-        //用最多policyTokenAmount个policy token 换usdtAmount个usdt出来
+        //用最多policyTokenAmount个policy token 换usdAmount个usd出来
         if (exact_former_later == "former") {
           const tx = await router.methods
             .swapExactTokensforTokens(
               policyTokenAmount,
-              window.WEB3.utils.toBN(usdtAmount * slip),
+              window.WEB3.utils.toBN(usdAmount * slip),
               policyTokenAddress,
-              usdtAddress,
+              usdAddress,
               account,
               date + 6000
             )
@@ -204,14 +204,14 @@ export default {
           this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
         }
 
-        // 用最多policyTokenAmount个policy, 换usdtAmount个usdt token出来
+        // 用最多policyTokenAmount个policy, 换usdAmount个usd token出来
         if (exact_former_later == "later") {
           const tx = await router.methods
             .swapTokensforExactTokens(
               window.WEB3.utils.toBN(policyTokenAmount / slip),
-              usdtAmount,
+              usdAmount,
               policyTokenAddress,
-              usdtAddress,
+              usdAddress,
               account,
               date + 6000
             )
@@ -220,15 +220,15 @@ export default {
           this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
         }
       }
-      if (buy_usdt_policy == "usdt2policy") {
-        const allowance = await usdt.methods
+      if (buy_usd_policy == "usd2policy") {
+        const allowance = await usd.methods
           .allowance(account, router.options.address)
           .call();
         if (
           parseInt(allowance) <
           parseInt(window.WEB3.utils.toWei("100000000", "ether"))
         ) {
-          const tx2 = await usdt.methods
+          const tx2 = await usd.methods
             .approve(
               router.options.address,
               window.WEB3.utils.toBN(
@@ -242,15 +242,15 @@ export default {
         let date = new Date().getTime();
         date = parseInt(date / 1000);
 
-        // 用usdtAmount个usdt token, 换至少policyTokenAmount个policy出来
+        // 用usdAmount个usd token, 换至少policyTokenAmount个policy出来
         if (exact_former_later == "former") {
-          console.log(usdtAmount);
+          console.log(usdAmount);
           console.log(policyTokenAmount * slip);
           const tx = await router.methods
             .swapExactTokensforTokens(
-              usdtAmount,
+              usdAmount,
               window.WEB3.utils.toBN(policyTokenAmount * slip),
-              usdtAddress,
+              usdAddress,
               policyTokenAddress,
               account,
               date + 6000
@@ -260,13 +260,13 @@ export default {
           this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
         }
 
-        // 用最多usdtAmount个usdt, 换policyTokenAmount个policy token出来
+        // 用最多usdAmount个usd, 换policyTokenAmount个policy token出来
         if (exact_former_later == "later") {
           const tx = await router.methods
             .swapTokensforExactTokens(
-              window.WEB3.utils.toBN(usdtAmount / slip),
+              window.WEB3.utils.toBN(usdAmount / slip),
               policyTokenAmount,
-              usdtAddress,
+              usdAddress,
               policyTokenAddress,
               account,
               date + 6000
@@ -277,24 +277,24 @@ export default {
         }
       }
 
-      const usdt_after = await usdt.methods.balanceOf(account).call({
+      const usd_after = await usd.methods.balanceOf(account).call({
         from: account,
       });
       const policy_after = await policyToken.methods.balanceOf(account).call({
         from: account,
       });
 
-      console.log("user:", usdt_after / 1e18, policy_after / 1e18);
+      console.log("user:", usd_after / 1e18, policy_after / 1e18);
     },
 
     async buyEvent() {
-      var usdtAmount = this.amount1;
+      var usdAmount = this.amount1;
       var policyTokenAmount = this.amount2;
       const tokenName = this.data.name2;
       await this.swap(
-        usdtAmount,
+        usdAmount,
         policyTokenAmount,
-        "usdt2policy",
+        "usd2policy",
         "former",
         tokenName,
         0.8
@@ -302,13 +302,13 @@ export default {
     },
 
     async sellEvent() {
-      var usdtAmount = this.amount1;
+      var usdAmount = this.amount1;
       var policyTokenAmount = this.amount2;
       const tokenName = this.data.name2;
       await this.swap(
-        usdtAmount,
+        usdAmount,
         policyTokenAmount,
-        "policy2usdt",
+        "policy2usd",
         "former",
         tokenName,
         0.8
