@@ -21,9 +21,7 @@
                   class="img-fluid"
                   style="width: 64px"
                 />
-                <span class="d-f-1 pl-3" style="vertical-align: middle">{{
-                  data.name1
-                }}</span>
+                <span class="d-f-1 pl-3" style="vertical-align: middle">{{ data.name1 }}</span>
               </div>
               <input
                 class="fw-4 d-g2 fs-32 mt-3 ta-c"
@@ -39,7 +37,7 @@
             </div>
             <div class="col-2 d-flex justify-content-center">
               <i
-                v-if="data.type === 'create'"
+                v-if="data.type === 'buy'"
                 class="el-icon-right d-p"
                 style="font-size: 80px"
               />

@@ -14,6 +14,13 @@ export function getFlight() {
   });
 }
 
+export function getFlightNos() {
+  return request({
+    url: "/flights",
+    method: "get",
+  });
+}
+
 export function getFlightByRoute(data) {
   return request({
     url: "/flight_info_by_route",

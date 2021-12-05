@@ -7,22 +7,22 @@
           <p class="d-f-4">Search by Flight</p>
           <div class="d-flex">
             <el-select v-model="flightno" filterable placeholder="Select Flight">
-              <el-option v-for="item in flightoptions" :key="item.value" :value="item.value"></el-option>
+              <el-option v-for="item in flightoptions" :key="item" :value="item"></el-option>
             </el-select>
           </div>
         </div>
-        <div>
-          <!-- <p class="d-f-4">Search by Route</p>
-          <div class="d-flex align-items-center">
-            <el-select v-model="origincity" filterable placeholder="Origin City">
-              <el-option v-for="item in cityoptions" :key="item" :value="item"></el-option>
-            </el-select>
-            <img src="img/function/flight-rarrow.png" style="width: 15px; margin: 0 8px"/>
-            <el-select v-model="destinationcity" filterable placeholder="Destination City">
-              <el-option v-for="item in cityoptions" :key="item" :value="item"></el-option>
-            </el-select>
-          </div> -->
-        </div>
+<!--        <div>-->
+<!--          <p class="d-f-4">Search by Route</p>-->
+<!--          <div class="d-flex align-items-center">-->
+<!--            <el-select v-model="origincity" filterable placeholder="Origin City">-->
+<!--              <el-option v-for="item in cityoptions" :key="item" :value="item"></el-option>-->
+<!--            </el-select>-->
+<!--            <img src="img/function/flight-rarrow.png" style="width: 15px; margin: 0 8px"/>-->
+<!--            <el-select v-model="destinationcity" filterable placeholder="Destination City">-->
+<!--              <el-option v-for="item in cityoptions" :key="item" :value="item"></el-option>-->
+<!--            </el-select>-->
+<!--          </div>-->
+<!--        </div>-->
 
         <div>
           <p class="d-f-4">Date</p>
@@ -38,8 +38,7 @@
     </stats-card>
 
     <el-card class="dg-card">
-      <el-table :data="flightData" class="dg-cardtable" :header-cell-class-name="'d-f-3'" :header-cell-style="{ 'text-align': 'center', height: '70px' }"
-                :cell-style="{ 'text-align': 'center', height: '70px' }">
+      <el-table :data="flightData" class="dg-cardtable" :header-cell-class-name="'d-f-3'" :header-cell-style="{ 'text-align': 'center', height: '70px' }" :cell-style="{ 'text-align': 'center', height: '70px' }">
         <el-table-column prop="airline" label="AIRLINE" sortable/>
         <el-table-column prop="flight_no" label="FLIGHT NO." sortable/>
         <el-table-column prop="route" label="ROUTE" sortable/>
@@ -75,7 +74,7 @@
 </template>
 
 <script>
-import {getFlight, getCity, getFlightByRoute, getFlightByNo} from "@/api/functions";
+import {getFlight, getFlightNos, getCity, getFlightByRoute, getFlightByNo} from "@/api/functions";
 import OrderConfirm from "./OrderConfirm";
 import dayjs from "dayjs";
 import {ref} from "vue";
@@ -95,11 +94,7 @@ export default {
       flightData: "",
       BuyProduction: false,
       datevalue: "",
-      flightoptions: ref([
-        {value: "AQ1299", label: "AQ1299"},
-        {value: "FlightNo2", label: "FlightNo2"},
-        {value: "FlightNo3", label: "FlightNo3"},
-      ]),
+      flightoptions: "",
       flightno: ref(""),
       cityoptions: "",
       origincity: ref(""),
@@ -111,6 +106,7 @@ export default {
   mounted() {
     this.City();
     this.defaultFlight();
+    this.FlightNos();
   },
 
   methods: {
@@ -123,6 +119,12 @@ export default {
     defaultFlight() {
       getFlight().then((response) => {
         this.flightData = response.data.data;
+      });
+    },
+
+    FlightNos() {
+      getFlightNos().then((response) => {
+        this.flightoptions = response.data.city_list;
       });
     },
 
@@ -142,12 +144,9 @@ export default {
         flight_no: this.flightno,
         depart_date: dayjs(this.datevalue).format('YYYYMMDD'),
       };
-      if(data["depart_date"] === "Invalid Date")
-      {
+      if(data["depart_date"] === "Invalid Date") {
         alert("Input Depart Date")
-      }
-      else
-      {
+      } else {
         getFlightByNo(data).then((response) => {
           this.flightData = response.data.data;
         });

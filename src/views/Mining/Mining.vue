@@ -3,11 +3,7 @@
     <h1 class="d-f-1 mb-4">Mining</h1>
     <el-card class="dg-card">
       <h1 class="d-f-1 mb-4 pl-3">LP Mining</h1>
-      <mining-line
-        v-for="(data, index) in miningData"
-        :data="data"
-        :key="index"
-      ></mining-line>
+      <mining-line v-for="(data, index) in miningData" :data="data" :key="index"></mining-line>
     </el-card>
     <el-card class="dg-card">
       <h1 class="d-f-1 mb-4 pl-3">Buyer Incentive</h1>
@@ -15,11 +11,7 @@
     </el-card>
     <el-card class="dg-card">
       <h1 class="d-f-1 mb-4 pl-3">Staking</h1>
-      <mining-line
-        v-for="(data, index) in stakingData"
-        :data="data"
-        :key="index"
-      ></mining-line>
+      <mining-line v-for="(data, index) in stakingData" :data="data" :key="index"></mining-line>
     </el-card>
   </base-header>
 </template>
@@ -207,12 +199,11 @@ export default {
         },
       ],
 
-      async mintUsdt()
-      {
+      async mintUsdt() {
         const account = this.$store.state.selectedAccount;
         var amount = window.WEB3.utils.toWei(String(9999), "ether");
         const usdt = await getMockUSD();
-        await usdt.methods.mint(account,amount).send({from:account}); 
+        await usdt.methods.mint(account, amount).send({ from: account });
       },
 
       async mintDegis() {
@@ -240,9 +231,11 @@ export default {
         //   window.WEB3.utils.toWei(String(100), "ether"),
         //   true,
         // ).send({ from: account });
-        
+
         const degis = await getDegis();
-        await degis.methods.addMinter(farm.options.address).send({from:account});
+        await degis.methods
+          .addMinter(farm.options.address)
+          .send({ from: account });
       },
 
       async getFarmingPoolName() {
@@ -255,7 +248,7 @@ export default {
         const farmPoolNames = await this.getFarmingPoolName();
         const farm = await getFarmingPool();
         const xxx = await farm.methods.getPoolList().call();
-        console.log(xxx)
+        console.log(xxx);
         this.miningData = [];
         for (var i = 0; i < farmPoolNames.length; i++) {
           const poolId = farmPoolNames[i][0];
@@ -268,8 +261,7 @@ export default {
           const lpToken = await getNPPolicyToken(lpTokenAddress);
           var depositLimit = 0;
           var availableToWithdraw = 0;
-          if(account != null)
-          {
+          if (account != null) {
             depositLimit = await lpToken.methods.balanceOf(account).call();
             availableToWithdraw = await farm.methods
               .getUserBalance(poolId, account)
@@ -289,9 +281,9 @@ export default {
           // const degRewards = 0;
           const degRewards = await farm.methods
             .pendingDegis(poolId, account)
-            .call({"from" : account});
+            .call({ from: account });
           poolInfo = {};
-          
+
           if (poolstatus) {
             poolInfo["pic"] = poolPic;
             poolInfo["name"] = poolName;

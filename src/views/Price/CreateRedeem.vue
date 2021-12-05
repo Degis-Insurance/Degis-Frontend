@@ -21,9 +21,7 @@
                   class="img-fluid"
                   style="width: 64px"
                 />
-                <span class="d-f-1 pl-3" style="vertical-align: middle">{{
-                  data.name1
-                }}</span>
+                <span class="d-f-1 pl-3" style="vertical-align: middle">{{ data.name1 }}</span>
               </div>
               <input
                 class="fw-4 d-g2 fs-32 mt-3 ta-c"
@@ -52,24 +50,10 @@
                   class="img-fluid"
                   style="width: 64px"
                 />
-                <span
-                  class="d-f-1 pl-3"
-                  style="vertical-align: middle; word-break: break-all"
-                  >{{ data.name2.replace(/_/g, "") }}
+                <span class="d-f-1 pl-3" style="vertical-align: middle; word-break: break-all">{{ data.name2.replace(/_/g, "") }}
                 </span>
               </div>
-              <input
-                class="fw-4 d-g2 fs-32 mt-3 ta-c"
-                style="
-                  background-color: #f2f2f2;
-                  border-radius: 12px;
-                  height: 58px;
-                  width: 100%;
-                  border-width: 0px;
-                "
-                v-model="calc_amount2"
-                disabled
-              />
+              <input class="fw-4 d-g2 fs-32 mt-3 ta-c" style=" background-color: #f2f2f2; border-radius: 12px; height: 58px; width: 100%; border-width: 0px;" v-model="calc_amount2" disabled/>
             </div>
           </div>
         </div>
@@ -204,8 +188,7 @@ export default {
   },
   computed: {
     calc_amount2() {
-      this.amount2 = 1 * this.amount1;
-      return this.amount2;
+      return 1 * this.amount1;
     },
   },
 };

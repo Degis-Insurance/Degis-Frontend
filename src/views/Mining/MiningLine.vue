@@ -42,7 +42,7 @@
             <p class="d-f-2">Deposit Limit</p>
             <p class="d-f-2">{{ (data.depositLimit / 1e18).toFixed(2) }} LPT</p>
           </div>
-          <input v-model="depositAmount"/>
+          <el-input class="mb-2" v-model="depositAmount"/>
           <base-button style="width: 100%" @click="depositEvent">DEPOSIT</base-button>
           <div class="d-flex justify-content-between">
             <div>
@@ -51,9 +51,9 @@
               <p class="d-f-2">My 24 Hour rewards:</p>
             </div>
             <div>
-              <p class="d-f-2">{{ (data.totalRewards / 1e18).toFixed(0)}} </p>
-              <p class="d-f-2">{{ (data.totalDeposited / 1e18).toFixed(2) }} </p>
-              <p class="d-f-2">{{ (data.myPoolShare / 1e18).toFixed(2) }} </p>
+              <p class="d-f-2">{{ (data.totalRewards / 1e18).toFixed(0) }}</p>
+              <p class="d-f-2">{{ (data.totalDeposited / 1e18).toFixed(2) }}</p>
+              <p class="d-f-2">{{ (data.myPoolShare / 1e18).toFixed(2) }}</p>
             </div>
           </div>
           <!-- <p class="d-f-4">From @ Get BNB1000-HELMET LPT</p>
@@ -64,15 +64,19 @@
         <div class="col-lg-6">
           <div class="d-flex justify-content-between">
             <p class="d-f-2">Available to Withdraw:</p>
-            <p class="d-f-2">{{ (data.availableToWithdraw / 1e18).toFixed(2) }} LPT</p>
+            <p class="d-f-2">
+              {{ (data.availableToWithdraw / 1e18).toFixed(2) }} LPT
+            </p>
           </div>
-          <input v-model="withdrawAmount"/>
+          <el-input class="mb-2" v-model="withdrawAmount" />
           <base-button style="width: 100%" @click="withdrawEvent">Withdraw</base-button>
           <div class="d-flex justify-content-between">
             <p class="d-f-2">DEG Rewards:</p>
-            <p class="d-f-2">{{ (data.degRewards / 1e18).toFixed(2) }} </p>
+            <p class="d-f-2">{{ (data.degRewards / 1e18).toFixed(2) }}</p>
           </div>
-          <base-button style="width: 100%" @click="harvestEvent">Harvest Rewards</base-button>
+          <base-button style="width: 100%" @click="harvestEvent"
+            >Harvest Rewards</base-button
+          >
           <!-- <p class="d-f-2">hWAR Contract Address:</p>
           <p class="d-f-4">{{ data.address2 }}</p>
           <p class="d-f-4" style="vertical-align: bottom">
@@ -102,20 +106,24 @@ export default {
   data() {
     return {
       more: false,
-      depositAmount : 0,
-      withdrawAmount : 0,
+      depositAmount: 0,
+      withdrawAmount: 0,
     };
   },
   methods: {
+    showinput() {
+      alert(this.depositAmount);
+      alert(this.withdrawAmount)
+    },
     showmore() {
       this.more = !this.more;
     },
-    async approve(token,account,contract)
-    {
-      const allowance = await token.methods
-        .allowance(account, contract)
-        .call();
-      if (parseInt(allowance) < parseInt(window.WEB3.utils.toWei("100000000", "ether"))) {
+    async approve(token, account, contract) {
+      const allowance = await token.methods.allowance(account, contract).call();
+      if (
+        parseInt(allowance) <
+        parseInt(window.WEB3.utils.toWei("100000000", "ether"))
+      ) {
         const tx1 = await token.methods
           .approve(
             contract,
@@ -129,18 +137,15 @@ export default {
     },
     async deposit(amount) {
       const account = this.$store.state.selectedAccount;
-      if(account == null)
-      {
-        alert("Please Connect Wallet")
-        return
-      } 
-      if(amount == 0)
-      {
-        alert("Please Input Amount")
-        return
-      } 
-      if(this.data.poolType == "lpMining")
-      {
+      if (account == null) {
+        alert("Please Connect Wallet");
+        return;
+      }
+      if (amount == 0) {
+        alert("Please Input Amount");
+        return;
+      }
+      if (this.data.poolType == "lpMining") {
         const pool = await getFarmingPool();
         const poolId = this.data.poolId;
         const poolInfo = await pool.methods.poolList(poolId).call();
@@ -148,7 +153,9 @@ export default {
         const lpToken = await getNPPolicyToken(lpTokenAddress);
         await this.approve(lpToken, account, pool.options.address);
         amount = window.WEB3.utils.toWei(String(amount), "ether");
-        const tx = await pool.methods.stake(poolId, amount).send({from:account});
+        const tx = await pool.methods
+          .stake(poolId, amount)
+          .send({ from: account });
         console.log("Tx Hash:", tx.transactionHash);
         this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
       }
@@ -156,25 +163,24 @@ export default {
 
     async withdraw(amount) {
       const account = this.$store.state.selectedAccount;
-      if(account == null)
-      {
-        alert("Please Connect Wallet")
-        return
-      } 
-      if(amount == 0)
-      {
-        alert("Please Input Amount")
-        return
-      } 
-      if(this.data.poolType == "lpMining")
-      {
+      if (account == null) {
+        alert("Please Connect Wallet");
+        return;
+      }
+      if (amount == 0) {
+        alert("Please Input Amount");
+        return;
+      }
+      if (this.data.poolType == "lpMining") {
         const pool = await getFarmingPool();
         const poolId = this.data.poolId;
         const poolInfo = await pool.methods.poolList(poolId).call();
         const lpTokenAddress = poolInfo["lpToken"];
         const lpToken = await getNPPolicyToken(lpTokenAddress);
         amount = window.WEB3.utils.toWei(String(amount), "ether");
-        const tx = await pool.methods.withdraw(poolId, amount).send({from:account});
+        const tx = await pool.methods
+          .withdraw(poolId, amount)
+          .send({ from: account });
         console.log("Tx Hash:", tx.transactionHash);
         this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
       }
@@ -182,42 +188,37 @@ export default {
 
     async harvest() {
       const account = this.$store.state.selectedAccount;
-      
-      if(this.data.poolType == "lpMining")
-      {
+
+      if (this.data.poolType == "lpMining") {
         const pool = await getFarmingPool();
         const poolId = this.data.poolId;
         const poolInfo = await pool.methods.poolList(poolId).call();
         const lpTokenAddress = poolInfo["lpToken"];
         const lpToken = await getNPPolicyToken(lpTokenAddress);
-        const tx = await pool.methods.harvest(poolId,account).send({from:account});
+        const tx = await pool.methods
+          .harvest(poolId, account)
+          .send({ from: account });
         console.log("Tx Hash:", tx.transactionHash);
         this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
       }
     },
 
-    async depositEvent()
-    {
+    async depositEvent() {
       const amount = this.depositAmount;
-      console.log("=======",amount);
+      console.log("=======", amount);
       await this.deposit(amount);
     },
 
-    async withdrawEvent()
-    {
+    async withdrawEvent() {
       const amount = this.withdrawAmount;
-      console.log("=======",amount);
+      console.log("=======", amount);
       await this.withdraw(amount);
     },
 
-    async harvestEvent()
-    {
+    async harvestEvent() {
       await this.harvest();
-    }
-
+    },
   },
-
-
 };
 </script>
 <style scoped></style>
