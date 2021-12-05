@@ -163,7 +163,7 @@ export default {
           }
           var degRewards = 0;
           if (account != null) {
-            const degRewards = await farm.methods
+            degRewards = await farm.methods
               .pendingDegis(poolId, account)
               .call({ from: account });
           }
@@ -233,6 +233,10 @@ export default {
         var apr = 0;
         if (totalDeposited != 0) {
           apr = (totalRewards / totalDeposited) * 365;
+        }
+        else
+        {
+          apr = totalRewards * 365 / 1e18;
         }
         var poolInfo = {};
         poolInfo["pic"] = "buyer";

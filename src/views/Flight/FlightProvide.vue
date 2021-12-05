@@ -18,7 +18,7 @@
               <div class="">
                 <h5 class="d-f-3">
                   Total Staking Balance:
-                  <span class="d-f-2"> {{ totalStakingBalance.toFixed(2) }}</span>
+                  <span class="d-f-2"> {{ totalStakingBalance }}</span>
                 </h5>
                 <h5 class="d-f-3">
                   Active Premiums:
@@ -255,7 +255,7 @@ export default {
 
     async showInfoEvent() {
       const res = await this.showInfo();
-      this.totalStakingBalance = res["totalStakingBalance"] / 1e18;
+      this.totalStakingBalance = (res["totalStakingBalance"] / 1e18).toFixed(2);
       this.activePremiums = res["activePremiums"] / 1e18;
       this.lockedRatio = res["lockedRatio"] / 1e18;
       this.LPValue = (res["LPValue"] / 1e18).toFixed(2);
