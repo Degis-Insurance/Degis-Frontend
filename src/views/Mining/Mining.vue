@@ -11,7 +11,12 @@
     </el-card>
     <el-card class="dg-card">
       <h1 class="d-f-1 mb-4 pl-3">Buyer Incentive</h1>
-      <mining-line :data="buyerData"></mining-line>
+      <!-- <mining-line :data="buyerData"></mining-line> -->
+      <mining-line
+        v-for="(data, index) in buyerData"
+        :data="data"
+        :key="index"
+      ></mining-line>
     </el-card>
     <el-card class="dg-card">
       <h1 class="d-f-1 mb-4 pl-3">Staking</h1>
@@ -67,142 +72,9 @@ export default {
 
   data() {
     return {
-      miningData: [
-        // {
-        //   pic: "flight",
-        //   name: "The Miserable Flight Pool",
-        //   status: "Ongoing",
-        //   apr: "47.63%",
-        //   available: 10,
-        //   mydeposits: 11,
-        //   totaldeposited: 12,
-        //   mypoolshare: 13,
-        //   address1: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
-        //   withdraw: 20,
-        //   reward: 21,
-        //   address2: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
-        // },
-        // {
-        //   pic: "AVAX",
-        //   name: "The naughty Price---AVAXL",
-        //   status: "Ongoing",
-        //   apr: "47.63%",
-        //   available: 10,
-        //   mydeposits: 11,
-        //   totaldeposited: 12,
-        //   mypoolshare: 13,
-        //   address1: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
-        //   withdraw: 20,
-        //   reward: 21,
-        //   address2: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
-        // },
-        // {
-        //   pic: "AVAX",
-        //   name: "The naughty Price---AVAXH",
-        //   status: "Ongoing",
-        //   apr: "47.63%",
-        //   available: 10,
-        //   mydeposits: 11,
-        //   totaldeposited: 12,
-        //   mypoolshare: 13,
-        //   address1: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
-        //   withdraw: 20,
-        //   reward: 21,
-        //   address2: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
-        // },
-        // {
-        //   pic: "BTC",
-        //   name: "The naughty Price---BTCL",
-        //   status: "Ongoing",
-        //   apr: "47.63%",
-        //   available: 10,
-        //   mydeposits: 11,
-        //   totaldeposited: 12,
-        //   mypoolshare: 13,
-        //   address1: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
-        //   withdraw: 20,
-        //   reward: 21,
-        //   address2: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
-        // },
-        // {
-        //   pic: "BTC",
-        //   name: "The naughty Price---BTCH",
-        //   status: "Ongoing",
-        //   apr: "47.63%",
-        //   available: 10,
-        //   mydeposits: 11,
-        //   totaldeposited: 12,
-        //   mypoolshare: 13,
-        //   address1: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
-        //   withdraw: 20,
-        //   reward: 21,
-        //   address2: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
-        // },
-        // {
-        //   pic: "ETH",
-        //   name: "The naughty Price---ETHL",
-        //   status: "Ongoing",
-        //   apr: "47.63%",
-        //   available: 10,
-        //   mydeposits: 11,
-        //   totaldeposited: 12,
-        //   mypoolshare: 13,
-        //   address1: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
-        //   withdraw: 20,
-        //   reward: 21,
-        //   address2: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
-        // },
-        // {
-        //   pic: "ETH",
-        //   name: "The naughty Price---ETHH",
-        //   status: "Ongoing",
-        //   apr: "47.63%",
-        //   available: 10,
-        //   mydeposits: 11,
-        //   totaldeposited: 12,
-        //   mypoolshare: 13,
-        //   address1: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
-        //   withdraw: 20,
-        //   reward: 21,
-        //   address2: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
-        // },
-      ],
-      buyerData: {
-        pic: "buyer",
-        name: "Buyer Pool",
-        status: "Ongoing",
-        apr: "--",
-      },
-      stakingData: [
-        // {
-        //   pic: "token",
-        //   name: "DEG X DEG Pool",
-        //   status: "Ongoing",
-        //   apr: "47.63%",
-        //   available: 10,
-        //   mydeposits: 11,
-        //   totaldeposited: 12,
-        //   mypoolshare: 13,
-        //   address1: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
-        //   withdraw: 20,
-        //   reward: 21,
-        //   address2: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
-        // },
-        // {
-        //   pic: "token",
-        //   name: "DEG Pool",
-        //   status: "Ongoing",
-        //   apr: "47.63%",
-        //   available: 10,
-        //   mydeposits: 11,
-        //   totaldeposited: 12,
-        //   mypoolshare: 13,
-        //   address1: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
-        //   withdraw: 20,
-        //   reward: 21,
-        //   address2: "0x7aae192b83589784851a7df13c225fda2e3d87c5",
-        // },
-      ],
+      miningData: [],
+      buyerData: [],
+      stakingData: [],
 
       async mintUsdt() {
         const account = this.$store.state.selectedAccount;
@@ -272,7 +144,7 @@ export default {
               .getUserBalance(poolId, account)
               .call();
           }
-          const totalRewards = poolInfo["degisPerBlock"] * 24 * 60 * 60 / 2 ;
+          const totalRewards = (poolInfo["degisPerBlock"] * 24 * 60 * 60) / 2;
           const totalDeposited = await lpToken.methods
             .balanceOf(farm.options.address)
             .call();
@@ -291,9 +163,8 @@ export default {
           }
 
           var apr = 0;
-          if(totalDeposited != 0)
-          {
-            apr = (totalRewards / totalDeposited) * 365
+          if (totalDeposited != 0) {
+            apr = (totalRewards / totalDeposited) * 365;
           }
           poolInfo = {};
 
@@ -314,7 +185,7 @@ export default {
           }
         }
       },
-      
+
       async showBuyerIncentive() {
         const account = this.$store.state.selectedAccount;
 
@@ -336,10 +207,13 @@ export default {
           availableToWithdraw = await incentivePool.methods
             .getUserShares(account)
             .call();
-          degRewards = await incentivePool.methods.pendingReward(account).call();
+          degRewards = await incentivePool.methods
+            .pendingReward(account)
+            .call();
         }
-        
-        const totalRewards = degisPerRound * 24 * 60 * 60 / 2 / distributionInterval;
+
+        const totalRewards =
+          (degisPerRound * 24 * 60 * 60) / 2 / distributionInterval;
         const totalDeposited = await buyerToken.methods
           .balanceOf(incentivePool.options.address)
           .call();
@@ -351,9 +225,8 @@ export default {
           ).toFixed(2);
         }
         var apr = 0;
-        if(totalDeposited != 0)
-        {
-          apr = (totalRewards / totalDeposited) * 365
+        if (totalDeposited != 0) {
+          apr = (totalRewards / totalDeposited) * 365;
         }
         var poolInfo = {};
         poolInfo["pic"] = "buyer";
@@ -368,8 +241,7 @@ export default {
         poolInfo["degRewards"] = degRewards;
         poolInfo["poolType"] = "buyerIncentive";
 
-        this.buyerData = poolInfo;
-
+        this.buyerData = [poolInfo];
       },
 
       async showBuyerIncentiveEvent() {

@@ -79,6 +79,7 @@ import {
   getNPPolicyToken,
   getNaughtyPair,
 } from "../../utils/contractInstance";
+import {getTokenPrice} from "@/api/functions";
 
 export default {
   name: "price-provide",
@@ -204,11 +205,15 @@ export default {
           ).toFixed(4);
         }
 
+        var coin = tokenName.split("_")[0];
+        var priceInfo = await getTokenPrice(coin);
+        var coinPrice = priceInfo["data"]["data"];
+
         var policyTokeninfo = {
-          coin: tokenName.split("_")[0],
+          coin: coin,
           name: tokenName,
           currentPrice: currentPrice,
-          coinPrice: "--",
+          coinPrice: coinPrice,
           type: types[tokenName.split("_")[2]],
           strike: policyInfo["strikePrice"],
           expiry: expiry,

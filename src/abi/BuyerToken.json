@@ -162,8 +162,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -206,8 +205,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -226,8 +224,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -240,8 +237,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -308,8 +304,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -322,8 +317,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -336,8 +330,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -350,8 +343,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -364,8 +356,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -7341,7 +7332,7 @@
         545
       ],
       "IBuyerToken": [
-        3719
+        3759
       ],
       "IERC20": [
         623
@@ -7383,7 +7374,7 @@
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
         "scope": 2375,
-        "sourceUnit": 3720,
+        "sourceUnit": 3760,
         "src": "112:38:11",
         "symbolAliases": [],
         "unitAlias": ""
@@ -7442,7 +7433,7 @@
               "id": 1985,
               "name": "IBuyerToken",
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 3719,
+              "referencedDeclaration": 3759,
               "src": "506:11:11"
             },
             "id": 1986,
@@ -7463,7 +7454,7 @@
         "id": 2374,
         "linearizedBaseContracts": [
           2374,
-          3719,
+          3759,
           545,
           648,
           623,
@@ -8458,7 +8449,7 @@
           },
           {
             "baseFunctions": [
-              3703
+              3743
             ],
             "body": {
               "id": 2100,
@@ -8766,7 +8757,7 @@
                       "name": "MinterAdded",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3662,
+                      "referencedDeclaration": 3702,
                       "src": "1839:11:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$returns$__$",
@@ -8871,7 +8862,7 @@
           },
           {
             "baseFunctions": [
-              3708
+              3748
             ],
             "body": {
               "id": 2182,
@@ -9743,7 +9734,7 @@
                       "name": "MinterRemoved",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3666,
+                      "referencedDeclaration": 3706,
                       "src": "2534:13:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$returns$__$",
@@ -9848,7 +9839,7 @@
           },
           {
             "baseFunctions": [
-              3713
+              3753
             ],
             "body": {
               "id": 2216,
@@ -10156,7 +10147,7 @@
                       "name": "BurnerAdded",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3670,
+                      "referencedDeclaration": 3710,
                       "src": "2949:11:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$returns$__$",
@@ -10261,7 +10252,7 @@
           },
           {
             "baseFunctions": [
-              3718
+              3758
             ],
             "body": {
               "id": 2298,
@@ -11133,7 +11124,7 @@
                       "name": "BurnerRemoved",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3674,
+                      "referencedDeclaration": 3714,
                       "src": "3643:13:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$returns$__$",
@@ -11342,7 +11333,7 @@
                       "name": "OwnerChanged",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3680,
+                      "referencedDeclaration": 3720,
                       "src": "3931:12:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_address_$returns$__$",
@@ -11583,7 +11574,7 @@
                       "name": "ReleaseOwnership",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3684,
+                      "referencedDeclaration": 3724,
                       "src": "4158:16:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$returns$__$",
@@ -11659,7 +11650,7 @@
           },
           {
             "baseFunctions": [
-              3691
+              3731
             ],
             "body": {
               "id": 2354,
@@ -11869,7 +11860,7 @@
           },
           {
             "baseFunctions": [
-              3698
+              3738
             ],
             "body": {
               "id": 2372,
@@ -12098,7 +12089,7 @@
         545
       ],
       "IBuyerToken": [
-        3719
+        3759
       ],
       "IERC20": [
         623
@@ -12140,7 +12131,7 @@
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
         "scope": 2375,
-        "sourceUnit": 3720,
+        "sourceUnit": 3760,
         "src": "112:38:11",
         "symbolAliases": [],
         "unitAlias": ""
@@ -12199,7 +12190,7 @@
               "id": 1985,
               "name": "IBuyerToken",
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 3719,
+              "referencedDeclaration": 3759,
               "src": "506:11:11"
             },
             "id": 1986,
@@ -12220,7 +12211,7 @@
         "id": 2374,
         "linearizedBaseContracts": [
           2374,
-          3719,
+          3759,
           545,
           648,
           623,
@@ -13215,7 +13206,7 @@
           },
           {
             "baseFunctions": [
-              3703
+              3743
             ],
             "body": {
               "id": 2100,
@@ -13523,7 +13514,7 @@
                       "name": "MinterAdded",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3662,
+                      "referencedDeclaration": 3702,
                       "src": "1839:11:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$returns$__$",
@@ -13628,7 +13619,7 @@
           },
           {
             "baseFunctions": [
-              3708
+              3748
             ],
             "body": {
               "id": 2182,
@@ -14500,7 +14491,7 @@
                       "name": "MinterRemoved",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3666,
+                      "referencedDeclaration": 3706,
                       "src": "2534:13:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$returns$__$",
@@ -14605,7 +14596,7 @@
           },
           {
             "baseFunctions": [
-              3713
+              3753
             ],
             "body": {
               "id": 2216,
@@ -14913,7 +14904,7 @@
                       "name": "BurnerAdded",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3670,
+                      "referencedDeclaration": 3710,
                       "src": "2949:11:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$returns$__$",
@@ -15018,7 +15009,7 @@
           },
           {
             "baseFunctions": [
-              3718
+              3758
             ],
             "body": {
               "id": 2298,
@@ -15890,7 +15881,7 @@
                       "name": "BurnerRemoved",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3674,
+                      "referencedDeclaration": 3714,
                       "src": "3643:13:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$returns$__$",
@@ -16099,7 +16090,7 @@
                       "name": "OwnerChanged",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3680,
+                      "referencedDeclaration": 3720,
                       "src": "3931:12:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_address_$returns$__$",
@@ -16340,7 +16331,7 @@
                       "name": "ReleaseOwnership",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3684,
+                      "referencedDeclaration": 3724,
                       "src": "4158:16:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$returns$__$",
@@ -16416,7 +16407,7 @@
           },
           {
             "baseFunctions": [
-              3691
+              3731
             ],
             "body": {
               "id": 2354,
@@ -16626,7 +16617,7 @@
           },
           {
             "baseFunctions": [
-              3698
+              3738
             ],
             "body": {
               "id": 2372,
@@ -16855,8 +16846,7 @@
     }
   },
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-12-02T13:56:56.543Z",
-  "networkType": "ethereum",
+  "updatedAt": "2021-12-05T09:39:22.846Z",
   "devdoc": {
     "kind": "dev",
     "methods": {
