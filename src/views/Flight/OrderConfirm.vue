@@ -130,14 +130,14 @@ export default {
       console.log("info",info.data.detail)
 
       const policyFlow = await getPolicyFlow();
-      const usdt = await getMockUSD();
+      const usd = await getMockUSD();
       const insurancePool = await getInsurancePool();
 
-      const allowance = await usdt.methods
+      const allowance = await usd.methods
         .allowance(account, insurancePool.options.address)
         .call();
       if (parseInt(allowance) < parseInt(window.WEB3.utils.toWei("100000000", "ether"))) {
-        const tx1 = await usdt.methods
+        const tx1 = await usd.methods
           .approve(
             insurancePool.options.address,
             window.WEB3.utils.toBN(

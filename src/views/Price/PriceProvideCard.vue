@@ -79,9 +79,9 @@ export default {
     return {
       modals: false,
       modalData: {
-        coin1: "USDT",
+        coin1: "USDC",
         coin2: this.data.coin,
-        name1: "USDT",
+        name1: "USDC",
         name2: this.data.name,
         currentPrice: this.data.currentPrice,
         poolLiquidityToken: this.data.poolLiquidityToken,

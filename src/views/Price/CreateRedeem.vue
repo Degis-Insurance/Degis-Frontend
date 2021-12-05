@@ -108,20 +108,20 @@ export default {
         alert("Please Input Amount");
         return;
       }
-      const usdt = await getMockUSD();
+      const usd = await getMockUSD();
       const core = await getPolicyCore();
       var amount = window.WEB3.utils.toWei(String(depositAmount), "ether");
       console.log("core", core.options.address);
-      console.log("usdt", usdt.options.address);
+      console.log("usd", usd.options.address);
 
-      const allowance = await usdt.methods
+      const allowance = await usd.methods
         .allowance(account, core.options.address)
         .call();
       if (
         parseInt(allowance) <
         parseInt(window.WEB3.utils.toWei("100000000", "ether"))
       ) {
-        const tx1 = await usdt.methods
+        const tx1 = await usd.methods
           .approve(
             core.options.address,
             window.WEB3.utils.toBN(
@@ -132,7 +132,7 @@ export default {
         console.log("Tx Hash:", tx1.transactionHash);
       }
       const tx2 = await core.methods
-        .deposit(tokenName, usdt.options.address, amount)
+        .deposit(tokenName, usd.options.address, amount)
         .send({ from: account });
       console.log(tx2.transactionHash);
       this.$store.commit("SET_LASTTRANSACTIONHASH", tx2.transactionHash);
@@ -148,12 +148,12 @@ export default {
         alert("Please Input Amount");
         return;
       }
-      const usdt = await getMockUSD();
+      const usd = await getMockUSD();
       const core = await getPolicyCore();
 
       var amount = window.WEB3.utils.toWei(String(redeemAmount), "ether");
       const tx1 = await core.methods
-        .redeem(tokenName, usdt.options.address, window.WEB3.utils.toBN(amount))
+        .redeem(tokenName, usd.options.address, window.WEB3.utils.toBN(amount))
         .send({ from: account });
 
       console.log(tx1.transactionHash);

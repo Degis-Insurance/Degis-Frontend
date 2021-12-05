@@ -112,19 +112,19 @@ export default {
       this.$emit("close");
     },
 
-    async addLiquidity(amountUSDT, amountPolicyToken, tokenName) {
+    async addLiquidity(amountUSD, amountPolicyToken, tokenName) {
       const account = this.$store.state.selectedAccount;
       if(account == null)
       {
         alert("Please Connect Wallet")
         return
       } 
-      if(amountUSDT == 0 || amountPolicyToken == 0)
+      if(amountUSD == 0 || amountPolicyToken == 0)
       {
         alert("Please Input Amount")
         return
       } 
-      const usdt = await getMockUSD();
+      const usd = await getMockUSD();
       const factory = await getNaughtyFactory();
       const core = await getPolicyCore();
       const router = await getNaughtyRouter();
@@ -133,7 +133,7 @@ export default {
           .findAddressbyName(tokenName)
           .call();
       const pairAddress = await factory.methods
-          .getPairAddress(tokenAddress, usdt.options.address)
+          .getPairAddress(tokenAddress, usd.options.address)
           .call();
       console.log("tokenAddress:", tokenAddress)
       console.log("pairAddress:", pairAddress)
@@ -142,12 +142,12 @@ export default {
       console.log("router address", router.options.address);
 
       const policyToken = await getNPPolicyToken(tokenAddress);
-      const amountUSDTEther = window.WEB3.utils.toWei(String(amountUSDT), "ether");
+      const amountUSDEther = window.WEB3.utils.toWei(String(amountUSD), "ether");
       const amountPolicyTokenEther = window.WEB3.utils.toWei(String(amountPolicyToken), "ether");
-      const amountUSDTEtherMin = window.WEB3.utils.toWei(String(amountUSDT / 4), "ether");
+      const amountUSDEtherMin = window.WEB3.utils.toWei(String(amountUSD / 4), "ether");
       const amountPolicyTokenEtherMin = window.WEB3.utils.toWei(String(amountPolicyToken / 4), "ether");
 
-      console.log(amountUSDTEther, amountPolicyTokenEther, amountUSDTEtherMin, amountPolicyTokenEtherMin)
+      console.log(amountUSDEther, amountPolicyTokenEther, amountUSDEtherMin, amountPolicyTokenEtherMin)
 
       var allowance = await policyToken.methods
         .allowance(account, router.options.address)
@@ -164,11 +164,11 @@ export default {
         console.log("Tx Hash:", tx1.transactionHash);
       }
 
-      allowance = await usdt.methods
+      allowance = await usd.methods
         .allowance(account, router.options.address)
         .call();
       if (parseInt(allowance) < parseInt(window.WEB3.utils.toWei("100000000", "ether"))) {
-        const tx2 = await usdt.methods
+        const tx2 = await usd.methods
           .approve(
             router.options.address,
             window.WEB3.utils.toBN(
@@ -186,11 +186,11 @@ export default {
       const tx = await router.methods
           .addLiquidity(
               tokenAddress,
-              usdt.options.address,
+              usd.options.address,
               window.WEB3.utils.toBN(amountPolicyTokenEther),
-              window.WEB3.utils.toBN(amountUSDTEther),
+              window.WEB3.utils.toBN(amountUSDEther),
               window.WEB3.utils.toBN(amountPolicyTokenEtherMin),
-              window.WEB3.utils.toBN(amountUSDTEtherMin),
+              window.WEB3.utils.toBN(amountUSDEtherMin),
               account,
               date + 6000
           )
@@ -199,7 +199,7 @@ export default {
       this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
     },
     
-    async removeLiquidity(amountUSDT, amountPolicyToken, tokenName) {
+    async removeLiquidity(amountUSD, amountPolicyToken, tokenName) {
       
       const account = this.$store.state.selectedAccount;
       if(account == null)
@@ -207,12 +207,12 @@ export default {
         alert("Please Connect Wallet")
         return
       } 
-      if(amountUSDT == 0 || amountPolicyToken == 0)
+      if(amountUSD == 0 || amountPolicyToken == 0)
       {
         alert("Please Input Amount")
         return
       } 
-      const usdt = await getMockUSD();
+      const usd = await getMockUSD();
       const factory = await getNaughtyFactory();
       const core = await getPolicyCore();
       const router = await getNaughtyRouter();
@@ -222,7 +222,7 @@ export default {
           .call();
 
       const pairAddress = await factory.methods
-          .getPairAddress(tokenAddress, usdt.options.address)
+          .getPairAddress(tokenAddress, usd.options.address)
           .call();
 
       const pair = await getNaughtyPair(pairAddress);
@@ -248,17 +248,17 @@ export default {
       const liquidityTokenAll = await pair.methods.totalSupply().call();
       const pair_amount = await pair.methods.getReserves().call();
 
-      amountUSDT = window.WEB3.utils.toWei(String(amountUSDT), "ether");
+      amountUSD = window.WEB3.utils.toWei(String(amountUSD), "ether");
       amountPolicyToken = window.WEB3.utils.toWei(String(amountPolicyToken), "ether");
 
       var percentage = amountPolicyToken / pair_amount[0] * liquidityTokenAll / liquidityToken;
-      percentage = Math.max(percentage, amountUSDT / pair_amount[1] * liquidityTokenAll / liquidityToken);
+      percentage = Math.max(percentage, amountUSD / pair_amount[1] * liquidityTokenAll / liquidityToken);
       percentage = Math.min(percentage, 1);
       
       const amountPolicyTokenMin = percentage * liquidityToken / liquidityTokenAll * pair_amount[0] * 0.8;
-      const amountUSDTMin = percentage * liquidityToken / liquidityTokenAll * pair_amount[1] * 0.8;
+      const amountUSDMin = percentage * liquidityToken / liquidityTokenAll * pair_amount[1] * 0.8;
 
-      console.log("liquidity:", liquidityToken, liquidityTokenAll, amountPolicyTokenMin, amountUSDTMin)
+      console.log("liquidity:", liquidityToken, liquidityTokenAll, amountPolicyTokenMin, amountUSDMin)
       let date = new Date().getTime();
       date = parseInt(date / 1000);
       console.log("now:", date);
@@ -266,10 +266,10 @@ export default {
       const tx = await router.methods
           .removeLiquidity(
               tokenAddress,  //
-              usdt.options.address, //
+              usd.options.address, //
               window.WEB3.utils.toBN(liquidityToken * percentage),
               window.WEB3.utils.toBN(amountPolicyTokenMin),
-              window.WEB3.utils.toBN(amountUSDTMin),
+              window.WEB3.utils.toBN(amountUSDMin),
               account,
               date + 6000
           )
