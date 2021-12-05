@@ -1,12 +1,14 @@
 import _CollapseTransition from "element-plus/lib/el-collapse-transition";
-import { RINKEBY, AVA_MAINNET } from "../abi/config";
+import { RINKEBY, AVA_MAINNET, FUJI} from "../abi/config";
 
 const selectNetwork = (chainId) => {
   switch (chainId) {
     case 4:
       return RINKEBY;
+    case 43113:
+      return FUJI;
     default:
-      alert("Wrong network, place switch to rinkeby.")
+      alert("Wrong network, place switch to FUJI(43113).", chainId)
   }
 };
 
@@ -21,15 +23,14 @@ export const getAddress = async (contractName, chainId) => {
 };
 
 export const getChainId = async () => {
-  console.log(window.ethereum)
   if (typeof window.ethereum !== "undefined") {
-    var chainId; 
-    try{
-      chainId = await window.WEB3.eth.net.getId();
+    var chainId;
+    try {
+      chainId = await window.WEB3.eth.getChainId();
     }
-    catch(e) {
+    catch (e) {
       console.log('Abnormal Chain ID');
-      chainId = 4;
+      chainId = 43113;
     }
     return chainId;
   } else {
