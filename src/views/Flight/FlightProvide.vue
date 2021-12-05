@@ -18,7 +18,7 @@
               <div class="">
                 <h5 class="d-f-3">
                   Total Staking Balance:
-                  <span class="d-f-2"> {{ totalStakingBalance }}</span>
+                  <span class="d-f-2"> {{ totalStakingBalance.toFixed(2) }}</span>
                 </h5>
                 <h5 class="d-f-3">
                   Active Premiums:

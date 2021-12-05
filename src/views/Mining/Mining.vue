@@ -116,7 +116,12 @@ export default {
       },
 
       async getFarmingPoolName() {
-        const farmPoolNames = [[1, "flight", "The Miserable Flight Pool"]];
+        const farmPoolNames = [
+          [1, "flight", "The Miserable Flight Pool"],
+          [2, "BTC", "BTC30000L202101 Pool"],
+          [3, "AVAX", "AVAX30L202101 Pool"],
+          [4, "ETH", "ETH2000L202101 Pool"],
+          ];
         return farmPoolNames;
       },
 
@@ -124,11 +129,12 @@ export default {
         const account = this.$store.state.selectedAccount;
         const farmPoolNames = await this.getFarmingPoolName();
         const farm = await getFarmingPool();
-        const xxx = await farm.methods.getPoolList().call();
-        console.log(xxx);
+        const poolList = await farm.methods.getPoolList().call();
         this.miningData = [];
         for (var i = 0; i < farmPoolNames.length; i++) {
           const poolId = farmPoolNames[i][0];
+          if(poolList.length <= poolId)
+            continue
           const poolPic = farmPoolNames[i][1];
           const poolName = farmPoolNames[i][2];
           const poolInfo = await farm.methods.poolList(poolId).call();
