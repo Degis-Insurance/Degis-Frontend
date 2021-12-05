@@ -66,7 +66,7 @@
               <div class="col-xl-6">
                 <div class="d-flex justify-content-between">
                   <p class="fw-4 d-g2 fs-16">Protection Premium:</p>
-                  <p class="fw-7 d-p fs-16">${{ buyData.premium.toFixed(2) }}</p>
+                  <p class="fw-7 d-p fs-16">${{ buyData.premium }}</p>
                 </div>
                 <div class="d-flex justify-content-between">
                   <p class="fw-4 d-g2 fs-16">Maximum Payoff:</p>
@@ -178,9 +178,6 @@ export default {
       
       console.log(this.buyData)
       var timestamp = this.buyData.timestamp;
-      // console.log("timestamp:",timestamp)
-      timestamp = new Date(this.buyData.arrive_time);
-      timestamp = timestamp.valueOf() / 1e3;
       console.log("timestamp:",timestamp)
       const flight_no = this.buyData.flight_no;
       await this.NewPolicy(timestamp, flight_no);

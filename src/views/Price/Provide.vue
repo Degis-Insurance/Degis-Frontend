@@ -90,7 +90,7 @@ import {
   getNaughtyFactory,
   getPolicyCore,
   getNaughtyRouter,
-  getPolicyToken,
+  getNPPolicyToken,
   getNaughtyPair,
 } from "../../utils/contractInstance";
 export default {
@@ -141,7 +141,7 @@ export default {
       console.log("core address", core.options.address);
       console.log("router address", router.options.address);
 
-      const policyToken = await getPolicyToken(tokenAddress);
+      const policyToken = await getNPPolicyToken(tokenAddress);
       const amountUSDTEther = window.WEB3.utils.toWei(String(amountUSDT), "ether");
       const amountPolicyTokenEther = window.WEB3.utils.toWei(String(amountPolicyToken), "ether");
       const amountUSDTEtherMin = window.WEB3.utils.toWei(String(amountUSDT / 4), "ether");

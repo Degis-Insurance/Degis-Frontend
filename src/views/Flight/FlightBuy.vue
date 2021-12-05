@@ -6,8 +6,8 @@
         <div>
           <p class="d-f-4">Search by Flight</p>
           <div class="d-flex">
-            <el-select v-model="flightno" filterable placeholder="Select Flight">
-              <el-option v-for="item in flightoptions" :key="item" :value="item"></el-option>
+            <el-select v-model="flightno" filterable allow-create default-first-option placeholder="Select Flight">
+              <el-option v-for="item in flightoptions" :key="item" :value="item"> </el-option>
             </el-select>
           </div>
         </div>
@@ -44,12 +44,13 @@
         <el-table-column prop="route" label="ROUTE" sortable/>
         <el-table-column prop="depart_time" label="DEPART TIME" sortable>
           <template #default="scope">
-            {{ scope.row.depart_time.split(' ')[1] }}
+            {{ scope.row.depart_time }}
           </template>
         </el-table-column>
         <el-table-column prop="arrive_time" label="ARRIVE TIME" sortable>
           <template #default="scope">
-            {{ scope.row.arrive_time.split(' ')[1] }} {{ scope.row.arrive_time.split(' ')[1] > scope.row.depart_time.split(' ')[1] ? '' : "(+1)" }}
+            {{ scope.row.arrive_time }} 
+            <!-- {{ scope.row.arrive_time.split(' ')[1] > scope.row.depart_time.split(' ')[1] ? '' : "(+1)" }} -->
           </template>
         </el-table-column>
         <el-table-column prop="premium" label="PREMIUM" sortable>
@@ -102,7 +103,6 @@ export default {
       buyData: {},
     };
   },
-
   mounted() {
     this.City();
     this.defaultFlight();
@@ -110,6 +110,11 @@ export default {
   },
 
   methods: {
+    changeFlightNo()
+    {
+      console.log("11111");
+    },
+
     City() {
       getCity().then((response) => {
         this.cityoptions = response.data.city_list;
@@ -124,7 +129,7 @@ export default {
 
     FlightNos() {
       getFlightNos().then((response) => {
-        this.flightoptions = response.data.city_list;
+        this.flightoptions = response.data.flights;
       });
     },
 
