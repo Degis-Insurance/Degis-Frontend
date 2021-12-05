@@ -300,7 +300,7 @@ export default {
   computed: {
     calc_amount2() {
       if(this.data.currentPrice == "--") {
-        this.amount2 = this.amount1 
+        this.amount2 = this.amount1 * 10 
       }
       else{
         this.amount2 = this.amount1 / this.data.currentPrice

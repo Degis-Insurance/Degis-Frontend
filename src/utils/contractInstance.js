@@ -100,7 +100,7 @@ export const getFLPolicyToken = async () => {
   const chainId = await getChainId();
   return await new web3.eth.Contract(
     FL_PolicyToken_abi.abi,
-    await getAddress("FL_POLICYTOKEN", chainId)
+    await getAddress("FD_POLICYTOKEN", chainId)
   );
 }
 
