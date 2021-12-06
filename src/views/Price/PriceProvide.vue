@@ -170,8 +170,8 @@ export default {
       return {
         policyInfo: policyInfo,
         poolInfo: {
-          policyTokenAmmount: poolInfo[0],
-          udstAmmount: poolInfo[1],
+          policyTokenAmount: poolInfo[0],
+          usdAmount: poolInfo[1],
           poolLiquidityToken: poolLiquidityToken,
           userLiquidityToken: userLiquidityToken,
         },
@@ -180,8 +180,8 @@ export default {
 
     async showInfoEvent() {
       const tokenNames = await this.getTokensNameEvent();
-      this.cardData = [];
-      for (var i = 0; i < tokenNames.length; i++) {
+      var cardInfo = [];
+      for (var i = tokenNames.length - 1 ; i >= 0 ; i--) {
         const tokenName = tokenNames[i];
         const info = await this.showPoolInfo(tokenName);
         const policyInfo = info["policyInfo"];
@@ -199,9 +199,9 @@ export default {
           date.getFullYear();
 
         var currentPrice = "--";
-        if (poolInfo["policyTokenAmmount"] != 0) {
+        if (poolInfo["policyTokenAmount"] != 0) {
           currentPrice = (
-            poolInfo["udstAmmount"] / poolInfo["policyTokenAmmount"]
+            poolInfo["usdAmount"] / poolInfo["policyTokenAmount"]
           ).toFixed(4);
         }
 
@@ -227,8 +227,9 @@ export default {
           poolLiquidityToken: poolInfo["poolLiquidityToken"],
           userLiquidityToken: poolInfo["userLiquidityToken"],
         };
-        this.cardData.push(policyTokeninfo);
+        cardInfo.push(policyTokeninfo);
       }
+      this.cardData = cardInfo;
     },
 
     async getTokensNameEvent() {

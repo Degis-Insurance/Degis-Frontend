@@ -79,6 +79,8 @@ export default {
         name1: "USDC",
         name2: this.data.name,
         currentPrice: this.data.currentPrice,
+        poolUsdAmount: this.data.poolUsdAmount,
+        poolPolicyTokenAmount: this.data.poolPolicyTokenAmount,
         type: "",
       },
     };
