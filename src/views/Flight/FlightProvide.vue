@@ -58,12 +58,12 @@
               v-model="amount"
             />
             <div class="d-flex justify-content-between">
-              <base-button style="width: 45%" @click="depositUSDEvent"
-                >DEPOSIT</base-button
-              >
-              <base-button style="width: 45%" @click="withdrawUSDEvent"
-                >WITHDRAW</base-button
-              >
+              <base-button style="width: 45%" @click="depositUSDEvent">DEPOSIT</base-button>
+              <p> </p>
+<!--              <div>-->
+                <base-button @click="withdrawUSDEvent">WITHDRAW (7days locked)</base-button>
+<!--/*                <p class="fw-4 d-g2 fs-16"><span style="color:red">*</span>7 Days Locked</p>*/-->
+<!--              </div>-->
             </div>
             <!-- <h5 class="text-r">Your Premium Income: <bold> {{ userPendingDegis }}</bold></h5> -->
             <!-- <h5 class="text-r">Your DEGIS Token Income: <bold> {{ userPendingDegis }}</bold></h5> -->

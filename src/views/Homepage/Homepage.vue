@@ -35,9 +35,9 @@
             <span class="nav-font">MetaMarket</span>
           </a>
         </ul>
-        <ul class="navbar-nav align-items-lg-center ml-lg-auto">
-          <base-button>CONNECT WALLET</base-button>
-        </ul>
+<!--        <ul class="navbar-nav align-items-lg-center ml-lg-auto">-->
+<!--          <base-button>CONNECT WALLET</base-button>-->
+<!--        </ul>-->
       </homepage-nav>
     </header>
 
