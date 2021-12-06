@@ -1,6 +1,6 @@
 <template>
   <section class="section-sm"/>
-  <div style="background-size: cover;  background-image: url('img/homepage/degis-lucky-box.png');">
+  <div style="background-size: cover; background-position: center;  background-image: url('img/homepage/degis-lucky-box.png');">
     <div class="dg-container">
       <div class="row row-grid align-items-center">
         <h1 class="hp-title2 pt-7" style="text-align: center">Lucky Box</h1>
