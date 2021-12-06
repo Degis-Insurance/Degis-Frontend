@@ -131,7 +131,7 @@ export default {
         if (poolInfo["policyTokenAmount"] != 0) {
           currentPrice = (
             poolInfo["udstAmount"] / poolInfo["policyTokenAmount"]
-          );
+          ).toFixed(4);
         }
 
         var coin = tokenName.split("_")[0];
