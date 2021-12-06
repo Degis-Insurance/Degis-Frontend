@@ -71,7 +71,7 @@
 <script>
 import BaseButton from "@/components/BaseButton";
 import PriceProvideCard from "./PriceProvideCard";
-
+const CoinGecko = require('coingecko-api');
 import {
   getMockUSD,
   getNaughtyFactory,
@@ -206,8 +206,10 @@ export default {
         }
 
         var coin = tokenName.split("_")[0];
-        var priceInfo = await getTokenPrice(coin);
-        var coinPrice = priceInfo["data"]["data"];
+        let coinMap = {"BTC":"bitcoin", "ETH":"ethereum" , "AVAX":"avalanche-2"}
+        const CoinGeckoClient = new CoinGecko();
+        let priceInfo = await CoinGeckoClient.coins.fetch(coinMap[coin], {});
+        let coinPrice = priceInfo["data"]["market_data"]["current_price"]["usd"];
 
         var policyTokeninfo = {
           coin: coin,
