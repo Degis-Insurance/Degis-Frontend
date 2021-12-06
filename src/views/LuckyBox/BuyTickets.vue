@@ -19,7 +19,8 @@
           </button>
         </div>
         <p class="fw-7 d-g2 fs-16 pl-4">
-          Round # {{roundData}} <span class="fw-4 d-g4"> | Ends in </span> {{drawTime}}
+          Round # {{ roundData }} <span class="fw-4 d-g4"> | Ends in </span>
+          {{ drawTime }}
         </p>
 
         <img src="img/luckybox/modal-split.png" style="height: 1px" />
@@ -33,7 +34,7 @@
             <p class="fw-5 d-g2 fs-16">AMOUNT</p>
             <input
               class="fw-4 d-g4 fs-32 ta-c"
-              value="0"
+              v-model="ticketAmount"
               style="
                 background-color: #f2f2f2;
                 border-radius: 12px;
@@ -42,6 +43,8 @@
                 border-width: 0px;
                 opacity: 0.6;
               "
+              placeholder="0"
+              @input="changeAmout"
               id="ticket-amount"
             />
           </div>
@@ -57,7 +60,7 @@
             </div>
             <div class="col-sm-4">
               <h4 class="fw-5 d-g4 fs-14">You Will Pay</h4>
-              <h4 class="fw-7 d-p fs-24">--</h4>
+              <h4 class="fw-7 d-p fs-24">{{ actualPayment }}</h4>
             </div>
             <div class="col-sm-4 ma" align="center">
               <base-button
@@ -83,6 +86,8 @@ export default {
   },
   data() {
     return {
+      ticketAmount: null,
+      actualPayment: 0,
       buyNum: [],
     };
   },
@@ -102,6 +107,9 @@ export default {
     },
     getBall(ballNum) {
       this.buyNum = ballNum;
+    },
+    changeAmout() {
+      this.actualPayment = this.ticketAmount * 10;
     },
     randomNumber() {
       this.num = [
@@ -125,13 +133,16 @@ export default {
           return;
         }
       }
-      
+
       console.log(newTickets);
       let cost = newTickets.length * 10;
       const allowance = await Degis.methods
         .allowance(account, DegisLottery.options.address)
         .call();
-      if (parseInt(allowance) < parseInt(window.WEB3.utils.toWei("100000000", "ether"))) {
+      if (
+        parseInt(allowance) <
+        parseInt(window.WEB3.utils.toWei("100000000", "ether"))
+      ) {
         var tx1 = await Degis.methods
           .approve(
             DegisLottery.options.address,
@@ -147,20 +158,32 @@ export default {
         .send({ from: account });
       this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
       console.log("Tx Hash:", tx.transactionHash);
-      console.log(this.$store.lastTransactionHash)
+      console.log(this.$store.lastTransactionHash);
     },
 
     async BuyTicketEvent() {
+      if (this.buyNum.length == 0) {
+        alert("please select ticket number");
+        return;
+      }
+
       const luckNumber =
         this.buyNum[0] * 1000 +
         this.buyNum[1] * 100 +
         this.buyNum[2] * 10 +
         this.buyNum[3] * 1;
+
       console.log(luckNumber);
-      const amount = document.getElementById("ticket-amount").value;
+      const amount = this.ticketAmount;
+
+      if (amount <= 0) {
+        alert("Please input amount!");
+        return;
+      }
+
       console.log(amount);
       let tickets = new Array();
-      for (var i = 0; i < amount; i++) {
+      for (let i = 0; i < amount; i++) {
         tickets.push(luckNumber);
       }
       await this.BuyTicket(tickets);
