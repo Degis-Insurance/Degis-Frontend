@@ -19,7 +19,7 @@ import {
   getNPPolicyToken,
   getNaughtyPair,
 } from "../../utils/contractInstance";
-import {getTokenPrice} from "@/api/functions";
+import {getTokenPrice, getTokenPriceFromCoinMarket} from "@/api/functions";
 export default {
   name: "price-buy-sell",
   components: { PriceBuySellCard },
@@ -140,7 +140,9 @@ export default {
         }
 
         var coin = tokenName.split("_")[0];
-        var priceInfo = await getTokenPrice(coin);
+        var priceInfo = await getTokenPriceFromCoinMarket(coin);
+        console.log(priceInfo)
+        priceInfo = priceInfo*1000
         var coinPrice = priceInfo["data"]["data"];
 
         var policyTokeninfo = {

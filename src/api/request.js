@@ -6,4 +6,10 @@ const service = axios.create({
   timeout: 6000000,
 });
 
+export const service_coinmarket = axios.create({
+  baseURL: "https://pro-api.coinmarketcap.com/v1",
+  timeout: 6000000,
+});
+
 export default service;
+
