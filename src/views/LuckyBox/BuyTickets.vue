@@ -115,7 +115,6 @@ export default {
       const DegisLottery = await getDegisLottery();
       const Degis = await getDegis();
       const account = this.$store.state.selectedAccount;
-
       let newTickets = new Array();
       for (var i = 0; i < tickets.length; i++) {
         var lotteryNumber = tickets;
