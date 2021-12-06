@@ -1,13 +1,13 @@
 <template>
   <div class="dg-container">
-<!--    <div class="row" style="text-align: center">-->
-<!--      <div class="col-md-2"></div>-->
-<!--      <div class="col-md-2"><a href="/#/protection" class="f-text-1">Protection</a></div>-->
-<!--      <div class="col-md-2"><a href="/#/mining" class="f-text-1">Mining</a></div>-->
-<!--      <div class="col-md-2"><a href="/#/luckybox" class="f-text-1">LuckyBox</a></div>-->
-<!--      <div class="col-md-2"><a href="/#/bazaar" class="f-text-1">Bazaar</a></div>-->
-<!--      <div class="col-md-2"></div>-->
-<!--    </div>-->
+    <div class="row" style="text-align: center">
+      <div class="col-md-2"></div>
+      <div class="col-md-2"><a href="/#/protection" class="f-text-1">Protection</a></div>
+      <div class="col-md-2"><a href="/#/mining" class="f-text-1">Mining</a></div>
+      <div class="col-md-2"><a href="/#/luckybox" class="f-text-1">LuckyBox</a></div>
+      <div class="col-md-2"><a href="/#/metamarket" class="f-text-1">Bazaar</a></div>
+      <div class="col-md-2"></div>
+    </div>
     <div class="row pt-5">
       <div class="col-lg-4"></div>
       <div class="col-lg-4 d-flex justify-content-between" align="center">

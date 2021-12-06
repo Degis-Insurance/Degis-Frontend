@@ -30,9 +30,9 @@
         <p class="hp-title">The 1st Decentralized Protection Market</p>
         <h1 class="hp-title" style="color: #6415FF;">On Avalanche</h1>
         <div class="btn-wrapper d-flex pt-5">
-<!--          <a href="/#/protection">-->
+          <a href="/#/protection">
             <base-button>Get started</base-button>
-<!--          </a>-->
+          </a>
           <a href="https://docs.degis.io/" style="padding: 0 8%">
             <base-button class="tut-button" style="background-color: #f2f2f2; color: #4d535c">Tutorial</base-button>
           </a>

@@ -1,6 +1,6 @@
 <template>
   <el-container>
-    <el-aside width="280px">
+    <el-aside class="hidden-md-and-down" width="280px">
       <div class="container-fluid" style="min-height: 700px;">
 
         <router-link to="/">

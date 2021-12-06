@@ -12,9 +12,9 @@
           <h3 class="hp-title2 pb-4">Liquidity Mining</h3>
           <p class="hp-desc">To solve the no-buyer situation in Blockchain insurance, Degis provide liquidity mining reward to both buyer and providers. Buyers can gain DEG tokens directly when purchased insurances and didn't get payoffs; Providers receive LP token from insurance pools and can get DEG tokens by staking LP tokens.</p>
           <div class="btn-wrapper d-flex pt-4 justify-content-between" style="padding-right: 15%">
-<!--            <a href="/#/mining">-->
+            <a href="/#/mining">
               <base-button>launch mining</base-button>
-<!--            </a>-->
+            </a>
             <a href="https://docs.degis.io/">
               <base-button>Read More</base-button>
             </a>

@@ -1,6 +1,6 @@
 <template>
   <section class="section-sm"/>
-  <div style="background-size: cover;  background-image: url('img/homepage/degis-lucky-box.png');">
+  <div style="background-size: cover; background-position: center;  background-image: url('img/homepage/degis-lucky-box.png');">
     <div class="dg-container">
       <div class="row row-grid align-items-center">
         <h1 class="hp-title2 pt-7" style="text-align: center">Lucky Box</h1>
@@ -18,7 +18,9 @@
         <p class="fw-9 d-g2 ma pt-4 fs-24">IN PRIZES!</p>
       </div>
       <div class="row row-grid align-items-center">
-        <base-button style="margin: 3% auto">Buy Tickets</base-button>
+        <a href="/#/luckybox" style="margin: 3% auto">
+          <base-button>Buy Tickets</base-button>
+        </a>
       </div>
       <div class="pb-9"></div>
     </div>

@@ -1,7 +1,7 @@
 <template>
   <nav
-    class="navbar"
-    :class="[
+      class="navbar"
+      :class="[
       { 'navbar-expand-md': expand },
       { 'navbar-transparent': transparent },
       { [`bg-${type}`]: type },
@@ -9,7 +9,9 @@
   >
     <div class="container-fluid">
       <div>
-        <h6 class="fw-7 d-g3 fs-24">Welcome to DEGIS!</h6>
+        <a href="/#/">
+          <h6 class="fw-7 d-g3 fs-24">Welcome to DEGIS!</h6>
+        </a>
       </div>
       <div>
         <base-button @click="getUSD">GET 10000 USD</base-button>
@@ -18,10 +20,10 @@
         <span id="userInfo"> {{ selectedAccount }}</span>
 
         <base-button v-if="!isConnected" @click="connectWallet"
-          >{{ walletstatus }}
+        >{{ walletstatus }}
         </base-button>
         <base-button v-if="isConnected" @click="disconnectWallet"
-          >{{ walletstatus }}
+        >{{ walletstatus }}
         </base-button>
       </div>
     </div>
@@ -29,9 +31,9 @@
 </template>
 <script>
 import BaseButton from "./BaseButton";
-import { getWeb3 } from "../utils/getWeb3";
+import {getWeb3} from "../utils/getWeb3";
 import Web3 from "web3";
-import { getDegis, getMockUSD } from "../utils/contractInstance";
+import {getDegis, getMockUSD} from "../utils/contractInstance";
 
 export default {
   name: "base-nav",
@@ -100,8 +102,8 @@ export default {
       const usd = await getMockUSD();
       const amount = window.WEB3.utils.toWei("10000", "ether");
       const tx = await usd.methods
-        .mint(account, amount)
-        .send({ from: account });
+          .mint(account, amount)
+          .send({from: account});
     },
     async getDegisBalance() {
       const degis = await getDegis();
