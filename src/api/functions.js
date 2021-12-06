@@ -1,4 +1,5 @@
 import request from "@/api/request";
+import {service_coinmarket} from "@/api/request";
 
 export function getCity() {
   return request({
@@ -65,6 +66,22 @@ export function getSignature(buyer_address, flight_no, timestamp) {
       buyer_address: buyer_address,
       flight_no: flight_no,
       timestamp: timestamp,
+    },
+  });
+}
+
+export function getTokenPriceFromCoinMarket(token) {
+  return service_coinmarket({
+    url: "/cryptocurrency/quotes/latest",
+    method: "get",
+    params: {
+      symbol: token,
+    },
+    headers:
+    {
+      "Accept": "*/*",
+      "User-Agent": "Thunder Client (https://www.thunderclient.io)",
+      "X-CMC_PRO_API_KEY": "22d94e85-bb52-4a52-838e-1a9061e10961",
     },
   });
 }
