@@ -18,7 +18,9 @@
         <p class="fw-9 d-g2 ma pt-4 fs-24">IN PRIZES!</p>
       </div>
       <div class="row row-grid align-items-center">
-        <base-button style="margin: 3% auto">Buy Tickets</base-button>
+        <a href="/#/luckybox" style="margin: 3% auto">
+          <base-button>Buy Tickets</base-button>
+        </a>
       </div>
       <div class="pb-9"></div>
     </div>
