@@ -118,9 +118,12 @@ export default {
       async getFarmingPoolName() {
         const farmPoolNames = [
           [1, "flight", "The Miserable Flight Pool"],
-          [2, "BTC", "BTC30000L202101 Pool"],
-          [3, "AVAX", "AVAX30L202101 Pool"],
-          [4, "ETH", "ETH2000L202101 Pool"],
+          [5, "BTC", "BTC24000L2112 Pool"],
+          [6, "BTC", "BTC71000H2112 Pool"],
+          [7, "ETH", "ETH2000L2112 Pool"],
+          [8, "ETH", "ETH5900H2112 Pool"],
+          [9, "AVAX", "AVAX60L2112 Pool"],
+          [10, "AVAX", "AVAX100H2112 Pool"],
           ];
         return farmPoolNames;
       },
@@ -130,7 +133,7 @@ export default {
         const farmPoolNames = await this.getFarmingPoolName();
         const farm = await getFarmingPool();
         const poolList = await farm.methods.getPoolList().call();
-        this.miningData = [];
+        let miningInfo = [];
         for (var i = 0; i < farmPoolNames.length; i++) {
           const poolId = farmPoolNames[i][0];
           if(poolList.length <= poolId)
@@ -187,9 +190,10 @@ export default {
             poolInfo["degRewards"] = degRewards;
             poolInfo["poolType"] = "lpMining";
             poolInfo["poolId"] = poolId;
-            this.miningData.push(poolInfo);
+            miningInfo.push(poolInfo);
           }
         }
+        this.miningData = miningInfo;
       },
 
       async showBuyerIncentive() {

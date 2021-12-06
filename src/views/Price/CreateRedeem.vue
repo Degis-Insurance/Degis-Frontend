@@ -188,7 +188,8 @@ export default {
   },
   computed: {
     calc_amount2() {
-      return 1 * this.amount1;
+      this.amount2 = this.amount1;
+      return this.amount2;
     },
   },
 };

@@ -77,6 +77,7 @@
         </div>
 
         <div class="modal-footer pt-1" style="display: block">
+          <base-button v-if="data.type === 'remove'" style="width: 100%" @click="getMax">Max</base-button>
           <base-button v-if="data.type === 'provide'" style="width: 100%" @click="addLiquidityEvent()">Provide</base-button>
           <base-button v-else style="width: 100%" @click="removeLiquidityEvent">Remove</base-button>
         </div>
@@ -198,7 +199,35 @@ export default {
       console.log(tx.transactionHash)
       this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
     },
-    
+    async getMax()
+    {
+      const tokenName = this.data.name2;
+      const account = this.$store.state.selectedAccount;
+      if(account == null)
+      {
+        alert("Please Connect Wallet")
+        return
+      } 
+      const usd = await getMockUSD();
+      const factory = await getNaughtyFactory();
+      const core = await getPolicyCore();
+
+      const policyTokenAddress = await core.methods
+        .findAddressbyName(tokenName)
+        .call();
+      const pairAddress = await factory.methods
+        .getPairAddress(policyTokenAddress, usd.options.address)
+        .call();
+      console.log("=============")
+      const pair = await getNaughtyPair(pairAddress);
+      console.log(pairAddress,pair.options.address)
+      const poolInfo = await pair.methods.getReserves().call();
+      console.log("=============")
+      const poolLiquidityToken = await pair.methods.totalSupply().call();
+      const userLiquidityToken = await pair.methods.balanceOf(account).call();
+      this.amount1 = (userLiquidityToken / poolLiquidityToken * poolInfo[1] / 1e18).toFixed(4);
+      this.amount2 = (userLiquidityToken / poolLiquidityToken * poolInfo[0] / 1e18).toFixed(4);
+    },
     async removeLiquidity(amountUSD, amountPolicyToken, tokenName) {
       
       const account = this.$store.state.selectedAccount;
@@ -253,8 +282,7 @@ export default {
 
       var percentage = amountPolicyToken / pair_amount[0] * liquidityTokenAll / liquidityToken;
       percentage = Math.max(percentage, amountUSD / pair_amount[1] * liquidityTokenAll / liquidityToken);
-      percentage = Math.min(percentage, 1);
-      
+      percentage = Math.min(percentage, 1-(1e-10));
       const amountPolicyTokenMin = percentage * liquidityToken / liquidityTokenAll * pair_amount[0] * 0.8;
       const amountUSDMin = percentage * liquidityToken / liquidityTokenAll * pair_amount[1] * 0.8;
 

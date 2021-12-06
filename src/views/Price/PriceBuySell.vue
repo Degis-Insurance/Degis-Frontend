@@ -108,14 +108,14 @@ export default {
 
       return {
         policyInfo: policyInfo,
-        poolInfo: { udstAmmount: poolInfo[1], policyTokenAmmount: poolInfo[0] },
+        poolInfo: { usdAmount: poolInfo[1], policyTokenAmount: poolInfo[0] },
       };
     },
 
     async showInfoEvent() {
       const tokenNames = await this.getTokensNameEvent();
-      this.cardData = [];
-      for (var i = 0; i < tokenNames.length; i++) {
+      let cardInfo = [];
+      for (var i = tokenNames.length - 1 ; i >= 0 ; i--) {
         const tokenName = tokenNames[i];
         const info = await this.showPoolInfo(tokenName);
         const policyInfo = info["policyInfo"];
@@ -134,10 +134,12 @@ export default {
 
         
         var currentPrice = "--";
-        if (poolInfo["policyTokenAmmount"] != 0) {
+        if (poolInfo["policyTokenAmount"] != 0) {
           currentPrice = (
-            poolInfo["udstAmmount"] / poolInfo["policyTokenAmmount"]
+            poolInfo["usdAmount"] / poolInfo["policyTokenAmount"]
           ).toFixed(4);
+          var poolUsdAmount = poolInfo["usdAmount"]  
+          var poolPolicyTokenAmount = poolInfo["policyTokenAmount"]
         }
 
         var coin = tokenName.split("_")[0];
@@ -162,9 +164,12 @@ export default {
             2
           ),
           usdBalance: (userInfo["usdBalance"] / 1e18).toFixed(2),
+          poolUsdAmount: poolUsdAmount,
+          poolPolicyTokenAmount: poolPolicyTokenAmount,
         };
-        this.cardData.push(policyTokeninfo);
+        cardInfo.push(policyTokeninfo);
       }
+      this.cardData = cardInfo;
     },
     async getTokensNameEvent() {
       return this.getTokensName();

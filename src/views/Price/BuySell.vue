@@ -317,7 +317,19 @@ export default {
   },
   computed: {
     calc_amount2() {
-      this.amount2 = this.amount1 / this.data.currentPrice;
+      var poolUsdAmount = Number(this.data.poolUsdAmount / 1e18);
+      var poolPolicyTokenAmount = Number(this.data.poolPolicyTokenAmount / 1e18);
+
+      if(this.data.type === "buy"){
+        this.amount2 = poolPolicyTokenAmount - poolUsdAmount * poolPolicyTokenAmount / (poolUsdAmount + this.amount1 * 1.02);
+      }
+      else{
+        if(this.amount1 >  poolUsdAmount)
+        {
+          this.amount1 = poolUsdAmount.toFixed(2);
+        }
+        this.amount2 = poolUsdAmount * poolPolicyTokenAmount / (poolUsdAmount - this.amount1 * 0.98) - poolPolicyTokenAmount;
+      }
       return this.amount2;
     },
   },
