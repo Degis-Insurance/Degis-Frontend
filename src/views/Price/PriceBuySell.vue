@@ -11,6 +11,7 @@
 
 <script>
 import PriceBuySellCard from "./PriceBuySellCard";
+const CoinGecko = require('coingecko-api');
 import {
   getMockUSD,
   getNaughtyFactory,
@@ -140,10 +141,10 @@ export default {
         }
 
         var coin = tokenName.split("_")[0];
-        var priceInfo = await getTokenPriceFromCoinMarket(coin);
-        console.log(priceInfo)
-        priceInfo = priceInfo*1000
-        var coinPrice = priceInfo["data"]["data"];
+        let coinMap = {"BTC":"bitcoin", "ETH":"ethereum" , "AVAX":"avalanche-2"}
+        const CoinGeckoClient = new CoinGecko();
+        let priceInfo = await CoinGeckoClient.coins.fetch(coinMap[coin], {});
+        let coinPrice = priceInfo["data"]["market_data"]["current_price"]["usd"];
 
         var policyTokeninfo = {
           coin: coin,
