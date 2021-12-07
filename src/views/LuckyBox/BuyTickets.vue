@@ -116,7 +116,7 @@ export default {
       this.ticketAmount = "";
     },
     randomNumber() {
-      this.num = [
+      this.buyNum = [
         Math.floor(Math.random() * 10),
         Math.floor(Math.random() * 10),
         Math.floor(Math.random() * 10),
@@ -177,7 +177,7 @@ export default {
         this.buyNum[2] * 10 +
         this.buyNum[3] * 1;
 
-      console.log(luckNumber);
+      console.log("your lucky number:", luckNumber);
       const amount = this.ticketAmount;
 
       if (amount <= 0) {

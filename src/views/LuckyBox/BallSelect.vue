@@ -91,6 +91,12 @@
             >RANDOM</span
           >
         </el-popover>
+        <span
+          class="d-f-4 pl-4"
+          style="line-height: 88px; text-align: center; cursor: pointer"
+          @click="randomAll"
+          >RANDOM</span
+        >
       </div>
       <!--                <div class="col-xl-3">-->
       <!--                  <p class="d-f-4" style="line-height: 88px; text-align: center; cursor: pointer" @click="randomNumber">RANDOM</p>-->
@@ -115,6 +121,11 @@ export default {
     set(ball, num) {
       this.nums[ball] = num;
       this.getBall(this.nums);
+    },
+    randomAll() {
+      for (let i = 0; i < 4; i++) {
+        this.random(i);
+      }
     },
   },
 };
