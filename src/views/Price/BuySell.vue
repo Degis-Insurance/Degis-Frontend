@@ -124,7 +124,6 @@ export default {
       tokenName,
       slip
     ) {
-      console.log(buy_usd_policy, exact_former_later);
       const account = this.$store.state.selectedAccount;
       if (account == null) {
         alert("Please Connect Wallet");
@@ -157,15 +156,6 @@ export default {
         from: account,
       });
 
-      console.log("user:", usd_before / 1e18, policy_before / 1e18);
-
-      usdAmount = window.WEB3.utils.toWei(String(usdAmount), "ether");
-
-      policyTokenAmount = window.WEB3.utils.toWei(
-        String(policyTokenAmount),
-        "ether"
-      );
-
       if (buy_usd_policy == "policy2usd") {
         const allowance = await policyToken.methods
           .allowance(account, router.options.address)
@@ -192,8 +182,8 @@ export default {
         if (exact_former_later == "former") {
           const tx = await router.methods
             .swapExactTokensforTokens(
-              policyTokenAmount,
-              window.WEB3.utils.toBN(usdAmount * slip),
+              window.WEB3.utils.toWei(String(policyTokenAmount),"ether"),
+              window.WEB3.utils.toWei(String(usdAmount * slip), "ether"),
               policyTokenAddress,
               usdAddress,
               account,
@@ -203,13 +193,13 @@ export default {
           console.log("Tx Hash:", tx.transactionHash);
           this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
         }
-
+        
         // 用最多policyTokenAmount个policy, 换usdAmount个usd token出来
         if (exact_former_later == "later") {
           const tx = await router.methods
             .swapTokensforExactTokens(
-              window.WEB3.utils.toBN(policyTokenAmount / slip),
-              usdAmount,
+              window.WEB3.utils.toWei(String(policyTokenAmount / slip),"ether"),
+              window.WEB3.utils.toWei(String(usdAmount), "ether"),
               policyTokenAddress,
               usdAddress,
               account,
@@ -244,12 +234,10 @@ export default {
 
         // 用usdAmount个usd token, 换至少policyTokenAmount个policy出来
         if (exact_former_later == "former") {
-          console.log(usdAmount);
-          console.log(policyTokenAmount * slip);
           const tx = await router.methods
             .swapExactTokensforTokens(
-              usdAmount,
-              window.WEB3.utils.toBN(policyTokenAmount * slip),
+              window.WEB3.utils.toWei(String(usdAmount), "ether"),
+              window.WEB3.utils.toWei(String(policyTokenAmount * slip),"ether"),
               usdAddress,
               policyTokenAddress,
               account,
@@ -264,8 +252,8 @@ export default {
         if (exact_former_later == "later") {
           const tx = await router.methods
             .swapTokensforExactTokens(
-              window.WEB3.utils.toBN(usdAmount / slip),
-              policyTokenAmount,
+              window.WEB3.utils.toWei(String(usdAmount / slip), "ether"),
+              window.WEB3.utils.toWei(String(policyTokenAmount),"ether"),
               usdAddress,
               policyTokenAddress,
               account,
