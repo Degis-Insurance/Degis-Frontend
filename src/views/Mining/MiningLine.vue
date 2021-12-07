@@ -40,10 +40,14 @@
         <div class="col-lg-6">
           <div class="d-flex justify-content-between">
             <p class="d-f-2">Deposit Limit</p>
-            <p class="d-f-2">{{ (data.depositLimit / 1e18).toFixed(2) }} LPT</p>
+            <p class="d-f-2">
+              {{ (data.depositLimit / 1e18).toFixed(2) }} {{ tokenType }}
+            </p>
           </div>
-          <el-input class="mb-2" v-model="depositAmount"/>
-          <base-button style="width: 100%" @click="depositEvent">DEPOSIT</base-button>
+          <el-input class="mb-2" v-model="depositAmount" />
+          <base-button style="width: 100%" @click="depositEvent"
+            >DEPOSIT</base-button
+          >
           <div class="d-flex justify-content-between">
             <div>
               <p class="d-f-2">24 Hour Total Rewards:</p>
@@ -65,11 +69,13 @@
           <div class="d-flex justify-content-between">
             <p class="d-f-2">Available to Withdraw:</p>
             <p class="d-f-2">
-              {{ (data.availableToWithdraw / 1e18).toFixed(2) }} LPT
+              {{ (data.availableToWithdraw / 1e18).toFixed(2) }} {{ tokenType }}
             </p>
           </div>
           <el-input class="mb-2" v-model="withdrawAmount" />
-          <base-button style="width: 100%" @click="withdrawEvent">Withdraw</base-button>
+          <base-button style="width: 100%" @click="withdrawEvent"
+            >Withdraw</base-button
+          >
           <div class="d-flex justify-content-between">
             <p class="d-f-2">DEG Rewards:</p>
             <p class="d-f-2">{{ (data.degRewards / 1e18).toFixed(2) }}</p>
@@ -111,10 +117,17 @@ export default {
       withdrawAmount: 0,
     };
   },
+  computed: {
+    tokenType: function () {
+      if (this.data.poolType == "buyerIncentive") {
+        return "BuyerToken";
+      } else return "LPT";
+    },
+  },
   methods: {
     showinput() {
       alert(this.depositAmount);
-      alert(this.withdrawAmount)
+      alert(this.withdrawAmount);
     },
     showmore() {
       this.more = !this.more;
@@ -160,12 +173,14 @@ export default {
         console.log("Tx Hash:", tx.transactionHash);
         this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
       }
-      if (this.data.poolType == "buyerIncentive") { 
-        const pool =  await getPurchaseIncentiveVault();
+      if (this.data.poolType == "buyerIncentive") {
+        const pool = await getPurchaseIncentiveVault();
         const buyerToken = await getBuyerToken();
         await this.approve(buyerToken, account, pool.options.address);
         amount = window.WEB3.utils.toWei(String(amount), "ether");
-        const tx = await pool.methods.stakeBuyerToken(amount).send({"from": account})
+        const tx = await pool.methods
+          .stakeBuyerToken(amount)
+          .send({ from: account });
         console.log("Tx Hash:", tx.transactionHash);
         this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
       }
@@ -195,10 +210,12 @@ export default {
         this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
       }
 
-      if (this.data.poolType == "buyerIncentive") { 
-        const pool =  await getPurchaseIncentiveVault();
+      if (this.data.poolType == "buyerIncentive") {
+        const pool = await getPurchaseIncentiveVault();
         amount = window.WEB3.utils.toWei(String(amount), "ether");
-        const tx = await pool.methods.redeemBuyerToken(amount).send({"from": account})
+        const tx = await pool.methods
+          .redeemBuyerToken(amount)
+          .send({ from: account });
         console.log("Tx Hash:", tx.transactionHash);
         this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
       }
@@ -219,10 +236,10 @@ export default {
         console.log("Tx Hash:", tx.transactionHash);
         this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
       }
-      
-      if (this.data.poolType == "buyerIncentive") { 
-        const pool =  await getPurchaseIncentiveVault();
-        const tx = await pool.methods.claimReward().send({"from": account})
+
+      if (this.data.poolType == "buyerIncentive") {
+        const pool = await getPurchaseIncentiveVault();
+        const tx = await pool.methods.claimReward().send({ from: account });
         console.log("Tx Hash:", tx.transactionHash);
         this.$store.commit("SET_LASTTRANSACTIONHASH", tx.transactionHash);
       }
