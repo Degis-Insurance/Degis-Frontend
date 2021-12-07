@@ -43,7 +43,8 @@
                 border-width: 0px;
                 opacity: 0.6;
               "
-              placeholder="0"
+              :placeholder="[[changeAmount]]"
+              @focus="hideHolder"
               @input="changeAmout"
               id="ticket-amount"
             />
@@ -86,7 +87,7 @@ export default {
   },
   data() {
     return {
-      ticketAmount: null,
+      ticketAmount: 0,
       actualPayment: 0,
       buyNum: [],
     };
@@ -110,6 +111,9 @@ export default {
     },
     changeAmout() {
       this.actualPayment = this.ticketAmount * 10;
+    },
+    hideHolder() {
+      this.ticketAmount = "";
     },
     randomNumber() {
       this.num = [
