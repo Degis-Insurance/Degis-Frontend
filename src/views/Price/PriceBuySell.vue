@@ -112,64 +112,67 @@ export default {
       };
     },
 
+    async showOneInfo(tokenName){
+      const info = await this.showPoolInfo(tokenName);
+      const policyInfo = info["policyInfo"];
+      const poolInfo = info["poolInfo"];
+
+      const userInfo = await this.showUserInfo(tokenName);
+
+      const types = { H: "Payout if Higher", L: "Pay out if Lower" };
+      var date = new Date(parseInt(policyInfo["deadline"]) * 1000);
+      var expiry =
+        date.getDate() +
+        "/" +
+        (date.getMonth() + 1) +
+        "/" +
+        date.getFullYear();
+
+      
+      var currentPrice = "--";
+      if (poolInfo["policyTokenAmount"] != 0) {
+        currentPrice = (
+          poolInfo["usdAmount"] / poolInfo["policyTokenAmount"]
+        ).toFixed(4);
+        var poolUsdAmount = poolInfo["usdAmount"]  
+        var poolPolicyTokenAmount = poolInfo["policyTokenAmount"]
+      }
+
+      var coin = tokenName.split("_")[0];
+      let coinMap = {"BTC":"bitcoin", "ETH":"ethereum" , "AVAX":"avalanche-2"}
+      const CoinGeckoClient = new CoinGecko();
+      let priceInfo = await CoinGeckoClient.coins.fetch(coinMap[coin], {});
+      let coinPrice = priceInfo["data"]["market_data"]["current_price"]["usd"];
+
+      var policyTokeninfo = {
+        coin: coin,
+        name: tokenName,
+        currentPrice: currentPrice,
+        coinPrice: coinPrice,
+        type: types[tokenName.split("_")[2]],
+        strike: policyInfo["strikePrice"],
+        expiry: expiry,
+        tvl: "--",
+        tradingVolume: "--",
+        change: "--",
+        minted: userInfo["userQuota"] / 1e18,
+        policyTokenBalance: (userInfo["policyTokenBalance"] / 1e18).toFixed(
+          2
+        ),
+        usdBalance: (userInfo["usdBalance"] / 1e18).toFixed(2),
+        poolUsdAmount: poolUsdAmount,
+        poolPolicyTokenAmount: poolPolicyTokenAmount,
+      };
+      return policyTokeninfo;
+    },
     async showInfoEvent() {
       const tokenNames = await this.getTokensNameEvent();
-      let cardInfo = [];
+      var threads = [];
       for (var i = tokenNames.length - 1 ; i >= 0 ; i--) {
         const tokenName = tokenNames[i];
-        const info = await this.showPoolInfo(tokenName);
-        const policyInfo = info["policyInfo"];
-        const poolInfo = info["poolInfo"];
-
-        const userInfo = await this.showUserInfo(tokenName);
-
-        const types = { H: "Payout if Higher", L: "Pay out if Lower" };
-        var date = new Date(parseInt(policyInfo["deadline"]) * 1000);
-        var expiry =
-          date.getDate() +
-          "/" +
-          (date.getMonth() + 1) +
-          "/" +
-          date.getFullYear();
-
-        
-        var currentPrice = "--";
-        if (poolInfo["policyTokenAmount"] != 0) {
-          currentPrice = (
-            poolInfo["usdAmount"] / poolInfo["policyTokenAmount"]
-          ).toFixed(4);
-          var poolUsdAmount = poolInfo["usdAmount"]  
-          var poolPolicyTokenAmount = poolInfo["policyTokenAmount"]
-        }
-
-        var coin = tokenName.split("_")[0];
-        let coinMap = {"BTC":"bitcoin", "ETH":"ethereum" , "AVAX":"avalanche-2"}
-        const CoinGeckoClient = new CoinGecko();
-        let priceInfo = await CoinGeckoClient.coins.fetch(coinMap[coin], {});
-        let coinPrice = priceInfo["data"]["market_data"]["current_price"]["usd"];
-
-        var policyTokeninfo = {
-          coin: coin,
-          name: tokenName,
-          currentPrice: currentPrice,
-          coinPrice: coinPrice,
-          type: types[tokenName.split("_")[2]],
-          strike: policyInfo["strikePrice"],
-          expiry: expiry,
-          tvl: "--",
-          tradingVolume: "--",
-          change: "--",
-          minted: userInfo["userQuota"] / 1e18,
-          policyTokenBalance: (userInfo["policyTokenBalance"] / 1e18).toFixed(
-            2
-          ),
-          usdBalance: (userInfo["usdBalance"] / 1e18).toFixed(2),
-          poolUsdAmount: poolUsdAmount,
-          poolPolicyTokenAmount: poolPolicyTokenAmount,
-        };
-        cardInfo.push(policyTokeninfo);
+        threads.push(this.showOneInfo(tokenName));
       }
-      this.cardData = cardInfo;
+      this.cardData = await Promise.all(threads);
     },
     async getTokensNameEvent() {
       return this.getTokensName();

@@ -128,72 +128,83 @@ export default {
         return farmPoolNames;
       },
 
-      async showFarmingPoolInfo() {
+      async showOneFarmingPoolInfo(farmPoolNames,i) {
         const account = this.$store.state.selectedAccount;
+        const farm = await getFarmingPool();
+        const poolId = farmPoolNames[i][0];
+        const poolPic = farmPoolNames[i][1];
+        const poolName = farmPoolNames[i][2];
+        const poolInfo = await farm.methods.poolList(poolId).call();
+        // const poolstatus = await farm.methods.isFarming(poolId).call();
+        const lpTokenAddress = poolInfo["lpToken"];
+
+        const lpToken = await getNPPolicyToken(lpTokenAddress);
+        var depositLimit = 0;
+        var availableToWithdraw = 0;
+        if (account != null) {
+          depositLimit = await lpToken.methods.balanceOf(account).call();
+          availableToWithdraw = await farm.methods
+            .getUserBalance(poolId, account)
+            .call();
+        }
+        const totalRewards = (poolInfo["degisPerBlock"] * 24 * 60 * 60) / 2;
+        const totalDeposited = await lpToken.methods
+          .balanceOf(farm.options.address)
+          .call();
+        var myTotalRewards = 0;
+        if (totalDeposited != 0) {
+          myTotalRewards = (
+            (availableToWithdraw / totalDeposited) *
+            totalRewards
+          ).toFixed(2);
+        }
+        var degRewards = 0;
+        if (account != null) {
+          degRewards = await farm.methods
+            .pendingDegis(poolId, account)
+            .call({ from: account });
+        }
+
+        var apr = 0;
+        if (totalDeposited != 0) {
+          apr = (totalRewards / totalDeposited) * 365;
+        }
+
+        var poolInfos = {};
+        // if (poolstatus) {
+        poolInfos["pic"] = poolPic;
+        poolInfos["name"] = poolName;
+        poolInfos["status"] = "Ongoing";
+        poolInfos["apr"] = apr;
+        poolInfos["depositLimit"] = depositLimit;
+        poolInfos["availableToWithdraw"] = availableToWithdraw;
+        poolInfos["totalRewards"] = totalRewards;
+        poolInfos["totalDeposited"] = totalDeposited;
+        poolInfos["myTotalRewards"] = myTotalRewards;
+        poolInfos["degRewards"] = degRewards;
+        poolInfos["poolType"] = "lpMining";
+        poolInfos["poolId"] = poolId;
+        return poolInfos;
+        // }
+      },
+
+      async showFarmingPoolInfo() {
         const farmPoolNames = await this.getFarmingPoolName();
         const farm = await getFarmingPool();
         const poolList = await farm.methods.getPoolList().call();
         let miningInfo = [];
+        var threads = [];
         for (var i = 0; i < farmPoolNames.length; i++) {
           const poolId = farmPoolNames[i][0];
           if(poolList.length <= poolId)
             continue
-          const poolPic = farmPoolNames[i][1];
-          const poolName = farmPoolNames[i][2];
-          const poolInfo = await farm.methods.poolList(poolId).call();
           const poolstatus = await farm.methods.isFarming(poolId).call();
-          const lpTokenAddress = poolInfo["lpToken"];
-
-          const lpToken = await getNPPolicyToken(lpTokenAddress);
-          var depositLimit = 0;
-          var availableToWithdraw = 0;
-          if (account != null) {
-            depositLimit = await lpToken.methods.balanceOf(account).call();
-            availableToWithdraw = await farm.methods
-              .getUserBalance(poolId, account)
-              .call();
-          }
-          const totalRewards = (poolInfo["degisPerBlock"] * 24 * 60 * 60) / 2;
-          const totalDeposited = await lpToken.methods
-            .balanceOf(farm.options.address)
-            .call();
-          var myTotalRewards = 0;
-          if (totalDeposited != 0) {
-            myTotalRewards = (
-              (availableToWithdraw / totalDeposited) *
-              totalRewards
-            ).toFixed(2);
-          }
-          var degRewards = 0;
-          if (account != null) {
-            degRewards = await farm.methods
-              .pendingDegis(poolId, account)
-              .call({ from: account });
-          }
-
-          var apr = 0;
-          if (totalDeposited != 0) {
-            apr = (totalRewards / totalDeposited) * 365;
-          }
-          poolInfo = {};
-
-          if (poolstatus) {
-            poolInfo["pic"] = poolPic;
-            poolInfo["name"] = poolName;
-            poolInfo["status"] = "Ongoing";
-            poolInfo["apr"] = apr;
-            poolInfo["depositLimit"] = depositLimit;
-            poolInfo["availableToWithdraw"] = availableToWithdraw;
-            poolInfo["totalRewards"] = totalRewards;
-            poolInfo["totalDeposited"] = totalDeposited;
-            poolInfo["myTotalRewards"] = myTotalRewards;
-            poolInfo["degRewards"] = degRewards;
-            poolInfo["poolType"] = "lpMining";
-            poolInfo["poolId"] = poolId;
-            miningInfo.push(poolInfo);
-          }
+          if(!poolstatus)
+            continue
+          threads.push(this.showOneFarmingPoolInfo(farmPoolNames,i))
         }
-        this.miningData = miningInfo;
+        // miningInfo.push(poolInfo);
+        this.miningData = await Promise.all(threads);
       },
 
       async showBuyerIncentive() {
