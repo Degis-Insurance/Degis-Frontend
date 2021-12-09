@@ -55,14 +55,18 @@
 
         <div class="modal-footer pt-4 pl-4" style="display: block">
           <div class="row">
-            <div class="col-sm-4">
+            <!-- <div class="col-sm-4">
               <h4 class="fw-5 d-g4 fs-14">Ticket Price</h4>
-              <h4 class="fw-7 d-g2 fs-24">10 DEG</h4>
-            </div>
+              <h4 class="fw-7 d-p fs-24">10 DEG</h4>
+            </div> -->
             <div class="col-sm-4">
               <h4 class="fw-5 d-g4 fs-14">You Will Pay</h4>
-              <h4 class="fw-7 d-p fs-24">{{ actualPayment }}</h4>
+              <h4 class="fw-7 d-p fs-24">{{ actualPayment }} DEG</h4>
             </div>
+            <div class="col-sm-4">
+              <h4 class="fw-5 d-g4 fs-14">Your Degis Balance</h4>
+              <h4 class="fw-7 d-p fs-24">{{ (userDegisBalance / 1e18).toFixed(2) }} DEG</h4>
+            </div>            
             <div class="col-sm-4 ma" align="center">
               <base-button
                 style="width: 100%; height: 100%"
@@ -95,6 +99,7 @@ export default {
   props: {
     show: Boolean,
     roundData: Number,
+    userDegisBalance: Number,
     drawTime: String,
   },
   methods: {
