@@ -1,21 +1,32 @@
 <template>
   <base-header type="" class="pt-4">
     <h1 class="d-f-1 mb-4">The Degis Lucky Box</h1>
-    <stats-card style=" background-size: cover; background-position: center; background-image: url('img/luckybox/luckybox.png');">
+    <stats-card
+      style="
+        background-size: cover;
+        background-position: center;
+        background-image: url('img/luckybox/luckybox.png');
+      "
+    >
       <div class="container" style="height: 450px">
         <div class="row row-grid align-items-center">
-          <h1 class="d-f-1 pt-5" style="margin: auto">
-            The Degis Lucky Box
+          <h1 class="d-f-1 pt-5" style="margin: auto">The Degis Lucky Box</h1>
+        </div>
+        <div class="row align-items-center">
+          <h1
+            class="fw-9 d-p pt-4"
+            style="font-size: 60px; margin: auto; text-align: center"
+          >
+            ${{ inPrizeMin }}
           </h1>
         </div>
         <div class="row align-items-center">
-          <h1 class="fw-9 d-p pt-4" style="font-size: 60px; margin: auto; text-align: center">${{ inPrizeMin }}</h1>
-        </div>
-        <div class="row align-items-center">
-          <h5 class="fw-9 d-g2 fs-24 ma pt-3"> {{inPrize}} IN PRIZES!</h5>
+          <h5 class="fw-9 d-g2 fs-24 ma pt-3">{{ inPrize }} IN PRIZES!</h5>
         </div>
         <div class="row row-grid align-items-center">
-          <base-button style="margin: 3% auto;" @click="modals.BuyTickets = true">Buy Tickets</base-button>
+          <base-button style="margin: 3% auto" @click="modals.BuyTickets = true"
+            >Buy Tickets</base-button
+          >
         </div>
       </div>
     </stats-card>
@@ -23,7 +34,13 @@
     <el-card class="dg-card">
       <div class="container-fluid">
         <div
-          class="row row-grid align-items-center justify-content-between pt-3 pb-2"
+          class="
+            row row-grid
+            align-items-center
+            justify-content-between
+            pt-3
+            pb-2
+          "
         >
           <div>
             <h2 class="fw-7 d-g1 fs-28">Finished Rounds ></h2>
@@ -41,11 +58,17 @@
           </div>
         </div>
 
-
         <el-tabs type="" :stretch="true">
           <el-tab-pane>
-            <template #label><p class="fw-7 d-g3 fs-16">ALL LOTTERY ROUND</p></template>
-            <el-table :data="roundData" class="dg-cardtable" :header-cell-style="{ 'text-align': 'center', height: '70px' }" :cell-style="{ 'text-align': 'center', height: '70px' }">
+            <template #label
+              ><p class="fw-7 d-g3 fs-16">ALL LOTTERY ROUND</p></template
+            >
+            <el-table
+              :data="roundData"
+              class="dg-cardtable"
+              :header-cell-style="{ 'text-align': 'center', height: '70px' }"
+              :cell-style="{ 'text-align': 'center', height: '70px' }"
+            >
               <el-table-column prop="round" label="ROUND NO.">
                 <template #default="scope">
                   <p class="fw-7 d-g1 fs-16 ma"># {{ scope.row.round }}</p>
@@ -79,13 +102,25 @@
             </el-table>
             <div class="demo-pagination-block pt-4 pb-2" align="right">
               <!--              <el-pagination :currentPage="1" :page-size="1" layout="prev, pager, next, jumper" :total="1" @size-change="handleSizeChange" @current-change="handleCurrentChange"/>-->
-              <el-pagination :currentPage="1" :page-size="1" layout="prev, pager, next, jumper" :total="1"/>
+              <el-pagination
+                :currentPage="1"
+                :page-size="1"
+                layout="prev, pager, next, jumper"
+                :total="1"
+              />
             </div>
           </el-tab-pane>
 
           <el-tab-pane>
-            <template #label><p class="fw-7 d-g3 fs-16">MY LOTTERY</p></template>
-            <el-table :data="lotteryData" class="dg-cardtable" :header-cell-style="{ 'text-align': 'center', height: '70px' }" :cell-style="{ 'text-align': 'center', height: '70px' }">
+            <template #label
+              ><p class="fw-7 d-g3 fs-16">MY LOTTERY</p></template
+            >
+            <el-table
+              :data="lotteryData"
+              class="dg-cardtable"
+              :header-cell-style="{ 'text-align': 'center', height: '70px' }"
+              :cell-style="{ 'text-align': 'center', height: '70px' }"
+            >
               <el-table-column prop="lotteryid" label="TICKET ID">
                 <template #default="scope">
                   <p class="fw-7 d-g1 fs-16 ma">{{ scope.row.lotteryid }}</p>
@@ -133,7 +168,12 @@
   </base-header>
 
   <template v-if="modals.BuyTickets">
-    <buy-tickets :roundData="currentRound" :drawTime="drawTime" v-model:show="modals.BuyTickets"></buy-tickets>
+    <buy-tickets
+      :roundData="currentRound"
+      :drawTime="drawTime"
+      :userDegisBalance="userDegisBalance"
+      v-model:show="modals.BuyTickets"
+    ></buy-tickets>
   </template>
   <pending-prize v-model:show="modals.PendingPrize"></pending-prize>
   <template v-if="modals.LbDetails">
@@ -179,9 +219,10 @@ export default {
   data() {
     return {
       currentRound: 0,
-      drawTime: "--", 
+      drawTime: "--",
       num: [3, 5, 6, 7],
-      // activeName: 'AllHistory',  
+      userDegisBalance: 0,
+      // activeName: 'AllHistory',
       roundData: [],
       lotteryData: [],
       modals: {
@@ -243,8 +284,7 @@ export default {
     async showUserInfo() {
       const DegisLottery = await getDegisLottery();
       const account = this.$store.state.selectedAccount;
-      if(account != null)
-      {
+      if (account != null) {
         const userTicketInfo = await DegisLottery.methods
           .viewUserInfo(account)
           .call();
@@ -289,9 +329,12 @@ export default {
     async showLotteryInfoEvent() {
       this.roundData = [];
       const lotteryDetails = await this.showLotteryInfo();
-      console.log("lotteryDetails",lotteryDetails);
-      this.currentRound = lotteryDetails[lotteryDetails.length - 1]["lotteryId"]
-      this.drawTime = this.getExactTime(lotteryDetails[ lotteryDetails.length - 1]["endTime"]*1000);
+      console.log("lotteryDetails", lotteryDetails);
+      this.currentRound =
+        lotteryDetails[lotteryDetails.length - 1]["lotteryId"];
+      this.drawTime = this.getExactTime(
+        lotteryDetails[lotteryDetails.length - 1]["endTime"] * 1000
+      );
       for (var i = lotteryDetails.length - 1; i >= 0; i--) {
         var lotteryDetail = lotteryDetails[i];
         var status = lotteryDetail["status"];
@@ -310,15 +353,27 @@ export default {
         });
         console.log(lotteryDetails[i]);
       }
-      this.inPrize = (lotteryDetails[lotteryDetails.length-1]["amountCollected"]/ 1e18).toFixed(2)
-      this.inPrizeMin = Math.max(10000, this.inPrize).toFixed(2)
+      this.inPrize = (
+        lotteryDetails[lotteryDetails.length - 1]["amountCollected"] / 1e18
+      ).toFixed(2);
+      this.inPrizeMin = Math.max(10000, this.inPrize).toFixed(2);
     },
 
     async showUserInfoEvent() {
       const userTicketInfo = await this.showUserInfo();
       const DegisLottery = await getDegisLottery();
-      const currentLotteryId = await DegisLottery.methods.currentLotteryId().call();
-      console.log("userTicketInfo",userTicketInfo);
+      const currentLotteryId = await DegisLottery.methods
+        .currentLotteryId()
+        .call();
+
+      const account = this.$store.state.selectedAccount;
+      const degis = await getDegis();
+      this.userDegisBalance = 0;
+      if (account != null) {
+        this.userDegisBalance = await degis.methods.balanceOf(account).call();
+      }
+
+      console.log("userTicketInfo", userTicketInfo);
       this.lotteryData = [];
       for (var i = 0; i < userTicketInfo[0].length; i++) {
         var lotteryid = userTicketInfo[0][i];
@@ -326,9 +381,10 @@ export default {
         var buylotteryid = userTicketInfo[1][i]["buyLotteryId"];
         var isredeemed = userTicketInfo[1][i]["isRedeemed"];
         var redeemlotteryid = userTicketInfo[1][i]["redeemLotteryId"];
-        var weight = (1 + Math.log(currentLotteryId - buylotteryid + 1)).toFixed(2);
-        if(isredeemed == false)
-        {
+        var weight = (
+          1 + Math.log(currentLotteryId - buylotteryid + 1)
+        ).toFixed(2);
+        if (isredeemed == false) {
           this.lotteryData.push({
             lotteryid: lotteryid,
             number: number,
