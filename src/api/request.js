@@ -12,4 +12,3 @@ export const service_coinmarket = axios.create({
 });
 
 export default service;
-
