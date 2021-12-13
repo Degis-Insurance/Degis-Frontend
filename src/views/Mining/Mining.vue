@@ -118,23 +118,23 @@ export default {
       async getFarmingPoolName() {
         const farmPoolNames = [
           [1, "flight", "The Miserable Flight Pool"],
-          [16, "AVAX", "AVAX100H21122 Pool"],
-          [15, "AVAX", "AVAX60L21122 Pool"],
-          [14, "ETH", "ETH5900H21122 Pool"],
-          [13, "ETH", "ETH2000L21122 Pool"],
-          [12, "BTC", "BTC71000H21122 Pool"],
-          [11, "BTC", "BTC24000L21122 Pool"],
-          [10, "AVAX", "AVAX100H2112 Pool"],
-          [9, "AVAX", "AVAX60L2112 Pool"],
-          [8, "ETH", "ETH5900H2112 Pool"],
-          [7, "ETH", "ETH2000L2112 Pool"],
-          [6, "BTC", "BTC71000H2112 Pool"],
-          [5, "BTC", "BTC24000L2112 Pool"],
-          ];
+          [16, "AVAX", "AVAX106H2112(2) Pool"],
+          [15, "AVAX", "AVAX65L21122(2) Pool"],
+          [14, "ETH", "ETH6000H21122(2) Pool"],
+          [13, "ETH", "ETH2000L21122(2) Pool"],
+          [12, "BTC", "BTC75000H21122(2) Pool"],
+          [11, "BTC", "BTC25000L21122(2) Pool"],
+          // [10, "AVAX", "AVAX100H2112 Pool"],
+          // [9, "AVAX", "AVAX60L2112 Pool"],
+          // [8, "ETH", "ETH5900H2112 Pool"],
+          // [7, "ETH", "ETH2000L2112 Pool"],
+          // [6, "BTC", "BTC71000H2112 Pool"],
+          // [5, "BTC", "BTC24000L2112 Pool"],
+        ];
         return farmPoolNames;
       },
 
-      async showOneFarmingPoolInfo(farmPoolNames,i) {
+      async showOneFarmingPoolInfo(farmPoolNames, i) {
         const account = this.$store.state.selectedAccount;
         const farm = await getFarmingPool();
         const poolId = farmPoolNames[i][0];
@@ -202,12 +202,10 @@ export default {
         var threads = [];
         for (var i = 0; i < farmPoolNames.length; i++) {
           const poolId = farmPoolNames[i][0];
-          if(poolList.length <= poolId)
-            continue
+          if (poolList.length <= poolId) continue;
           const poolstatus = await farm.methods.isFarming(poolId).call();
-          if(!poolstatus)
-            continue
-          threads.push(this.showOneFarmingPoolInfo(farmPoolNames,i))
+          if (!poolstatus) continue;
+          threads.push(this.showOneFarmingPoolInfo(farmPoolNames, i));
         }
         // miningInfo.push(poolInfo);
         this.miningData = await Promise.all(threads);
@@ -254,10 +252,8 @@ export default {
         var apr = 0;
         if (totalDeposited != 0) {
           apr = (totalRewards / totalDeposited) * 365;
-        }
-        else
-        {
-          apr = totalRewards * 365 / 1e18;
+        } else {
+          apr = (totalRewards * 365) / 1e18;
         }
         var poolInfo = {};
         poolInfo["pic"] = "buyer";
