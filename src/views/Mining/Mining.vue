@@ -118,12 +118,18 @@ export default {
       async getFarmingPoolName() {
         const farmPoolNames = [
           [1, "flight", "The Miserable Flight Pool"],
-          [5, "BTC", "BTC24000L2112 Pool"],
-          [6, "BTC", "BTC71000H2112 Pool"],
-          [7, "ETH", "ETH2000L2112 Pool"],
-          [8, "ETH", "ETH5900H2112 Pool"],
-          [9, "AVAX", "AVAX60L2112 Pool"],
+          [16, "AVAX", "AVAX100H21122 Pool"],
+          [15, "AVAX", "AVAX60L21122 Pool"],
+          [14, "ETH", "ETH5900H21122 Pool"],
+          [13, "ETH", "ETH2000L21122 Pool"],
+          [12, "BTC", "BTC71000H21122 Pool"],
+          [11, "BTC", "BTC24000L21122 Pool"],
           [10, "AVAX", "AVAX100H2112 Pool"],
+          [9, "AVAX", "AVAX60L2112 Pool"],
+          [8, "ETH", "ETH5900H2112 Pool"],
+          [7, "ETH", "ETH2000L2112 Pool"],
+          [6, "BTC", "BTC71000H2112 Pool"],
+          [5, "BTC", "BTC24000L2112 Pool"],
           ];
         return farmPoolNames;
       },
