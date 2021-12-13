@@ -48,7 +48,7 @@
             <span class="d-p">{{ (data.minted / 1e18).toFixed(2) }}</span>
           </p>
           <p class="d-f-2">
-            Avaliable:
+            Available:
             <span class="d-p">{{ (data.balance / 1e18).toFixed(2) }}</span>
           </p>
         </div>
