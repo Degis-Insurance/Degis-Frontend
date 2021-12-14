@@ -59,15 +59,22 @@
               <h4 class="fw-5 d-g4 fs-14">Ticket Price</h4>
               <h4 class="fw-7 d-p fs-24">10 DEG</h4>
             </div> -->
-            <div class="col-sm-4">
+            <div class="col-sm-3">
               <h4 class="fw-5 d-g4 fs-14">You Will Pay</h4>
               <h4 class="fw-7 d-p fs-24">{{ actualPayment }} DEG</h4>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
               <h4 class="fw-5 d-g4 fs-14">Your Degis Balance</h4>
               <h4 class="fw-7 d-p fs-24">{{ (userDegisBalance / 1e18).toFixed(2) }} DEG</h4>
-            </div>            
-            <div class="col-sm-4 ma" align="center">
+            </div>           
+            <div class="col-sm- ma" align="center">
+              <base-button
+                style="width: 100%; height: 100%"
+                @click="BuyRandomTicketEvent"
+                >Buy Random Tickets</base-button
+              >
+            </div> 
+            <div class="col-sm- ma" align="center">
               <base-button
                 style="width: 100%; height: 100%"
                 @click="BuyTicketEvent"
@@ -134,7 +141,7 @@ export default {
       const account = this.$store.state.selectedAccount;
       let newTickets = new Array();
       for (var i = 0; i < tickets.length; i++) {
-        var lotteryNumber = tickets;
+        var lotteryNumber = tickets[i];
         if (parseInt(lotteryNumber) < 10000 && parseInt(lotteryNumber) >= 0) {
           newTickets.push(parseInt(lotteryNumber) + 10000);
         } else {
@@ -169,7 +176,19 @@ export default {
       console.log("Tx Hash:", tx.transactionHash);
       console.log(this.$store.lastTransactionHash);
     },
-
+    async BuyRandomTicketEvent() {
+      const amount = this.ticketAmount;
+      if (amount <= 0) {
+        alert("Please input amount!");
+        return;
+      }
+      var tickets = new Array();
+      for (let i = 0; i < amount; i++) {
+        tickets.push(Math.floor(Math.random() * 10000));
+      }
+      console.log(tickets)
+      await this.BuyTicket(tickets);
+    },
     async BuyTicketEvent() {
       if (this.buyNum.length == 0) {
         alert("please select ticket number");
