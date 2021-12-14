@@ -77,9 +77,9 @@
           </div>
 
           <el-table :data="prizeData" :header-cell-style="{'text-align': 'center', 'height': '70px'}" :cell-style="{'text-align': 'center', 'height': '70px'}">
-            <el-table-column prop="lotteryid" label="Ticket ID" sortable>
+            <el-table-column prop="ticketid" label="Ticket ID" sortable>
               <template #default="scope">
-                <p class="fw-7 d-g1 fs-16 ma">{{ scope.row.lotteryid }}</p>
+                <p class="fw-7 d-g1 fs-16 ma">{{ scope.row.ticketid }}</p>
               </template>
             </el-table-column>
             <el-table-column prop="lotterynumber" label="TICKET NUMBERS" sortable>
@@ -169,14 +169,35 @@ export default {
       return userTicketInfo;
     },
 
+    // async claimAllTickets(lotteryId) {
+    //   const DegisLottery = await getDegisLottery();
+    //   const lotteryDetails = await DegisLottery.methods
+    //     .viewLottery(lotteryId)
+    //     .call();
+    //   const account = this.$store.state.selectedAccount;
+    //   if (lotteryDetails.status == 3) {
+    //     const tx = await DegisLottery.methods.claimAllTickets(lotteryId).send({
+    //       from: account,
+    //     });
+    //     console.log("Tx Hash:", tx.transactionHash);
+    //   } else {
+    //     alert("current round not claimable now");
+    //   }
+    // },
+
     async claimAllTickets(lotteryId) {
       const DegisLottery = await getDegisLottery();
       const lotteryDetails = await DegisLottery.methods
         .viewLottery(lotteryId)
         .call();
       const account = this.$store.state.selectedAccount;
+      var number = []
       if (lotteryDetails.status == 3) {
-        const tx = await DegisLottery.methods.claimAllTickets(lotteryId).send({
+        for(var i = 0; i<this.prizeData.length; i++)
+        {
+          number.push(window.WEB3.utils.toBN(this.prizeData[i].ticketid));
+        }
+        const tx = await DegisLottery.methods.claimTickets(lotteryId, number).send({
           from: account,
         });
         console.log("Tx Hash:", tx.transactionHash);
@@ -220,17 +241,17 @@ export default {
       this.prizeData = []
       for(var i=0;i<userTicketInfo[2].length;i++)
       {
-        var lotteryid = userTicketInfo[2][i][0]
+        var ticketid = userTicketInfo[2][i][0]
         var number = this.int2array(userTicketInfo[2][i][1])
         var lotteryrewards = (userTicketInfo[2][i][2] / 1e18).toFixed(2)
-        this.prizeData.push({lotteryid:lotteryid,number:number,lotteryrewards:lotteryrewards})
+        this.prizeData.push({ticketid:ticketid,number:number,lotteryrewards:lotteryrewards})
       }
     },
 
     async claimAllTicketsEvent() {
       var lotteryId = this.viewData.round
       await this.claimAllTickets(lotteryId);
-      this.showUserInfoEvent();
+      await this.showUserInfoEvent();
     }
   },
   created() {
