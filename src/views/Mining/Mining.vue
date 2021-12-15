@@ -124,12 +124,12 @@ export default {
           [13, "ETH", "ETH2000L21122(2) Pool"],
           [12, "BTC", "BTC75000H21122(2) Pool"],
           [11, "BTC", "BTC25000L21122(2) Pool"],
-          // [10, "AVAX", "AVAX100H2112 Pool"],
-          // [9, "AVAX", "AVAX60L2112 Pool"],
-          // [8, "ETH", "ETH5900H2112 Pool"],
-          // [7, "ETH", "ETH2000L2112 Pool"],
-          // [6, "BTC", "BTC71000H2112 Pool"],
-          // [5, "BTC", "BTC24000L2112 Pool"],
+          [10, "AVAX", "AVAX100H2112 Pool"],
+          [9, "AVAX", "AVAX60L2112 Pool"],
+          [8, "ETH", "ETH5900H2112 Pool"],
+          [7, "ETH", "ETH2000L2112 Pool"],
+          [6, "BTC", "BTC71000H2112 Pool"],
+          [5, "BTC", "BTC24000L2112 Pool"],
         ];
         return farmPoolNames;
       },
