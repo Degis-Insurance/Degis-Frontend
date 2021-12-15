@@ -307,7 +307,7 @@ export default {
     calc_amount2() {
       var poolUsdAmount = Number(this.data.poolUsdAmount / 1e18);
       var poolPolicyTokenAmount = Number(this.data.poolPolicyTokenAmount / 1e18);
-
+      console.log(this.data.poolUsdAmount,this.data.poolPolicyTokenAmount)
       if(this.data.type === "buy"){
         this.amount2 = poolPolicyTokenAmount - poolUsdAmount * poolPolicyTokenAmount / (poolUsdAmount + this.amount1 * 1.02);
       }

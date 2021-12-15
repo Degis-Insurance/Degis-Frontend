@@ -105,20 +105,26 @@ export default {
   },
 
   mounted() {
+    this.showFrame();
     this.showInfoEvent();
   },
   methods: {
+    // async getTokensName() {
+    //   const core = await getPolicyCore();
+    //   const tokenInfos = await core.methods.getAllTokens().call();
+    //   var tokenNames = [];
+    //   for (var i = 0; i < tokenInfos.length; i++) {
+    //     var tokenName = await core.methods
+    //       .findNamebyAddress(tokenInfos[i]["policyTokenAddress"])
+    //       .call();
+    //     tokenNames.push(tokenName);
+    //   }
+    //   return tokenNames;
+    // },
+
     async getTokensName() {
-      const core = await getPolicyCore();
-      const tokenInfos = await core.methods.getAllTokens().call();
-      var tokenNames = [];
-      for (var i = 0; i < tokenInfos.length; i++) {
-        var tokenName = await core.methods
-          .findNamebyAddress(tokenInfos[i]["policyTokenAddress"])
-          .call();
-        tokenNames.push(tokenName);
-      }
-      return tokenNames;
+      let tokenNames = ['BTC_24000_L_2112', 'BTC_71000_H_2112', 'ETH_2000_L_2112', 'ETH_5900_H_2112', 'AVAX_60_L_2112', 'AVAX_100_H_2112', 'BTC_25000_L_21122', 'BTC_75000_H_21122', 'ETH_2000_L_21122', 'ETH_6000_H_21122', 'AVAX_65_L_21122', 'AVAX_106_H_21122']
+      return tokenNames
     },
 
     async showUserInfo(tokenName) {
@@ -147,23 +153,21 @@ export default {
     },
 
     async showPoolInfo(tokenName) {
-      const account = this.$store.state.selectedAccount;
       const usd = await getMockUSD();
       const factory = await getNaughtyFactory();
       const core = await getPolicyCore();
       var policyInfo = await core.methods.getPolicyTokenInfo(tokenName).call();
-
       const policyTokenAddress = await core.methods
         .findAddressbyName(tokenName)
         .call();
       const pairAddress = await factory.methods
         .getPairAddress(policyTokenAddress, usd.options.address)
         .call();
-
       const pair = await getNaughtyPair(pairAddress);
       const poolInfo = await pair.methods.getReserves().call();
       const poolLiquidityToken = await pair.methods.totalSupply().call();
-      var userLiquidityToken = 0;
+      let userLiquidityToken = 0;
+      const account = this.$store.state.selectedAccount;
       if (account != null) {
         userLiquidityToken = await pair.methods.balanceOf(account).call();
       }
@@ -177,13 +181,44 @@ export default {
         },
       };
     },
+    
+    async showFrame()
+    {
+      const tokenNames = await this.getTokensNameEvent();
+      this.cardData = []
+      const types = { H: "Payout if Higher", L: "Pay out if Lower" };
+      // const coinMap = {"BTC":"bitcoin", "ETH":"ethereum" , "AVAX":"avalanche-2"}
+      // const CoinGeckoClient = new CoinGecko();
+      for (var i = tokenNames.length - 1 ; i >= 0 ; i--) {
+        const tokenName = tokenNames[i];
+        var coin = tokenName.split("_")[0];
+        // let priceInfo = await CoinGeckoClient.coins.fetch(coinMap[coin], {});
+        // let coinPrice = priceInfo["data"]["market_data"]["current_price"]["usd"];
+        let policyTokeninfo = {
+          coin: coin,
+          name: tokenName,
+          currentPrice: 0,
+          coinPrice: 0,
+          type: types[tokenName.split("_")[2]],
+          strike: "--",
+          expiry: "--",
+          tvl: "--",
+          tradingVolume: "--",
+          change: "--",
+          minted: 0,
+          balance: 0,
+          poolLiquidityToken: 0,
+          userLiquidityToken: 0,
+        };
+        this.cardData.push(policyTokeninfo)
+      }
+    },
+
     async showOneInfo(tokenName){
       const info = await this.showPoolInfo(tokenName);
       const policyInfo = info["policyInfo"];
       const poolInfo = info["poolInfo"];
-
       const userInfo = await this.showUserInfo(tokenName);
-
       const types = { H: "Payout if Higher", L: "Pay out if Lower" };
       var date = new Date(parseInt(policyInfo["deadline"]) * 1000);
       var expiry =
@@ -199,14 +234,12 @@ export default {
           poolInfo["usdAmount"] / poolInfo["policyTokenAmount"]
         ).toFixed(4);
       }
-
       var coin = tokenName.split("_")[0];
       let coinMap = {"BTC":"bitcoin", "ETH":"ethereum" , "AVAX":"avalanche-2"}
       const CoinGeckoClient = new CoinGecko();
       let priceInfo = await CoinGeckoClient.coins.fetch(coinMap[coin], {});
       let coinPrice = priceInfo["data"]["market_data"]["current_price"]["usd"];
-
-      var policyTokeninfo = {
+      let policyTokeninfo = {
         coin: coin,
         name: tokenName,
         currentPrice: currentPrice,

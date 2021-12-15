@@ -45,20 +45,58 @@ export default {
   },
 
   mounted() {
+    this.showFrame();
     this.showInfoEvent();
   },
   methods: {
+    // async getTokensName() {
+    //   const core = await getPolicyCore();
+    //   const tokenInfos = await core.methods.getAllTokens().call();
+    //   var tokenNames = [];
+    //   for (var i = 0; i < tokenInfos.length; i++) {
+    //     var tokenName = await core.methods
+    //       .findNamebyAddress(tokenInfos[i]["policyTokenAddress"])
+    //       .call();
+    //     tokenNames.push(tokenName);
+    //   }
+    //   return tokenNames;
+    // },
     async getTokensName() {
-      const core = await getPolicyCore();
-      const tokenInfos = await core.methods.getAllTokens().call();
-      var tokenNames = [];
-      for (var i = 0; i < tokenInfos.length; i++) {
-        var tokenName = await core.methods
-          .findNamebyAddress(tokenInfos[i]["policyTokenAddress"])
-          .call();
-        tokenNames.push(tokenName);
+      let tokenNames = ['BTC_24000_L_2112', 'BTC_71000_H_2112', 'ETH_2000_L_2112', 'ETH_5900_H_2112', 'AVAX_60_L_2112', 'AVAX_100_H_2112', 'BTC_25000_L_21122', 'BTC_75000_H_21122', 'ETH_2000_L_21122', 'ETH_6000_H_21122', 'AVAX_65_L_21122', 'AVAX_106_H_21122']
+      return tokenNames
+    },
+
+    async showFrame()
+    {
+      const tokenNames = await this.getTokensNameEvent();
+      this.cardData = []
+      const types = { H: "Payout if Higher", L: "Pay out if Lower" };
+      // const coinMap = {"BTC":"bitcoin", "ETH":"ethereum" , "AVAX":"avalanche-2"}
+      // const CoinGeckoClient = new CoinGecko();
+      for (var i = tokenNames.length - 1 ; i >= 0 ; i--) {
+        const tokenName = tokenNames[i];
+        var coin = tokenName.split("_")[0];
+        // let priceInfo = await CoinGeckoClient.coins.fetch(coinMap[coin], {});
+        // let coinPrice = priceInfo["data"]["market_data"]["current_price"]["usd"];
+        var policyTokeninfo = {
+          coin: coin,
+          name: tokenName,
+          currentPrice: 0,
+          coinPrice: 0,
+          type: types[tokenName.split("_")[2]],
+          strike: "--",
+          expiry: "--",
+          tvl: "--",
+          tradingVolume: "--",
+          change: "--",
+          minted: 0,
+          policyTokenBalance: 0,
+          usdBalance: 0,
+          poolUsdAmount: 0,
+          poolPolicyTokenAmount: 0,
+        };
+        this.cardData.push(policyTokeninfo)
       }
-      return tokenNames;
     },
 
     async showUserInfo(tokenName) {
@@ -172,7 +210,7 @@ export default {
         const tokenName = tokenNames[i];
         threads.push(this.showOneInfo(tokenName));
       }
-      this.cardData = await Promise.all(threads);
+      this.cardData = await Promise.all(threads); 
     },
     async getTokensNameEvent() {
       return this.getTokensName();

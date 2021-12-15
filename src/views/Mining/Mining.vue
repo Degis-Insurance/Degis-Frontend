@@ -66,6 +66,7 @@ export default {
   mounted() {
     // this.addMiningPool();
     // this.mintDegis();
+    this.showFrame();
     this.showBuyerIncentiveEvent();
     this.showFarmingPoolInfoEvent();
   },
@@ -132,6 +133,31 @@ export default {
           [5, "BTC", "BTC24000L2112 Pool"],
         ];
         return farmPoolNames;
+      },
+
+      async showFrame(){
+        const farmPoolNames = await this.getFarmingPoolName();
+        this.miningData = []
+        for (var i = 0; i < farmPoolNames.length; i++) {
+          const poolId = farmPoolNames[i][0];
+          const poolPic = farmPoolNames[i][1];
+          const poolName = farmPoolNames[i][2];
+          var poolInfos = {};
+          // if (poolstatus) {
+          poolInfos["pic"] = poolPic;
+          poolInfos["name"] = poolName;
+          poolInfos["status"] = "Ongoing";
+          poolInfos["apr"] = 0;
+          poolInfos["depositLimit"] = "--";
+          poolInfos["availableToWithdraw"] = "--";
+          poolInfos["totalRewards"] = "--";
+          poolInfos["totalDeposited"] = "--";
+          poolInfos["myTotalRewards"] = "--";
+          poolInfos["degRewards"] = "--";
+          poolInfos["poolType"] = "lpMining";
+          poolInfos["poolId"] = "--";
+          this.miningData.push(poolInfos)
+        }
       },
 
       async showOneFarmingPoolInfo(farmPoolNames, i) {
