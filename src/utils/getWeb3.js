@@ -22,6 +22,8 @@ export const getWeb3 = async () => {
 
     await web3Modal.clearCachedProvider();
 
+    console.log("New web3 provider");
+
     const provider = await web3Modal.connect();
     newWeb3 = new Web3(provider);
   }

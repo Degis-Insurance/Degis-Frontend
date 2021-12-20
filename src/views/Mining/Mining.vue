@@ -119,6 +119,12 @@ export default {
       async getFarmingPoolName() {
         const farmPoolNames = [
           [1, "flight", "The Miserable Flight Pool"],
+          [22, "AVAX", "AVAX125H2112(4) Pool"],
+          [21, "AVAX", "AVAX75L2112(4) Pool"],
+          [20, "ETH", "ETH5700H2112(4) Pool"],
+          [19, "ETH", "ETH1900L2112(4) Pool"],
+          [18, "BTC", "BTC69000H2112(4) Pool"],
+          [17, "BTC", "BTC23000L2112(4) Pool"],
           [16, "AVAX", "AVAX106H2112(2) Pool"],
           [15, "AVAX", "AVAX65L21122(2) Pool"],
           [14, "ETH", "ETH6000H21122(2) Pool"],
@@ -135,9 +141,9 @@ export default {
         return farmPoolNames;
       },
 
-      async showFrame(){
+      async showFrame() {
         const farmPoolNames = await this.getFarmingPoolName();
-        this.miningData = []
+        this.miningData = [];
         for (var i = 0; i < farmPoolNames.length; i++) {
           const poolId = farmPoolNames[i][0];
           const poolPic = farmPoolNames[i][1];
@@ -156,7 +162,7 @@ export default {
           poolInfos["degRewards"] = "--";
           poolInfos["poolType"] = "lpMining";
           poolInfos["poolId"] = "--";
-          this.miningData.push(poolInfos)
+          this.miningData.push(poolInfos);
         }
       },
 
@@ -226,6 +232,18 @@ export default {
         const poolList = await farm.methods.getPoolList().call();
         let miningInfo = [];
         var threads = [];
+
+        // farmPoolNames.forEach(async (item, key) => {
+        //   const poolId = farmPoolNames[key][0];
+        //   const status = await farm.methods.isFarming(poolId).call();
+
+        //   if (status) {
+        //     const data = await this.showOneFarmingPoolInfo(item, key);
+        //     console.log(key);
+        //     this.mingData[key] = data;
+        //   }
+        // });
+
         for (var i = 0; i < farmPoolNames.length; i++) {
           const poolId = farmPoolNames[i][0];
           if (poolList.length <= poolId) continue;
