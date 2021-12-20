@@ -295,9 +295,9 @@ export default {
           .removeLiquidity(
               tokenAddress,  //
               usd.options.address, //
-              window.WEB3.utils.toBN(liquidityToken * percentage),
-              window.WEB3.utils.toBN(amountPolicyTokenMin),
-              window.WEB3.utils.toBN(amountUSDMin),
+              window.WEB3.utils.toBN(BigInt(liquidityToken * percentage).toString()),
+              window.WEB3.utils.toBN(BigInt(amountPolicyTokenMin).toString()),
+              window.WEB3.utils.toBN(BigInt(amountUSDMin).toString()),
               account,
               date + 6000
           )
